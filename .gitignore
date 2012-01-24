@@ -1,0 +1,5 @@
+*.pyc
+
+mcb_printer_scheduler/config/*
+db/*.db3
+fixtures/*
