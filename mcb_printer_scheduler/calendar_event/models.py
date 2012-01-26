@@ -84,7 +84,10 @@ class Reservation(CalendarEvent):
         self.subclass_type = self.__class__.__name__
         super(Reservation, self).save()    
     
-    
+    class Meta:
+        verbose_name = 'Reservation'
+
+
 class CalendarMessage(CalendarEvent):
     """For general messages, e.g. holidays, etc"""    
     def get_display_msg(self):
@@ -119,9 +122,11 @@ class CalendarFullDayMessage(CalendarEvent):
     
     
 class ScheduledBannerMessage(CalendarEvent):
+    detailed_msg = models.TextField('Detailed Message for Banner')
+    
     def get_display_msg(self):
-        return self.display_name
+        return self.detailed_msg[:255]
         
     class Meta:
-        verbose_name = 'Scheduled Banner Message (Displayed over calendar)'
-        verbose_name_plural = 'Scheduled Banner Messages (Displayed over calendar)'
+        verbose_name = 'Scheduled Banner Message (Displayed above calendar)'
+        verbose_name_plural = 'Scheduled Banner Messages (Displayed above calendar)'
