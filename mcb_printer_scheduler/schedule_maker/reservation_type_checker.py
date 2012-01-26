@@ -13,6 +13,11 @@ def check_reservation_type(sender, **kwargs):
     # temporarily disconnect the post_save signal
     post_save.disconnect(check_reservation_type, reservation_type_class)
 
+    print 'about to save number'
+    selected_rt.set_day_iso_numbers()
+    print 'numbers saved'
+    selected_rt.save()
+    
     if selected_rt.is_active:
         # The last reservation type saved is 'active', 
         # mark all others as inactive
@@ -27,8 +32,8 @@ def check_reservation_type(sender, **kwargs):
         elif num_active == 0:
             # no ReservationType objects are active, 
             # make the last one saved active
-            instance.is_active = True
-            instance.save()
+            selected_rt.is_active = True
+            selected_rt.save()
         elif num_active > 1:
             # too many ReservationType objects are active, 
             # make the last active one saved the only active one

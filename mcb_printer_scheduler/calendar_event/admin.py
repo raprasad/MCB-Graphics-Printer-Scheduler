@@ -10,6 +10,8 @@ class CalendarEventAdmin(admin.ModelAdmin):
     search_fields = ( 'display_name',)
     readonly_fields = ('subclass_type',)
 admin.site.register(CalendarEvent, CalendarEventAdmin)
+admin.site.register(CalendarMessage, CalendarEventAdmin)
+admin.site.register(CalendarFullDayMessage, CalendarEventAdmin)
 
 
 class ReservationAdmin(admin.ModelAdmin):
@@ -21,6 +23,4 @@ class ReservationAdmin(admin.ModelAdmin):
     search_fields = ( 'display_name', 'user__last_name', 'user__first_name', 'lab', 'billing_code')
 admin.site.register(Reservation, ReservationAdmin)
 
-admin.site.register(CalendarMessage, CalendarEventAdmin)
-admin.site.register(CalendarFullDayMessage, CalendarEventAdmin)
 

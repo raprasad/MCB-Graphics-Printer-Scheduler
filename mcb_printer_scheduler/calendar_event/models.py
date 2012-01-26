@@ -29,6 +29,15 @@ class CalendarEvent(models.Model):
     def __unicode__(self):
         return self.display_name
     
+    def get_event_length_in_minutes(self):
+        if self.end_time is None or self.start_time is None:
+            return None
+        if self.end_time < self.start_time:
+            return None
+            
+        time_diff = self.end_time - self.start_time
+        return time_diff.seconds / 60
+        
     def get_display_msg(self):
         if self.display_name:
             return self.display_name

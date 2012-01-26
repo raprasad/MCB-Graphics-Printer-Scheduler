@@ -54,5 +54,41 @@
             "day_number": 7, 
             "day": "Sunday"
         }
+    }, 
+    {
+        "pk": 1, 
+        "model": "reservation_type.reservationtype", 
+        "fields": {
+            "days_allowed": [
+                1, 
+                2, 
+                3, 
+                4, 
+                5
+            ], 
+            "name": "Weekdays, 20 minutes blocks", 
+            "created": "2012-01-25 23:21:01", 
+            "closing_time": "18:00:00", 
+            "is_active": true, 
+            "last_update": "2012-01-25 23:51:52", 
+            "day_iso_numbers": "1, 2, 3, 4, 5", 
+            "time_block": 20, 
+            "opening_time": "12:00:00", 
+            "id_hash": "03c5955f1f14260018a603efa508ac0a4bc6bfed"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "calendar_event.calendarevent", 
+        "fields": {
+            "is_visible": true, 
+            "display_name": "Thursday, 12pm to 12:20pm", 
+            "created": "2012-01-25 23:43:51", 
+            "start_time": "2012-01-26 12:00:00", 
+            "last_update": "2012-01-25 23:43:51", 
+            "end_time": "2012-01-26 12:20:00", 
+            "subclass_type": "", 
+            "id_hash": "1ac3a3dddcfb325548594aa7ea088ed37d1bfc9b"
+        }
     }
 ]

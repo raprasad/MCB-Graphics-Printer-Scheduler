@@ -1,16 +1,9 @@
-"""
-This file demonstrates writing tests using the unittest module. These will pass
-when you run "manage.py test".
+import unittest
+from test_reservation_type import ReservationTypeTest
 
-Replace this with more appropriate tests for your application.
-"""
-
-from django.test import TestCase
-
-
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
-        """
-        Tests that 1 + 1 always equals 2.
-        """
-        self.assertEqual(1 + 1, 2)
+def suite():
+    suite = unittest.TestSuite()
+    #suite.addTest(TreeRearrangement('runTest'))
+    #suite.addTest(NodeTestCase('test_root'))
+    suite.addTest(ReservationTypeTest('runTest'))
+    return suite        
