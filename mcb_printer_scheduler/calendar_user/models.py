@@ -15,12 +15,12 @@ class CalendarUser(models.Model):
     - includes the active directory attribute userPrincipalName
     """
     user = models.ForeignKey(User, unique=True)
-    id_hash = models.CharField(max_length=40, blank=True, null=True, help_text='Auto-fill on save')   # 
+    id_hash = models.CharField(max_length=40, blank=True, help_text='Auto-fill on save')    
 
     is_calendar_admin = models.BooleanField(default=False)
     
     phone_number = PhoneNumberField(blank=True)
-    contact_mail = models.EmailField(max_length=150, blank=True)
+    contact_email = models.EmailField(max_length=150, blank=True)
     lab_name = models.CharField(max_length=100, blank=True)
     billing_code = models.CharField('33 digit code', max_length=39, blank=True)
     
@@ -76,7 +76,7 @@ class CalendarUser(models.Model):
         if not self.contact_email:
             self.contact_email = self.user.email
             
-        super(LabUser, self).save()        # Call the "real" save() method.
+        super(CalendarUser, self).save()        # Call the "real" save() method.
 
     class Meta:
         ordering = ('user__last_name',  )

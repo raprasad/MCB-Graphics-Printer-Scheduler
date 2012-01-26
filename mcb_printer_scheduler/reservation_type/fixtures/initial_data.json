@@ -1,0 +1,58 @@
+[
+    {
+        "pk": 1, 
+        "model": "reservation_type.dayofweek", 
+        "fields": {
+            "day_number": 1, 
+            "day": "Sunday"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "reservation_type.dayofweek", 
+        "fields": {
+            "day_number": 2, 
+            "day": "Monday"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "reservation_type.dayofweek", 
+        "fields": {
+            "day_number": 3, 
+            "day": "Tuesday"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "reservation_type.dayofweek", 
+        "fields": {
+            "day_number": 4, 
+            "day": "Wednesday"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "reservation_type.dayofweek", 
+        "fields": {
+            "day_number": 5, 
+            "day": "Thursday"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "reservation_type.dayofweek", 
+        "fields": {
+            "day_number": 6, 
+            "day": "Friday"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "reservation_type.dayofweek", 
+        "fields": {
+            "day_number": 7, 
+            "day": "Saturday"
+        }
+    }
+]
