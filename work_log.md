@@ -16,5 +16,5 @@
 		* admin entered regular message
 * Timed Notice Event - across top of calendar.  e.g. show 'Closed until January 2nd' message
 
-# 1/26/2012 - 9:45am
+# 1/26/2012 - 9:45am to 11:45am
 * basic template, then scheduling form

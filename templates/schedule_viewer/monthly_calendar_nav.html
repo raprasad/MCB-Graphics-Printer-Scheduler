@@ -1,0 +1,17 @@
+<tr><!-- previous year | selected year's months | next year -->
+       <td colspan="7"><div id="nav_months">
+           <a href="{% url view_current_month_calendar %}{{ prev_year }}/1/">{{ prev_year }}</a>
+       
+   {% spaceless %}
+      {% for mth in month_list %}
+            &nbsp;&nbsp;
+           {% ifequal mth current_mm %}
+               <a href="{% url view_current_month_calendar %}{{ mth|date:"Y/m/"}}" class="month_lnk_sel">{{ mth|date:"M" }}</a>
+           {% else %}
+               <a href="{% url view_current_month_calendar %}{{ mth|date:"Y/m/" }}">{{ mth|date:"M" }}</a>
+           {% endifequal %}
+       {% endfor %}
+        &nbsp;&nbsp; <a href="{% url view_current_month_calendar %}{{ next_year }}/1/">{{ next_year }}</a>
+   {% endspaceless %}
+       </div></td>
+   </tr>

@@ -21,7 +21,7 @@ class CalendarEvent(models.Model):
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     
-    subclass_type = models.CharField(max_length=70, blank=True, help_text='Event Type (auto-filled on save)')
+    subclass_name = models.CharField(max_length=70, blank=True, help_text='Event Type (auto-filled on save)')
     
     created = models.DateTimeField(auto_now_add=True)
     last_update = models.DateTimeField(auto_now=True)
@@ -81,7 +81,7 @@ class Reservation(CalendarEvent):
     def save(self):    
         if self.is_cancelled:
             self.is_visible= False
-        self.subclass_type = self.__class__.__name__
+        self.subclass_name = self.__class__.__name__
         super(Reservation, self).save()    
     
     class Meta:
@@ -94,7 +94,7 @@ class CalendarMessage(CalendarEvent):
         return self.display_name
     
     def save(self):
-        self.subclass_type = self.__class__.__name__
+        self.subclass_name = self.__class__.__name__
         super(CalendarMessage, self).save()    
         
     class Meta:
@@ -112,7 +112,7 @@ class CalendarFullDayMessage(CalendarEvent):
         self.end_time = datetime(self.end_time.year, self.end_time.month, self.end_time.day) + timedelta(days=1) + timedelta(microseconds=-1)
         if self.start_time > self.end_time:
             self.end_time = self.start_time + timedelta(days=1) + timedelta(microseconds=-1)
-        self.subclass_type = self.__class__.__name__
+        self.subclass_name = self.__class__.__name__
         
         super(CalendarFullDayMessage, self).save()    
 
