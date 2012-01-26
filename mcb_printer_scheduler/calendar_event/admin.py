@@ -1,5 +1,5 @@
 from django.contrib import admin
-from calendar_event.models import CalendarEvent, Reservation, CalendarMessage, CalendarFullDayMessage
+from calendar_event.models import CalendarEvent, Reservation, CalendarMessage, CalendarFullDayMessage, ScheduledBannerMessage
 from calendar_event.forms import TimeCheckForm
 
 class CalendarEventAdmin(admin.ModelAdmin):
@@ -12,6 +12,7 @@ class CalendarEventAdmin(admin.ModelAdmin):
 admin.site.register(CalendarEvent, CalendarEventAdmin)
 admin.site.register(CalendarMessage, CalendarEventAdmin)
 admin.site.register(CalendarFullDayMessage, CalendarEventAdmin)
+admin.site.register(ScheduledBannerMessage, CalendarEventAdmin)
 
 
 class ReservationAdmin(admin.ModelAdmin):

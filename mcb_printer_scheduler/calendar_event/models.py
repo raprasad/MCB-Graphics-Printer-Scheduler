@@ -60,8 +60,8 @@ class CalendarEvent(models.Model):
 
     class Meta:
         ordering = ('-start_time', 'display_name'  )
-        verbose_name = 'Calendar Event (all types)'
-        verbose_name_plural = 'Calendar Events (all types)'
+        verbose_name = 'Calendar Event (view all events)'
+        verbose_name_plural = 'Calendar Events (view all events)'
 
         
         
@@ -94,6 +94,10 @@ class CalendarMessage(CalendarEvent):
         self.subclass_type = self.__class__.__name__
         super(CalendarMessage, self).save()    
         
+    class Meta:
+        verbose_name = 'Calendar Message'
+        verbose_name_plural = 'Calendar Messages'
+
 
 class CalendarFullDayMessage(CalendarEvent):
     """For general messages, e.g. holidays, etc"""    
@@ -108,4 +112,16 @@ class CalendarFullDayMessage(CalendarEvent):
         self.subclass_type = self.__class__.__name__
         
         super(CalendarFullDayMessage, self).save()    
+
+    class Meta:
+        verbose_name = 'Calendar Full Day Message (1 or more days, e.g. holiday)'
+        verbose_name_plural = 'Calendar Full Day Messages (1 or more days, e.g. holiday)'
     
+    
+class ScheduledBannerMessage(CalendarEvent):
+    def get_display_msg(self):
+        return self.display_name
+        
+    class Meta:
+        verbose_name = 'Scheduled Banner Message (Displayed over calendar)'
+        verbose_name_plural = 'Scheduled Banner Messages (Displayed over calendar)'
