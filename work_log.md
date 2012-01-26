@@ -1,6 +1,7 @@
-# 1/24/2011 - initial setup
+# 1/24/2012 - initial setup
+* created project + settings file
 
-# 1/25/2011 - 7:33pm to 10:01pm, 10:30pm to 12:20am
+# 1/25/2012 - 7:33pm to 10:01pm, 10:30pm to 12:20am
 * basic calendar user set up in admin 
 * reservation models set up
 * model for minutes/days
@@ -14,3 +15,6 @@
 		* admin entered full day message
 		* admin entered regular message
 * Timed Notice Event - across top of calendar.  e.g. show 'Closed until January 2nd' message
+
+# 1/26/2012 - 9:45am
+* basic template, then scheduling form

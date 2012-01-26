@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title_tag %}{% include "page_parts/page_title_tag.html" %}{% endblock %}
+
+
+{% block main_content %}
+{% include "page_parts/page_breadcrumb.html" %}
+{% include "page_parts/page_title.html" %}
+<div class="pg_stnd_content">
+	{% if ERR_page_not_found or not page %}
+	<div class="err_box">Sorry!  The page content was not found.</div>
+	{% endif %}
+
+	{{ page.content|safe }}
+
+	{% include "page_parts/tag_related_links.html" %}
+</div>
+
+{% endblock %}
+

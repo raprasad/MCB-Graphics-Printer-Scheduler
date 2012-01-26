@@ -37,7 +37,7 @@ class ReservationTypeTest(TestCase):
 
         #--------------------------------------------
 
-        rt.set_day_iso_numbers()
+        #rt.set_day_iso_numbers()
         print 'day_iso_numbers', rt.day_iso_numbers
         rt.save()
         msgt('Calendar event should be valid for reservation type  Actual: %s' % (rt.is_calendar_event_valid(evt)))

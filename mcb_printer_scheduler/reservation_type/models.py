@@ -3,7 +3,7 @@ from django.template.defaultfilters import slugify
 from django.db.models.signals import post_save
 
 from calendar_user.models import CalendarUser
-from schedule_maker.reservation_type_checker import check_reservation_type
+from schedule_helper.reservation_type_checker import check_reservation_type
 
 from datetime import datetime, timedelta
 
@@ -27,37 +27,47 @@ class DayOfWeek(models.Model):
     
     class Meta:
         ordering = ('day_number',)
-    
+        verbose_name = 'Day of Week'
+        verbose_name_plural = 'Days of Week'
         
 class ReservationType(models.Model):
     """
-    Reservation Type - only one may be active at once
+    Reservation Type - only one may be a default at once
+
+    In addition, date specific reservation types may be active and override the defaults.
+    
+    Note, date specific reservation types may not overlap
     """
     name = models.CharField(max_length=255)
     
     days_allowed = models.ManyToManyField(DayOfWeek, blank=True, null=True)
     day_iso_numbers = models.CharField('ISO day numbers', max_length=30, blank=True, help_text='auto-filled on save')
     
+    start_date = models.DateField(blank=True, null=True)
+    end_date = models.DateField(blank=True, null=True)
+    
     opening_time = models.TimeField()
     closing_time = models.TimeField()
 
     time_block = models.IntegerField('minutes in a time block', default=20)
+
     is_active = models.BooleanField(default=False)
+    is_default = models.BooleanField(default=False)
     
     id_hash = models.CharField(max_length=40, blank=True, help_text='Auto-fill on save')   # 
     
     created = models.DateTimeField(auto_now_add=True)
     last_update = models.DateTimeField(auto_now=True)
     
+    class Meta:
+        ordering = ('-is_default', '-is_active',)
 
-    def set_day_iso_numbers(self):
-        print '--set_day_iso_numbers'
+    def get_day_iso_numbers(self):
         l = map(lambda x: x.day_number, self.days_allowed.all())
-        print 'l', l
         if len(l) == 0:
-            self.day_iso_numbers= ''
+            return ''
         else:
-            self.day_iso_numbers = str(l)   # e.g. [1, 2, 3, 4, 5, 6, 7]
+            return str(l)   # e.g. [1, 2, 3, 4, 5, 6, 7]
         
     def __unicode__(self):
         return self.name
@@ -66,7 +76,7 @@ class ReservationType(models.Model):
         l = map(lambda x: x.day, self.days_allowed.all())
         if len(l) == 0:
             return 'none'
-        return '<br />'.l
+        return '<br />'.join(l)
     available_days_of_week.allow_tags = True    
     
         

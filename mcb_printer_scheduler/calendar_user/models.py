@@ -22,7 +22,7 @@ class CalendarUser(models.Model):
     phone_number = PhoneNumberField(blank=True)
     contact_email = models.EmailField(max_length=150, blank=True)
     lab_name = models.CharField(max_length=100, blank=True)
-    billing_code = models.CharField('33 digit code', max_length=39, blank=True)
+    billing_code = models.CharField('33 digit code', max_length=39, blank=True) # object code 8260
     
     created = models.DateTimeField(auto_now_add=True)
     last_update = models.DateTimeField(auto_now=True)
