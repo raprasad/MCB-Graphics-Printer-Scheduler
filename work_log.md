@@ -20,6 +20,14 @@
 * basic template, then scheduling form
 * adjusted reservation_type
 
-# 1/27/2012 - 10:15am (new haven) 12:50pm
+# 1/27/2012 - 10:15am (new haven) 1:28pm	(including fielding many work emails)
 * see if we can't get the month view going:)
 * basic month view working with test event
+
+> one time slot per poster, up to 4 slots ok, 5 or more forget it
+> plan ahead time 
+> if less than 3 hours advance, email notice, please notify mcb graphics
+> billing code 8260 default; validate it?
+> no lab name
+> reservation type with calendar dates that overrides defaults
+
