@@ -2,13 +2,20 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.views.decorators.cache import never_cache
-from datetime import datetime
+from django.db.models import Q
+
+from datetime import datetime, date
 
 from calendar_event.models import CalendarEvent
 from calendar_event.calendar_event_helper import CalendarEventOrganizer
-from cal_util.view_util import get_common_lookup
+from schedule_maker.day_events_organizer import DayEventsOrganizer
+from schedule_maker.calendar_weeks import get_calendar_weeks
 
-def view_month_calendar(request, selected_year=None, month=selected_month):
+
+from cal_util.view_util import get_common_lookup
+from cal_util.msg_util import *
+
+def view_month_calendar(request, selected_year=None, selected_month=None):
     """
     View monthly calendar
     """
@@ -18,17 +25,23 @@ def view_month_calendar(request, selected_year=None, month=selected_month):
 
     current_datetime = datetime.now()
             
-    if year is None or month is None:
+    if selected_year is None or selected_month is None:
         selected_year = current_datetime.year
         selected_month= current_datetime.month
     
     try:
-        selected_month = datetime.datetime(year=selected_year, month=selected_month, day=1)
+        selected_month = datetime(year=int(selected_year), month=int(selected_month), day=1)
     except:
-        selected_month = datetime.datetime(year=current_datetime.year, month=current_datetime.month, day=1)
-        
+        selected_month = datetime(year=current_datetime.year, month=current_datetime.month, day=1)
+    
+    if current_datetime.month == selected_month.month \
+        and current_datetime.year ==  selected_month.year:
+            is_current_month = True
+    else:
+        is_current_month = False
     
     lu.update({'current_datetime':current_datetime\
+                , 'is_current_month' : is_current_month
                 , 'selected_month' : selected_month })
     
         
@@ -43,23 +56,17 @@ def view_month_calendar(request, selected_year=None, month=selected_month):
 
     month_list = []
     for x in range(1,13):
-        month_list.append(make_date_obj(start_date_selected.year, x, 1))
+        month_list.append(date(selected_month.year, x, 1))
     
+    day_events_organizer = DayEventsOrganizer(get_calendar_weeks(selected_month), cal_events)
     
     lu.update( {'day_events_organizer' : day_events_organizer \
             , 'month_list' : month_list \
-            , 'frequency' : freq
-            ,'prev_year':start_date.year-1 \
-            ,'next_year':start_date.year+1 \
-            , 'category_list' : EventCategory.objects.all() \
+            ,'prev_year':selected_month.year-1 \
+            ,'next_year':selected_month.year+1 \
            })
-    lu.update(FREQ_LU)
 
-    if template is None:
-        if freq == VIEW_DAYS_DAILY: 
-            template = 'calendar_event_html/day_calendar.html'
-        else:
-            template = 'calendar_event_html/month_calendar.html'
+    template = 'schedule_viewer/month_calendar.html'
             
     return render_to_response(template, lu, context_instance=RequestContext(request))
     

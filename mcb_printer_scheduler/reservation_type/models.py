@@ -50,6 +50,8 @@ class ReservationType(models.Model):
     closing_time = models.TimeField()
 
     time_block = models.IntegerField('minutes in a time block', default=20)
+    
+    scheduling_window_in_days = models.IntegerField('How many days in advance may a user schedule?', default=365)
 
     is_active = models.BooleanField(default=False)
     is_default = models.BooleanField(default=False)

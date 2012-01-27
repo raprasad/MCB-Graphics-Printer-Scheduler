@@ -72,6 +72,7 @@
             "is_active": true, 
             "last_update": "2012-01-25 23:51:52", 
             "day_iso_numbers": "1, 2, 3, 4, 5", 
+			"scheduling_window_in_days" : 365,
             "time_block": 20, 
             "opening_time": "12:00:00", 
             "id_hash": "03c5955f1f14260018a603efa508ac0a4bc6bfed"

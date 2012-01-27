@@ -8,11 +8,11 @@
         num events: {{ event_count }}
 
 	    <table cellpadding="0" cellspacing="0">
-	        {% include "schedule_viewer/month_calendar_nav.html" %}
+	        {% include "schedule_viewer/monthly_calendar_nav.html" %}
 	        <tr>
 	            <th colspan="7">
 					
-					{{ start_date_selected|date:"F Y" }}
+					{{ selected_month|date:"F Y" }}
 					
 				
 						<br /><span style="font-size:75%">
@@ -51,23 +51,13 @@
 	        <tr>
 	            {% for day_event_obj in one_week %}
 	                <td {% if day_event_obj.is_day_past %}class="cal_td_over"{% endif %}>
-	                    <div class="cal_day_num {% if day_event_obj.is_date_other_month %} cal_day_num_other_mth{% endif %}{% if day_event_obj.is_day_today %} cal_day_num_today{% endif %}"><a href="{% url view_single_day_html_calendar day_event_obj.date|date:"Y/m/d" %}">{{ day_event_obj.date.day }}</a></div>
+	                    <div class="cal_day_num {% if day_event_obj.is_date_other_month %} cal_day_num_other_mth{% endif %}{% if day_event_obj.is_day_today %} cal_day_num_today{% endif %}"><a href="{#% url view_single_day_html_calendar day_event_obj.date|date:"Y/m/d" %#}">{{ day_event_obj.date.day }}</a></div>
 	                                        <!--({{ day_event_obj.get_event_count }})-->
 	                    <div class="cal_day">
 	                    {% for evt in day_event_obj.events %}
 	                        <div class="evt_listing_mth" xstyle="background-color:#{{ evt.category.display_color}};">
-	                            <div class="cal_day_time">{{ evt.start_time|date:"P" }}{% if evt.end_time %}&#150;{{ evt.end_time|date:"P" }}{% endif %} ({{ evt.category.abbreviation }})</div>
-	                            <b>{{ evt.title|safe }}</b>
-	                           {% comment %}  {% if evt.speaker %}
-	                                <br /><b>speaker</b>: {% if evt.speaker_link %}<a href="{{ evt.speaker_link }}">{{ evt.speaker }}</a>{% else %}{{ evt.speaker }}{% endif %}
-	                                {#% if evt.speaker_description %}<br />{{ evt.speaker_description }}{% endif %#}
-	                            {% endif %}
-	                            {#% if evt.short_description %}<p>{{ evt.short_description }}</p>{% endif %#}
-                           
-	                            {% if evt.location %}
-	                                <br /><b>location:</b> {{ evt.location }}
-	                            {% endif %}
-	                            {% endcomment %}
+	                            <div class="cal_day_time"><b>{{ evt.start_time|date:"P" }}-{{ evt.end_time|date:"P" }}</b>
+	                           <br /><a href="{# view_signup evt.id_hash #}" class="cal_name_regular">{{ evt.display_name|safe }}</a></div>
 	                        </div>
 	                    {% empty %}
 	                        <br />&nbsp;

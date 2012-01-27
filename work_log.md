@@ -18,3 +18,8 @@
 
 # 1/26/2012 - 9:45am to 11:45am
 * basic template, then scheduling form
+* adjusted reservation_type
+
+# 1/27/2012 - 10:15am (new haven) 12:50pm
+* see if we can't get the month view going:)
+* basic month view working with test event

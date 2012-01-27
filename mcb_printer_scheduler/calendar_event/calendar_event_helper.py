@@ -1,4 +1,4 @@
-
+from calendar_event.models import *
 
 class CalendarEventOrganizer:
     """if it exists, replace a CalendarEvent with it's subclass"""
@@ -8,7 +8,7 @@ class CalendarEventOrganizer:
         if calendar_events is None:
             return calendar_events
 
-        # retrieve node subclass names.  e.g.: "Page", "PageDirect", "PageCustomView", etc
+        # retrieve node subclass names.  e.g.: "CalendarMessage", "Reservation", "CalendarFullDayMessage", etc
         subclass_dict = {}  # { subclass name : 1 }
         map(lambda x: subclass_dict.update({x.subclass_name:1}), calendar_events)
 
@@ -25,7 +25,7 @@ class CalendarEventOrganizer:
                 continue    # go to the next subclass name
             cal_event_obj_type = eval(subclass_name)     # e.g. eval('Page')
             # retrieve subclass instances
-            subclass_object_qs = cal_event_obj_type.objects.select_related().filter(id__in=event_ids, visible=True) 
+            subclass_object_qs = cal_event_obj_type.objects.select_related().filter(id__in=event_ids, is_visible=True) 
             # put subclass instances into lookup
             for subclass_obj in subclass_object_qs:  
                     evt_subclass_objects.update({ subclass_obj.id: subclass_obj })
@@ -42,13 +42,10 @@ class CalendarEventOrganizer:
             else:
                 formatted_node = nd
 
-            if formatted_node.id in active_path_ids:
-                formatted_node.active_path = True
-            else:
-                formatted_node.active_path = False
-
-            if len(active_path_ids) > 0 and nd.id == active_path_ids[-1]:
-                formatted_node.selected_node = True
+            #if formatted_node.id in active_path_ids:
+            #    formatted_node.active_path = True
+            #else:
+            #    formatted_node.active_path = False
 
             formatted_events.append(formatted_node)      # subclass not found, use the Node
         return formatted_events

@@ -68,15 +68,16 @@ class CalendarEvent(models.Model):
 class Reservation(CalendarEvent):
     user = models.ForeignKey(CalendarUser)
     contact_email = models.EmailField()
-    lab_name = models.CharField(max_length=100)
+    lab_name = models.CharField(max_length=100, blank=True)
     billing_code = models.CharField('33 digit billing code', max_length=39, blank=True, help_text='optional, but will expedite paperwork')
     contact_phone = PhoneNumberField(help_text='To contact you regarding scheduling changes.')
     is_cancelled = models.BooleanField(default=False)
     
     def get_display_msg(self):
-        return '%s %s-%s' % (self.user.get_first_initial_lastname()\
-                            , self.start_time.strftime('%I:%M%p')\
-                            , self.end_time.strftime('%I:%M%p')) 
+        return self.user.get_first_initial_lastname()
+        #return '%s %s-%s' % (self.user.get_first_initial_lastname())\
+        #                    , self.start_time.strftime('%I:%M%p')\
+        #                    , self.end_time.strftime('%I:%M%p')) 
         
     def save(self):    
         if self.is_cancelled:
