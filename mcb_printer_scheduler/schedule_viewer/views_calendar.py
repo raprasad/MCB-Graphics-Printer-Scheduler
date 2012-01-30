@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response
 from django.views.decorators.cache import never_cache
 from django.db.models import Q
 
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 
 from calendar_event.models import CalendarEvent
 from calendar_event.calendar_event_helper import CalendarEventOrganizer
@@ -44,24 +44,35 @@ def view_month_calendar(request, selected_year=None, selected_month=None):
                 , 'is_current_month' : is_current_month
                 , 'selected_month' : selected_month })
     
-        
+    
+    # Create a list of the weeks. Each week is a list of seven datetime.date objects.
+    cal_weeks = get_calendar_weeks(selected_month)  
+
+    # query for calendar events in selected months, including days in week from prev/next month
     cal_events = CalendarEvent.objects.filter(is_visible=True)
-    cal_events = cal_events.filter(Q(start_time__year=selected_month.year, start_time__month=selected_month.month)|\
-                         Q(end_time__year=selected_month.year, end_time__month=selected_month.month)).order_by('start_time')
+    print 'start day', cal_weeks[0][0]
+    print 'end day', cal_weeks[-1][-1]
+    filter_start_day = datetime(cal_weeks[0][0].year, cal_weeks[0][0].month, cal_weeks[0][0].day)
+    filter_end_day = datetime(cal_weeks[-1][-1].year, cal_weeks[-1][-1].month, cal_weeks[-1][-1].day) + timedelta(days=1, microseconds=-1)
+    
+    # everything where the *start* time falls within the filter boundaries
+    cal_events = cal_events.filter(start_time__gte=filter_start_day\
+                                 , start_time__lte=filter_end_day).order_by('start_time')
                                     
     cal_events = CalendarEventOrganizer.add_calendar_event_subclasses(cal_events)
     num_events = len(cal_events)
-    lu.update( { 'cal_events' : cal_events\
+    day_events_organizer = DayEventsOrganizer(cal_weeks, cal_events)
+
+    lu.update( { 'day_events_organizer' : day_events_organizer \
+                ,'cal_events' : cal_events\
                 , 'num_events' : num_events })
 
     month_list = []
     for x in range(1,13):
         month_list.append(date(selected_month.year, x, 1))
     
-    day_events_organizer = DayEventsOrganizer(get_calendar_weeks(selected_month), cal_events)
     
-    lu.update( {'day_events_organizer' : day_events_organizer \
-            , 'month_list' : month_list \
+    lu.update( {'month_list' : month_list \
             ,'prev_year':selected_month.year-1 \
             ,'next_year':selected_month.year+1 \
            })

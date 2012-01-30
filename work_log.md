@@ -24,6 +24,11 @@
 * see if we can't get the month view going:)
 * basic month view working with test event
 
+# 1/30/2012 - 9:30 to 10:00am / 4 to 4:15
+* script to make random reservations
+* adjusted the filter times for viewing the monthly calendar
+
+
 > one time slot per poster, up to 4 slots ok, 5 or more forget it
 > plan ahead time 
 > if less than 3 hours advance, email notice, please notify mcb graphics
