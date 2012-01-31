@@ -1,16 +1,21 @@
-<html>
-<head>
-<title>mcb graphics</title>
-<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/mcb_graphics.css" />
-    
-<style>
+body{text-align: center; font-family:'trebuchet ms', serif; font-size:12px;}
+
+
+
 #evt_month_cal{font-family:verdana; float:left;}
 #evt_month_cal table{border-top: 1px solid #999999;
 border-right: 1px solid #999999; width:850px;
 }
-
+div#container
+{
+	margin-left: auto;
+	margin-right: auto;
+	width: 900px;
+	text-align: left;
+}
 .clear{clear:both;}
-
+#header{margin:0 0 40px 0;}
+#header h1{font-size:30px;}
 #evt_month_cal table tr {vertical-align:top;}
 
 #evt_month_cal table th {
@@ -81,12 +86,3 @@ div.cal_day a:hover{color:#ff0000;}
 #category_list ul {list-style-type:none;}
 #category_list li {height:40px; vertical-align:middle;}
 #category_list .cat_box{ width:20px; height:20px; border:1px solid #ccc;}
-</style>
-</head>
-<body>
-
-
-{% block cal_render %}cal_render block{% endblock %}
-
-</body>
-</html>

@@ -21,7 +21,7 @@ It sought 18 months ago to silence the American Embassy in Beijing as well, argu
 
 While China has made gains on some other airborne toxins, the PM 2.5 data is far from reassuring in a country that annually has hundreds of thousands of premature deaths related to air pollution. In an unreleased December report relying on government data, the World Bank said average annual PM 2.5 concentrations in northern Chinese cities exceeded American limits by five to six times as much, and two to four times as much in southern Chinese cities.'''.split()
 
-def make_reservations(year=2012, month=3, cnt=10):
+def make_reservations(year=2012, month=2, cnt=10):
     global random_words
     iso_day_of_week, num_days_in_month = calendar.monthrange(year, month)
     for x in range(1, cnt+1):
@@ -41,4 +41,6 @@ def make_reservations(year=2012, month=3, cnt=10):
         print '(%s) evt saved: %s' % (x, evt)
 
 if __name__=='__main__':
-    make_reservations(cnt=30)
+    CalendarEvent.objects.all().delete()
+    for mth in range(1, 13):
+        make_reservations(2012, mth, cnt=40)

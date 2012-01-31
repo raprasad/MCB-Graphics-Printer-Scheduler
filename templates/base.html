@@ -1,71 +1,17 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
-<title>{% block title_tag %}Breaking the Vicious Cycle - The Specific Carbohydrate Diet{% endblock %}</title>
-<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/btvc.css" />
-<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/google_search_minimalist.css" />
+<title>mcb graphics</title>
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/mcb_graphics.css" />
 </head>
 <body>
-<div id="content">{% comment %}
-	<div id="search_box_in_header">
-		<div id="cse-search-form" style="width: 100%;">Loading</div>
-		<script src="http://www.google.com/jsapi" type="text/javascript"></script>
-		<script type="text/javascript"> 
-		  google.load('search', '1', {language : 'en', style : google.loader.themes.MINIMALIST});
-		  google.setOnLoadCallback(function() {
-		    var customSearchControl = new google.search.CustomSearchControl(
-		      '000814121127831260345:l_vulwcrbpq');
-
-		    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
-		    var options = new google.search.DrawOptions();
-		    options.enableSearchboxOnly("search_results.html");
-		    customSearchControl.draw('cse-search-form', options);
-		  }, true);
-		</script>
-		<!-- full url in options.enableSearchboxOnly("http://www.breakingtheviciouscycle.info/search-results/") -->
-	</div>{% endcomment %}
-<div id="hm_header">	
-<img src="{{ MEDIA_URL }}imgs/site/header_top_img.jpg" width="1057" height="35" border="0" alt="The Official Website for The Specific Carbohydrate Diet" />
-<h1 id="btvc_header_img"><a href="{% url view_home %}"><img src="{{ MEDIA_URL }}imgs/site/header_title_btvc.gif" width="1057" height="40" border="0" alt="Breaking the Vicious Cycle" /></a></h1>
-<img src="{{ MEDIA_URL }}imgs/site/header_tagline.gif" width="1057" height="28" border="0" alt="The Official Website for The Specific Carbohydrate Diet" />
-<img src="{{ MEDIA_URL }}imgs/site/header_btm_img.jpg" width="1057" height="24" border="0" alt="The Official Website for The Specific Carbohydrate Diet" />
+<div id="container">
+<div id="header">
+<img src="{{ MEDIA_URL }}imgs/mcb_graphics_sm.jpg" width="60" height="60" style="float:left;" />
+<div style="float:left;"><h1 style="color:#1a2f5a; padding:0 20px; margin:0; line-height:60px; font-family:'trebuchet ms', serif;">poster printer schedule</h1></div>
+<div class="clear"></div>
 </div>
-<table id="hm_main_tbl" cellpadding="0" cellspacing="0" border="0">
-	<tr>
-		<td class="hm_rt_left_col_bg"><div class="left_col_width">{% include "page_parts/page_left_menu.html" %}
-				
-			<img src="{{ MEDIA_URL }}imgs/site/quote_left.gif" width="23" height="25" border="0" alt="left quote" style="margin:40px 0 0 0;" />
-			<div class="testimonial_quote">Thanks to the Specific Carbohydrate Diet, I have regained my life!  I would never have thought that something as simple as diet could solve this problem.</div>
-			<div class="testimonial_quote_source">
-			<img src="{{ MEDIA_URL }}imgs/site/quote_right.gif" width="23" height="25" border="0" alt="left quote" style="float:right;" />
-				<br />- <i>Lucy Rosset</i>
-				<br />Lucy's Kitchen Shop
-				<div class="clear"></div>
-			</div>
-		</div></td>
-		
-		<td class="hm_main_td"><div class="mid_col_width">{% block main_content %}base
-			{% endblock %}
-		</div></td>
+{% block cal_render %}cal_render block{% endblock %}
 
-		<td class="hm_rt_left_col_bg"><div class="rt_col_width"><a href="{#% url view_food_list %#}"><img src="{{ MEDIA_URL }}imgs/site/rtcol_legal.gif" width="185" height="188" border="0" alt="Legal/Illegal List" /></a><br />
-		<img src="{{ MEDIA_URL }}imgs/site/rtcol_book.jpg" width="185" height="262" border="0" alt="Mission Statement" />
-		</div></td>
-	</tr>
-</table>
-<!-- start: footer --><div id="footer">
-	<div class="footer_mid">
-	&copy; 2012 Breaking the Vicious Cycle&#8482;
-	&nbsp; | &nbsp; <a href="{% url view_page_by_slug "contact" %}">Contact</a>
-	&nbsp; | &nbsp; <a href="{% url view_page_by_slug "privacy-policy" %}">Privacy Policy</a>
-	&nbsp; | &nbsp; <a href="{% url view_page_by_slug "terms-conditions" %}">Terms &amp; Conditions</a>		
-		<div class="footer_icons"><a href=""><img src="{{ MEDIA_URL }}imgs/site/btn_facebook.gif" width="20" height="20" border="0" alt="facebook" /></a>
-			<a href=""><img src="{{ MEDIA_URL }}imgs/site/btn_twitter.gif" width="20" height="20" border="0" alt="twitter" /></a>
-		</div>
-	</div>
-	<div class="clear"></div>
-</div><!-- end: footer -->
 </div>
 </body>
 </html>
