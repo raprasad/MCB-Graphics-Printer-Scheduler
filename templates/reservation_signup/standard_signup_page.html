@@ -1,0 +1,29 @@
+
+{% extends "base.html" %}
+{% block main_content %}
+<div><!-- start: overarching_cal_div -->
+    <div style="float:left; width:400px;">
+        {% if ERR_found %}
+            {% if ERR_signup_day_has_passed %}
+                Sorry!  You cannot signup for a day in the past:)
+            {% endif %}
+        {% endif %}
+        
+    </div>
+    <div style="float:left; width:400px;">
+        <div id="day_events_list">
+        <table cellspacing="0">
+            <tr>
+                <th colspan="2">{{ current_datetime|date:"F j, Y" }}</th>
+            </tr>
+            {% for evt in day_cal_events %}
+            <tr>
+                <td class="time_col">{{ evt.start_time|date:"P" }} &#151; {{ evt.end_time|date:"P" }}</td>
+                <td>{{ evt.display_name|safe }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+	<div class="clear">
+</div><!-- end: overarching_cal_div -->
+{% endblock %}

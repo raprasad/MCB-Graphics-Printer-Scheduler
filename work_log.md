@@ -28,6 +28,8 @@
 * script to make random reservations
 * adjusted the filter times for viewing the monthly calendar
 
+# 2/6/2012 - 9:30am to 
+* work on sign up page
 
 > one time slot per poster, up to 4 slots ok, 5 or more forget it
 > plan ahead time 

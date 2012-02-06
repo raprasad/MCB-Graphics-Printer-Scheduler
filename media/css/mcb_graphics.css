@@ -86,3 +86,23 @@ div.cal_day a:hover{color:#ff0000;}
 #category_list ul {list-style-type:none;}
 #category_list li {height:40px; vertical-align:middle;}
 #category_list .cat_box{ width:20px; height:20px; border:1px solid #ccc;}
+
+#day_events_list table {border-top:1px solid #ccc;
+    border-right:1px solid #ccc;
+    padding:0;
+    margin:0;
+    width:300px;
+    }
+#day_events_list table tr:hover{background-color:#ffcc00;}
+#day_events_list table tr td{border-bottom:1px solid #ccc;
+    border-left:1px solid #ccc;
+    padding:10px;
+    font-size:12px;
+}
+#day_events_list table tr td.time_col{ white-space: nowrap;}
+
+#day_events_list table tr th{border-bottom:1px solid #ccc;
+    border-left:1px solid #ccc;
+    padding:10px;
+    font-size:12px;
+}

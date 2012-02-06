@@ -13,6 +13,8 @@ from schedule_maker.calendar_weeks import get_calendar_weeks
 
 
 from cal_util.view_util import get_common_lookup
+from cal_util.time_util import get_next_month, get_previous_month
+
 from cal_util.msg_util import *
 
 def view_month_calendar(request, selected_year=None, selected_month=None):
