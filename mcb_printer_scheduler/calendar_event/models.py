@@ -18,8 +18,8 @@ class CalendarEvent(models.Model):
 
     is_visible = models.BooleanField('Event is Active and Visible',     default=True)
     
-    start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
+    start_datetime = models.DateTimeField()
+    end_datetime = models.DateTimeField()
     
     subclass_name = models.CharField(max_length=70, blank=True, help_text='Event Type (auto-filled on save)')
     
@@ -30,20 +30,20 @@ class CalendarEvent(models.Model):
         return self.display_name
     
     def get_event_length_in_minutes(self):
-        if self.end_time is None or self.start_time is None:
+        if self.end_datetime is None or self.start_datetime is None:
             return None
-        if self.end_time < self.start_time:
+        if self.end_datetime < self.start_datetime:
             return None
             
-        time_diff = self.end_time - self.start_time
+        time_diff = self.end_datetime - self.start_datetime
         return time_diff.seconds / 60
         
     def get_display_msg(self):
         if self.display_name:
             return self.display_name
             
-        return '%s to %s' % (self.start_time.strftime('%I:%M%p')\
-                    , self.end_time.strftime('%I:%M%p')) 
+        return '%s to %s' % (self.start_datetime.strftime('%I:%M%p')\
+                    , self.end_datetime.strftime('%I:%M%p')) 
                     
     def save(self):    
         if self.id == None:
@@ -59,7 +59,7 @@ class CalendarEvent(models.Model):
         super(CalendarEvent, self).save()    
 
     class Meta:
-        ordering = ('-start_time', 'display_name'  )
+        ordering = ('-start_datetime', 'display_name'  )
         verbose_name = 'Calendar Event (view all events)'
         verbose_name_plural = 'Calendar Events (view all events)'
 
@@ -76,8 +76,8 @@ class Reservation(CalendarEvent):
     def get_display_msg(self):
         return self.user.get_first_initial_lastname()
         #return '%s %s-%s' % (self.user.get_first_initial_lastname())\
-        #                    , self.start_time.strftime('%I:%M%p')\
-        #                    , self.end_time.strftime('%I:%M%p')) 
+        #                    , self.start_datetime.strftime('%I:%M%p')\
+        #                    , self.end_datetime.strftime('%I:%M%p')) 
         
     def save(self):    
         if self.is_cancelled:
@@ -109,10 +109,10 @@ class CalendarFullDayMessage(CalendarEvent):
         return self.display_name
         
     def save(self):    
-        self.start_time = datetime(self.start_time.year, self.start_time.month, self.start_time.day)
-        self.end_time = datetime(self.end_time.year, self.end_time.month, self.end_time.day) + timedelta(days=1) + timedelta(microseconds=-1)
-        if self.start_time > self.end_time:
-            self.end_time = self.start_time + timedelta(days=1) + timedelta(microseconds=-1)
+        self.start_datetime = datetime(self.start_datetime.year, self.start_datetime.month, self.start_datetime.day)
+        self.end_datetime = datetime(self.end_datetime.year, self.end_datetime.month, self.end_datetime.day) + timedelta(days=1) + timedelta(microseconds=-1)
+        if self.start_datetime > self.end_datetime:
+            self.end_datetime = self.start_datetime + timedelta(days=1) + timedelta(microseconds=-1)
         self.subclass_name = self.__class__.__name__
         
         super(CalendarFullDayMessage, self).save()    

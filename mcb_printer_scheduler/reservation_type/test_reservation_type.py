@@ -27,8 +27,8 @@ class ReservationTypeTest(TestCase):
         msgt('Should be 20 minute calendar event, actual count: [%s]' % (evt.get_event_length_in_minutes()))
         self.assertEqual(evt.get_event_length_in_minutes(), 20)
 
-        msgt('ISO day of week should be 4 for Thursday. [%s]' % (evt.start_time.isoweekday()))
-        self.assertEqual(evt.start_time.isoweekday(), 4)
+        msgt('ISO day of week should be 4 for Thursday. [%s]' % (evt.start_datetime.isoweekday()))
+        self.assertEqual(evt.start_datetime.isoweekday(), 4)
         
         #--------------------------------------------
         rt = ReservationType.objects.get(pk=1)

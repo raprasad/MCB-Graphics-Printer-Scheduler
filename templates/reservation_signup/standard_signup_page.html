@@ -13,13 +13,18 @@
         {% endif %}
         
         {% if num_timeslots > 0 %}
+            <p>building sign-up form - open slots</p>
+            <ul>
             {% for ts in open_timeslots %}
-            {{ ts.start_datetime}} - {{ ts.end_datetime}}<br />
+                <li>{{ ts.start_datetime|date:"P"}} - {{ ts.end_datetime|date:"P"}}</li>
             {% endfor %}
+            </ul>
         {% endif %}
     </div>
+    
     <div style="float:left; width:400px;">
         {% if selected_date and calendar_events %}
+        <!-- day listing -->
         <div id="day_events_list">
         <table cellspacing="0">
             <tr>
@@ -27,7 +32,7 @@
             </tr>
             {% for evt in calendar_events %}
             <tr>
-                <td class="time_col">{{ evt.start_time|date:"P" }} &#151; {{ evt.end_time|date:"P" }}</td>
+                <td class="time_col">{{ evt.start_datetime|date:"P" }} &#151; {{ evt.end_datetime|date:"P" }}</td>
                 <td>{{ evt.display_name|safe }}</td>
             </tr>
             {% endfor %}

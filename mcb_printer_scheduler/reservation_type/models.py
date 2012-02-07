@@ -138,23 +138,23 @@ class ReservationType(models.Model):
         if calendar_event is None:
             return False
 
-        if calendar_event.__dict__.get('start_time', None) is None:
+        if calendar_event.__dict__.get('start_datetime', None) is None:
             return False
 
-        if calendar_event.__dict__.get('end_time', None) is None:
+        if calendar_event.__dict__.get('end_datetime', None) is None:
             return False
             
         # Is this a valid day of the week
         #print self.day_iso_numbers
-        if not calendar_event.start_time.isoweekday() in eval(self.day_iso_numbers):
+        if not calendar_event.start_datetime.isoweekday() in eval(self.day_iso_numbers):
             return False
 
         # start time is too early or too late
-        if calendar_event.start_time.time() < self.opening_time or calendar_event.start_time.time() > self.closing_time:
+        if calendar_event.start_datetime.time() < self.opening_time or calendar_event.start_datetime.time() > self.closing_time:
             return False
 
         # end time is too early or too late
-        if calendar_event.end_time.time() < self.opening_time or calendar_event.end_time.time() > self.closing_time:
+        if calendar_event.end_datetime.time() < self.opening_time or calendar_event.end_datetime.time() > self.closing_time:
             return False
 
         if not calendar_event.get_event_length_in_minutes() == self.time_block:

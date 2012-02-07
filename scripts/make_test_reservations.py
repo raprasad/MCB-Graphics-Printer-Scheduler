@@ -29,18 +29,18 @@ def make_reservations(year=2012, month=2, cnt=10):
         day_of_week = random.randint(1, num_days_in_month)    
         start_hr = random.randint(0, 23)
         start_min = [0, 20, 40][random.randint(0, 2)]
-        start_time = datetime(year, month, day_of_week, start_hr, start_min)
-        end_time = start_time + timedelta(minutes=20)
+        start_datetime = datetime(year, month, day_of_week, start_hr, start_min)
+        end_datetime = start_datetime + timedelta(minutes=20)
         
         desc_idx_start = random.randint(0, len(random_words)-5)
         rand_desc = ' '.join(random_words[desc_idx_start:desc_idx_start+5])
-        evt = CalendarEvent(start_time=start_time\
-                    , end_time=end_time\
+        evt = CalendarEvent(start_datetime=start_datetime\
+                    , end_datetime=end_datetime\
                     , display_name=rand_desc )
         evt.save()
         print '(%s) evt saved: %s' % (x, evt)
 
 if __name__=='__main__':
-    CalendarEvent.objects.all().delete()
-    for mth in range(1, 13):
-        make_reservations(2012, mth, cnt=40)
+    #CalendarEvent.objects.all().delete()
+    for mth in range(1, 3):
+        make_reservations(2012, mth, cnt=200)

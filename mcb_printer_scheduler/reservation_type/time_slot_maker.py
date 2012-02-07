@@ -2,6 +2,7 @@ from datetime import date, datetime, time, timedelta
 from calendar_event.models import CalendarEvent
 
 from reservation_type.models import ReservationType
+from reservation_type.conflict_checker import ConflictChecker
 """
 Given a particular day, choose the ReservationType that applies
 """
@@ -18,10 +19,10 @@ class TimeSlot:
         """Check that datetime objects are valid and start time isn't after end time"""
         
         if start_datetime is None or not start_datetime.__class__.__name__ == 'datetime':
-            raise ValueError('start_time is not a datetime.time object!')
+            raise ValueError('start_datetime is not a datetime.time object!')
 
         if end_datetime is None or not end_datetime.__class__.__name__ == 'datetime':
-            raise ValueError('end_time is not a datetime.time object!')
+            raise ValueError('end_datetime is not a datetime.time object!')
 
         if start_datetime > end_datetime :
             raise ValueError('start_datetime is greater than the end_datetime')
@@ -110,8 +111,8 @@ class TimeSlotChecker:
 
     def gather_calendar_events(self):
         self.calendar_events = CalendarEvent.objects.filter(is_visible=True\
-                             , start_time__gte=datetime.combine(self.selected_date, time.min)
-                             , start_time__lte=datetime.combine(self.selected_date, time.max)).order_by('start_time')
+                             , start_datetime__gte=datetime.combine(self.selected_date, time.min)
+                             , start_datetime__lte=datetime.combine(self.selected_date, time.max)).order_by('start_datetime')
         
     def check_for_conflict(self, timeslot):
         if timeslot is None:
@@ -121,27 +122,9 @@ class TimeSlotChecker:
             return False
         
         """Check for conflicts"""
-        for cal_event in self.calendar_event:
-            if 
+        #for cal_event in self.calendar_event:
+        #    if 
 
-             err_date_overlap_msg = 'Please enter different start/end dates.  (No overlaps are allowed, even if other ReservationTypes are inactive.)'
-                if ReservationType.objects.exclude(id=id_to_exclude).filter(end_date__gte=start_date, end_date__lte=end_date).count() > 0:
-                    self._errors['end_date'] = self.error_class(['Another ReservationType ends during these dates.'])
-                    self._errors['start_date'] = self.error_class(['Another ReservationType ends during these dates.'])
-                    raise forms.ValidationError(err_date_overlap_msg)
-
-                if ReservationType.objects.exclude(id=id_to_exclude).filter(start_date__gte=start_date, start_date__lte=end_date).count() > 0:
-                    self._errors['start_date'] = self.error_class(['Another ReservationType starts during these dates.'])
-                    self._errors['end_date'] = self.error_class(['Another ReservationType starts during these dates.'])
-                    raise forms.ValidationError(err_date_overlap_msg)
-
-                if ReservationType.objects.exclude(id=id_to_exclude).filter(start_date__lte=start_date, end_date__gte=end_date).exclude(id=id_to_exclude).count() > 0:
-                    self._errors['start_date'] = self.error_class(['The start date overlaps with another ReservationType.'])
-                    self._errors['end_date'] = self.error_class(['The end date overlaps with another ReservationType.'])
-                    raise forms.ValidationError(err_date_overlap_msg)
-
-            
-        
     def calculate_time_slots(self):
         
         if self.selected_date < self.current_date:        
@@ -157,9 +140,11 @@ class TimeSlotChecker:
         start_datetime = datetime.combine(self.selected_date, self.reservation_type.opening_time)
         end_datetime = start_datetime + timedelta(minutes=self.reservation_type.time_block)
         
+        conflict_checker = ConflictChecker(self.calendar_events)
         while end_datetime.time() <= self.reservation_type.closing_time:
             timeslot = TimeSlot(start_datetime, end_datetime)
-            self.open_timeslots.append(timeslot)
+            if not conflict_checker.does_timeslot_conflict(timeslot):
+                self.open_timeslots.append(timeslot)
             # set next timeslot
             start_datetime = end_datetime
             end_datetime = start_datetime + timedelta(minutes=self.reservation_type.time_block)

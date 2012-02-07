@@ -67,7 +67,7 @@ class DayEventsOrganizer:
             return
             
         for evt in self.events:
-            evt_date = evt.start_time.date()
+            evt_date = evt.start_datetime.date()
 
             # get DayEvents object exist for this date?
             day_events_obj = self.event_lookup.get(evt_date, DayEvents(evt_date, current_date=self.today))

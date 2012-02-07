@@ -58,8 +58,8 @@ def view_month_calendar(request, selected_year=None, selected_month=None):
     filter_end_day = datetime(cal_weeks[-1][-1].year, cal_weeks[-1][-1].month, cal_weeks[-1][-1].day) + timedelta(days=1, microseconds=-1)
     
     # everything where the *start* time falls within the filter boundaries
-    cal_events = cal_events.filter(start_time__gte=filter_start_day\
-                                 , start_time__lte=filter_end_day).order_by('start_time')
+    cal_events = cal_events.filter(start_datetime__gte=filter_start_day\
+                                 , start_datetime__lte=filter_end_day).order_by('start_datetime')
                                     
     cal_events = CalendarEventOrganizer.add_calendar_event_subclasses(cal_events)
     num_events = len(cal_events)

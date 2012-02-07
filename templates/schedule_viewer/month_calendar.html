@@ -61,7 +61,7 @@
 	                    <div class="cal_day">
 	                    {% for evt in day_event_obj.events %}
 	                        <div class="evt_listing_mth">
-	                            <div class="cal_day_time"><b>{{ evt.start_time|date:"P" }}{#-{{ evt.end_time|date:"P" }}#}</b>
+	                            <div class="cal_day_time"><b>{{ evt.start_datetime|date:"P" }}{#-{{ evt.end_datetime|date:"P" }}#}</b>
 	                           <br /><a href="{# view_signup evt.id_hash #}" class="cal_name_regular">{{ evt.display_name|safe }}</a></div>
 	                        </div>
 	                    {% empty %}
