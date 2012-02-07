@@ -4,8 +4,7 @@ from django.db.models.signals import post_save
 
 from calendar_user.models import CalendarUser
 from schedule_helper.reservation_type_checker import check_reservation_type
-
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 
 try:
     from hashlib import sha1
@@ -73,8 +72,47 @@ class ReservationType(models.Model):
         
     def __unicode__(self):
         return self.name
+        
+    def is_potential_reservation_date_valid(self, selected_date, current_date=None):
+        """Checks if the ReservationType may be used for the given *date* 
+        This does not check the times, only the dates
+        """
+        if selected_date is None:
+            return False
+            
+        if selected_date.__class__.__name__ == 'date': 
+            pass
+        elif selected_date.__class__.__name___ == 'datetime':
+            selected_date = selected_date.date()
+        else:
+            return True
+              
+        # check if active
+        if not self.is_active:
+            return False
+
+        # get current date
+        if current_date is None or not current_date.__class__.__name__ == 'date': 
+            current_date = date.now()
+
+        # is potential reservation in the past?
+        if selected_date < current_date:        
+            return False
     
+        # check start / end dates
+        if self.start_date and self.end_date:
+            if selected_date < self.start_date or selected_date > self.end_date:
+                return False
+        
+        # check if future scheduling window is in range
+        if selected_date > (current_date + timedelta(self.scheduling_window_in_days)):        
+            return False
+    
+        return True
+        
+        
     def available_days_of_week(self):
+        """Show available days of week, in the admin."""
         l = map(lambda x: x.day, self.days_allowed.all())
         if len(l) == 0:
             return 'none'

@@ -93,7 +93,7 @@ div.cal_day a:hover{color:#ff0000;}
     margin:0;
     width:300px;
     }
-#day_events_list table tr:hover{background-color:#ffcc00;}
+#day_events_list table tr:hover{background-color:#fffcf1;}
 #day_events_list table tr td{border-bottom:1px solid #ccc;
     border-left:1px solid #ccc;
     padding:10px;

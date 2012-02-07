@@ -7,22 +7,32 @@
             {% if ERR_signup_day_has_passed %}
                 Sorry!  You cannot signup for a day in the past:)
             {% endif %}
+            {% if ERR_reservation_type_not_found %}
+                Sorry!  Further reservations are not available for this day.
+            {% endif %}
         {% endif %}
         
+        {% if num_timeslots > 0 %}
+            {% for ts in open_timeslots %}
+            {{ ts.start_datetime}} - {{ ts.end_datetime}}<br />
+            {% endfor %}
+        {% endif %}
     </div>
     <div style="float:left; width:400px;">
+        {% if selected_date and calendar_events %}
         <div id="day_events_list">
         <table cellspacing="0">
             <tr>
-                <th colspan="2">{{ current_datetime|date:"F j, Y" }}</th>
+                <th colspan="2">{{ selected_date|date:"F j, Y" }}</th>
             </tr>
-            {% for evt in day_cal_events %}
+            {% for evt in calendar_events %}
             <tr>
                 <td class="time_col">{{ evt.start_time|date:"P" }} &#151; {{ evt.end_time|date:"P" }}</td>
                 <td>{{ evt.display_name|safe }}</td>
             </tr>
             {% endfor %}
         </table>
+        {% endif %}
     </div>
 	<div class="clear">
 </div><!-- end: overarching_cal_div -->

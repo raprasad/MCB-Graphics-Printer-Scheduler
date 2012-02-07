@@ -57,6 +57,7 @@ class ReservationTypeForm(forms.ModelForm):
         if self.instance and self.instance.id:
             id_to_exclude = self.instance.id
         
+        # conflict check        
         err_date_overlap_msg = 'Please enter different start/end dates.  (No overlaps are allowed, even if other ReservationTypes are inactive.)'
         if ReservationType.objects.exclude(id=id_to_exclude).filter(end_date__gte=start_date, end_date__lte=end_date).count() > 0:
             self._errors['end_date'] = self.error_class(['Another ReservationType ends during these dates.'])
