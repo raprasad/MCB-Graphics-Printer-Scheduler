@@ -10,12 +10,17 @@ class DayEvents:
         self.is_day_today = False
         self.is_day_past = False
         self.is_date_other_month = False
-
+        self.is_weekend = False
+        
         self.set_date_flags(current_date)
         
+
     def set_date_flags(self, current_date):
         if current_date is None:
             return
+            
+        if self.date.isoweekday() in [6, 7]:
+            self.is_weekend = True
             
         if self.date < current_date:
             self.is_day_past = True

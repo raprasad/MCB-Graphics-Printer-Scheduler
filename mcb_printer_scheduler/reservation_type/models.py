@@ -29,6 +29,7 @@ class DayOfWeek(models.Model):
         verbose_name = 'Day of Week'
         verbose_name_plural = 'Days of Week'
         
+        
 class ReservationType(models.Model):
     """
     Reservation Type - only one may be a default at once

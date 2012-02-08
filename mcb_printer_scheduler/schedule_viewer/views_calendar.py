@@ -74,6 +74,8 @@ def view_month_calendar(request, selected_month=None):
     lu.update( {'month_list' : month_list \
             ,'prev_year':selected_month.year-1 \
             ,'next_year':selected_month.year+1 \
+            , 'next_month' : get_next_month(selected_month)
+            , 'previous_month' :  get_previous_month(selected_month)
            })
 
     template = 'schedule_viewer/month_calendar.html'

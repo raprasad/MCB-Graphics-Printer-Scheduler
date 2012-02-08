@@ -4,6 +4,8 @@ a {color:#1a2f5a;
     text-decoration:underline;}
 a:hover{color:#77aa56; }
 
+h1{color:#1a2f5a; padding:0 20px; margin:0; line-height:60px; font-family:'trebuchet ms', serif;}
+
 #evt_month_cal{font-family:verdana; float:left;}
 #evt_month_cal table{border-top: 1px solid #999999;
 border-right: 1px solid #999999; width:850px;
@@ -16,9 +18,33 @@ div#container
 	text-align: left;
 }
 .clear{clear:both;}
-#header{margin:0 0 40px 0;}
+#header{margin:0 0 20px 0;}
 #header h1{font-size:30px;}
 #evt_month_cal table tr {vertical-align:top;}
+
+#question_div{color:#1a2f5a;
+    font-size:14px;
+    float:right;
+    margin:0 50px 0 0;
+}
+#question_div a{color:#9a1a2c;    }
+#question_div a:hover{color:#77aa56; }
+
+#reserve_slot_div{color:#1a2f5a;
+    font-size:14px;
+    float:left;
+    margin:0 0 0 180px;
+}
+    
+#hu_pin_login{
+    margin:2px;
+    background-color:#9a1a2c; 
+    color:#fff;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    
+}
+
 
 #evt_month_cal table th {
     background-color: #FFFFFF;
@@ -127,5 +153,10 @@ ul.errorlist li{ color:#ff0000;}
     vertical-align:middle;
     
     padding:10px;}
+    
+a.cal_nav_months{color:#fff; text-decoration:none; font-size:14px;  line-height:170%;}    
+a.cal_nav_months:hover{color:#1a2f5a;}    
+a.this_month{color:#fff; text-decoration:underline; font-size:11px;}
+a.this_month:hover{color:#1a2f5a;}    
     
 #footer{margin:40px 0;}    
