@@ -5,12 +5,18 @@
 </head>
 <body>
 <div id="container">
+<div id="overarching_div">
+    
 <div id="header">
-<a href="{% url view_current_month_calendar %}"><img src="{{ MEDIA_URL }}imgs/mcb_graphics_sm.jpg" width="60" height="60" style="float:left;" /></a>
-<div style="float:left;"><h1>poster printer schedule</h1></div>
-<div class="clear"></div>
+    <a href="{% url view_current_month_calendar %}"><img src="{{ MEDIA_URL }}imgs/mcb_graphics_sm.jpg" width="60" height="60" style="float:left;" /></a>
+    <div style="float:left;"><h1>poster printer schedule</h1></div>
+    <div class="clear"></div>
 </div>
+
+<!-- start: overarching_cal_div -->
 {% block main_content %}main_content block{% endblock %}
+
+
 <!-- start: footer -->
 
 <div id="footer">
@@ -19,6 +25,7 @@
     copyright &copy; {% now "Y" %} <a href="http://www.mcb.harvard.edu">Department of Molecular &amp; Cellular Biology</a> 
     &nbsp;|&nbsp; <a href="http://www.harvard.edu">Harvard University</a>
 </div><!-- end: footer -->
+</div><!-- end: overarching_cal_div -->
 </div><!-- end container -->
 </body>
 </html>

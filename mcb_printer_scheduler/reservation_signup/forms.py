@@ -6,16 +6,24 @@ from reservation_type.time_slot_maker import TimeSlot
 
 from calendar_event.models import CalendarEvent, Reservation
 
+from django.contrib.localflavor.us.forms import USPhoneNumberField
 
 class SignupForm(forms.Form):
     """Form used for a regular user to reserve a time."""
 
-    time_slot = forms.DateTimeField(label='Available Times', widget=forms.Select)
+    time_slot = forms.DateTimeField(label='Available times', widget=forms.Select)
     session_length = forms.IntegerField(widget=forms.HiddenInput)
-
-    def init(self, time_slot_choices, session_length):   
+    phone_number = USPhoneNumberField(label='Phone')
+    email = forms.EmailField(label='Email')
+    
+    
+    def init(self, time_slot_choices, session_length, **kwargs):   
         self.fields['time_slot'].widget.choices = time_slot_choices
         self.fields['session_length'].initial = session_length
+
+        self.fields['email'].initial = kwargs.get('contact_email', '')
+        self.fields['phone_number'].initial = kwargs.get('phone', '')
+
 
 
     def get_time_slot_object(self):

@@ -1,7 +1,5 @@
-
 {% extends "base.html" %}
 {% block main_content %}
-<div><!-- start: overarching_cal_div -->
     <div style="float:left; width:400px;">
         {% if not ERR_found %}
         <h3 style="margin:0 0 20px 0; color:green;">Signup Success!</h3>
@@ -52,5 +50,4 @@
     {% include "reservation_signup/right_col_reservations.html" %}
     
 	<div class="clear"></div>
-</div><!-- end: overarching_cal_div -->
 {% endblock %}

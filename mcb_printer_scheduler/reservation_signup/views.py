@@ -45,6 +45,7 @@ def view_signup_page(request, selected_date):
         raise Http404('Signup date not found.')
 
     lu = get_common_lookup(request)
+    cal_user = lu.get('calendar_user', None)
 
     try:
         selected_datetime = datetime.strptime(selected_date, '%Y-%m-%d')
@@ -82,7 +83,9 @@ def view_signup_page(request, selected_date):
     else:
         signup_form = SignupForm()
         signup_form.init(timeslot_checker.get_timeslot_choices_for_form()\
-                        , timeslot_checker.get_reservation_time_block() )
+                        , timeslot_checker.get_reservation_time_block()
+                        ,**{ 'phone' : cal_user.phone_number\
+                           , 'contact_email' : cal_user.contact_email } )
             
     lu.update({ 'signup_form' : signup_form})
     
