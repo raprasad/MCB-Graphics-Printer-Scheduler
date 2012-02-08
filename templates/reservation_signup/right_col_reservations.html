@@ -1,0 +1,25 @@
+<div style="float:left; width:400px; margin:0 0 0 20px">
+    {% if selected_date and calendar_events %}
+    <!-- day listing -->
+    <div id="day_events_list">
+    <table cellspacing="0">
+        <tr>
+            <th colspan="2">{{ selected_date|date:"F j, Y" }}</th>
+        </tr>
+        {% for evt in calendar_events %}
+            {% ifequal reservation.id evt.id %}
+            <tr style="background-color:#ffcc00;">
+                <td class="time_col">{{ evt.start_datetime|date:"P" }} &#151; {{ evt.end_datetime|date:"P" }}</td>
+                <td>{{ evt.display_name|safe }}</td>
+            </tr>
+            
+            {% else %}
+            <tr>
+                <td class="time_col">{{ evt.start_datetime|date:"P" }} &#151; {{ evt.end_datetime|date:"P" }}</td>
+                <td>{{ evt.display_name|safe }}</td>
+            </tr>
+            {% endifequal %}
+        {% endfor %}
+    </table>
+    {% endif %}
+</div>

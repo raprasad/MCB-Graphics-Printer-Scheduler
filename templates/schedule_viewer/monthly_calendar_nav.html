@@ -11,9 +11,10 @@
       {% for mth in month_list %}
             &nbsp;&nbsp;
            {% ifequal mth selected_month.date %}
-               <a href="{% url view_current_month_calendar %}{{ mth|date:"Y-m/"}}" class="month_lnk_sel">{{ mth|date:"M" }}</a>
+               <a href="{% url view_month_calendar mth|date:"Y-m" %}" class="month_lnk_sel">{{ mth|date:"M" }}</a>
            {% else %}
-               <a href="{% url view_current_month_calendar %}{{ mth|date:"Y-m/" }}">{{ mth|date:"M" }}</a>
+               <a href="{% url view_month_calendar mth|date:"Y-m" %}">{{ mth|date:"M" }}</a>
+               
            {% endifequal %}
        {% endfor %}
         &nbsp;&nbsp; <a href="{% url view_current_month_calendar %}{{ next_year }}-1/">{{ next_year }}</a>

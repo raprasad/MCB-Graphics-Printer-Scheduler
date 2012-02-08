@@ -1,0 +1,37 @@
+
+{% extends "base.html" %}
+{% block main_content %}
+<div><!-- start: overarching_cal_div -->
+    <div style="float:left; width:400px;">
+        {% if not ERR_found %}
+        <h3 style="margin:0 0 20px 0; color:green;">Signup Success!</h3>
+        {% else %}
+        <h3 style="margin:0 0 20px 0;">Signup Failed</h3>
+        {% endif %}
+
+        {% if reservation %}
+        Success!
+        {% endif %}
+        {% if ERR_found %}
+            <div class="err_box">{% if ERR_signup_day_has_passed %}
+                Sorry!  You cannot sign up for a day in the past:)
+            {% endif %}
+            {% if ERR_reservation_type_not_found %}
+              Sorry!  Further reservations are not available for this day.
+            {% endif %}
+            
+            {% if ERR_not_authenticated %}You must sign in to reserve a time.
+                {% include "pin_auth/login_url.html" %}
+            {% endif %}
+            <p>Please return to the <a href="{% url view_month_calendar selected_date|date:"Y-m" %}">monthly calendar</a>.</p>
+            
+            </div>
+        {% endif %}
+       
+    </div>
+    
+    {% include "reservation_signup/right_col_reservations.html" %}
+    
+	<div class="clear">
+</div><!-- end: overarching_cal_div -->
+{% endblock %}

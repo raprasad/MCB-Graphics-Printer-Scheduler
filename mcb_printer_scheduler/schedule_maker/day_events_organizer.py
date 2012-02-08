@@ -76,7 +76,7 @@ class DayEventsOrganizer:
             #if day_events_obj.get_event_count() == 1:
             # update the lookup
             self.event_lookup.update( { evt_date:day_events_obj})
-            print day_events_obj.date, day_events_obj.events
+            #print day_events_obj.date, day_events_obj.events
             
     def add_events_to_calendar_weeks(self):
         fmt_weeks = []

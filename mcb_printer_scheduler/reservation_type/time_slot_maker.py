@@ -13,7 +13,15 @@ class TimeSlot:
         
         self.start_datetime = start_datetime
         self.end_datetime = end_datetime
-        
+    
+    def get_timeslot_label_for_form(self):
+        return '%s - %s' % (self.start_datetime.strftime('%I:%M %p')\
+                             ,  self.end_datetime.strftime('%I:%M %p'))
+
+    def get_timeslot_entry_for_form(self):
+        label = self.get_timeslot_label_for_form()
+        val = self.start_datetime   #strftime('%Y-%m-%d %H:%M')
+        return (val, label)
 
     def check_selected_date_times(self, start_datetime, end_datetime):
         """Check that datetime objects are valid and start time isn't after end time"""
@@ -60,6 +68,19 @@ class TimeSlotChecker:
         self.init_err_flag_attrs()
         self.gather_calendar_events()   # get events for the selected_date
         self.calculate_time_slots()     # choose reservation type and calculate time slots
+
+
+    def get_timeslot_choices_for_form(self):
+        if self.open_timeslots is None or len(self.open_timeslots) == 0:
+            return None
+        return [('', '--------------')] + map(lambda x: x.get_timeslot_entry_for_form()\
+                            , self.open_timeslots)
+                            
+
+    def get_reservation_time_block(self):
+        if self.reservation_type is None:
+            return None
+        return self.reservation_type.time_block
 
     def get_lookup_for_template(self):
 
@@ -140,7 +161,7 @@ class TimeSlotChecker:
         start_datetime = datetime.combine(self.selected_date, self.reservation_type.opening_time)
         end_datetime = start_datetime + timedelta(minutes=self.reservation_type.time_block)
         
-        conflict_checker = ConflictChecker(self.calendar_events)
+        conflict_checker = ConflictChecker()    # helps check against all existing CalendarEvents
         while end_datetime.time() <= self.reservation_type.closing_time:
             timeslot = TimeSlot(start_datetime, end_datetime)
             if not conflict_checker.does_timeslot_conflict(timeslot):

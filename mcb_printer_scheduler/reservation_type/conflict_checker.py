@@ -4,11 +4,8 @@ class ConflictChecker:
     """
     proposed_timeslot: requires start_datetime and end_datetime objects
     """
-    def __init__(self, calendar_events, event_to_edit=None):        
-        if calendar_events is None:
-            raise ValueError('ConflictChecker - calendar_events is None')
-            
-        self.calendar_events = calendar_events
+    def __init__(self, event_to_edit=None):        
+
         self.event_to_edit = event_to_edit
         
         if event_to_edit:

@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^poster-printer/admin/', include(admin.site.urls)),
     
-    url(r'^poster-printer/calendar', include('mcb_printer_scheduler.schedule_viewer.urls')),
+    url(r'^poster-printer/calendar/', include('mcb_printer_scheduler.schedule_viewer.urls')),
 
     url(r'^poster-printer/signup/', include('mcb_printer_scheduler.reservation_signup.urls')),
     

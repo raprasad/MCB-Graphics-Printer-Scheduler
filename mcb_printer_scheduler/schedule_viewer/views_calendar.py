@@ -17,30 +17,27 @@ from cal_util.time_util import get_next_month, get_previous_month
 
 from cal_util.msg_util import *
 
-def view_month_calendar(request, selected_year=None, selected_month=None):
+def view_month_calendar(request, selected_month=None):
     """
     View monthly calendar
     """
-    lu = get_common_lookup(request)
-
-    cal_user = lu.get('cal_user', None)
-
     current_datetime = datetime.now()
-            
-    if selected_year is None or selected_month is None:
-        selected_year = current_datetime.year
-        selected_month= current_datetime.month
-    
-    try:
-        selected_month = datetime(year=int(selected_year), month=int(selected_month), day=1)
-    except:
-        selected_month = datetime(year=current_datetime.year, month=current_datetime.month, day=1)
-    
-    if current_datetime.month == selected_month.month \
-        and current_datetime.year ==  selected_month.year:
-            is_current_month = True
+    if selected_month is None:
+        selected_month = current_datetime.date()
+        is_current_month = True
     else:
-        is_current_month = False
+        try:
+            selected_month = datetime.strptime(selected_month, '%Y-%m')
+        except:
+            raise ValueError('selected month is not valid')
+        
+        if current_datetime.month == selected_month.month \
+            and current_datetime.year ==  selected_month.year:
+            is_current_month = True
+        else:
+            is_current_month = False
+    
+    lu = get_common_lookup(request)
     
     lu.update({'current_datetime':current_datetime\
                 , 'is_current_month' : is_current_month
@@ -52,8 +49,8 @@ def view_month_calendar(request, selected_year=None, selected_month=None):
 
     # query for calendar events in selected months, including days in week from prev/next month
     cal_events = CalendarEvent.objects.filter(is_visible=True)
-    print 'start day', cal_weeks[0][0]
-    print 'end day', cal_weeks[-1][-1]
+    #print 'start day', cal_weeks[0][0]
+    #print 'end day', cal_weeks[-1][-1]
     filter_start_day = datetime(cal_weeks[0][0].year, cal_weeks[0][0].month, cal_weeks[0][0].day)
     filter_end_day = datetime(cal_weeks[-1][-1].year, cal_weeks[-1][-1].month, cal_weeks[-1][-1].day) + timedelta(days=1, microseconds=-1)
     

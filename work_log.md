@@ -31,8 +31,13 @@
 # 2/6/2012 - 9:30am to 11:00
 * work on sign up page
 
-# 2/7/2012 - 1:15pm to 4:30 (coffee break 3:14 to 4:50)
+# 2/7/2012 - 1:15pm to 5:35pm (coffee break 3:14 to 4:50)
 * scheduling - avail slots
+* conflict checking, slotmaking, etc working!!
+
+# 2/8/2012 - 11:15am to 
+* scheduling sign up form
+(i) ScheduledBannerMessage should *not* be a CalendarEvent
 
 > one time slot per poster, up to 4 slots ok, 5 or more forget it
 > plan ahead time 

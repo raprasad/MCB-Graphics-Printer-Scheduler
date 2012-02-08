@@ -21,13 +21,10 @@
 					
 				
 						<br /><span style="font-size:75%">
-        					{% if last_week_date %}<a href="{% url view_weekly_html_calendar last_week_date|date:"Y/m/d" %}">&lt;&lt;</a> &nbsp;{% endif %}
-
-                        	{% if next_week_date %}	&nbsp; <a href="{% url view_weekly_html_calendar next_week_date|date:"Y/m/d" %}">&gt;&gt;</a> &nbsp;{% endif %}
                         	
-                        	{% if last_month_date %}<a href="{% url view_month_calendar last_month_date|date:"Y/m" %}">&lt;&lt;</a> &nbsp;{% endif %}
+                        	{% if last_month_date %}<a href="{% url view_month_calendar last_month_date|date:"Y-m" %}">&lt;&lt;</a> &nbsp;{% endif %}
 
-                        	{% if next_month_date %}	&nbsp; <a href="{% url view_month_calendar next_month_date|date:"Y/m" %}">&gt;&gt;</a> &nbsp;{% endif %}
+                        	{% if next_month_date %}	&nbsp; <a href="{% url view_month_calendar next_month_date|date:"Y-m" %}">&gt;&gt;</a> &nbsp;{% endif %}
         				</span>
 				</th>
 			</tr>
