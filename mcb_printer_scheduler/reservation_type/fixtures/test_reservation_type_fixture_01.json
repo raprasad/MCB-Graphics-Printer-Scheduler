@@ -85,9 +85,9 @@
             "is_visible": true, 
             "display_name": "Thursday, 12pm to 12:20pm", 
             "created": "2012-01-25 23:43:51", 
-            "start_time": "2012-01-26 12:00:00", 
+            "start_datetime": "2012-01-26 12:00:00", 
             "last_update": "2012-01-25 23:43:51", 
-            "end_time": "2012-01-26 12:20:00", 
+            "end_datetime": "2012-01-26 12:20:00", 
             "subclass_name": "", 
             "id_hash": "1ac3a3dddcfb325548594aa7ea088ed37d1bfc9b"
         }

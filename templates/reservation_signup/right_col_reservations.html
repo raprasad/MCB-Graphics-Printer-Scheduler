@@ -8,9 +8,9 @@
         </tr>
         {% for evt in calendar_events %}
             {% ifequal reservation.id evt.id %}
-            <tr style="background-color:#ffcc00;">
-                <td class="time_col">{{ evt.start_datetime|date:"P" }} &#151; {{ evt.end_datetime|date:"P" }}</td>
-                <td>{{ evt.display_name|safe }}</td>
+            <tr style="background-color:#f4fcf2;">
+                <td class="time_col"><b>{{ evt.start_datetime|date:"P" }} &#151; {{ evt.end_datetime|date:"P" }}<b></td>
+                <td><b>{{ evt.display_name|safe }}</b></td>
             </tr>
             
             {% else %}
@@ -21,5 +21,6 @@
             {% endifequal %}
         {% endfor %}
     </table>
+    </div>
     {% endif %}
 </div>

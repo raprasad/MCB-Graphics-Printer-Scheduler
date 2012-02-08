@@ -48,6 +48,7 @@ class TimeSlotChecker:
     """
     ERR_reservation_type_not_found = False
     ERR_signup_day_has_passed = False
+    ERR_selected_date_not_valid_for_reservation_type = False
     
     def __init__(self, selected_date, calendar_user=None):
 
@@ -156,6 +157,7 @@ class TimeSlotChecker:
         if self.reservation_type is None:
             self.ERR_reservation_type_not_found = True
             return
+            
         
         # set initial time slot
         start_datetime = datetime.combine(self.selected_date, self.reservation_type.opening_time)

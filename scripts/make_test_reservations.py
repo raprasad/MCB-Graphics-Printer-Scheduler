@@ -41,6 +41,6 @@ def make_reservations(year=2012, month=2, cnt=10):
         print '(%s) evt saved: %s' % (x, evt)
 
 if __name__=='__main__':
-    CalendarEvent.objects.delete():
+    CalendarEvent.objects.all().delete()
     for mth in range(1, 3):
-        make_reservations(2012, mth, cnt=200)
+        make_reservations(2012, mth, cnt=25)

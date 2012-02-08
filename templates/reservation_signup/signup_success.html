@@ -9,9 +9,28 @@
         <h3 style="margin:0 0 20px 0;">Signup Failed</h3>
         {% endif %}
 
+
         {% if reservation %}
-        Success!
+        <div class="gb">
+            Success!
+            Your reservation has been made.
+        
+            {% ifequal reservation.start_datetime.date reservation.end_datetime.date %}
+                <!-- start / end on same day -->
+                <p>Date: <b>{{ reservation.start_datetime|date:"F j, Y" }}</b></p>
+                <p>Time: <b>{{ reservation.start_datetime|date:"P" }}</b> &#151; <b>{{ reservation.end_datetime|date:"P" }}</b></p>
+            {% else %}
+            <!-- start / end on different days -->
+            <p>Start Time: <b>{{ reservation.start_datetime|date:"F j, Y" }} at {{ reservation.start_datetime|date:"P" }}</b></p>
+            <p>End Time: <b>{{ reservation.end_datetime|date:"F j, Y" }} at {{ reservation.end_datetime|date:"P" }}</b></p>
+            {% endifequal %}
+            
+            <p>Return to the <a href="{% url view_month_calendar selected_date|date:"Y-m" %}">monthly calendar</a>.</p>
+
+
+        </div>
         {% endif %}
+
         {% if ERR_found %}
             <div class="err_box">{% if ERR_signup_day_has_passed %}
                 Sorry!  You cannot sign up for a day in the past:)
@@ -32,6 +51,6 @@
     
     {% include "reservation_signup/right_col_reservations.html" %}
     
-	<div class="clear">
+	<div class="clear"></div>
 </div><!-- end: overarching_cal_div -->
 {% endblock %}

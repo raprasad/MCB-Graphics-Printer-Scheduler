@@ -13,33 +13,18 @@
         {#num events: {{ num_events }} #}
 
 	    <table cellpadding="0" cellspacing="0">
-	        {% include "schedule_viewer/monthly_calendar_nav.html" %}
+	        {#% include "schedule_viewer/monthly_calendar_nav.html" %#}
 	        <tr>
-	            <th colspan="7">
-					
-					{{ selected_month|date:"F Y" }}
-					
-				
-						<br /><span style="font-size:75%">
-                        	
-                        	{% if last_month_date %}<a href="{% url view_month_calendar last_month_date|date:"Y-m" %}">&lt;&lt;</a> &nbsp;{% endif %}
+	            <th colspan="7" style=" background-color:#77aa56; color:#fff; ">
+					<div>
+					    <div style="float:left; padding:5px 10px; font-size:120%;">{{ selected_month|date:"F Y" }}</div>
+					    <div style="float:right;">{% if last_month_date %}<a href="{% url view_month_calendar last_month_date|date:"Y-m" %}">&lt;&lt;</a> &nbsp;{% endif %}
 
-                        	{% if next_month_date %}	&nbsp; <a href="{% url view_month_calendar next_month_date|date:"Y-m" %}">&gt;&gt;</a> &nbsp;{% endif %}
-        				</span>
+                    	{% if next_month_date %}	&nbsp; <a href="{% url view_month_calendar next_month_date|date:"Y-m" %}">&gt;&gt;</a> &nbsp;{% endif %}</div>
+					    <div class="clear"></div>
+    				</div>						
 				</th>
 			</tr>
-			{% if last_week_date and next_week_date %}
-			<tr>
-				
-				<td colspan="7" style="text-align:center;font-size:70%;padding: 10px;">Week of 
-					{% ifequal end_date.year start_date.year %}
-						{{ start_date|date:"N d" }} &#151; {{ end_date|date:"N d" }}
-					{% else %}
-						{{ start_date|date:"N d, Y" }} &#151; {{ end_date|date:"N d, Y" }}
-					{% endifequal %}	
-	            </td>
-			</tr>
-	       	{% endif %}
 			 <tr>
 	                <td style="text-align:center;">SUN</td>
 	                <td style="text-align:center;">MON</td>
@@ -80,7 +65,7 @@
 	    </ul>
 	</div>
 	{% endif %}
-	<div class="clear">
+	<div class="clear"></div>
 </div><!-- end: overarching_cal_div -->
 {% endif %}
 {% endblock %}

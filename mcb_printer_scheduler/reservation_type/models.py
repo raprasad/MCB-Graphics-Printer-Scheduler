@@ -79,13 +79,10 @@ class ReservationType(models.Model):
         """
         if selected_date is None:
             return False
-            
-        if selected_date.__class__.__name__ == 'date': 
-            pass
-        elif selected_date.__class__.__name___ == 'datetime':
-            selected_date = selected_date.date()
-        else:
-            return True
+        
+        print 'selected_date', selected_date
+        if not selected_date.__class__.__name__ == 'date': 
+            raise ValueError('selected date is not a datetime.date object')
               
         # check if active
         if not self.is_active:
@@ -93,7 +90,7 @@ class ReservationType(models.Model):
 
         # get current date
         if current_date is None or not current_date.__class__.__name__ == 'date': 
-            current_date = date.now()
+            current_date = date.today()
 
         # is potential reservation in the past?
         if selected_date < current_date:        
@@ -107,6 +104,11 @@ class ReservationType(models.Model):
         # check if future scheduling window is in range
         if selected_date > (current_date + timedelta(self.scheduling_window_in_days)):        
             return False
+            
+        # check if the day of the week is permitted    
+        if not selected_date.isoweekday() in eval(self.day_iso_numbers):
+            return False
+            
     
         return True
         

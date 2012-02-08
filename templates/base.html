@@ -7,11 +7,19 @@
 <div id="container">
 <div id="header">
 <a href="{% url view_current_month_calendar %}"><img src="{{ MEDIA_URL }}imgs/mcb_graphics_sm.jpg" width="60" height="60" style="float:left;" /></a>
-<div style="float:left;"><h1 style="color:#1a2f5a; padding:0 20px; margin:0; line-height:60px; font-family:'trebuchet ms', serif;">poster printer schedule</h1></div>
+<div style="float:left;">
+    <h1 style="color:#1a2f5a; padding:0 20px; margin:0; line-height:60px; font-family:'trebuchet ms', serif;">poster printer schedule</h1></div>
 <div class="clear"></div>
 </div>
 {% block main_content %}main_content block{% endblock %}
+<!-- start: footer -->
 
-</div>
+<div id="footer">
+    <p>Questions?  Contact <a href="mailto:mcbgraphics@fas.harvard.edu">mcbgraphics@fas.harvard.edu</a></p>
+    
+    copyright &copy; {% now "Y" %} <a href="http://www.mcb.harvard.edu">Department of Molecular &amp; Cellular Biology</a> 
+    &nbsp;|&nbsp; <a href="http://www.harvard.edu">Harvard University</a>
+</div><!-- end: footer -->
+</div><!-- end container -->
 </body>
 </html>

@@ -4,7 +4,7 @@ import unittest
 from django.test import TestCase
 from calendar_event.models import CalendarEvent
 from reservation_type.models import ReservationType
-import python_version
+from platform import python_version
 #python manage.py dumpdata reservation_type calendar_event --indent=4 > reservation_type/fixtures/test_reservation_type_fixture_01.json
 
 def msg(m): print m
