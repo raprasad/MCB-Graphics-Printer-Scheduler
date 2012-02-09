@@ -35,9 +35,17 @@
 * scheduling - avail slots
 * conflict checking, slotmaking, etc working!!
 
-# 2/8/2012 - 11:15am to 
+# 2/8/2012 - 11:15am to 4:30pm
 * scheduling sign up form
+* basic sign-up working
 (i) ScheduledBannerMessage should *not* be a CalendarEvent
+(i) time slot maker, make sure time has not passed e.g, if signing up that day
+* add cancel for users.
+* add 'edit' for admin?
+* too many cancels on same day, give warning
+* too many reservations same day, give warning
+* view my reservations
+
 
 > one time slot per poster, up to 4 slots ok, 5 or more forget it
 > plan ahead time 
