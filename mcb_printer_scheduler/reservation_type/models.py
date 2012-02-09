@@ -51,6 +51,8 @@ class ReservationType(models.Model):
 
     time_block = models.IntegerField('minutes in a time block', default=20)
     
+    min_time_advance_notice = models.IntegerField(default=180, help_text='in minutes. If the user tries to sign up last minute, he/she will receive an online notice to email.')
+
     scheduling_window_in_days = models.IntegerField('How many days in advance may a user schedule?', default=365)
 
     is_active = models.BooleanField(default=False)

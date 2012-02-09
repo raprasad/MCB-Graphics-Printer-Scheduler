@@ -1,4 +1,8 @@
-body{text-align: center; font-family:'trebuchet ms', serif; font-size:12px;}
+body{text-align: center;
+     font-family:'trebuchet ms', serif; 
+     font-size:12px; 
+     margin:0; 
+     padding: 0;}
 
 a {color:#1a2f5a; 
     text-decoration:underline;}

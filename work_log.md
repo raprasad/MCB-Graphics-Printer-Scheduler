@@ -38,13 +38,21 @@
 # 2/8/2012 - 11:15am to 4:30pm
 * scheduling sign up form
 * basic sign-up working
+
+# 2/8/2012 - 8pm to 9pm
+* reading django docs re: media and static files
+
+# 2/9/2012 - 9:45am to 3pm
+* implement static/media
+*FIXED(i) time slot maker, make sure time has not passed e.g, if signing up that day
+
 (i) ScheduledBannerMessage should *not* be a CalendarEvent
-(i) time slot maker, make sure time has not passed e.g, if signing up that day
 * add cancel for users.
 * add 'edit' for admin?
 * too many cancels on same day, give warning
 * too many reservations same day, give warning
 * view my reservations
+
 
 
 > one time slot per poster, up to 4 slots ok, 5 or more forget it

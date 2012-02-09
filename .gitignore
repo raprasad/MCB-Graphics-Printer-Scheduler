@@ -3,3 +3,4 @@
 mcb_printer_scheduler/config/*
 db/*.db3
 fixtures/*
+collected_static_files/*

@@ -49,6 +49,7 @@ class TimeSlotChecker:
     ERR_reservation_type_not_found = False
     ERR_signup_day_has_passed = False
     ERR_selected_date_not_valid_for_reservation_type = False
+    ERR_no_reservation_times_left_today = False
     
     def __init__(self, selected_date, calendar_user=None):
 
@@ -158,6 +159,12 @@ class TimeSlotChecker:
             self.ERR_reservation_type_not_found = True
             return
             
+        print 'current time', self.current_datetime
+        print 'closing time', datetime.combine(self.selected_date, self.reservation_type.closing_time)
+        if self.current_datetime >= datetime.combine(self.selected_date, self.reservation_type.closing_time):
+            self.ERR_facility_closed = True
+            return
+        
         
         # set initial time slot
         start_datetime = datetime.combine(self.selected_date, self.reservation_type.opening_time)
@@ -166,13 +173,19 @@ class TimeSlotChecker:
         conflict_checker = ConflictChecker()    # helps check against all existing CalendarEvents
         while end_datetime.time() <= self.reservation_type.closing_time:
             timeslot = TimeSlot(start_datetime, end_datetime)
+            
             if not conflict_checker.does_timeslot_conflict(timeslot):
-                self.open_timeslots.append(timeslot)
+                # make sure the time slot hasn't passed--if it's the current day
+                if start_datetime >= self.current_datetime:
+                    self.open_timeslots.append(timeslot)
             # set next timeslot
             start_datetime = end_datetime
             end_datetime = start_datetime + timedelta(minutes=self.reservation_type.time_block)
         
         self.num_timeslots = len(self.open_timeslots)
+
+        if self.num_timeslots == 0:
+            self.ERR_no_reservation_times_left_today = True
             
     
 

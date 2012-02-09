@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
 from django.contrib import admin
 admin.autodiscover()
@@ -18,8 +19,9 @@ urlpatterns = patterns('',
 
     url(r'^poster-printer/signup/', include('mcb_printer_scheduler.reservation_signup.urls')),
     
-    (r'^media/(?P<path>.*)$', 'django.views.static.serve'\
-        , {'document_root': settings.MEDIA_ROOT }),
-    
+    #(r'^media/(?P<path>.*)$', 'django.views.static.serve'\
+    #    , {'document_root': settings.MEDIA_ROOT }),
     
 )
+
+urlpatterns += staticfiles_urlpatterns()

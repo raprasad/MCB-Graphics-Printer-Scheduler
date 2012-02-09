@@ -13,8 +13,8 @@ class SignupForm(forms.Form):
 
     time_slot = forms.DateTimeField(label='Available times', widget=forms.Select)
     session_length = forms.IntegerField(widget=forms.HiddenInput)
-    phone_number = USPhoneNumberField(label='Phone')
-    email = forms.EmailField(label='Email')
+    phone_number = USPhoneNumberField(label='Contact Phone')
+    email = forms.EmailField(label='Contact Email')
     
     
     def init(self, time_slot_choices, session_length, **kwargs):   
