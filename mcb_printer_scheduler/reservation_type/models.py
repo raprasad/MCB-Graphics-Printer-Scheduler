@@ -83,7 +83,6 @@ class ReservationType(models.Model):
         if selected_date is None:
             return False
         
-        print 'selected_date', selected_date
         if not selected_date.__class__.__name__ == 'date': 
             raise ValueError('selected date is not a datetime.date object')
               

@@ -161,13 +161,10 @@ class TimeSlotChecker:
             self.ERR_reservation_type_not_found = True
             return
             
-        print 'current time', self.current_datetime
-        print 'closing time', datetime.combine(self.selected_date, self.reservation_type.closing_time)
         if self.current_datetime >= datetime.combine(self.selected_date, self.reservation_type.closing_time):
             self.ERR_facility_closed = True
             return
-        
-        
+                
         # set initial time slot
         start_datetime = datetime.combine(self.selected_date, self.reservation_type.opening_time)
         end_datetime = start_datetime + timedelta(minutes=self.reservation_type.time_block)
