@@ -61,6 +61,9 @@ class CalendarUser(models.Model):
     def get_fullname(self):
         return '%s %s' % (self.user.first_name ,self.user.last_name)
 
+    def getusername(self):
+        return self.user.username
+        
     def save(self):
     
         if self.id == None:

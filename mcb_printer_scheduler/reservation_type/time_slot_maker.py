@@ -1,5 +1,6 @@
 from datetime import date, datetime, time, timedelta
 from calendar_event.models import CalendarEvent
+from calendar_event.calendar_event_helper import CalendarEventOrganizer
 
 from reservation_type.models import ReservationType
 from reservation_type.conflict_checker import ConflictChecker
@@ -130,12 +131,13 @@ class TimeSlotChecker:
             return
         self.err_found = True
         self.err_flags.append(m)
-
-
+    
     def gather_calendar_events(self):
-        self.calendar_events = CalendarEvent.objects.filter(is_visible=True\
+        cal_events = CalendarEvent.objects.filter(is_visible=True\
                              , start_datetime__gte=datetime.combine(self.selected_date, time.min)
                              , start_datetime__lte=datetime.combine(self.selected_date, time.max)).order_by('start_datetime')
+        
+        self.calendar_events = CalendarEventOrganizer.substitute_cal_event_subclasses(cal_events)
         
     def check_for_conflict(self, timeslot):
         if timeslot is None:

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block main_content %}
+    <div style="float:left; width:400px;">
+        {% if not ERR_found %}
+        <h3 style="margin:0 0 20px 0; color:green;">Logout Success!</h3>
+        {% else %}
+        <h3 style="margin:0 0 20px 0;">Logout</h3>
+        {% endif %}
+
+
+        {% if logout_success %}
+        <div class="gb">
+            You have been logged out of the mcb graphics scheduler.
+
+			<p>To log out of the Harvard Pin system, please use this link:</p>
+			<p><a href="https://www.pin1.harvard.edu/pin/logout">https://www.pin1.harvard.edu/pin/logout</a></p>
+
+            <p><br />Return to the <a href="{% url view_current_month_calendar %}">monthly calendar</a>.</p>
+
+
+        </div>
+        {% endif %}
+
+        {% if ERR_found %}
+            <div class="err_box">
+	
+				{% if ERR_already_logged_out %}
+				You have already been logged out.
+		        {% endif %}
+	
+	        	<p>Please return to the <a href="{% url view_current_month_calendar %}">monthly calendar</a> to log in again.</p>
+            
+            </div>
+        {% endif %}
+       
+    </div>
+    
+    
+	<div class="clear"></div>
+{% endblock %}

@@ -13,12 +13,17 @@
                 <td><b>{{ evt.display_name|safe }}</b></td>
             </tr>
             
-            {% else %}
-            <tr>
-                <td class="time_col">{{ evt.start_datetime|date:"P" }} &#151; {{ evt.end_datetime|date:"P" }}</td>
-                <td>{{ evt.display_name|safe }}</td>
-            </tr>
-            {% endifequal %}
+            {% else %}{% ifequal evt.user calendar_user %}
+            	<tr style="background-color:#f4fcf2;">
+	                <td class="time_col"><b>{{ evt.start_datetime|date:"P" }} &#151; {{ evt.end_datetime|date:"P" }}<b></td>
+	                <td><b>{{ evt.display_name|safe }}</b></td>
+	            </tr>
+			{% else %}
+				<tr>
+		            <td class="time_col">{{ evt.start_datetime|date:"P" }} &#151; {{ evt.end_datetime|date:"P" }}</td>
+		            <td>{{ evt.display_name|safe }}&nbsp;</td>
+		        </tr>
+            {% endifequal %}{% endifequal %}
         {% endfor %}
     </table>
     </div>

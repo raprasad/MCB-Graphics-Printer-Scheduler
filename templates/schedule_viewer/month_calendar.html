@@ -69,7 +69,13 @@
 	                    {% for evt in day_event_obj.events %}
 	                        <div class="evt_listing_mth">
 	                            <div class="cal_day_time"><b>{{ evt.start_datetime|date:"P" }}{#-{{ evt.end_datetime|date:"P" }}#}</b>
-	                           <br /><a href="{# view_signup evt.id_hash #}" class="cal_name_regular">{{ evt.display_name|safe }}</a></div>
+									
+								{% ifequal evt.user calendar_user %}
+	                           <br /><a href="{% url view_cancel_signup evt.id_hash %}" class="cal_name_regular"  style="font-size:120%; font-weight:bold;">{{ evt.display_name|safe }}</a>
+								{% else %}
+	                           <br /><span style="color:#964B36;">{{ evt.display_name|safe }}</span></div>
+								{% endifequal %}
+								</div>
 	                        </div>
 	                    {% empty %}
 	                        <br />&nbsp;

@@ -12,7 +12,7 @@ class CalendarEvent(models.Model):
     """
     Basic calendar event class
     """
-    display_name = models.CharField(max_length=255, blank=True)
+    display_name = models.CharField(max_length=255)
     
     id_hash = models.CharField(max_length=40, blank=True, help_text='Auto-fill on save')   # 
 
@@ -44,18 +44,23 @@ class CalendarEvent(models.Model):
             
         return '%s to %s' % (self.start_datetime.strftime('%I:%M%p')\
                     , self.end_datetime.strftime('%I:%M%p')) 
-                    
+    
+    def set_hash_id(self): 
+        try:
+            self.id_hash =  sha1('%s%s' % (self.id, self.start_datetime)).hexdigest()
+        except: #md5 is for old versions of python
+            self.id_hash =  md5.new('%s%s' % (self.id,  self.start_datetime)).hexdigest()
+    
+    def get_subclass_name(self):
+        return self.__class__.__name__
+    
     def save(self):    
         if self.id == None:
             super(CalendarEvent, self).save()     
         
-        self.display_name = self.get_display_msg()
-         
-        try:
-            self.id_hash =  sha1('%s%s' % (self.id,  datetime.now())).hexdigest()
-        except: #md5 is for old versions of python
-            self.id_hash =  md5.new('%s%s' % (self.id,  datetime.now())).hexdigest()
-        
+        #self.display_name = self.get_display_msg()
+        self.set_hash_id()
+    
         super(CalendarEvent, self).save()    
 
     class Meta:
@@ -74,16 +79,27 @@ class Reservation(CalendarEvent):
     is_cancelled = models.BooleanField(default=False)
     
     def get_display_msg(self):
-        return self.user.get_first_initial_lastname()
+        name = self.user.get_first_initial_lastname()
+        if name is None or name.strip() == '':
+            return self.user.getusername()
+            
         #return '%s %s-%s' % (self.user.get_first_initial_lastname())\
         #                    , self.start_datetime.strftime('%I:%M%p')\
         #                    , self.end_datetime.strftime('%I:%M%p')) 
-        
+    
+
     def save(self):    
+        if self.id == None:
+            super(Reservation, self).save()     
+
+        self.display_name = self.get_display_msg()
+        self.set_hash_id()
+    
         if self.is_cancelled:
             self.is_visible= False
         self.subclass_name = self.__class__.__name__
         super(Reservation, self).save()    
+    
     
     class Meta:
         verbose_name = 'Reservation'
@@ -91,12 +107,18 @@ class Reservation(CalendarEvent):
 
 class CalendarMessage(CalendarEvent):
     """For general messages, e.g. holidays, etc"""    
-    def get_display_msg(self):
-        return self.display_name
-    
     def save(self):
+        if self.id == None:
+            super(CalendarMessage, self).save()     
+
+        self.set_hash_id()
+
+        if self.is_cancelled:
+            self.is_visible= False
         self.subclass_name = self.__class__.__name__
         super(CalendarMessage, self).save()    
+
+
         
     class Meta:
         verbose_name = 'Calendar Message'
@@ -105,16 +127,22 @@ class CalendarMessage(CalendarEvent):
 
 class CalendarFullDayMessage(CalendarEvent):
     """For general messages, e.g. holidays, etc"""    
-    def get_display_msg(self):
-        return self.display_name
-        
-    def save(self):    
+
+    def save(self):
+        if self.id == None:
+            super(CalendarFullDayMessage, self).save()    
+
+        self.set_hash_id()
+
+        self.subclass_name = self.__class__.__name__
+
+        # make the start/end times 24 hours
         self.start_datetime = datetime(self.start_datetime.year, self.start_datetime.month, self.start_datetime.day)
         self.end_datetime = datetime(self.end_datetime.year, self.end_datetime.month, self.end_datetime.day) + timedelta(days=1) + timedelta(microseconds=-1)
         if self.start_datetime > self.end_datetime:
             self.end_datetime = self.start_datetime + timedelta(days=1) + timedelta(microseconds=-1)
         self.subclass_name = self.__class__.__name__
-        
+
         super(CalendarFullDayMessage, self).save()    
 
     class Meta:

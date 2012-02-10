@@ -58,7 +58,7 @@ def view_month_calendar(request, selected_month=None):
     cal_events = cal_events.filter(start_datetime__gte=filter_start_day\
                                  , start_datetime__lte=filter_end_day).order_by('start_datetime')
                                     
-    cal_events = CalendarEventOrganizer.add_calendar_event_subclasses(cal_events)
+    cal_events = CalendarEventOrganizer.substitute_cal_event_subclasses(cal_events)
     num_events = len(cal_events)
     day_events_organizer = DayEventsOrganizer(cal_weeks, cal_events)
 

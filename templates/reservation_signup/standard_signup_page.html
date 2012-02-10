@@ -18,72 +18,11 @@
                 <td><b>{{ reservation_type.opening_time|time:"P" }} 
                         to  {{ reservation_type.closing_time|time:"P" }}</b></td>
             </tr>
-            
-            
-            {% if signup_form  and not ERR_found %}
-            <tr>    
-                <th># open time slots:</th>
-                <td><b>{{ num_timeslots }}</b></td>
-            </tr>
-                {% for f in signup_form %}
-                    {% if f.is_hidden %}
-                        {{ f }}
-                    {% else %}
-                    <tr>
-                        <th>{{ f.label }}</th>
-                
-                        <td>{% for err in f.errors %}
-                                <span style="color:#ff0000;">{{ err }}</span><br />
-                            {% endfor %} 
-                            {{ f }}</td>
-                        {% endif %}
-                    </tr>
-                    {#{ signup_form.as_table }#}
-                {% endfor %}
-           
-            <tr>
-                <td>&nbsp;</td>
-                <td><input type="submit" name="sign up!" value="sign up!"></td>
-            </tr>
-            <tr>
-                <th colspan="2"><br />Return to the <a href="{% url view_month_calendar selected_date|date:"Y-m" %}">monthly calendar</a>.</td>
-            </tr>
-            {% endif %}
+            {% include "reservation_signup/standard_signup_form.html" %}
         {% endif %}
         </table></form>
         </div>
-        {% if ERR_found %}
-            <div class="err_box">{% if ERR_signup_day_has_passed %}
-                Sorry!  You cannot sign up for a day in the past:)
-            {% endif %}
-            
-            {% if ERR_reservation_type_not_found %}
-                Sorry!  Sign ups are not available for this day.
-            {% endif %}
-            
-            {% if ERR_not_authenticated %}You must sign in to reserve a time.
-                {% include "pin_auth/login_url.html" %}
-            {% endif %}
-            
-            {% if ERR_selected_date_not_valid_for_reservation_type %}
-                Sorry!  Sign ups are not available for this day.
-            {% endif %}
-
-			{% if ERR_no_reservation_times_left_today %}
-				Sorry!  There are no more open time slots.
-			{% endif %}
-			
-			{% if ERR_facility_closed %}
-				{% if reservation_type %}
-				Sorry, the facility <b>closed at {{ reservation_type.closing_time|time:"P" }}</b>.
-				{% else %}
-				Sorry, the facility is closed.
-				{% endif %}
-			{% endif %}
-            <p>Please return to the <a href="{% url view_month_calendar selected_date|date:"Y-m" %}">monthly calendar</a>.</p>
-            
-            </div>
-        {% endif %}
+		{% include "reservation_signup/signup_errs.html" %}
        
         
         

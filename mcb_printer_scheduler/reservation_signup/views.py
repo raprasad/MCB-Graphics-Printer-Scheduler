@@ -17,14 +17,14 @@ from django.core.urlresolvers import reverse
 @login_required    #(login_url=reverse('view_current_month_calendar'))
 def view_signup_page_success(request, id_hash):
     if id_hash is None:
-        raise Http404('Signup date not found.')
+        raise Http404('Reservation not found.')
     
     if not request.user.is_authenticated():
         lu.update({ 'ERR_found' : True, 'ERR_not_authenticated' : True })
         return render_to_response('reservation_signup/signup_success.html', lu, context_instance=RequestContext(request))
     
     try:
-        reservation = CalendarEvent.objects.get(id_hash=id_hash)
+        reservation = CalendarEvent.objects.get(id_hash=id_hash, is_visible=True)
     except CalendarEvent.DoesNotExist:
         raise Http404('Reservation not found.')
     

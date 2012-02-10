@@ -18,6 +18,8 @@ urlpatterns = patterns('',
     url(r'^poster-printer/calendar/', include('mcb_printer_scheduler.schedule_viewer.urls')),
 
     url(r'^poster-printer/signup/', include('mcb_printer_scheduler.reservation_signup.urls')),
+
+    url(r'^poster-printer/user-auth/', include('mcb_printer_scheduler.login.urls')),
     
     #(r'^media/(?P<path>.*)$', 'django.views.static.serve'\
     #    , {'document_root': settings.MEDIA_ROOT }),

@@ -46,8 +46,13 @@
 * implement static/media
 *FIXED(i) time slot maker, make sure time has not passed e.g, if signing up that day
 
+# 2/9/2012 - 7:45pm to 10:15pm (multiple zahra stops)
+* logout page, username in header
+* redo display names
+* substitute cal-events for subclasses
+* cancellation added for users
+
 (i) ScheduledBannerMessage should *not* be a CalendarEvent
-* add cancel for users.
 * add 'edit' for admin?
 * too many cancels on same day, give warning
 * too many reservations same day, give warning

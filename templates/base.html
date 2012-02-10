@@ -10,7 +10,11 @@
 <div id="header">
     <a href="{% url view_current_month_calendar %}"><img src="{{ STATIC_URL }}imgs/mcb_graphics_sm.jpg" width="60" height="60" style="float:left;" /></a>
     <div style="float:left;"><h1>poster printer schedule</h1></div>
-    <div class="clear"></div>
+    {% if calendar_user %}
+		<div style="float:left; padding:0 0 0 191px;">logged in as {{ calendar_user }}
+			<br /><a href="{% url view_logout_page %}">log out</a></div>
+    {% endif %}
+<div class="clear"></div>
 </div>
 
 <!-- start: overarching_cal_div -->
@@ -24,6 +28,7 @@
     
     copyright &copy; {% now "Y" %} <a href="http://www.mcb.harvard.edu">Department of Molecular &amp; Cellular Biology</a> 
     &nbsp;|&nbsp; <a href="http://www.harvard.edu">Harvard University</a>
+<br /><br />({% now "F jS, Y f:s a" %})
 </div><!-- end: footer -->
 </div><!-- end: overarching_cal_div -->
 </div><!-- end container -->

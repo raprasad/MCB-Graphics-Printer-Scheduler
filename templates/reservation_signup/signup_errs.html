@@ -1,0 +1,58 @@
+{% if ERR_found %}
+    <div class="err_box">
+	
+	{% if ERR_reservation_not_cancelled %}
+		This reservation has NOT been cancelled.
+		{% if reservation %}
+		<p>Please try to <a href="{% url view_cancel_signup reservation.id_hash %}">cancel</a> it again.</p>
+		{% endif %}
+	{% endif %}
+	
+	
+	{% if ERR_reservation_already_cancelled %}
+		This reservation has already been cancelled.
+	{% endif %}
+	
+	{% if ERR_signup_day_has_passed %}
+        Sorry!  You cannot sign up for a day in the past:)
+    {% endif %}
+    
+    {% if ERR_reservation_type_not_found %}
+        Sorry!  Sign ups are not available for this day.
+    {% endif %}
+    
+    {% if ERR_not_authenticated %}You must sign in to reserve a time.
+        {% include "pin_auth/login_url.html" %}
+    {% endif %}
+    
+    {% if ERR_selected_date_not_valid_for_reservation_type %}
+        Sorry!  Sign ups are not available for this day.
+    {% endif %}
+
+	{% if ERR_no_reservation_times_left_today %}
+		Sorry!  There are no more open time slots.
+	{% endif %}
+	
+	{% if ERR_different_user %}
+		You do not have permission to cancel this reservation.
+	{% endif %}
+	
+	{% if ERR_facility_closed %}
+		{% if reservation_type %}
+		Sorry, the facility <b>closed at {{ reservation_type.closing_time|time:"P" }}</b>.
+		{% else %}
+		Sorry, the facility is closed.
+		{% endif %}
+	{% endif %}
+	
+    <p>Please return to the 
+		{% if selected_date %}
+			<a href="{% url view_month_calendar selected_date|date:"Y-m" %}">monthly calendar</a>.
+		{% else %}
+		<a href="{% url view_current_month_calendar %}">monthly calendar</a>.
+		
+		{% endif %}
+	</p>
+    
+    </div>
+{% endif %}

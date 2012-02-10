@@ -29,21 +29,8 @@
         </div>
         {% endif %}
 
-        {% if ERR_found %}
-            <div class="err_box">{% if ERR_signup_day_has_passed %}
-                Sorry!  You cannot sign up for a day in the past:)
-            {% endif %}
-            {% if ERR_reservation_type_not_found %}
-              Sorry!  Further reservations are not available for this day.
-            {% endif %}
-            
-            {% if ERR_not_authenticated %}You must sign in to reserve a time.
-                {% include "pin_auth/login_url.html" %}
-            {% endif %}
-            <p>Please return to the <a href="{% url view_month_calendar selected_date|date:"Y-m" %}">monthly calendar</a>.</p>
-            
-            </div>
-        {% endif %}
+     	{% include "reservation_signup/signup_errs.html" %}
+		
        
     </div>
     
