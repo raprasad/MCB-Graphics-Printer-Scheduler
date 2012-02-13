@@ -69,6 +69,7 @@ class SignupForm(forms.Form):
         ts_obj = self.get_time_slot_object()
         if ts_obj is None:
             return None
+<<<<<<< HEAD
             
         res = Reservation(user=calendar_user\
                         , contact_email=self.cleaned_data.get('email')\
@@ -91,6 +92,31 @@ class SignupForm(forms.Form):
         #            , end_datetime = ts_obj.end_datetime
         #        )
         res.save()
+=======
+
+        res = Reservation(user=calendar_user \
+                , start_datetime = ts_obj.start_datetime \
+                , end_datetime = ts_obj.end_datetime \
+                , contact_email=self.cleaned_data.get('email') \
+                , contact_phone=self.cleaned_data.get('phone_number') \
+                , display_name=str(calendar_user)
+        )
+        res.save()
+        
+        return res
+
+        res = CalendarEvent(
+                     start_datetime = ts_obj.start_datetime
+                    , end_datetime = ts_obj.end_datetime
+                )
+        res.save()
+        return res
+
+        #user=calendar_user\
+        #            , contact_email=self.cleaned_data.get('email')
+        #            , contact_phone=self.cleaned_data.get('phone_number')
+        #            , billing_code=self.cleaned_data.get('billing_code', '')
+>>>>>>> signup form updates
                     
               
         
