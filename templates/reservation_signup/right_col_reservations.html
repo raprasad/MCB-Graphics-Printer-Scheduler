@@ -8,15 +8,15 @@
         </tr>
         {% for evt in calendar_events %}
             {% ifequal reservation.id evt.id %}
-            <tr style="background-color:#f4fcf2;">
+            <tr style="background-color:#f9de66;">
                 <td class="time_col"><b>{{ evt.start_datetime|date:"P" }} &#151; {{ evt.end_datetime|date:"P" }}<b></td>
                 <td><b>{{ evt.display_name|safe }}</b></td>
             </tr>
             
-<<<<<<< HEAD
             {% else %}{% ifequal evt.user calendar_user %}
             	<tr style="background-color:#f4fcf2;">
-	                <td class="time_col"><b>{{ evt.start_datetime|date:"P" }} &#151; {{ evt.end_datetime|date:"P" }}<b></td>
+	                <td class="time_col"><b>{{ evt.start_datetime|date:"P" }} &#151;
+                            {{ evt.end_datetime|date:"P" }}</b></td>
 	                <td><b>{{ evt.display_name|safe }}</b></td>
 	            </tr>
 			{% else %}
@@ -25,14 +25,6 @@
 		            <td>{{ evt.display_name|safe }}&nbsp;</td>
 		        </tr>
             {% endifequal %}{% endifequal %}
-=======
-            {% else %}
-            <tr>
-                <td class="time_col">{{ evt.start_datetime|date:"P" }} &#151; {{ evt.end_datetime|date:"P" }}</td>
-                <td>{{ evt.display_name|safe }}&nbsp;</td>
-            </tr>
-            {% endifequal %}
->>>>>>> signup form updates
         {% endfor %}
     </table>
     </div>

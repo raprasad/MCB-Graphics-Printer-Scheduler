@@ -50,6 +50,14 @@ class CalendarUser(models.Model):
     def get_fname(self):
         return self.user.first_name
 
+    def get_user_initials(self):
+        if self.get_fname() is None or self.get_lname() is None:
+            return None
+        try:
+            return '%s%s' % (self.user.first_name[0].upper(), self.user.last_name[0].upper())
+        except:
+            return None
+            
     def get_first_initial_lastname(self):
         if not self.user.first_name:
             return self.user.last_name

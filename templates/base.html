@@ -11,7 +11,7 @@
     <a href="{% url view_current_month_calendar %}"><img src="{{ STATIC_URL }}imgs/mcb_graphics_sm.jpg" width="60" height="60" style="float:left;" /></a>
     <div style="float:left;"><h1>poster printer schedule</h1></div>
     {% if calendar_user %}
-		<div style="float:left; padding:0 0 0 191px;">logged in as {{ calendar_user }}
+		<div style="float:right; padding:0 10px;">logged in as {{ calendar_user }}
 			<br /><a href="{% url view_logout_page %}">log out</a></div>
     {% endif %}
 <div class="clear"></div>

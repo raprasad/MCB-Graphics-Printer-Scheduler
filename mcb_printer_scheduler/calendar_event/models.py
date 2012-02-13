@@ -79,10 +79,12 @@ class Reservation(CalendarEvent):
     is_cancelled = models.BooleanField(default=False)
     
     def get_display_msg(self):
-        name = self.user.get_first_initial_lastname()
-        if name is None or name.strip() == '':
-            return self.user.getusername()
-            
+        name = self.user.get_user_initials()
+        if name is not None or not name.strip() == '':
+            return name
+
+        return self.user.getusername()
+        
         #return '%s %s-%s' % (self.user.get_first_initial_lastname())\
         #                    , self.start_datetime.strftime('%I:%M%p')\
         #                    , self.end_datetime.strftime('%I:%M%p')) 
@@ -145,6 +147,9 @@ class CalendarFullDayMessage(CalendarEvent):
 
         super(CalendarFullDayMessage, self).save()    
 
+    def is_full_day_message(self):
+        return True
+        
     class Meta:
         verbose_name = 'Calendar Full Day Message (1 or more days, e.g. holiday)'
         verbose_name_plural = 'Calendar Full Day Messages (1 or more days, e.g. holiday)'

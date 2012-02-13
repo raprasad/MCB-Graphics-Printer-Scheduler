@@ -1,0 +1,66 @@
+{% comment %}
+td cell: dkgray | white
+        wkend/holiday   | others
+td header/number: dkgray | green | lghtgray
+                past/wkend/holiday    |  today  | future
+click number: today/future
+click events: today/future
+
+{% endcomment %}
+
+
+{% if day_event_obj.is_weekend or day_event.is_full_day_message %}
+<!--  wkend/holiday --><td class="cal_td_over">
+    <div class="cal_day_num cal_day_holiday_weekend">{{ day_event_obj.date.day }}</div>
+{% else %}{% if day_event_obj.is_day_today %}
+<!--  today --><td>
+    <div class="cal_day_num cal_day_num_today"><a href="{% url view_signup_page day_event_obj.date|date:"Y-m-d" %}">{{ day_event_obj.date.day }}</a></div>
+{% else %}{% if day_event_obj.is_day_past %}
+<!--  day has passed --><td>
+    <div class="cal_day_num">{{ day_event_obj.date.day }}</div>
+{% else %}
+<!--  day --><td>
+    <div class="cal_day_num"><a href="{% url view_signup_page day_event_obj.date|date:"Y-m-d" %}">{{ day_event_obj.date.day }}</a></div>
+{% endif %}{% endif %}{% endif %}
+<div class="cal_day">
+    {% for evt in day_event_obj.events %}
+        <div class="day_evt_listing">
+            <div class="cal_day_time">{{ evt.start_datetime|date:"g:i A" }} &#150; 
+            {% if calendar_user %}
+                {% ifequal evt.user calendar_user %}
+                    <a href="{% url view_cancel_signup evt.id_hash %}" class="cal_name_regular">{{ evt.display_name|safe }}</a>
+                {% else %}
+                    <span style="color:#1a2f5a;">{{ evt.display_name|safe }}</span>
+            {% endifequal %}{% else %}
+                <span style="color:#1a2f5a;">{{ evt.display_name|safe }}</span>
+            {% endif %}             
+                         
+            {% if day_event.is_full_day_message %}
+                <!--span style="color:#1a2f5a;">{{ evt.display_name|safe }}</span-->
+            {% endif %}
+			</div>
+        </div>
+    {% empty %}
+        <br />&nbsp;
+    {% endfor %}
+    </div>
+</td>
+
+
+{% comment %}
+<!--div class="cal_day_num {% if day_event_obj.is_date_other_month %} cal_day_num_other_mth{% endif %}{% if day_event_obj.is_day_today %} cal_day_num_today{% endif %}"--><a href="{% url view_signup_page day_event_obj.date|date:"Y-m-d" %}">{{ day_event_obj.date.day }}</a></div>
+                    <!--({{ day_event_obj.get_event_count }})-->
+
+<td {% if day_event_obj.is_day_past or day_event_obj.is_weekend %}class="cal_td_over"{% endif %}>
+    {% if day_event_obj.is_weekend %}
+        <div class="cal_day_num"> weekend
+    {% else %}{% if day_event_obj.is_date_other_month %}
+        <div class="cal_day_num cal_day_num_other_mth">other month
+    {% else %}{% if day_event_obj.is_day_today %}
+        <div class="cal_day_num cal_day_num_today">today
+    {% else %}{% if day_event_obj.is_day_past %}
+        <div class="cal_day_num">past
+    {% else %}
+        <div class="cal_day_num">regular
+    {% endif %}{% endif %}{% endif %}{% endif %}
+{% endcomment %}

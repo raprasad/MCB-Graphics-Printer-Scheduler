@@ -25,6 +25,8 @@
             
             <p>Return to the <a href="{% url view_month_calendar selected_date|date:"Y-m" %}">monthly calendar</a>.</p>
 
+            <p><a href="{% url view_signup_page reservation.start_datetime|date:"Y-m-d" %}">Sign up</a> again for {{ reservation.start_datetime|date:"F j, Y" }}.</p>
+
 
         </div>
         {% endif %}

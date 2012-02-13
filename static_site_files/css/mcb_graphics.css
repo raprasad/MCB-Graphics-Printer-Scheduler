@@ -12,10 +12,8 @@ h1{color:#1a2f5a; padding:0 20px; margin:0; line-height:60px; font-family:'trebu
 
 .res_cancelled {text-decoration: line-through;}
 
-#evt_month_cal{font-family:verdana; float:left;}
-#evt_month_cal table{border-top: 1px solid #999999;
-border-right: 1px solid #999999; width:850px;
-}
+
+
 div#container
 {
 	margin-left: auto;
@@ -33,7 +31,7 @@ div#container
 #question_div{color:#1a2f5a;
     font-size:14px;
     float:right;
-    margin:0 50px 0 0;
+    margin:0 10px 0 0;
 }
 #question_div a{color:#9a1a2c;    }
 #question_div a:hover{color:#77aa56; }
@@ -53,21 +51,31 @@ div#container
     
 }
 
+#evt_month_cal{font-family:verdana; float:left;}
+#evt_month_cal table{border-top: 1px solid #1a2f5a;
+border-right: 1px solid #1a2f5a; width:850px;
+}
+
 
 #evt_month_cal table th {
-    background-color: #FFFFFF;
-    border-bottom: 1px solid #999999;
-    border-left: 1px solid #999999;
+    background-color: #fff;
+    border-bottom: 1px solid #1a2f5a;
+    border-left: 1px solid #1a2f5a;
     margin: 0;
     padding: 5px;
     text-align: center;
     font-weight:normal;
     font-size:16px;
 }
+
+#evt_month_cal table th.day_header{ color:#1a2f5a;
+    background-color:#e8e8e8;
+}
+
 #evt_month_cal table td {
-    background-color: #FFFFFF;
-    border-bottom: 1px solid #999999;
-    border-left: 1px solid #999999;
+    background-color: #fff;
+    border-bottom: 1px solid #1a2f5a;
+    border-left: 1px solid #1a2f5a;
     margin: 0;
     padding: 0;
     text-align: left;
@@ -75,17 +83,26 @@ div#container
 }
 
 #evt_month_cal table td.cal_td_over {
-    background-color: #F8F8F8;
-   
+    background-color: #dadade;
 }
 
 #evt_month_cal a.next_prev_week{font-size:11px; color:#333; text-decoration:none;}
 #evt_month_cal a.next_prev_week:hover{color:#ff0000; }
 
 /* day of week in the monthly calendar */
+.cal_day_num_holiday_weekend{background-color:#dadade;}
+
+.cal_day_num_today{background-color:#56b840; 
+    color:#1a2f5a;
+}
+.cal_day_num_today a{color:#fff;
+    text-decoration:underline;
+}
+
+
+
 .cal_day_num {
     text-align: right;
-    background-color: #E8EEF7;
     margin: 0;
     padding: 2px 10px;
 }
@@ -94,21 +111,25 @@ div#container
 
 .cal_day_num_other_mth{background-color:#ffffcc; }
 
-.cal_day_num_today{background-color:#dcf9d7;}
-.cal_day_num_today a{font-weight:bold;}
 
 /* each event listing within a single day block */ 
-div.evt_listing_mth{font-size:10px; padding:5px; margin:2px 0;}
-div.evt_listing_mth .cal_day_time{color:#2952AE;}
-div.evt_listing_mth .cal_day_time a.cal_name_regular {
-    color: #964B36;
+div.day_evt_listing{font-size:12px; 
+    padding:2px; 
+    margin:3px 0; 
+    line-height:80%;
+    }
+div.day_evt_listing .cal_day_time{color:#1a2f5a; }
+div.day_evt_listing .cal_day_time a.cal_name_regular {
+    color: #9a1a2c;
+    font-size:110%;
+    xfont-weight:bold;
     cursor: pointer;
-    font-weight: normal;
     text-decoration: underline;
 }
-div.evt_listing_mth .cal_day_time a.cal_name_regular:hover { color:#ff0000;}
+div.day_evt_listing .cal_day_time a.cal_name_regular:hover { color:#ff0000;}
 
-div.cal_day a {font-size:10px; color:#2952ae; text-decoration:underline;}
+div.cal_day{padding:2px 0 5px 0;}
+div.cal_day a {font-size:11px; color:#2952ae; text-decoration:underline;}
 div.cal_day a:hover{color:#ff0000;}
 
 /* navigation menu by montly */
@@ -162,9 +183,10 @@ ul.errorlist li{ color:#ff0000;}
     
     padding:10px;}
     
-a.cal_nav_months{color:#fff; text-decoration:none; font-size:14px;  line-height:170%;}    
-a.cal_nav_months:hover{color:#1a2f5a;}    
-a.this_month{color:#fff; text-decoration:underline; font-size:11px;}
-a.this_month:hover{color:#1a2f5a;}    
+a.cal_nav_months{color:#1a2f5a; text-decoration:none; font-size:14px;  line-height:170%;}    
+a.cal_nav_months:hover{color:#fff;}    
+a.this_month{color:#1a2f5a; text-decoration:underline; font-size:11px;}
+a.this_month:hover{color:#fff;}    
+   
     
 #footer{margin:40px 0;}    

@@ -24,10 +24,10 @@
 
 	    <table cellpadding="0" cellspacing="0">
 	        {#% include "schedule_viewer/monthly_calendar_nav.html" %#}
-	        <tr>
-	            <th colspan="7" style=" background-color:#77aa56; color:#fff;">
+	        <tr><!-- #77aa56 -->
+	            <th colspan="7" style="background-color:#56b840; color:#fff;">
 					<div>
-					    <div style="float:left; padding:5px 10px; font-size:120%;">{{ selected_month|date:"F Y" }}</div>
+					    <div style="float:left; padding:5px 10px; font-size:120%; color:#1a2f5a;">{{ selected_month|date:"F Y" }}</div>
 					    <div style="float:right;padding:5px 10px; ">
                                 <!-- previous month -->{% if previous_month %}	&nbsp; <a href="{% url view_month_calendar previous_month|date:"Y-m" %}" class="cal_nav_months"> &lt;&lt; {{ previous_month|date:"F" }}</a>{% endif %}
                                 <!-- next month --> &nbsp;	{% if next_month %}<a href="{% url view_month_calendar next_month|date:"Y-m" %}" class="cal_nav_months">{{ next_month|date:"F" }} &gt;&gt; </a>{% endif %}                 
@@ -41,47 +41,18 @@
 				</th>
 			</tr>
 			 <tr>
-	                <td style="text-align:center;">SUN</td>
-	                <td style="text-align:center;">MON</td>
-	                <td style="text-align:center;">TUES</td>
-	                <td style="text-align:center;">WED</td>
-	                <td style="text-align:center;">THURS</td>
-	                <td style="text-align:center;">FRI</td>
-	                <td style="text-align:center;">SAT</td>
+	                <th class="day_header">SUN</td>
+	                <th class="day_header">MON</td>
+	                <th class="day_header">TUES</td>
+	                <th class="day_header">WED</td>
+	                <th class="day_header">THURS</td>
+	                <th class="day_header">FRI</td>
+	                <th class="day_header">SAT</td>
 	            </tr>
 	    {% for one_week in day_events_organizer.cal_weeks %}
 	        <tr>
 	            {% for day_event_obj in one_week %}
-	                <td {% if day_event_obj.is_day_past  or day_event_obj.is_weekend %}class="cal_td_over"{% endif %}>
-	                    {% if day_event_obj.is_weekend %}
-	                        <div class="cal_day_num">
-	                    {% else %}{% if day_event_obj.is_date_other_month %}
-                            <div class="cal_day_num cal_day_num_other_mth">
-	                    {% else %}{% if day_event_obj.is_day_today %}
-	                        <div class="cal_day_num cal_day_num_today">
-                        {% else %}
-                            <div class="cal_day_num">
-                        {% endif %}{% endif %}{% endif %}
-	                    
-	                    <!--div class="cal_day_num {% if day_event_obj.is_date_other_month %} cal_day_num_other_mth{% endif %}{% if day_event_obj.is_day_today %} cal_day_num_today{% endif %}"--><a href="{% url view_signup_page day_event_obj.date|date:"Y-m-d" %}">{{ day_event_obj.date.day }}</a></div>
-	                                        <!--({{ day_event_obj.get_event_count }})-->
-	                    <div class="cal_day">
-	                    {% for evt in day_event_obj.events %}
-	                        <div class="evt_listing_mth">
-	                            <div class="cal_day_time"><b>{{ evt.start_datetime|date:"P" }}{#-{{ evt.end_datetime|date:"P" }}#}</b>
-									
-								{% ifequal evt.user calendar_user %}
-	                           <br /><a href="{% url view_cancel_signup evt.id_hash %}" class="cal_name_regular"  style="font-size:120%; font-weight:bold;">{{ evt.display_name|safe }}</a>
-								{% else %}
-	                           <br /><span style="color:#964B36;">{{ evt.display_name|safe }}</span></div>
-								{% endifequal %}
-								</div>
-	                        </div>
-	                    {% empty %}
-	                        <br />&nbsp;
-	                    {% endfor %}
-	                    </div>
-	                </td>
+	                {% include "schedule_viewer/single_day.html" %}
 	            {% endfor %}
 	        </tr>
 	    {% endfor %}

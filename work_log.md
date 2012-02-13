@@ -24,11 +24,11 @@
 * see if we can't get the month view going:)
 * basic month view working with test event
 
-# 1/30/2012 - 9:30 to 10:00am / 4 to 4:15
+# 1/30/2012 - 9:30am to 10:00am / 4:00pm to 4:15pm
 * script to make random reservations
 * adjusted the filter times for viewing the monthly calendar
 
-# 2/6/2012 - 9:30am to 11:00
+# 2/6/2012 - 9:30am to 11:00am
 * work on sign up page
 
 # 2/7/2012 - 1:15pm to 5:35pm (coffee break 3:14 to 4:50)
@@ -39,10 +39,10 @@
 * scheduling sign up form
 * basic sign-up working
 
-# 2/8/2012 - 8pm to 9pm
+# 2/8/2012 - 8:00pm to 9:00pm
 * reading django docs re: media and static files
 
-# 2/9/2012 - 9:45am to 3pm
+# 2/9/2012 - 9:45am to 3:00pm
 * implement static/media
 *FIXED(i) time slot maker, make sure time has not passed e.g, if signing up that day
 
@@ -51,6 +51,10 @@
 * redo display names
 * substitute cal-events for subclasses
 * cancellation added for users
+
+# 2/13/2012 - 1:50pm to 4:05pm (css fixup)
+* css fixup on the monthly calendar
+
 
 (i) ScheduledBannerMessage should *not* be a CalendarEvent
 * add 'edit' for admin?
