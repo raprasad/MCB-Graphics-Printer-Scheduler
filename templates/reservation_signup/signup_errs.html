@@ -7,6 +7,10 @@
 		<p>Please try to <a href="{% url view_cancel_signup reservation.id_hash %}">cancel</a> it again.</p>
 		{% endif %}
 	{% endif %}
+
+	{% if ERR_no_permission_to_view_history %}
+        You do not have permission to view reservation history for this user.
+	{% endif %}
 	
 	{% if ERR_no_permission_to_cancel %}
         You do not have permission to cancel this reservation.
