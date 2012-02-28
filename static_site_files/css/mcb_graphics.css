@@ -122,11 +122,20 @@ div.day_evt_listing .cal_day_time{color:#1a2f5a; }
 div.day_evt_listing .cal_day_time a.cal_name_regular {
     color: #9a1a2c;
     font-size:110%;
-    xfont-weight:bold;
     cursor: pointer;
     text-decoration: underline;
 }
 div.day_evt_listing .cal_day_time a.cal_name_regular:hover { color:#ff0000;}
+
+div.day_evt_listing .cal_day_time a.cal_name_admin {
+    color: #006699;
+    font-size:110%;
+    cursor: pointer;
+    text-decoration: underline;
+}
+div.day_evt_listing .cal_day_time a.cal_name_admin:hover { color:#ff0000;}
+
+
 
 div.cal_day{padding:2px 0 5px 0;}
 div.cal_day a {font-size:11px; color:#2952ae; text-decoration:underline;}

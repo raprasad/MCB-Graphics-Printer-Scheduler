@@ -29,6 +29,15 @@ def view_cancel_success(request, id_hash):
 
 
     lu = get_common_lookup(request)
+    cal_user = lu.get('calendar_user', None)
+
+    if cal_user.is_calendar_admin or cal_user == reservation.user:
+        pass
+    else:
+        lu.update({ 'ERR_found' : True, 'ERR_no_permission_to_cancel' : True })
+        return render_to_response('reservation_signup/cancel_signup_success.html', lu, context_instance=RequestContext(request))
+        
+
     lu.update({'reservation' : reservation
             , 'selected_date' : reservation.start_datetime.date() })
 

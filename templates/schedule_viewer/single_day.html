@@ -29,9 +29,12 @@ click events: today/future
             {% if calendar_user %}
                 {% ifequal evt.user calendar_user %}
                     <a href="{% url view_cancel_signup evt.id_hash %}" class="cal_name_regular">{{ evt.display_name|safe }}</a>
+                {% else %}{% if calendar_user.is_calendar_admin %}
+                    <a href="{% url view_cancel_signup evt.id_hash %}" class="cal_name_admin">{{ evt.display_name|safe }}</a>
+    
                 {% else %}
                     <span style="color:#1a2f5a;">{{ evt.display_name|safe }}</span>
-            {% endifequal %}{% else %}
+            {% endif %}{% endifequal %}{% else %}
                 <span style="color:#1a2f5a;">{{ evt.display_name|safe }}</span>
             {% endif %}             
                          

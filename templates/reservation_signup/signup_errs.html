@@ -8,6 +8,9 @@
 		{% endif %}
 	{% endif %}
 	
+	{% if ERR_no_permission_to_cancel %}
+        You do not have permission to cancel this reservation.
+	{% endif %}
 	
 	{% if ERR_reservation_already_cancelled %}
 		This reservation has already been cancelled.
