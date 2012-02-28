@@ -55,6 +55,10 @@
 # 2/13/2012 - 1:50pm to 4:05pm (css fixup)
 * css fixup on the monthly calendar
 
+# 2/28/2012 - 11:14am to 12:15pm, 3:00pm to 5:00pm
+* PIN login working
+* Adjusted signup form for 33-digit code and lab name
+
 
 (i) ScheduledBannerMessage should *not* be a CalendarEvent
 * add 'edit' for admin?

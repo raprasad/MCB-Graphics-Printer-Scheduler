@@ -79,13 +79,13 @@ def view_signup_page(request, selected_date):
             return HttpResponseRedirect(success_url) # Redirect after POST
         else:
             signup_form.init(timeslot_checker.get_timeslot_choices_for_form()\
-                            , timeslot_checker.get_reservation_time_block() )
+                            , timeslot_checker.get_reservation_time_block()
+                            , cal_user )
     else:
         signup_form = SignupForm()
         signup_form.init(timeslot_checker.get_timeslot_choices_for_form()\
                         , timeslot_checker.get_reservation_time_block()
-                        ,**{ 'phone' : cal_user.phone_number\
-                           , 'contact_email' : cal_user.contact_email } )
+                        , cal_user)
             
     lu.update({ 'signup_form' : signup_form})
     

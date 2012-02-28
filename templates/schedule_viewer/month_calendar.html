@@ -3,17 +3,28 @@
 {% block main_content %}
 
 <div>
+    
+    {% if not calendar_user %}
     <div id="reserve_slot_div">
-    <form action="http://www.mcb.harvard.edu/HU_Auth2/send.asp" method="post" name="Auther" id="Auther">
-    	<input type="hidden" name="App" id="App" value="2">
+    <form action="https://www.pin1.harvard.edu/pin/authenticate" method="GET">
+        <input type="hidden" name="__authen_application" id="__authen_application" value="FAS_MCB_AUTH_DEV" />
+        
     	<label for="hu_pin_login">Please reserve a time slot</label>					  
-    	<br /><input name="Submit" type="submit" id="hu_pin_login" class="smaller" value="Log in with your Harvard PIN" />
+    	<br /><input type="submit" id="hu_pin_login" class="smaller" value="Log in with your Harvard PIN" />
     	<br /><span style="font-size:80%">so that the we can ready the printers for you</span>
     </form></div>
+    {% else %}
+    <div id="reserve_slot_div">
+        To reserve a time slot, click on an available date.
+    </div>
+    
+    {% endif %}
 
     <div id="question_div">
-        Questions: please e-mail us
-        <br /><a href="mailto:mcbgraphics@fas.harvard.edu">mcbgraphics@fas.harvard.edu</a>
+        <form action="mailto:mcbgraphics@fas.harvard.edu" method="GET">
+        	<label for="hu_email_button">Questions: please e-mail us</label>					  
+        	<br /><input type="submit" id="hu_email_button" class="smaller" value="mcbgraphics@fas.harvard.edu" />
+        </form>
     </div>
     <div class="clear"></div>
 </div>
@@ -28,13 +39,15 @@
 	            <th colspan="7" style="background-color:#56b840; color:#fff;">
 					<div>
 					    <div style="float:left; padding:5px 10px; font-size:120%; color:#1a2f5a;">{{ selected_month|date:"F Y" }}</div>
-					    <div style="float:right;padding:5px 10px; ">
-                                <!-- previous month -->{% if previous_month %}	&nbsp; <a href="{% url view_month_calendar previous_month|date:"Y-m" %}" class="cal_nav_months"> &lt;&lt; {{ previous_month|date:"F" }}</a>{% endif %}
+					    
+                        {% if not is_current_month %}
+                           <div style="float:right;padding:5px 10px 5px 10px; ">
+                       		<a href="{% url view_current_month_calendar %}" class="this_month">{% now "F Y" %}</a><br />         {% else %}
+                       		<div style="float:right;padding:25px 10px 5px 10px; ">
+                       		{% endif %} <!-- previous month -->{% if previous_month %}	&nbsp; <a href="{% url view_month_calendar previous_month|date:"Y-m" %}" class="cal_nav_months"> &lt;&lt; {{ previous_month|date:"F" }}</a>{% endif %}
                                 <!-- next month --> &nbsp;	{% if next_month %}<a href="{% url view_month_calendar next_month|date:"Y-m" %}" class="cal_nav_months">{{ next_month|date:"F" }} &gt;&gt; </a>{% endif %}                 
                     
-                        {% if not is_current_month %}
-                		<br /><a href="{% url view_current_month_calendar %}" class="this_month">(THIS MONTH)</a>
-                		{% endif %}
+                        
                         </div>
 					    <div class="clear"></div>
     				</div>						

@@ -1,3 +1,4 @@
+import re
 from django import forms 
 from datetime import timedelta
 
@@ -15,15 +16,17 @@ class SignupForm(forms.Form):
     session_length = forms.IntegerField(widget=forms.HiddenInput)
     phone_number = USPhoneNumberField(label='Contact Phone')
     email = forms.EmailField(label='Contact Email')
+    billing_code = forms.CharField(label='33-digit Harvard Billing Code', required=False, widget=forms.TextInput(attrs={'size': 40}))
+    lab_name = forms.CharField(label='Lab or Group Affiliation',widget=forms.TextInput(attrs={'size': 40}) )
     
-    
-    def init(self, time_slot_choices, session_length, **kwargs):   
+    def init(self, time_slot_choices, session_length, cal_user):   
         self.fields['time_slot'].widget.choices = time_slot_choices
         self.fields['session_length'].initial = session_length
 
-        self.fields['email'].initial = kwargs.get('contact_email', '')
-        self.fields['phone_number'].initial = kwargs.get('phone', '')
-
+        self.fields['email'].initial = cal_user.contact_email 
+        self.fields['phone_number'].initial = cal_user.phone_number
+        self.fields['billing_code'].initial = cal_user.billing_code
+        self.fields['lab_name'].initial = cal_user.lab_name
 
 
     def get_time_slot_object(self):
@@ -36,7 +39,22 @@ class SignupForm(forms.Form):
             return TimeSlot(time_slot, end_datetime)
         except:
             return None
-            
+    
+    def clean_billing_code(self):
+        billing_code = self.cleaned_data.get('billing_code')
+        
+        if billing_code is None:
+            return billing_code
+
+        # remove everything except digits
+        val = re.sub('[^\d]', '', billing_code).strip().lower()
+        if len(val) == 0:
+            pass
+        elif not len(val) == 33:
+            raise forms.ValidationError('The code is not 33-digits.  Please re-enter it.')
+        
+        return billing_code
+        
     def clean(self):
         """Make sure the slot is still available"""
         time_slot = self.cleaned_data.get('time_slot', None)
@@ -62,7 +80,7 @@ class SignupForm(forms.Form):
         return self.cleaned_data
             
     def get_reservation(self, calendar_user):
-        print '>>> get_reservation'
+        #print '>>> get_reservation'
         if calendar_user is None:
             return None
         
@@ -75,13 +93,16 @@ class SignupForm(forms.Form):
                         , contact_phone=self.cleaned_data.get('phone_number')\
                         , start_datetime = ts_obj.start_datetime\
                         , end_datetime = ts_obj.end_datetime\
-                        #, billing_code=self.cleaned_data.get('billing_code', '')\
+                        , billing_code=self.cleaned_data.get('billing_code', '')\
+                        , lab_name=self.cleaned_data.get('lab_name', '')\
                         )        
         res.save()          # save the reservation
         
         # update user's contact info
         calendar_user.contact_email = res.contact_email
         calendar_user.phone_number = res.contact_phone
+        calendar_user.billing_code = res.billing_code
+        calendar_user.lab_name = res.lab_name
         calendar_user.save()
 
         return res

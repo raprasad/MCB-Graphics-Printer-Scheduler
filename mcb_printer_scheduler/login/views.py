@@ -15,10 +15,19 @@ def view_logout_page(request):
         lu.update({ 'ERR_found' : True, 'ERR_already_logged_out' : True })
         return render_to_response('login/logout_page.html', lu, context_instance=RequestContext(request))
     
-    logout(request)
+    try:
+        logout(request)
+        return view_logout_success_page(request)
+    except:
+        return render_to_response('login/logout_page.html', lu, context_instance=RequestContext(request))
+
+def view_logout_success_page(request):
+    
+    lu = get_common_lookup(request)
+
+    cal_user = lu.get('calendar_user', None)
 
     lu.update({ 'logout_success' : True})
-    return render_to_response('login/logout_page.html', lu, context_instance=RequestContext(request))
-
     
+    return render_to_response('login/logout_page.html', lu, context_instance=RequestContext(request))
         

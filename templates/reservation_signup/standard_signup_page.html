@@ -13,11 +13,13 @@
                 <td><b>{{ selected_date|date:"F j, Y" }}</b></td>
             </tr>
         {% if reservation_type %}
+        {% comment %}
             <tr>    
                 <th>Facility Hours:</th>
                 <td><b>{{ reservation_type.opening_time|time:"P" }} 
                         to  {{ reservation_type.closing_time|time:"P" }}</b></td>
             </tr>
+        {% endcomment %}
             {% include "reservation_signup/standard_signup_form.html" %}
         {% endif %}
         </table></form>
