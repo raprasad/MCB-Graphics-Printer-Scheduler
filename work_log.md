@@ -59,6 +59,13 @@
 * PIN login working
 * Adjusted signup form for 33-digit code and lab name
 
+# 2/29/2012 - 12:00pm to 3pm
+* allow cancel for admin (misplaced if statement)
+* remove end time from dropdown, reservation confirmation, and cancel pags
+* added basic history page
+* started rewriting scheduled banner.
+* Add separate form for 33-digit code: http://digitalbush.com/projects/masked-input-plugin/
+370-31560-6600-000775-600200-0000-44733
 
 (i) ScheduledBannerMessage should *not* be a CalendarEvent
 * add 'edit' for admin?

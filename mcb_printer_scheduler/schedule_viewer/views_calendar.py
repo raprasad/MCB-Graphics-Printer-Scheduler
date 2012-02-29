@@ -6,7 +6,7 @@ from django.db.models import Q
 
 from datetime import datetime, date, timedelta
 
-from calendar_event.models import CalendarEvent
+from calendar_event.models import CalendarEvent, ScheduledBannerMessage
 from calendar_event.calendar_event_helper import CalendarEventOrganizer
 from schedule_maker.day_events_organizer import DayEventsOrganizer
 from schedule_maker.calendar_weeks import get_calendar_weeks
@@ -76,6 +76,9 @@ def view_month_calendar(request, selected_month=None):
             ,'next_year':selected_month.year+1 \
             , 'next_month' : get_next_month(selected_month)
             , 'previous_month' :  get_previous_month(selected_month)
+            , 'banner_messages' : ScheduledBannerMessage.objects.filter(is_active=True\
+                                    , start_datetime__lte=current_datetime\
+                                    , end_datetime__gte=current_datetime).all()
            })
 
     template = 'schedule_viewer/month_calendar.html'

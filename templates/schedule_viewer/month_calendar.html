@@ -17,17 +17,17 @@
     <div id="reserve_slot_div">
         To reserve a time slot, click on an available date.
     </div>
-    
     {% endif %}
 
     <div id="question_div">
         <form action="mailto:mcbgraphics@fas.harvard.edu" method="GET">
-        	<label for="hu_email_button">Questions: please e-mail us</label>					  
+        	<label for="hu_email_button">Questions? Please e-mail us</label>					  
         	<br /><input type="submit" id="hu_email_button" class="smaller" value="mcbgraphics@fas.harvard.edu" />
         </form>
     </div>
     <div class="clear"></div>
 </div>
+
 {% if day_events_organizer %}
 <div id="overarching_cal_div">
 	<div id="evt_month_cal">
@@ -53,6 +53,23 @@
     				</div>						
 				</th>
 			</tr>
+			{% if banner_messages.count > 0 %}
+            <tr><!-- #77aa56 -->
+	            <th colspan="7" style="background-color:#fad4d4; color:#333; border:1px solid #ff0000;">
+                        {% for msg in banner_messages %}
+                        {% if forloop.counter > 1  and not forloop.first %}
+                        <div style="padding:6px 0; line-height:150%; font-size:13px; border-top:1px dotted #333;">{{ msg.banner_message|safe }}</div>
+                        {% else %}
+                        <div style="padding:6px 0; line-height:150%; font-size:13px;">{{ msg.banner_message|safe }}</div>
+                        {% endif %}
+                            
+                            
+                        {% endfor %}
+                </th>
+            </tr>
+            {% endif %}
+            
+		
 			 <tr>
 	                <th class="day_header">SUN</td>
 	                <th class="day_header">MON</td>

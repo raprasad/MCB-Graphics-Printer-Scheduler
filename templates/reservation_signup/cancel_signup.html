@@ -5,10 +5,13 @@
 
 
 		 {% if reservation %}
+		        <p>User: <b> {{ reservation.user }}</b></p>
+         
 		      {% ifequal reservation.start_datetime.date reservation.end_datetime.date %}
 	                <!-- start / end on same day -->
 	                <p>Date: <b>{{ reservation.start_datetime|date:"F j, Y" }}</b></p>
-	                <p>Time: <b>{{ reservation.start_datetime|date:"P" }}</b> &#151; <b>{{ reservation.end_datetime|date:"P" }}</b></p>
+	                <p>Time: <b>{{ reservation.start_datetime|date:"P" }}</b> 
+	                    {# &#151; <b>{{ reservation.end_datetime|date:"P" }}</b>#}</p>
 	            {% else %}
 	            <!-- start / end on different days -->
 	            <p>Start Time: <b>{{ reservation.start_datetime|date:"F j, Y" }} at {{ reservation.start_datetime|date:"P" }}</b></p>

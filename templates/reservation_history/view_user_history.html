@@ -1,38 +1,76 @@
 {% extends "base.html" %}
 {% block main_content %}
-    <div style="float:left; width:400px;">
-        <h3 style="margin:0 0 20px 0;">Reservation History</h3>
+
+    <div style="float:left; width:600px;">
+        <h3 style="margin:0 0 20px 0;">Reservation History{% if cal_user_to_check %}: {{ cal_user_to_check }}{% endif %}</h3>
 
 
-		 {% if  {{ cal_user_to_check }} %}
-		      {% ifequal reservation.start_datetime.date reservation.end_datetime.date %}
-	                <h4>User: {{ cal_user_to_check }}</h4>
-	                <!-- start / end on same day -->
-	                <p: <b>{{ reservation.start_datetime|date:"F j, Y" }}</b></p>
-	                <p>Time: <b>{{ reservation.start_datetime|date:"P" }}</b> &#151; <b>{{ reservation.end_datetime|date:"P" }}</b></p>
-	            {% else %}
-	            <!-- start / end on different days -->
-	            <p>Start Time: <b>{{ reservation.start_datetime|date:"F j, Y" }} at {{ reservation.start_datetime|date:"P" }}</b></p>
-	            <p>End Time: <b>{{ reservation.end_datetime|date:"F j, Y" }} at {{ reservation.end_datetime|date:"P" }}</b></p>
-	            {% endifequal %}
-	     {% endif %}
+		 {% if  cal_user_to_check %}
+         <p><b>{{ reservations.count }} reservation{{ reservations.count|pluralize }}</b> found for <b>{{ cal_user_to_check }}</b>.
+        <br />{{ cancellations.count }} cancellation{{ cancellations.count|pluralize }}</b> 
+           <br />  (Return to the <a href="{% url view_current_month_calendar %}">monthly calendar</a>.)
+             
+             </p>
+         {% endif %}
 
-		{% if cancel_form and reservation and not ERR_found %}
-	    <form method="post" id="cancel_form" name="cancel_form" action="{% url view_cancel_signup reservation.id_hash %}">{% csrf_token %} 
-			{{ cancel_form.as_p }}
+         {% if reservations.count > 0 %}
+         {{ cal_user }}
+         {% if calendar_user.is_calendar_admin and calendar_user.user.is_staff %}
+         <a href="{% url admin:calendar_event_reservation_changelist  %}?user__id__exact={{ cal_user_to_check.id }}" target="dadmin">View in Admin</a>
+		 {% endif %}
+         <div id="id_reservation_listing">
+            <table cellspacing="0">
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>date</th>
+                    <th>start time</th>
+                    <th>lab or group affiliation</th>
+                    <th>expense code</th>
+                    <th>cancelled?</th>
+                </tr>
+         {% for r in reservations %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ r.start_datetime|date:"m/d/Y" }}
+                        <!--br />(<a href="{% url view_cancel_signup r.id_hash  %}">cancel</a>)-->
+                     {% if calendar_user.is_calendar_admin and calendar_user.user.is_staff %}
+                    <br />(<a href="{% url admin:calendar_event_reservation_change r.id  %}" target="dadmin">edit</a>)
+                    {% endif %}
+           		 
+                    </td>
+                <td class="rt">{{ r.start_datetime|date:"g:i" }}&nbsp;{{ r.start_datetime|date:"A" }}</td>
+                <td>{{ r.lab_name }}</td>
+                <td>{% if r.billing_code %}{{ r.billing_code }}{% else %}&nbsp;{% endif %}</td>
+                <td>{% if r.is_cancelled %}YES <div class="cancelled_box"></div>
+                    
+                    {% else %}no <div class="enabled_box"></div>{% endif %}</td>
+            </tr>
+            
+         {% empty %}
+         {% endfor %}
+            </table>
+         </div>
+         {% endif %}
 
-		    <input type="submit" name="Cancel Reservation" value="Cancel Reservation">
-
-	        <p><br />Return to the <a href="{% url view_month_calendar selected_date|date:"Y-m" %}">monthly calendar</a>.</p>
-	    {% endif %}
-
-       
+         
         {% include "reservation_signup/signup_errs.html" %}
 		
        
     </div>
-    
-    {% include "reservation_signup/right_col_reservations.html" %}
-    
-	<div class="clear"></div>
+     
+	{% if  cal_user_to_check %}
+     <div style="float:left; width:240px; border:1px solid #999; margin:0 0 0 10px;">
+
+        <div style="padding:10px; background-color:#F5F6F1;"><b>Current Information</b><br />
+            <b>name</b>: {{ cal_user_to_check }}<br />
+        <b>phone</b>: {{ cal_user_to_check.phone_number }}<br />
+        <b>email</b>: <a href="mailto:{{ cal_user_to_check.contact_email }}">{{ cal_user_to_check.contact_email }}</a><br />
+        <b>affiliation</b>: {{ cal_user_to_check.lab_name }}<br />
+        <b>billing code</b>: {{ cal_user_to_check.billing_code }}<br />
+        </div>
+
+    </div>
+    {% endif %}
+    <div class="clear"></div>
+	
 {% endblock %}

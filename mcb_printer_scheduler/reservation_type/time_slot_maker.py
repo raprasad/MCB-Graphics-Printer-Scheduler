@@ -16,8 +16,10 @@ class TimeSlot:
         self.end_datetime = end_datetime
     
     def get_timeslot_label_for_form(self):
-        return '%s - %s' % (self.start_datetime.strftime('%I:%M %p')\
-                             ,  self.end_datetime.strftime('%I:%M %p'))
+        return '%s' % (self.start_datetime.strftime('%I:%M %p'))
+
+        #return '%s - %s' % (self.start_datetime.strftime('%I:%M %p')\
+        #                     ,  self.end_datetime.strftime('%I:%M %p'))
 
     def get_timeslot_entry_for_form(self):
         label = self.get_timeslot_label_for_form()
@@ -76,7 +78,7 @@ class TimeSlotChecker:
     def get_timeslot_choices_for_form(self):
         if self.open_timeslots is None or len(self.open_timeslots) == 0:
             return None
-        return [('', '--------------')] + map(lambda x: x.get_timeslot_entry_for_form()\
+        return [('', '------')] + map(lambda x: x.get_timeslot_entry_for_form()\
                             , self.open_timeslots)
                             
 

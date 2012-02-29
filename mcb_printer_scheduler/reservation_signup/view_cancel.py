@@ -31,7 +31,7 @@ def view_cancel_success(request, id_hash):
     lu = get_common_lookup(request)
     cal_user = lu.get('calendar_user', None)
 
-    if cal_user.is_calendar_admin or cal_user == reservation.user:
+    if cal_user.is_calendar_admin or (cal_user == reservation.user):
         pass
     else:
         lu.update({ 'ERR_found' : True, 'ERR_no_permission_to_cancel' : True })
@@ -67,10 +67,19 @@ def view_cancel_signup(request, id_hash):
         raise Http404('Reservation not found.')
     
     lu = get_common_lookup(request)
+    cal_user = lu.get('calendar_user', None)
+    print 'cal_user', cal_user
+    print 'cal_user.is_calendar_admin', cal_user.is_calendar_admin
+    if cal_user.is_calendar_admin or (cal_user == reservation.user):
+        pass
+    else:
+        lu.update({ 'ERR_found' : True, 'ERR_no_permission_to_cancel' : True })
+        return render_to_response('reservation_signup/cancel_signup.html', lu, context_instance=RequestContext(request))
 
     if reservation.is_cancelled:    # should never happen b/c shouldn't be visible
         lu.update({ 'ERR_found' : True, 'ERR_reservation_already_cancelled' : True })
         return render_to_response('reservation_signup/cancel_signup.html', lu, context_instance=RequestContext(request))
+
 
 
     lu.update({'reservation' : reservation
@@ -80,9 +89,6 @@ def view_cancel_signup(request, id_hash):
     lu.update({ 'calendar_events' : timeslot_checker.calendar_events })
 
     cal_user = lu.get('calendar_user')
-    if not cal_user == reservation.user:
-        lu.update({ 'ERR_found' : True, 'ERR_different_user' : True })
-        return render_to_response('reservation_signup/cancel_signup.html', lu, context_instance=RequestContext(request))
         
     
     if request.method == 'POST': # If the form has been submitted...

@@ -12,7 +12,6 @@ class CalendarEventAdmin(admin.ModelAdmin):
 admin.site.register(CalendarEvent, CalendarEventAdmin)
 admin.site.register(CalendarMessage, CalendarEventAdmin)
 admin.site.register(CalendarFullDayMessage, CalendarEventAdmin)
-admin.site.register(ScheduledBannerMessage, CalendarEventAdmin)
 
 
 class ReservationAdmin(admin.ModelAdmin):
@@ -24,4 +23,12 @@ class ReservationAdmin(admin.ModelAdmin):
     search_fields = ( 'display_name', 'user__last_name', 'user__first_name', 'lab', 'billing_code')
 admin.site.register(Reservation, ReservationAdmin)
 
+
+
+class ScheduledBannerMessageAdmin(admin.ModelAdmin):
+    save_on_top = True
+    list_display= ('name', 'start_datetime', 'end_datetime', 'is_active', 'banner_message' )
+    list_filter = ('is_active', )
+    search_fields = ( 'name', 'banner_message',)
+admin.site.register(ScheduledBannerMessage, ScheduledBannerMessageAdmin)
 

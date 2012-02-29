@@ -155,12 +155,25 @@ class CalendarFullDayMessage(CalendarEvent):
         verbose_name_plural = 'Calendar Full Day Messages (1 or more days, e.g. holiday)'
     
     
-class ScheduledBannerMessage(CalendarEvent):
-    detailed_msg = models.TextField('Detailed Message for Banner')
+class ScheduledBannerMessage(models.Model):
+    name = models.CharField(max_length=255, help_text='for internal use, not displayed for public')
+
+    banner_message = models.TextField()
     
-    def get_display_msg(self):
-        return self.detailed_msg[:255]
+    id_hash = models.CharField(max_length=40, blank=True, help_text='Auto-fill on save')   # 
+
+    start_datetime = models.DateTimeField()
+    end_datetime = models.DateTimeField()
+
+    is_active = models.BooleanField(default=True, help_text='Will be visible on appropriate dates')
+
+    created = models.DateTimeField(auto_now_add=True)
+    last_update = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return self.name
         
     class Meta:
+        ordering = ('-start_datetime',)
         verbose_name = 'Scheduled Banner Message (Displayed above calendar)'
         verbose_name_plural = 'Scheduled Banner Messages (Displayed above calendar)'

@@ -10,10 +10,11 @@
 
         {% if cancel_success %}
         <div class="gb">
-            Your reservation has been cancelled.
+            This reservation has been cancelled.
         
             {% ifequal reservation.start_datetime.date reservation.end_datetime.date %}
                 <!-- start / end on same day -->
+                 <p>Person: <b> {{ reservation.user }}</b></p>
                 <p>Date: <b> <span class="res_cancelled">{{ reservation.start_datetime|date:"F j, Y" }}</span></b></p>
                 <p>Time: <b><span class="res_cancelled">{{ reservation.start_datetime|date:"P" }}</b> &#151; <b><span class="res_cancelled">{{ reservation.end_datetime|date:"P" }}</span></b></p>
             {% else %}

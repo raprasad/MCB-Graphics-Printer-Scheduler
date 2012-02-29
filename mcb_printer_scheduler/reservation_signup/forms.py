@@ -46,14 +46,17 @@ class SignupForm(forms.Form):
         if billing_code is None:
             return billing_code
 
-        # remove everything except digits
-        val = re.sub('[^\d]', '', billing_code).strip().lower()
-        if len(val) == 0:
-            pass
-        elif not len(val) == 33:
+        # remove everything except digits, x's, and dashes
+        val = re.sub('[^\d|x|-]', '', billing_code).strip().lower()
+
+        # blanks are OK
+        if val == '':
+            return val
+            
+        if not re.match('\d{3}-\d{5}-[x|\d]{4}-\d{6}-\d{6}-\d{4}-\d{5}' ,val):
             raise forms.ValidationError('The code is not 33-digits.  Please re-enter it.')
         
-        return billing_code
+        return val
         
     def clean(self):
         """Make sure the slot is still available"""

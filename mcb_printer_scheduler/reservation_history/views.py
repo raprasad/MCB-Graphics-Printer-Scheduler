@@ -12,8 +12,8 @@ from cal_util.msg_util import *
 from django.core.urlresolvers import reverse
 
 @login_required
-def view_reservation_history(request, user_id_hash):
-    if user_id_hash is None:
+def view_reservation_history(request, id_hash):
+    if id_hash is None:
         raise Http404('History not found.')
 
 
@@ -34,3 +34,13 @@ def view_reservation_history(request, user_id_hash):
     else:
         lu.update({ 'ERR_found' : True, 'ERR_no_permission_to_view_history' : True })
         return render_to_response('reservation_history/view_user_history.html', lu, context_instance=RequestContext(request))
+
+    
+    lu.update({ 'reservations' : Reservation.objects.filter(user=cal_user_to_check)\
+            , 'cancellations' : Reservation.objects.filter(user=cal_user_to_check, is_cancelled=True)\
+            , 'cal_user_to_check' : cal_user_to_check})
+
+    return render_to_response('reservation_history/view_user_history.html', lu, context_instance=RequestContext(request))
+
+
+        
