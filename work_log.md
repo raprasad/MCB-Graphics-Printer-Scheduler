@@ -71,8 +71,9 @@
 * admin form to sign up for anyone
     * basics work
     * add jquery to update email, phone, lab if user changes
-    
+
 #----------------    
+
 * add 'edit' for admin?
 * too many cancels on same day, give warning
 * too many reservations same day, give warning

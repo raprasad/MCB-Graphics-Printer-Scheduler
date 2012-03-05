@@ -16,7 +16,7 @@ from cal_util.msg_util import *
 from django.core.urlresolvers import reverse
 
 
-@login_required    #(login_url=reverse('view_current_month_calendar'))
+@login_required    
 def view_admin_signup_page_success(request, id_hash):
     if id_hash is None:
         raise Http404('Reservation not found.')
@@ -46,7 +46,7 @@ def view_admin_signup_page_success(request, id_hash):
     return render_to_response('admin_signup/admin_signup_success.html', lu, context_instance=RequestContext(request))
 
     
-#@login_required #(login_url=reverse('view_current_month_calendar'))
+#@login_required 
 def view_admin_signup_page(request, selected_date):
     if selected_date is None:
         raise Http404('Signup date not found.')

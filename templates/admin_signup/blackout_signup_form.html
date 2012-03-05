@@ -1,0 +1,29 @@
+{% if signup_form  and not ERR_found %}
+ <!--tr>    
+     <th># open time slots:</th>
+     <td><b>{{ num_timeslots }}</b></td>
+ </tr-->
+     {% for f in signup_form %}
+         {% if f.is_hidden %}
+             {{ f }}
+         {% else %}
+         <tr>
+             <th>{% if f.field.required %}*{% endif %}{{ f.label }}</th>
+     
+             <td>{% for err in f.errors %}
+                     <span style="color:#ff0000;">{{ err }}</span><br />
+                 {% endfor %} 
+                 {{ f }}</td>
+             {% endif %}
+         </tr>
+         {#{ signup_form.as_table }#}
+     {% endfor %}
+
+ <tr>
+     <td>&nbsp;</td>
+     <td><input type="submit" name="sign up!" value="sign up!"></td>
+ </tr>
+ <tr>
+     <th colspan="2"><br />Return to the <a href="{% url view_month_calendar selected_date|date:"Y-m" %}">monthly calendar</a>.</td>
+ </tr>
+ {% endif %}

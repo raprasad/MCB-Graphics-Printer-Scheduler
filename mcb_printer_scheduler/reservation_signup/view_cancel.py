@@ -52,7 +52,7 @@ def view_cancel_success(request, id_hash):
     return render_to_response('reservation_signup/cancel_signup_success.html', lu, context_instance=RequestContext(request))
     
     
-@login_required    #(login_url=reverse('view_current_month_calendar'))
+@login_required    
 def view_cancel_signup(request, id_hash):
     if id_hash is None:
         raise Http404('Reservation not found.')

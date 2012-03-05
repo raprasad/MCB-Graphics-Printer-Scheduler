@@ -17,7 +17,6 @@ class AdminSignupForm(forms.Form):
     """Form used for a regular user to reserve a time."""
 
     calendar_user = forms.ChoiceField(label='User', choices=CALENDAR_USER_CHOICES)
-
     time_slot = forms.DateTimeField(label='Available times', widget=forms.Select)
     session_length = forms.IntegerField(widget=forms.HiddenInput)
     phone_number = USPhoneNumberField(label='Contact Phone')

@@ -17,10 +17,10 @@ $(document).ready(function(){
 
 {% block main_content %}
     <div style="float:left; width:400px;">
-        <h3 style="margin:0 0 20px 0; ">Sign Up for a Time Slot</h3>
+        <h3 style="margin:0 0 20px 0; ">Time Slot Blackout</h3>
 
         {% if calendar_user.is_calendar_admin %}
-        <p><a href="{% url view_blackout_signup_page selected_date|date:"Y-m-d"%}">blackout form</a></p>
+        
         {% endif %}
         <div id="id_signup_form_div">
         <form method="post" id="signup_form" name="signup_form" action="{% url view_admin_signup_page selected_date|date:"Y-m-d" %}">{% csrf_token %} 
@@ -32,7 +32,7 @@ $(document).ready(function(){
             </tr>
         {% if reservation_type %}
         
-            {% include "admin_signup/reservation_signup_form.html" %}
+            {% include "admin_signup/blackout_signup_form.html" %}
         {% endif %}
         </table></form>
         </div>
