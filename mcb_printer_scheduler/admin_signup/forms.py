@@ -6,11 +6,17 @@ from reservation_type.conflict_checker import ConflictChecker
 from reservation_type.time_slot_maker import TimeSlot
 
 from calendar_event.models import CalendarEvent, Reservation
+from calendar_user.models import CalendarUser
 
 from django.contrib.localflavor.us.forms import USPhoneNumberField
 
-class SignupForm(forms.Form):
+CALENDAR_USER_CHOICES = map(lambda x: (x.id, x), CalendarUser.objects.filter(user__is_active=True))
+
+
+class AdminSignupForm(forms.Form):
     """Form used for a regular user to reserve a time."""
+
+    calendar_user = forms.ChoiceField(label='User', choices=CALENDAR_USER_CHOICES)
 
     time_slot = forms.DateTimeField(label='Available times', widget=forms.Select)
     session_length = forms.IntegerField(widget=forms.HiddenInput)
@@ -23,6 +29,7 @@ class SignupForm(forms.Form):
         self.fields['time_slot'].widget.choices = time_slot_choices
         self.fields['session_length'].initial = session_length
 
+        self.fields['calendar_user'].initial = cal_user.id 
         self.fields['email'].initial = cal_user.contact_email 
         self.fields['phone_number'].initial = cal_user.phone_number
         self.fields['billing_code'].initial = cal_user.billing_code
@@ -82,13 +89,15 @@ class SignupForm(forms.Form):
             
         return self.cleaned_data
             
-    def get_reservation(self, calendar_user):
-        #print '>>> get_reservation'
-        if calendar_user is None:
-            return None
-        
+    def get_reservation(self):
         ts_obj = self.get_time_slot_object()
         if ts_obj is None:
+            return None
+        
+        try:
+            cal_user_id = self.cleaned_data.get('calendar_user')
+            calendar_user = CalendarUser.objects.get(pk=cal_user_id)
+        except CalendarUser.DoesNotExist: 
             return None
             
         res = Reservation(user=calendar_user\
@@ -102,11 +111,13 @@ class SignupForm(forms.Form):
         res.save()          # save the reservation
         
         # update user's contact info
+        """
         calendar_user.contact_email = res.contact_email
         calendar_user.phone_number = res.contact_phone
         calendar_user.billing_code = res.billing_code
         calendar_user.lab_name = res.lab_name
         calendar_user.save()
-
+        """
+        
         return res
-          
+             

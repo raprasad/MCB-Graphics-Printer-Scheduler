@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block main_content %}
+    <div style="float:left; width:400px;">
+        {% if not ERR_found %}
+        <h3 style="margin:0 0 20px 0; color:green;">Signup Success!</h3>
+        {% else %}
+        <h3 style="margin:0 0 20px 0;">Signup Failed</h3>
+        {% endif %}
+
+
+        {% if reservation %}
+        <div class="gb">
+            Success!
+            Your reservation has been made.
+
+            <p>User: <b>{{ reservation.user.get_fullname_last_first }}</b></p>
+        
+            {% ifequal reservation.start_datetime.date reservation.end_datetime.date %}
+                <!-- start / end on same day -->
+                <p>Date: <b>{{ reservation.start_datetime|date:"F j, Y" }}</b></p>
+                <p>Time: <b>{{ reservation.start_datetime|date:"P" }}</b> 
+                    {# &#151; <b>{{ reservation.end_datetime|date:"P" }}</b>#}</p>
+            {% else %}
+            <!-- start / end on different days -->
+            <p>Start Time: <b>{{ reservation.start_datetime|date:"F j, Y" }} at {{ reservation.start_datetime|date:"P" }}</b></p>
+            <p>End Time: <b>{{ reservation.end_datetime|date:"F j, Y" }} at {{ reservation.end_datetime|date:"P" }}</b></p>
+            {% endifequal %}
+            
+            <p>Return to the <a href="{% url view_month_calendar selected_date|date:"Y-m" %}">monthly calendar</a>.</p>
+
+            <p><a href="{% url view_admin_signup_page reservation.start_datetime|date:"Y-m-d" %}">Sign up</a> again for {{ reservation.start_datetime|date:"F j, Y" }}.</p>
+
+
+        </div>
+        {% endif %}
+
+     	{% include "reservation_signup/signup_errs.html" %}
+		
+       
+    </div>
+    
+    {% include "reservation_signup/right_col_reservations.html" %}
+    
+	<div class="clear"></div>
+{% endblock %}

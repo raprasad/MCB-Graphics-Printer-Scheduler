@@ -14,13 +14,25 @@ click events: today/future
     <div class="cal_day_num cal_day_holiday_weekend">{{ day_event_obj.date.day }}</div>
 {% else %}{% if day_event_obj.is_day_today %}
 <!--  today --><td>
-    <div class="cal_day_num cal_day_num_today"><a href="{% url view_signup_page day_event_obj.date|date:"Y-m-d" %}">{{ day_event_obj.date.day }}</a></div>
+    <div class="cal_day_num cal_day_num_today">
+        {% if calendar_user.is_calendar_admin %}
+        <a href="{% url view_admin_signup_page day_event_obj.date|date:"Y-m-d" %}">{{ day_event_obj.date.day }}</a>
+        {% else %}
+        <a href="{% url view_signup_page day_event_obj.date|date:"Y-m-d" %}">{{ day_event_obj.date.day }}</a>
+        {% endif %}
+        </div>
 {% else %}{% if day_event_obj.is_day_past %}
 <!--  day has passed --><td>
     <div class="cal_day_num">{{ day_event_obj.date.day }}</div>
 {% else %}
 <!--  day --><td>
-    <div class="cal_day_num"><a href="{% url view_signup_page day_event_obj.date|date:"Y-m-d" %}">{{ day_event_obj.date.day }}</a></div>
+    <div class="cal_day_num">
+            {% if calendar_user.is_calendar_admin %}
+            <a href="{% url view_admin_signup_page day_event_obj.date|date:"Y-m-d" %}">{{ day_event_obj.date.day }}</a>
+            {% else %}
+            <a href="{% url view_signup_page day_event_obj.date|date:"Y-m-d" %}">{{ day_event_obj.date.day }}</a>
+            {% endif %}
+    </div>
 {% endif %}{% endif %}{% endif %}
 <div class="cal_day">
     {% for evt in day_event_obj.events %}

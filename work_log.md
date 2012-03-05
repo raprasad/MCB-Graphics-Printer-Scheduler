@@ -67,11 +67,15 @@
 * Add separate form for 33-digit code: http://digitalbush.com/projects/masked-input-plugin/
 370-31560-6600-000775-600200-0000-44733
 
-(i) ScheduledBannerMessage should *not* be a CalendarEvent
+# 3/5/2012 - 3:30pm to 5pm
+* admin form to sign up for anyone
+    * basics work
+    * add jquery to update email, phone, lab if user changes
+    
+#----------------    
 * add 'edit' for admin?
 * too many cancels on same day, give warning
 * too many reservations same day, give warning
-* view my reservations
 
 
 

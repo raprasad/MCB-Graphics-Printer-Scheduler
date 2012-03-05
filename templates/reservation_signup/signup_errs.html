@@ -8,6 +8,10 @@
 		{% endif %}
 	{% endif %}
 
+	{% if ERR_no_permission_to_reserve_as_admin %}
+        You do not have permission to reserve time for another user.
+	{% endif %}
+	
 	{% if ERR_no_permission_to_view_history %}
         You do not have permission to view reservation history for this user.
 	{% endif %}

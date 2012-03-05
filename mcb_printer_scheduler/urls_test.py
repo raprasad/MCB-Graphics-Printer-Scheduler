@@ -19,6 +19,8 @@ urlpatterns = patterns('',
 
     url(r'^poster-printer/signup/', include('mcb_printer_scheduler.reservation_signup.urls')),
 
+    url(r'^poster-printer/admin-signup/', include('mcb_printer_scheduler.admin_signup.urls')),
+
     url(r'^poster-printer/user-auth/', include('mcb_printer_scheduler.login.urls')),
 
     url(r'^poster-printer/history/', include('mcb_printer_scheduler.reservation_history.urls')),
