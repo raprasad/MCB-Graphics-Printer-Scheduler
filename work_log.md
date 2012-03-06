@@ -88,7 +88,11 @@ x* blackout slots
     x* basic form
     x* right cal view
     * month cal view
-    -> redo DayEventsOrganizer to consider events spanning multiple days
+-> redo Blackout Days
+    - limit to 10 day length
+    - for each day, make a separate CalendarFullDayMessage object
+     
+
 #----------------    
 
 * limit scheduling ahead by 1year

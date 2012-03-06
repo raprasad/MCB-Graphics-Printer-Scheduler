@@ -1,6 +1,6 @@
 import re
 from django import forms 
-from datetime import datetime, time
+from datetime import datetime, time, timedelta
 
 from reservation_type.conflict_checker import ConflictChecker
 from reservation_type.time_slot_maker import TimeSlot
@@ -37,7 +37,7 @@ class AdminBlackoutForm(forms.Form):
         if end_time <= start_time:
             self._errors['end_time'] = self.error_class(['This field is required.'])
             raise forms.ValidationError('The end time must be AFTER the start time')
-        
+            
         conflict_checker = ConflictChecker()
         if conflict_checker.does_timeslot_conflict(TimeSlot(start_time, end_time)):
              self._errors['end_time'] = self.error_class(['Please choose a different time.'])
@@ -96,6 +96,15 @@ class AdminBlackoutDaysForm(forms.Form):
             self._errors['end_date'] = self.error_class(['This field is required.'])
             raise forms.ValidationError('The end date must be AFTER the start date')
 
+        # Limit to 10 days
+        days_limit = 7
+        time_diff = end_date - start_date
+        
+        if time_diff.days > days_limit:
+            self._errors['end_date'] = self.error_class(['This field is required.'])
+            raise forms.ValidationError('You may only block off %s days at a time' % days_limit)
+            
+        
         
         start_time = datetime.combine(start_date, time.min)
         end_time = datetime.combine(end_date, time.max)
@@ -109,17 +118,20 @@ class AdminBlackoutDaysForm(forms.Form):
 
 
     def get_calendar_event(self):
+        """create a CalendarFullDayMessage object for --each-- day"""
         start_date = self.cleaned_data.get('start_date', None)
         end_date = self.cleaned_data.get('end_date', None)
 
         if start_date is None or end_date is None:
             return None
-
-        cal_message = CalendarFullDayMessage(display_name=self.cleaned_data.get('message')\
-                        , start_datetime = datetime.combine(start_date, time.min)
-                        , end_datetime = datetime.combine(end_date, time.max)
-                        )        
-        cal_message.save()          # save the CalendarMessage
-
+            
+        date_to_block = start_date
+        while date_to_block <= end_date:
+            cal_message = CalendarFullDayMessage(display_name=self.cleaned_data.get('message')\
+                            , start_datetime = datetime.combine(date_to_block, time.min)
+                            , end_datetime = datetime.combine(date_to_block, time.max)
+                            )        
+            #cal_message.save()          # save the CalendarMessage
+            date_to_block = date_to_block + timedelta(days=1)
 
         return cal_message
