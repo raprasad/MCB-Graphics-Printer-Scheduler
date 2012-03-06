@@ -84,7 +84,7 @@ def view_admin_signup_page(request, selected_date):
     cal_user = lu.get('calendar_user', None)
     if cal_user is None or not cal_user.is_calendar_admin:
         lu.update({ 'ERR_found' : True, 'ERR_no_permission_to_reserve_as_admin' : True })
-        return render_to_response('admin_signup/standard_signup_page.html', lu, context_instance=RequestContext(request))
+        return render_to_response('admin_signup/reservation_signup_page.html', lu, context_instance=RequestContext(request))
         
     try:
         selected_datetime = datetime.strptime(selected_date, '%Y-%m-%d')
@@ -96,13 +96,13 @@ def view_admin_signup_page(request, selected_date):
 
     if not request.user.is_authenticated():
         lu.update({ 'ERR_found' : True, 'ERR_not_authenticated' : True })
-        return render_to_response('admin_signup/standard_signup_page.html', lu, context_instance=RequestContext(request))
+        return render_to_response('admin_signup/reservation_signup_page.html', lu, context_instance=RequestContext(request))
 
     timeslot_checker = TimeSlotChecker(selected_date=selected_date)
     if timeslot_checker.err_found():
         lu.update({ 'ERR_found' : True })
         lu.update(timeslot_checker.get_lookup_for_template())
-        return render_to_response('admin_signup/standard_signup_page.html', lu, context_instance=RequestContext(request))
+        return render_to_response('admin_signup/reservation_signup_page.html', lu, context_instance=RequestContext(request))
         
     lu.update(timeslot_checker.get_lookup_for_template())
     if request.method == 'POST': # If the form has been submitted...

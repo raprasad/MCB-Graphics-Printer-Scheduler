@@ -56,6 +56,8 @@ click events: today/future
             
             {# <!-- ================ Calendar Message ============== --> #}    
            
+            
+           
             {% if evt.is_calendar_message %}
             <div class="cal_day_time_msg">
                   {{ evt.display_name|safe }} @{{ evt.start_datetime|date:"g:i A" }}

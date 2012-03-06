@@ -197,6 +197,8 @@ class TimeSlotChecker:
                              , start_datetime__gte=datetime.combine(self.selected_date, time.min)
                              , start_datetime__lte=datetime.combine(self.selected_date, time.max)).order_by('start_datetime')
         
+        #print 'TimeSlotMaker.gather_calendar_events: %s' % cal_events
+        
         self.calendar_events = CalendarEventOrganizer.substitute_cal_event_subclasses(cal_events)
         
     def check_for_conflict(self, timeslot):

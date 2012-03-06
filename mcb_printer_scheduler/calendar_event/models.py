@@ -136,6 +136,10 @@ class CalendarMessage(CalendarEvent):
 class CalendarFullDayMessage(CalendarEvent):
     """For general messages, e.g. holidays, etc"""    
 
+    def is_fullday_message(self):
+        """convenience for templates"""
+        return True
+
     def save(self):
         if self.id == None:
             super(CalendarFullDayMessage, self).save()    

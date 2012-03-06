@@ -71,7 +71,7 @@
 * admin form to sign up for anyone
     * basics are working
 
-# 3/6/2012 - 9:40am to 11:15pm, 1:00pm to 2:07pm, 2:22pm to 3:05pm
+# 3/6/2012 - 9:40am to 11:15pm, 1:00pm to 2:07pm, 2:22pm to 3:05pm, 3:30pm to 5:00pm
 * blackout form
     x*fixed x- cancel is via admin
     x* need time chooser for start/end times
@@ -83,7 +83,12 @@ x* blackout success page
 x* top menu
 x* cancel blackout date
 x* signup for another user: add jquery to update email, phone, lab if user changes
-
+x* blackout slots
+* blackout days
+    x* basic form
+    x* right cal view
+    * month cal view
+    -> redo DayEventsOrganizer to consider events spanning multiple days
 #----------------    
 
 * limit scheduling ahead by 1year

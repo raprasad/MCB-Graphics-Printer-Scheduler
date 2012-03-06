@@ -18,7 +18,7 @@
                      &#151; <b>{{ calendar_message.end_datetime|date:"P" }}</b></p>
             {% else %}
             <!-- start / end on different days -->
-            <p>Start Time: <b>{{ calendar_message.start_datetime|date:"F j, Y" }} at {{ resecalendar_messagervation.start_datetime|date:"P" }}</b></p>
+            <p>Start Time: <b>{{ calendar_message.start_datetime|date:"F j, Y" }} at {{ calendar_message.start_datetime|date:"P" }}</b></p>
             <p>End Time: <b>{{ calendar_message.end_datetime|date:"F j, Y" }} at {{ calendar_message.end_datetime|date:"P" }}</b></p>
             {% endifequal %}
             

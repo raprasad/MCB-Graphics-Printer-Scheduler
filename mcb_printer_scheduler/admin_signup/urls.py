@@ -35,6 +35,15 @@ urlpatterns += patterns(
 )
 
 
+# Set CalendarFullDayMessage events
+urlpatterns += patterns(
+    'admin_signup.views_blackout_days'
+
+,    url(r'set-blackout-days/(?P<selected_date>\d{4}-\d{1,2}-\d{1,2})/$', 'view_blackout_days_signup_page', name='view_blackout_days_signup_page')
+    
+)
+
+
 # Cancel CalendarMessage events
 urlpatterns += patterns(
     'admin_signup.views_cancel'

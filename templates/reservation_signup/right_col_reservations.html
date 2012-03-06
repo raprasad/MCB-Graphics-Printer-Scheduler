@@ -7,7 +7,7 @@
             <th colspan="2">{{ selected_date|date:"F j, Y" }}</th>
         </tr>
         {% for evt in calendar_events %}
-            {% if evt.is_calendar_message %}
+            {% if evt.is_calendar_message or evt.is_fullday_message %}
                 <tr style="background-color:#e8e8e8;">
                     <td class="time_col"><b>{{ evt.start_datetime|date:"g:i A" }} &#150;
                             <br />{{ evt.end_datetime|date:"g:i A" }}<b></td>

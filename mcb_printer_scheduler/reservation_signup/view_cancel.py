@@ -105,8 +105,7 @@ def view_cancel_signup(request, id_hash):
     else:
         cancel_form = ReservationCancellationForm()    
         cancel_form.init(id_hash)
-    print 'cancel_form',cancel_form.as_p()
-    print lu
+
     lu.update({'cancel_form' :cancel_form })
     return render_to_response('reservation_signup/cancel_signup.html', lu, context_instance=RequestContext(request))
         

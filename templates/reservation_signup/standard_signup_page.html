@@ -42,16 +42,7 @@ $(document).ready(function(){
        
         
         
-        {% comment %}
-        {% if num_timeslots > 0 %}
-            <p>building sign-up form - open slots</p>
-            <ul>
-            {% for ts in open_timeslots %}
-                <li>{{ ts.start_datetime|date:"P"}} - {{ ts.end_datetime|date:"P"}}</li>
-            {% endfor %}
-            </ul>
-        {% endif %}
-        {% endcomment %}
+        
     </div>
     
     {% include "reservation_signup/right_col_reservations.html" %}

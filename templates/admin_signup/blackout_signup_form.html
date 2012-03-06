@@ -1,8 +1,5 @@
 {% if signup_form  and not ERR_found %}
- <!--tr>    
-     <th># open time slots:</th>
-     <td><b>{{ num_timeslots }}</b></td>
- </tr-->
+ 
      {% for f in signup_form %}
          {% if f.is_hidden %}
              {{ f }}
