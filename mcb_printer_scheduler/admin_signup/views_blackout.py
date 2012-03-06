@@ -44,7 +44,6 @@ def get_valid_end_times(request, selected_date, selected_time=None):
                                 , { 'end_time_options' : end_time_options})
     options_html_json = simplejson.dumps(options_html)
     
-
     return get_json_str_as_http_response2(request, True, msg=''\
                                 , json_str=',"options_html" : %s' % options_html_json)
 

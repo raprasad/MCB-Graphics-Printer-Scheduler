@@ -59,7 +59,7 @@
 * PIN login working
 * Adjusted signup form for 33-digit code and lab name
 
-# 2/29/2012 - 12:00pm to 3pm
+# 2/29/2012 - 12:00pm to 3:00pm
 * allow cancel for admin (misplaced if statement)
 * remove end time from dropdown, reservation confirmation, and cancel pags
 * added basic history page
@@ -67,14 +67,13 @@
 * Add separate form for 33-digit code: http://digitalbush.com/projects/masked-input-plugin/
 370-31560-6600-000775-600200-0000-44733
 
-# 3/5/2012 - 3:30pm to 5pm
+# 3/5/2012 - 3:30pm to 5:00pm
 * admin form to sign up for anyone
-    * basics work
-    * add jquery to update email, phone, lab if user changes
+    * basics are working
 
-# 3/6/2012 - 9:40am to 11:15pm, 1:00pm to 2:07pm
+# 3/6/2012 - 9:40am to 11:15pm, 1:00pm to 2:07pm, 2:22pm to 3:05pm
 * blackout form
-    (i) cancel is via admin
+    x*fixed x- cancel is via admin
     x* need time chooser for start/end times
     x* basic start/end times there
     x* need to jquery/ajax end time choices
@@ -83,11 +82,11 @@
 x* blackout success page
 x* top menu
 x* cancel blackout date
+x* signup for another user: add jquery to update email, phone, lab if user changes
 
 #----------------    
 
 * limit scheduling ahead by 1year
-* add 'edit' for admin?
 * too many cancels on same day, give warning
 * too many reservations same day, give warning
 

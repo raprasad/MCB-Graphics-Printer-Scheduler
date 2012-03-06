@@ -1,14 +1,18 @@
-# Create your views here.
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 
-from datetime import datetime, date, timedelta, time
+from datetime import datetime
 
-from calendar_event.models import CalendarEvent, Reservation
+from calendar_user.models import CalendarUser
+from calendar_event.models import Reservation
 from reservation_type.time_slot_maker import TimeSlotChecker
 from admin_signup.forms import AdminSignupForm
+
+
+from django.utils import simplejson
+from cal_util.ajax_util import render_to_string_remove_spaces, get_json_str_as_http_response2
 
 from cal_util.view_util import get_common_lookup
 from cal_util.msg_util import *
@@ -16,6 +20,28 @@ from cal_util.msg_util import *
 from django.core.urlresolvers import reverse
 
 
+@login_required    
+def get_cal_user_contact_info(request, cal_user_id=None):
+    if cal_user_id is None:
+        return get_json_str_as_http_response2(request, False, "The calendar user id was not found")
+         
+
+    try:
+        cal_user_to_check = CalendarUser.objects.get(pk=cal_user_id)
+    except CalendarUser.DoesNotExist:
+        return get_json_str_as_http_response2(request, False, "The calendar user was not found")
+    
+    contact_info_dict = { 'phone_number' : cal_user_to_check.phone_number
+                            ,'email' : cal_user_to_check.contact_email
+                            ,'billing_code' : cal_user_to_check.billing_code
+                            ,'lab_name': cal_user_to_check.lab_name
+                        }  
+    json_contact_info = simplejson.dumps(contact_info_dict)
+    
+    return get_json_str_as_http_response2(request, True, msg=''\
+                                , json_str=',"contact_info" : %s' % json_contact_info)
+    
+    
 @login_required    
 def view_admin_signup_page_success(request, id_hash):
     if id_hash is None:
@@ -47,7 +73,7 @@ def view_admin_signup_page_success(request, id_hash):
     return render_to_response('admin_signup/admin_signup_success.html', lu, context_instance=RequestContext(request))
 
     
-#@login_required 
+@login_required 
 def view_admin_signup_page(request, selected_date):
     if selected_date is None:
         raise Http404('Signup date not found.')

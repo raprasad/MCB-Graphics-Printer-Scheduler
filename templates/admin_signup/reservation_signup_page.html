@@ -3,9 +3,49 @@
 
 {% block extra_header %}
 <script language="javascript"  src="{{ STATIC_URL }}js/jquery-1.7.1.min.js" type="text/javascript"></script>
+<!-- from: http://digitalbush.com/projects/masked-input-plugin/; see "jquery.maskedinput-1.3.min.js" for more info  -->
+<script language="javascript"  src="{{ STATIC_URL }}js/jquery.maskedinput-1.3.min.js" type="text/javascript"></script>
 <script language="javascript1.1" type="text/javascript">
 <!--
+
+function set_contact_info(){
+        
+    cal_user_id = $("#id_calendar_user").val();
+    if (cal_user_id==null){ 
+        return;   
+    }
+
+   if (cal_user_id.length == 0){        
+       return;     
+   }
+   
+    var contact_info_url = '{% url get_cal_user_contact_info_base %}'  + cal_user_id + '/';
+
+     $.getJSON(contact_info_url,{}, function(data){
+         if (data.success == false){
+             alert('Sorry! ' + data.msg);
+             //$('#dialog').html($('<p>' + data.msg + '</p>'));   
+             return;
+         }
+         if (data.success == true){ 
+             $("#id_phone_number").val(data.contact_info.phone_number);
+             $("#id_email").val(data.contact_info.email);
+             $("#id_lab_name").val(data.contact_info.lab_name);
+             $("#id_billing_code").val(data.contact_info.billing_code);
+            // $("#id_billing_code").mask("999-99999-****-999999-999999-9999-99999");             
+         }
+    })
+}
+
+
+
 $(document).ready(function(){
+       $("#id_billing_code").mask("999-99999-****-999999-999999-9999-99999");
+       
+       // if a different user is chosen, his/her contact and billing information is retrieved
+       $('select#id_calendar_user').change(function() {
+           set_contact_info();
+       });
 });
 //-->
 </script>
@@ -32,18 +72,6 @@ $(document).ready(function(){
         </div>
 		{% include "reservation_signup/signup_errs.html" %}
        
-        
-        
-        {% comment %}
-        {% if num_timeslots > 0 %}
-            <p>building sign-up form - open slots</p>
-            <ul>
-            {% for ts in open_timeslots %}
-                <li>{{ ts.start_datetime|date:"P"}} - {{ ts.end_datetime|date:"P"}}</li>
-            {% endfor %}
-            </ul>
-        {% endif %}
-        {% endcomment %}
     </div>
     
     {% include "reservation_signup/right_col_reservations.html" %}

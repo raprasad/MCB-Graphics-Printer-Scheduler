@@ -9,7 +9,13 @@ urlpatterns = patterns(
 
 ,    url(r'reservation-complete/(?P<id_hash>(\w){32,40})/$', 'view_admin_signup_page_success', name='view_admin_signup_page_success')
 
+    # ajax calls
+,    url(r'get-cal-user-contact-info/(?P<cal_user_id>\d{1,6})/$', 'get_cal_user_contact_info', name='get_cal_user_contact_info')
+
+,    url(r'get-cal-user-contact-info/$', 'get_cal_user_contact_info', name='get_cal_user_contact_info_base')
 ,
+
+
 )
 
 

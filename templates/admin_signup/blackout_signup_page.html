@@ -6,9 +6,7 @@
 <script language="javascript1.1" type="text/javascript">
 <!--
 
-function set_available_hours(){
-    
-    /* (1) retrieve the start time */
+function set_available_hours(){    
     stime = $("#id_start_time").val();
     if (stime==null){ 
         return;   
@@ -16,9 +14,8 @@ function set_available_hours(){
 
    /* make sure the string length is 19, e.g. "2009-06-27 00:00:00" */
    if (stime.length != 19){        
-       return;     //  alert( 'nope');        
+       return;     
    }
-
     // extract the hour/minute portions
     var hh = stime.substring(11, 13);
     var mm = stime.substring(14, 16);
@@ -26,18 +23,15 @@ function set_available_hours(){
     var hours_url = '{% url get_valid_end_times_base  selected_date|date:"Y-m-d" %}'  + hh + '-' + mm + '/';
     
      $.getJSON(hours_url,{}, function(data){
-         
          if (data.success == false){
              alert('Sorry! ' + data.msg);
              //$('#dialog').html($('<p>' + data.msg + '</p>'));   
              return;
          }
-
          if (data.success == true){        
              $("select#id_end_time").html(data.options_html);
          }
     })
-
 }
 
 
