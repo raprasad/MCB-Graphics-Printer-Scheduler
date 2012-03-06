@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block main_content %}
+    <div style="float:left; width:400px;">
+        {% include "admin_signup/menu_admin_signup.html" %}        
+
+        
+        {% if cancel_success %}
+        <div class="gb">
+            The blackout time has been cancelled.  
+            
+            <p>(It has been deleted from the system.)</p>
+        
+            <p>Return to the <a href="{% url view_month_calendar selected_date|date:"Y-m" %}">monthly calendar</a>.</p>
+
+
+        </div>
+        {% endif %}
+
+     	{% include "reservation_signup/signup_errs.html" %}
+		
+       
+    </div>
+    
+    {% include "reservation_signup/right_col_reservations.html" %}
+    
+	<div class="clear"></div>
+{% endblock %}

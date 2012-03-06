@@ -120,6 +120,9 @@ div.day_evt_listing{font-size:12px;
     line-height:80%;
     }
 div.day_evt_listing .cal_day_time{color:#1a2f5a; }
+
+div.cal_day_time_msg{background-color:#dadade;color:#1a2f5a; padding:2px; margin:3px 0; }
+
 div.day_evt_listing .cal_day_time a.cal_name_regular {
     color: #9a1a2c;
     font-size:110%;

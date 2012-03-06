@@ -68,8 +68,7 @@ def view_cancel_signup(request, id_hash):
     
     lu = get_common_lookup(request)
     cal_user = lu.get('calendar_user', None)
-    print 'cal_user', cal_user
-    print 'cal_user.is_calendar_admin', cal_user.is_calendar_admin
+
     if cal_user.is_calendar_admin or (cal_user == reservation.user):
         pass
     else:

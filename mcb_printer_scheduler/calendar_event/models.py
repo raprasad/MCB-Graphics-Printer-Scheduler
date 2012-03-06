@@ -78,6 +78,11 @@ class Reservation(CalendarEvent):
     contact_phone = PhoneNumberField(help_text='To contact you regarding scheduling changes.')
     is_cancelled = models.BooleanField(default=False)
     
+    
+    def is_reservation(self):
+        """convenience for templates"""
+        return True
+        
     def get_display_msg(self):
         name = self.user.get_user_initials()
         if name is not None or not name.strip() == '':
@@ -115,12 +120,13 @@ class CalendarMessage(CalendarEvent):
 
         self.set_hash_id()
 
-        if self.is_cancelled:
-            self.is_visible= False
         self.subclass_name = self.__class__.__name__
         super(CalendarMessage, self).save()    
 
-
+    def is_calendar_message(self):
+        """convenience for templates"""
+        return True
+        
         
     class Meta:
         verbose_name = 'Calendar Message'

@@ -8,6 +8,11 @@ from reservation_type.conflict_checker import ConflictChecker
 Given a particular day, choose the ReservationType that applies
 """
 
+class OptLabelVal:
+    def __init__(self, label, val):
+        self.label = label
+        self.val = val
+
 class TimeSlot:
     def __init__(self, start_datetime, end_datetime):
         self.check_selected_date_times(start_datetime, end_datetime)
@@ -20,6 +25,22 @@ class TimeSlot:
 
         #return '%s - %s' % (self.start_datetime.strftime('%I:%M %p')\
         #                     ,  self.end_datetime.strftime('%I:%M %p'))
+
+    def get_start_time_for_form(self):
+        label = '%s' % (self.start_datetime.strftime('%I:%M %p'))
+        val = self.start_datetime   #strftime('%Y-%m-%d %H:%M')
+        return (val, label)
+
+    def get_end_time_for_ajax_call(self):
+         label = '%s' % (self.end_datetime.strftime('%I:%M %p'))
+         val = self.end_datetime.strftime('%Y-%m-%d %H:%M')
+         return OptLabelVal(label, val)
+
+    def get_end_time_for_form(self):
+        label = '%s' % (self.end_datetime.strftime('%I:%M %p'))
+        val = self.end_datetime   #strftime('%Y-%m-%d %H:%M')
+        return (val, label)
+        
 
     def get_timeslot_entry_for_form(self):
         label = self.get_timeslot_label_for_form()
@@ -75,6 +96,43 @@ class TimeSlotChecker:
         self.calculate_time_slots()     # choose reservation type and calculate time slots
 
 
+    def get_start_time_choices_for_form(self):
+        if self.open_timeslots is None or len(self.open_timeslots) == 0:
+            return None
+        return [('', '------')] + map(lambda x: x.get_start_time_for_form()\
+                                , self.open_timeslots)
+    
+    def get_end_time_choices_for_form(self):
+        if self.open_timeslots is None or len(self.open_timeslots) == 0:
+            return None
+        return [('', '------')] + map(lambda x: x.get_end_time_for_form()\
+                                                            , self.open_timeslots)
+    
+    
+    def get_end_times_for_ajax_call(self, start_datetime):
+        if start_datetime is None:
+            return None
+            
+        if self.open_timeslots is None or len(self.open_timeslots) == 0:
+            return None
+        
+        # filter out times before the start_datetime
+        avail_slots = filter(lambda x: x.end_datetime > start_datetime, self.open_timeslots)
+        if len(avail_slots) == 0:
+            return None
+        
+        # remove non-contiguous times
+        last_end = None
+        contiguous_times = []
+        for idx, ts in enumerate(avail_slots):
+            if idx > 0 and not ts.start_datetime == last_end:
+                break
+            contiguous_times.append(ts)
+            last_end = ts.end_datetime
+
+        
+        return map(lambda x: x.get_end_time_for_ajax_call(), contiguous_times)
+    
     def get_timeslot_choices_for_form(self):
         if self.open_timeslots is None or len(self.open_timeslots) == 0:
             return None

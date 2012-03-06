@@ -22,7 +22,8 @@ def view_admin_signup_page_success(request, id_hash):
         raise Http404('Reservation not found.')
 
     lu = get_common_lookup(request)
-    
+    lu.update({ 'admin_signup' : True })
+
     if not request.user.is_authenticated():
         lu.update({ 'ERR_found' : True, 'ERR_not_authenticated' : True })
         return render_to_response('admin_signup/admin_signup_success.html', lu, context_instance=RequestContext(request))
@@ -52,6 +53,7 @@ def view_admin_signup_page(request, selected_date):
         raise Http404('Signup date not found.')
 
     lu = get_common_lookup(request)
+    lu.update({ 'admin_signup' : True })
 
     cal_user = lu.get('calendar_user', None)
     if cal_user is None or not cal_user.is_calendar_admin:

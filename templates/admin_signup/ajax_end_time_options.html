@@ -1,0 +1,5 @@
+{% for opt in end_time_options %}
+<option value="{{ opt.val }}">{{ opt.label }}</option>
+{% empty %}
+<option value="">Sorry! No end times found!</option>
+{% endfor %}

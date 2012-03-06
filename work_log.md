@@ -72,8 +72,21 @@
     * basics work
     * add jquery to update email, phone, lab if user changes
 
+# 3/6/2012 - 9:40am to 11:15pm, 1:00pm to 2:07pm
+* blackout form
+    (i) cancel is via admin
+    x* need time chooser for start/end times
+    x* basic start/end times there
+    x* need to jquery/ajax end time choices
+    x* right col reservation diff
+    x* monthly col display
+x* blackout success page
+x* top menu
+x* cancel blackout date
+
 #----------------    
 
+* limit scheduling ahead by 1year
 * add 'edit' for admin?
 * too many cancels on same day, give warning
 * too many reservations same day, give warning

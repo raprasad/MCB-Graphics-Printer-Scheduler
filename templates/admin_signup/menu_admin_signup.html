@@ -1,0 +1,21 @@
+
+<div><!-- admin signup menu -->
+{% if admin_signup %}<b>Time Slot Signup Up</b>
+{% else %}    <a href="{% url view_admin_signup_page selected_date|date:"Y-m-d" %}">Time Slot Signup Up</a>{% endif %}
+&nbsp; | &nbsp;
+
+{% if admin_blackout %}<b>Set a Blackout Time</b>
+{% else %}<a href="{% url view_blackout_signup_page selected_date|date:"Y-m-d" %}">Set a Blackout Time</a>{% endif %}
+</div>
+
+{% if admin_signup %}
+<h3 style="margin:20px 0; ">Time Slot Signup Up</h3>
+{% endif %}
+
+{% if admin_blackout %}
+<h3 style="margin:20px 0; ">Set a Blackout Time</h3>
+{% endif %}
+
+{% if admin_blackout_cancel %}
+<h3 style="margin:20px 0; ">Cancel a Blackout Time</h3>
+{% endif %}
