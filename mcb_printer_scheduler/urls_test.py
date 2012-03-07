@@ -25,10 +25,12 @@ urlpatterns = patterns('',
 
     url(r'^poster-printer/history/', include('mcb_printer_scheduler.reservation_history.urls')),
     
-    url(r'^mcb/hu_auth/', include('mcb_printer_scheduler.login.urls')),
+    url(r'^poster-printer/hu-auth/', include('mcb_printer_scheduler.login.urls')),
+    
+    #url(r'^mcb/hu_auth/', include('mcb_printer_scheduler.login.urls')),
 
-    #(r'^media/(?P<path>.*)$', 'django.views.static.serve'\
-    #    , {'document_root': settings.MEDIA_ROOT }),
+    (r'^poster-printer/media/(?P<path>.*)$', 'django.views.static.serve'\
+        , {'document_root': settings.MEDIA_ROOT }),
     
 )
 

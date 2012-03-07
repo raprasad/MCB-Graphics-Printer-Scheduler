@@ -84,16 +84,34 @@ x* top menu
 x* cancel blackout date
 x* signup for another user: add jquery to update email, phone, lab if user changes
 x* blackout slots
-* blackout days
+x* blackout days
     x* basic form
     x* right cal view
 
-# 3/7/2012 - 6:45am to 7:28am
-* redid blackout days
+# 3/7/2012 - 6:45am to 7:28am, 9:20am - 11:45am, 2:45pm to 5:00pm
+* local pin test
+    x* /etc/apache2/httpd.conf
+    x* RedirectMatch poster-printer/(.*) http://127.0.0.1:8000/poster-printer/$1
+x* redo blackout days
 	x* month cal view
-    * for confirmation, retrieve message_group and iterate through all the blackout days
-     
+(i)* for confirmation, retrieve message_group and iterate through all the blackout days
+x* sign up as another user, add note field. for administrator: show note in monthly cal and in history
+x* re-order reservation type to take in restrictive dates and non-default ReservationType first
 
+* allow cancellation of blackout day group
+* right col reservations, check off 'slot is available' work, allow 'double-booking'  
+    * is slot is available, don't show on calendar but show in the history
+* form for banner messages
+* less than 3 hours, email to mcb graphics + msg to user
+* thumbnail of each poster -- img upload with note -- name images with hash
+    * upload screenshot, will be .png, change size to 500px wide
+        * allow multiple screenshots with names
+(i) * reservations 
+        * 3 buttons: 
+            9:00am to 12pm
+            12pm to 6pm (default)
+            6pm to 8:40pm
+* Note: for image resizing, use post_save functions            
 #----------------    
 
 * limit scheduling ahead by 1year

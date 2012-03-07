@@ -121,6 +121,12 @@ div.day_evt_listing{font-size:12px;
     }
 div.day_evt_listing .cal_day_time{color:#1a2f5a; }
 
+div.evt_note_monthly_cal{
+    margin:5px;
+    color:#333;
+    line-height:100%;
+    font-style:italic;}
+
 div.cal_day_time_msg{background-color:#dadade;color:#1a2f5a; padding:2px; margin:3px 0; }
 
 div.day_evt_listing .cal_day_time a.cal_name_regular {

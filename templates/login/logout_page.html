@@ -15,7 +15,7 @@
 			<p>To log out of the Harvard Pin system, please use this link:</p>
 			<p><a href="https://www.pin1.harvard.edu/pin/logout">https://www.pin1.harvard.edu/pin/logout</a></p>
 
-            <p><br />Return to the <a href="{% url view_current_month_calendar %}">monthly calendar</a>.</p>
+            {% include "reservation_signup/link_return_to_monthly_cal.html" %}
 
 
         </div>
@@ -28,7 +28,7 @@
 				You have already been logged out.
 		        {% endif %}
 	
-	        	<p>Please return to the <a href="{% url view_current_month_calendar %}">monthly calendar</a> to log in again.</p>
+                {% include "reservation_signup/link_return_to_monthly_cal.html" %}
             
             </div>
         {% endif %}

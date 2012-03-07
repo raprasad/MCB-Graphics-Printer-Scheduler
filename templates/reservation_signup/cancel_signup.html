@@ -25,7 +25,8 @@
 
 		    <input type="submit" name="Cancel Reservation" value="Cancel Reservation">
 
-	        <p><br />Return to the <a href="{% url view_month_calendar selected_date|date:"Y-m" %}">monthly calendar</a>.</p>
+            {% include "reservation_signup/link_return_to_monthly_cal.html" %}
+
 	    {% endif %}
 
        

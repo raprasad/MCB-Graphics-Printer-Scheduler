@@ -14,10 +14,10 @@ class SignupForm(forms.Form):
 
     time_slot = forms.DateTimeField(label='Available times', widget=forms.Select)
     session_length = forms.IntegerField(widget=forms.HiddenInput)
-    phone_number = USPhoneNumberField(label='Contact Phone')
-    email = forms.EmailField(label='Contact Email')
+    phone_number = USPhoneNumberField(label='Contact Phone',widget=forms.TextInput(attrs={'size': 25}) )
+    email = forms.EmailField(label='Contact Email', widget=forms.TextInput(attrs={'size': 25}) )
     billing_code = forms.CharField(label='33-digit Harvard Billing Code', required=False, widget=forms.TextInput(attrs={'size': 40}))
-    lab_name = forms.CharField(label='Lab or Group Affiliation',widget=forms.TextInput(attrs={'size': 40}) )
+    lab_name = forms.CharField(label='Lab or Group Affiliation',widget=forms.TextInput(attrs={'size': 25}) )
     
     def init(self, time_slot_choices, session_length, cal_user):   
         self.fields['time_slot'].widget.choices = time_slot_choices

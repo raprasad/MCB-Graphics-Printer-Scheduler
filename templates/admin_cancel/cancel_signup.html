@@ -23,9 +23,9 @@
 	    <form method="post" id="cancel_form" name="cancel_form" action="{% url view_cancel_calendar_message calendar_message.id_hash %}">{% csrf_token %} 
 			{{ cancel_form.as_p }}
 
-		    <input type="submit" name="Cancel" value="Cancel">
+		    <input type="submit" name="Remove" value="Remove">
 
-	        <p><br />Return to the <a href="{% url view_month_calendar selected_date|date:"Y-m" %}">monthly calendar</a>.</p>
+            {% include "reservation_signup/link_return_to_monthly_cal.html" %}
 	    {% endif %}
 
        

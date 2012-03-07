@@ -1,0 +1,6 @@
+
+{% if selected_date %}
+    <p>Return to the <a href="{% url view_month_calendar selected_date|date:"Y-m" %}">monthly calendar</a>.</p>
+{% else %}
+    <p>Return to the <a href="{% url view_current_month_calendar %}">monthly calendar</a>.</p>
+{% endif %}

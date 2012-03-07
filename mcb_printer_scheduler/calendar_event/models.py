@@ -55,7 +55,7 @@ class CalendarEvent(models.Model):
         return self.__class__.__name__
     
     def save(self):    
-        if self.id == None:
+        if self.id is None:
             super(CalendarEvent, self).save()     
         
         #self.display_name = self.get_display_msg()
@@ -76,6 +76,7 @@ class Reservation(CalendarEvent):
     lab_name = models.CharField('Lab or Group Affiliation', max_length=100, blank=True)
     billing_code = models.CharField('33 digit billing code', max_length=39, blank=True, help_text='optional, but will expedite paperwork')
     contact_phone = PhoneNumberField(help_text='To contact you regarding scheduling changes.')
+    note = models.TextField(blank=True)
     is_cancelled = models.BooleanField(default=False)
     
     
@@ -96,7 +97,7 @@ class Reservation(CalendarEvent):
     
 
     def save(self):    
-        if self.id == None:
+        if self.id is None:
             super(Reservation, self).save()     
 
         self.display_name = self.get_display_msg()
@@ -115,7 +116,7 @@ class Reservation(CalendarEvent):
 class CalendarMessage(CalendarEvent):
     """For general messages, e.g. holidays, etc"""    
     def save(self):
-        if self.id == None:
+        if self.id is None:
             super(CalendarMessage, self).save()     
 
         self.set_hash_id()
@@ -149,7 +150,7 @@ class CalendarFullDayMessageGroup(models.Model):
             self.id_hash =  md5.new('%s%s' % (self.id,  self.group_name)).hexdigest()
     
     def save(self):
-       if self.id == None:
+       if self.id is None:
            super(CalendarFullDayMessageGroup, self).save()    
 
        self.set_hash_id()
@@ -164,7 +165,7 @@ class CalendarFullDayMessage(CalendarEvent):
         return True
 
     def save(self):
-        if self.id == None:
+        if self.id is None:
             super(CalendarFullDayMessage, self).save()    
 
         self.set_hash_id()

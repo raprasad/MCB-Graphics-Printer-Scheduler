@@ -125,7 +125,7 @@ class ReservationType(models.Model):
     
         
     def save(self):    
-        if self.id == None:
+        if self.id is None:
             super(ReservationType, self).save()     
                  
         try:

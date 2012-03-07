@@ -3,6 +3,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.views.decorators.cache import never_cache
 from django.db.models import Q
+from django.conf import settings
 
 from datetime import datetime, date, timedelta
 
@@ -41,7 +42,8 @@ def view_month_calendar(request, selected_month=None):
     
     lu.update({'current_datetime':current_datetime\
                 , 'is_current_month' : is_current_month
-                , 'selected_month' : selected_month })
+                , 'selected_month' : selected_month
+                , 'HU_PIN_LOGIN_APP_NAME' : settings.HU_PIN_LOGIN_APP_NAME })
     
     
     # Create a list of the weeks. Each week is a list of seven datetime.date objects.

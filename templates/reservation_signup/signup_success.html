@@ -24,7 +24,7 @@
             <p>End Time: <b>{{ reservation.end_datetime|date:"F j, Y" }} at {{ reservation.end_datetime|date:"P" }}</b></p>
             {% endifequal %}
             
-            <p>Return to the <a href="{% url view_month_calendar selected_date|date:"Y-m" %}">monthly calendar</a>.</p>
+            {% include "reservation_signup/link_return_to_monthly_cal.html" %}
 
             <p><a href="{% url view_signup_page reservation.start_datetime|date:"Y-m-d" %}">Sign up</a> again for {{ reservation.start_datetime|date:"F j, Y" }}.</p>
 

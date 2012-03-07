@@ -8,7 +8,7 @@
 		 {% if  cal_user_to_check %}
          <p><b>{{ reservations.count }} reservation{{ reservations.count|pluralize }}</b> found for <b>{{ cal_user_to_check }}</b>.
         <br />{{ cancellations.count }} cancellation{{ cancellations.count|pluralize }}</b> 
-           <br />  (Return to the <a href="{% url view_current_month_calendar %}">monthly calendar</a>.)
+        {% include "reservation_signup/link_return_to_monthly_cal.html" %}
              
              </p>
          {% endif %}
@@ -40,7 +40,9 @@
                     </td>
                 <td class="rt">{{ r.start_datetime|date:"g:i" }}&nbsp;{{ r.start_datetime|date:"A" }}</td>
                 <td>{{ r.lab_name }}</td>
-                <td>{% if r.billing_code %}{{ r.billing_code }}{% else %}&nbsp;{% endif %}</td>
+                <td>{% if r.billing_code %}{{ r.billing_code }}{% if r.note %}<br />{% endif %}{% endif %}
+                    {% if r.note %}Note: {{ r.note|safe }}{% endif %}
+                    &nbsp;</td>
                 <td>{% if r.is_cancelled %}YES <div class="cancelled_box"></div>
                     
                     {% else %}no <div class="enabled_box"></div>{% endif %}</td>

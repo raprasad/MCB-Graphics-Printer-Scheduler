@@ -10,7 +10,7 @@
             
             <p>(It has been deleted from the system.)</p>
         
-            <p>Return to the <a href="{% url view_month_calendar selected_date|date:"Y-m" %}">monthly calendar</a>.</p>
+            {% include "reservation_signup/link_return_to_monthly_cal.html" %}
 
 
         </div>

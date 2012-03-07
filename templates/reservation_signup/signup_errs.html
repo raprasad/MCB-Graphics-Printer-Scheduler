@@ -65,12 +65,12 @@
 		Sorry, the facility is closed.
 		{% endif %}
 	{% endif %}
-	
+	    
     <p>Please return to the 
 		{% if selected_date %}
 			<a href="{% url view_month_calendar selected_date|date:"Y-m" %}">monthly calendar</a>.
 		{% else %}
-		<a href="{% url view_current_month_calendar %}">monthly calendar</a>.
+		    <a href="{% url view_current_month_calendar %}">monthly calendar</a>.
 		
 		{% endif %}
 	</p>

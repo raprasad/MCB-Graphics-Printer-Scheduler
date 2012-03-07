@@ -13,6 +13,7 @@ class ConflictChecker:
         else:
             self.base_evts = CalendarEvent.objects.filter(is_visible=True)
     
+    
     def does_timeslot_conflict(self, proposed_timeslot):
 
         if proposed_timeslot is None:

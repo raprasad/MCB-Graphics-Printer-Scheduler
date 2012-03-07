@@ -1,0 +1,3 @@
+{% if calendar_user.is_calendar_admin and evt.note %}
+    <div class="evt_note_monthly_cal">{{ evt.note|safe|truncatewords:10 }}</div>
+{% endif %}

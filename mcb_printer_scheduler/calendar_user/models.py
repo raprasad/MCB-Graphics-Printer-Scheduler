@@ -74,7 +74,7 @@ class CalendarUser(models.Model):
         
     def save(self):
     
-        if self.id == None:
+        if self.id is None:
             super(CalendarUser, self).save()        # Call the "real" save() method.
          
         # update the hash.  md5 is for old versions of python

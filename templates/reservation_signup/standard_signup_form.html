@@ -1,8 +1,4 @@
    {% if signup_form  and not ERR_found %}
-    <!--tr>    
-        <th># open time slots:</th>
-        <td><b>{{ num_timeslots }}</b></td>
-    </tr-->
         {% for f in signup_form %}
             {% if f.is_hidden %}
                 {{ f }}
@@ -16,7 +12,6 @@
                     {{ f }}</td>
                 {% endif %}
             </tr>
-            {#{ signup_form.as_table }#}
         {% endfor %}
    
     <tr>
@@ -24,6 +19,6 @@
         <td><input type="submit" name="sign up!" value="sign up!"></td>
     </tr>
     <tr>
-        <th colspan="2"><br />Return to the <a href="{% url view_month_calendar selected_date|date:"Y-m" %}">monthly calendar</a>.</td>
+        <th colspan="2">{% include "reservation_signup/link_return_to_monthly_cal.html" %}</td>
     </tr>
     {% endif %}
