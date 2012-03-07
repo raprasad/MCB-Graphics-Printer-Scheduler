@@ -56,8 +56,6 @@ click events: today/future
             
             {# <!-- ================ Calendar Message ============== --> #}    
            
-            
-           
             {% if evt.is_calendar_message %}
             <div class="cal_day_time_msg">
                   {{ evt.display_name|safe }} @{{ evt.start_datetime|date:"g:i A" }}
@@ -68,9 +66,13 @@ click events: today/future
             {% endif %}
             
             {# <!-- ================ Full Day Message ============== --> #}    
-            {% if day_event.is_full_day_message %}
-                <!--span style="color:#1a2f5a;">{{ evt.display_name|safe }}</span-->
-            {% endif %}
+            {% if evt.is_fullday_message %}
+			 <div class="cal_day_time_msg">
+	                  {{ evt.display_name|safe }} <br>(all day)
+	                  {% if calendar_user.is_calendar_admin %}
+	                    <a href="{% url view_cancel_calendar_message evt.id_hash %}">(c)</a>
+	                  {#<a href="{% url admin:calendar_event_calendarmessage_change evt.id  %}" target="_blank">(e)</a>#}{% endif %}
+	            </div>            {% endif %}
         </div>
     {% empty %}
         <br />&nbsp;

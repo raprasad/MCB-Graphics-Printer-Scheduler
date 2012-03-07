@@ -87,10 +87,11 @@ x* blackout slots
 * blackout days
     x* basic form
     x* right cal view
-    * month cal view
--> redo Blackout Days
-    - limit to 10 day length
-    - for each day, make a separate CalendarFullDayMessage object
+
+# 3/7/2012 - 6:45am to 7:28am
+* redid blackout days
+	x* month cal view
+    * for confirmation, retrieve message_group and iterate through all the blackout days
      
 
 #----------------    

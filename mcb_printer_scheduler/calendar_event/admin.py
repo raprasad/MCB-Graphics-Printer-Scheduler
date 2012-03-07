@@ -1,6 +1,14 @@
 from django.contrib import admin
-from calendar_event.models import CalendarEvent, Reservation, CalendarMessage, CalendarFullDayMessage, ScheduledBannerMessage
+from calendar_event.models import CalendarEvent, Reservation, CalendarMessage, CalendarFullDayMessageGroup,  CalendarFullDayMessage, ScheduledBannerMessage
 from calendar_event.forms import TimeCheckForm
+
+class CalendarFullDayMessageGroupAdmin(admin.ModelAdmin):
+    save_on_top = True
+    list_display= ('group_name', 'num_events','created', 'last_update', )
+    search_fields = ( 'group_name',)
+    readonly_fields = ('num_events', 'created', 'last_update', )
+admin.site.register(CalendarFullDayMessageGroup, CalendarFullDayMessageGroupAdmin)
+
 
 class CalendarEventAdmin(admin.ModelAdmin):
     form = TimeCheckForm

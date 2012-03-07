@@ -5,7 +5,7 @@ from datetime import datetime, time, timedelta
 from reservation_type.conflict_checker import ConflictChecker
 from reservation_type.time_slot_maker import TimeSlot
 
-from calendar_event.models import CalendarMessage, CalendarFullDayMessage
+from calendar_event.models import CalendarMessage, CalendarFullDayMessageGroup, CalendarFullDayMessage
 
 
 
@@ -125,13 +125,17 @@ class AdminBlackoutDaysForm(forms.Form):
         if start_date is None or end_date is None:
             return None
             
+        message_group = CalendarFullDayMessageGroup(group_name=self.cleaned_data.get('message'))
+        message_group.save()
+        
         date_to_block = start_date
         while date_to_block <= end_date:
-            cal_message = CalendarFullDayMessage(display_name=self.cleaned_data.get('message')\
+            cal_message = CalendarFullDayMessage(message_group=message_group
+                            , display_name=self.cleaned_data.get('message')\
                             , start_datetime = datetime.combine(date_to_block, time.min)
                             , end_datetime = datetime.combine(date_to_block, time.max)
                             )        
-            #cal_message.save()          # save the CalendarMessage
+            cal_message.save()          # save the CalendarMessage
             date_to_block = date_to_block + timedelta(days=1)
 
         return cal_message

@@ -8,7 +8,7 @@ from datetime import datetime, date, timedelta, time
 
 from calendar_event.models import CalendarEvent, CalendarFullDayMessage
 from reservation_type.time_slot_maker import TimeSlotChecker
-from admin_signup.form_blackout import AdminBlackoutDaysForm
+from admin_signup.forms_blackout import AdminBlackoutDaysForm
 
 from django.utils import simplejson
 from cal_util.ajax_util import render_to_string_remove_spaces, get_json_str_as_http_response2
@@ -51,7 +51,7 @@ def view_blackout_days_signup_page(request, selected_date):
         signup_form = AdminBlackoutDaysForm(request.POST) # A form bound to the POST data
         if signup_form.is_valid(): # All validation rules pass
             new_signup = signup_form.get_calendar_event()
-            
+            print 'new_signup', new_signup
             success_url = reverse('view_blackout_signup_success'\
                             , kwargs={  'id_hash' : new_signup.id_hash }\
                             )

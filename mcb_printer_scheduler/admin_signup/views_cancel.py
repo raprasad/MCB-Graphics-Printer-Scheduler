@@ -63,9 +63,9 @@ def view_cancel_calendar_message(request, id_hash):
         return render_to_response('admin_cancel/cancel_signup.html', lu, context_instance=RequestContext(request))
     
     try:
-        calendar_message = CalendarMessage.objects.get(id_hash=id_hash, is_visible=True)
-    except CalendarMessage.DoesNotExist:
-        raise Http404('CalendarMessage not found.')
+        calendar_message = CalendarEvent.objects.get(id_hash=id_hash, is_visible=True)
+    except CalendarEvent.DoesNotExist:
+        raise Http404('CalendarEvent not found.')
     
     lu = get_common_lookup(request)
     cal_user = lu.get('calendar_user', None)

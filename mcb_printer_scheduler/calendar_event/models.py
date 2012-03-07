@@ -132,8 +132,31 @@ class CalendarMessage(CalendarEvent):
         verbose_name = 'Calendar Message'
         verbose_name_plural = 'Calendar Messages'
 
+class CalendarFullDayMessageGroup(models.Model):
+    group_name = models.CharField(max_length=255)
+    id_hash = models.CharField(max_length=40, blank=True, help_text='Auto-fill on save')  
+    
+    created = models.DateTimeField(auto_now_add=True)
+    last_update = models.DateTimeField(auto_now=True)
+    
+    def num_events(self):
+        return CalendarFullDayMessage.objects.filter(message_group=self).count()
+        
+    def set_hash_id(self): 
+        try:
+            self.id_hash =  sha1('%s%s' % (self.id, self.group_name)).hexdigest()
+        except: #md5 is for old versions of python
+            self.id_hash =  md5.new('%s%s' % (self.id,  self.group_name)).hexdigest()
+    
+    def save(self):
+       if self.id == None:
+           super(CalendarFullDayMessageGroup, self).save()    
+
+       self.set_hash_id()
+       super(CalendarFullDayMessageGroup, self).save()    
 
 class CalendarFullDayMessage(CalendarEvent):
+    message_group = models.ForeignKey(CalendarFullDayMessageGroup)
     """For general messages, e.g. holidays, etc"""    
 
     def is_fullday_message(self):
@@ -157,9 +180,6 @@ class CalendarFullDayMessage(CalendarEvent):
 
         super(CalendarFullDayMessage, self).save()    
 
-    def is_full_day_message(self):
-        return True
-        
     class Meta:
         verbose_name = 'Calendar Full Day Message (1 or more days, e.g. holiday)'
         verbose_name_plural = 'Calendar Full Day Messages (1 or more days, e.g. holiday)'

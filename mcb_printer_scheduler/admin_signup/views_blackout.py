@@ -8,7 +8,7 @@ from datetime import datetime, date, timedelta, time
 
 from calendar_event.models import CalendarEvent, CalendarMessage
 from reservation_type.time_slot_maker import TimeSlotChecker
-from admin_signup.form_blackout import AdminBlackoutForm
+from admin_signup.forms_blackout import AdminBlackoutForm
 
 from django.utils import simplejson
 from cal_util.ajax_util import render_to_string_remove_spaces, get_json_str_as_http_response2
