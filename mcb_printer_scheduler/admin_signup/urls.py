@@ -40,6 +40,9 @@ urlpatterns += patterns(
     'admin_signup.views_blackout_days'
 
 ,    url(r'set-blackout-days/(?P<selected_date>\d{4}-\d{1,2}-\d{1,2})/$', 'view_blackout_days_signup_page', name='view_blackout_days_signup_page')
+
+,    url(r'cal-blackout-days-complete/(?P<id_hash>(\w){32,40})/$', 'view_blackout_days_signup_success', name='view_blackout_days_signup_success')
+
     
 )
 

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block main_content %}
+    <div style="float:left; width:400px;">
+        {% include "admin_signup/menu_admin_signup.html" %}
+        
+
+        {% if calendar_message %}
+        <div class="gb">
+            Success!<br />
+            {{ message_group.num_events }} blackout message{{ message_group.num_events|pluralize:" has,s have" }} been added.
+            
+        	<div style="padding:0px 20px;">
+            <p>Message: <b>{{ calendar_message }}</b></p>
+			{% for msg in message_group.get_calendar_full_days %}
+			    {% ifequal message_group.num_events 1 %}
+					<p>Date: <b>{{ msg.start_datetime|date:"F j, Y" }}</b></p>
+				{% else %}
+					<p>Date {{ forloop.counter }}: <b>{{ msg.start_datetime|date:"F j, Y" }}</b></p>
+				{% endifequal %}
+			{% endfor %}
+			</div>
+            
+            {% include "reservation_signup/link_return_to_monthly_cal.html" %}
+
+            <p><a href="{% url view_admin_signup_page calendar_message.start_datetime|date:"Y-m-d" %}">Sign up</a> again for {{ calendar_message.start_datetime|date:"F j, Y" }}.</p>
+
+
+        </div>
+        {% endif %}
+
+     	{% include "reservation_signup/signup_errs.html" %}
+		
+       
+    </div>
+    
+    {% include "reservation_signup/right_col_reservations.html" %}
+    
+	<div class="clear"></div>
+{% endblock %}

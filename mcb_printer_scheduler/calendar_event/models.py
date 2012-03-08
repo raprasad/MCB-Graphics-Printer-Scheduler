@@ -140,6 +140,9 @@ class CalendarFullDayMessageGroup(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     last_update = models.DateTimeField(auto_now=True)
     
+    def get_calendar_full_days(self):
+        return CalendarFullDayMessage.objects.filter(message_group=self, is_visible=True).order_by('start_datetime')
+        
     def num_events(self):
         return CalendarFullDayMessage.objects.filter(message_group=self).count()
         

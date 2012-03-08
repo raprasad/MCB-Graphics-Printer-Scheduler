@@ -121,10 +121,12 @@ def view_blackout_signup_success(request, id_hash):
         return render_to_response('admin_signup/blackout_signup_page_success.html', lu, context_instance=RequestContext(request))
 
     try:
-        calendar_message = CalendarEvent.objects.get(id_hash=id_hash, is_visible=True)
+        calendar_message = CalendarEvent.objects.get(id_hash=id_hash, is_visible=True)        
     except CalendarEvent.DoesNotExist:
         raise Http404('CalendarMessage not found.')
 
+    print dir(calendar_message)
+    
     lu.update({'calendar_message' : calendar_message
            , 'selected_date' : calendar_message.start_datetime.date() })
 

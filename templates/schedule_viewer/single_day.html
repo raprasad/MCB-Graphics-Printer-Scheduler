@@ -69,7 +69,7 @@ click events: today/future
             
             {# <!-- ================ Full Day Message ============== --> #}    
             {% if evt.is_fullday_message %}
-			 <div class="cal_day_time_msg">
+			 <div class="cal_fullday_msg">
 	                  {{ evt.display_name|safe }} <br>(all day)
 	                  {% if calendar_user.is_calendar_admin %}
 	                    <a href="{% url view_cancel_calendar_message evt.id_hash %}">(c)</a>

@@ -19,6 +19,50 @@ from cal_util.msg_util import *
 from django.core.urlresolvers import reverse
 
 
+
+@login_required
+def view_blackout_days_signup_success(request, id_hash):
+    if id_hash is None:
+      raise Http404('CalendarMessage not found.')
+
+    lu = get_common_lookup(request)
+    lu.update({ 'admin_blackout' : True })
+
+    if not request.user.is_authenticated():
+      lu.update({ 'ERR_found' : True, 'ERR_not_authenticated' : True })
+      return render_to_response('admin_signup/blackout_days_signup_success.html', lu, context_instance=RequestContext(request))
+
+    cal_user = lu.get('calendar_user', None)
+    if cal_user is None or not cal_user.is_calendar_admin:
+      lu.update({ 'ERR_found' : True, 'ERR_no_permission_to_reserve_as_admin' : True })
+      return render_to_response('admin_signup/blackout_days_signup_success.html', lu, context_instance=RequestContext(request))
+
+    try:
+      calendar_message = CalendarFullDayMessage.objects.get(id_hash=id_hash, is_visible=True)        
+    except CalendarFullDayMessage.DoesNotExist:
+      raise Http404('CalendarFullDayMessage not found.')
+
+    try:
+        message_group = calendar_message.message_group
+    except:
+        message_group = None
+
+    lu.update({'calendar_message' : calendar_message
+         , 'message_group' : message_group
+         , 'selected_date' : calendar_message.start_datetime.date() })
+
+    timeslot_checker = TimeSlotChecker(selected_date=calendar_message.start_datetime.date())
+    lu.update({ 'calendar_events' : timeslot_checker.calendar_events })
+
+    return render_to_response('admin_signup/blackout_days_signup_success.html', lu, context_instance=RequestContext(request))
+
+
+
+
+
+
+
+
 @login_required 
 def view_blackout_days_signup_page(request, selected_date):
     if selected_date is None:
@@ -52,7 +96,7 @@ def view_blackout_days_signup_page(request, selected_date):
         if signup_form.is_valid(): # All validation rules pass
             new_signup = signup_form.get_calendar_event()
             print 'new_signup', new_signup
-            success_url = reverse('view_blackout_signup_success'\
+            success_url = reverse('view_blackout_days_signup_success'\
                             , kwargs={  'id_hash' : new_signup.id_hash }\
                             )
             return HttpResponseRedirect(success_url) # Redirect after POST
@@ -65,4 +109,7 @@ def view_blackout_days_signup_page(request, selected_date):
     lu.update({ 'signup_form' : signup_form})
     
     return render_to_response('admin_signup/blackout_days_signup_page.html', lu, context_instance=RequestContext(request))
+    
+    
+
      
