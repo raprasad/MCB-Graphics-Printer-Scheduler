@@ -98,6 +98,8 @@ x* redo blackout days
 x* sign up as another user, add note field. for administrator: show note in monthly cal and in history
 x* re-order reservation type to take in restrictive dates and non-default ReservationType first
 
+# 3/8/2012 - 1:00pm to 
+
 * allow cancellation of blackout day group
 * right col reservations, check off 'slot is available' work, allow 'double-booking'  
     * is slot is available, don't show on calendar but show in the history

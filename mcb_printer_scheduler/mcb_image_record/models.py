@@ -3,6 +3,9 @@ import Image
 
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.db.models.signals import post_save      
+from django.conf import settings
+
 from datetime import datetime, timedelta
 from calendar_event.models import CalendarEvent
 try:
@@ -18,12 +21,12 @@ im.size
 (888, 724)
 '''
 
-MAX_MAIN_IMAGE_WIDTH = 500
-MAX_THUMB_IMAGE_WIDTH = 100
+MAX_MAIN_IMAGE_WIDTH = 600
+MAX_THUMB_IMAGE_WIDTH = 140
 
 class ImageRecord(models.Model):
     def get_image_upload_base(self):
-        return os.path.join('mcb_images')#, 'month_%s' % datetime.today().strftime('%Y_%m'))
+        return os.path.join('mcb_images', 'month_%s' % datetime.today().strftime('%Y_%m'))
 
     def get_image_upload_directory(self, attname):
         return os.path.join(self.get_image_upload_base(), 'main', attname)
@@ -37,16 +40,30 @@ class ImageRecord(models.Model):
     calendar_event = models.ForeignKey(CalendarEvent)       # Used general "CalendarEvent" in case of future subclass
     
     name = models.CharField(max_length=255, help_text='image description')
-    
     id_hash = models.CharField(max_length=40, blank=True, help_text='Auto-fill on save')   # 
 
-    main_image = models.ImageField(max_length=255, upload_to='mcb_images/main/month_%Y_%m')
+    main_image = models.ImageField(max_length=255, upload_to=get_image_upload_directory)#'mcb_images/main/month_%Y_%m')
 
-    thumb_image = models.ImageField(max_length=255,upload_to='mcb_images/thumb/month_%Y_%m', blank=True, null=True, help_text='auto-filled on save')
+    thumb_image = models.ImageField(max_length=255, upload_to=get_image_upload_directory_thumb,
+    blank=True, null=True, help_text='auto-filled on save') #  'mcb_images/thumb/month_%Y_%m',
+    
+    notes = models.TextField(blank=True, help_text='optional')
     
     created = models.DateTimeField(auto_now_add=True)
     last_update = models.DateTimeField(auto_now=True)
     
+    def thumb_view(self):
+        if self.thumb_image:
+            return '<a href="%s"><img src="%s" style="border:1px solid #333;" /></a>' % (self.main_image.url, self.thumb_image.url)
+        return '(auto-filled when main image is uploaded)'
+    thumb_view.allow_tags= True
+    
+    def main_view(self):
+        if self.main_image:
+            return '<img src="%s" style="border:1px solid #333;" />' % (self.main_image.url)
+        return '(blank)'
+    main_view.allow_tags= True
+
     def __unicode__(self):
         return self.name
         
@@ -56,32 +73,42 @@ class ImageRecord(models.Model):
         except: #md5 is for old versions of python
             self.id_hash =  md5.new('%s%s' % (self.id,  self.name)).hexdigest()
     
+    @staticmethod
+    def update_image_sizes( sender, **kwargs):
+        # if main image is too big, resize it; make a thumbnail image
+        img_rec = kwargs.get('instance', None)
+        if img_rec is None:
+            return
 
+        # (1) resize main image
+        if img_rec.main_image.width > MAX_MAIN_IMAGE_WIDTH or img_rec.main_image.height > MAX_MAIN_IMAGE_WIDTH:
+            im = Image.open(img_rec.main_image.file.name)   # open image
+            im.thumbnail((MAX_MAIN_IMAGE_WIDTH, MAX_MAIN_IMAGE_WIDTH), Image.ANTIALIAS) # resize
+            im.save(img_rec.main_image.file.name, quality=90)   #save
+        
+        # (2) make a thumbnail
+        thumb = Image.open(img_rec.main_image.file.name)    # open the main image
+        thumb.thumbnail((MAX_THUMB_IMAGE_WIDTH, MAX_THUMB_IMAGE_WIDTH), Image.ANTIALIAS)
+        thumb_fullpath = os.path.join(settings.MEDIA_ROOT\
+                        , img_rec.get_image_upload_directory_thumb(os.path.basename(img_rec.main_image.path)) )
 
+        # if needed, make thumb directory
+        if not os.path.isdir(os.path.dirname(thumb_fullpath)):
+            os.makedirs(os.path.dirname(thumb_fullpath))
+        # save file
+        thumb.save(thumb_fullpath, quality=100)
+
+        # disconnect save signal, save the ImageRecord, and reconnect signal
+        post_save.disconnect(ImageRecord.update_image_sizes, sender=ImageRecord)        
+        # update/save django model
+        img_rec.thumb_image.name = img_rec.get_image_upload_directory_thumb(os.path.basename(thumb_fullpath))
+        img_rec.save()
+        post_save.connect(ImageRecord.update_image_sizes, sender=ImageRecord)
+        
     def save(self):    
         if self.id is None:
             super(ImageRecord, self).save()     
-
-        # if main image is too big, resize it
-        print 'self.main_image.path: %s' % self.main_image.path
-        print 'self.main_image.file: %s' % self.main_image.file
-        """
-        REPLACE WITH POST SAVE
-        if self.main_image.width > MAX_MAIN_IMAGE_WIDTH or self.main_image.height > MAX_MAIN_IMAGE_WIDTH:
-            print '1 - open it'
-            im = Image.open(self.main_image.file.name)
-            print '2- make thumb'
-            im.thumbnail((MAX_MAIN_IMAGE_WIDTH, MAX_MAIN_IMAGE_WIDTH), Image.ANTIALIAS)
-            print '3- save'
-            im.save(self.main_image.file.name, quality=90)
-        """  
-
-        # make a thumbnail
-        #thumb = Image.open(self.main_image.path)    # (1) open the main image
-        #thumb = thumb.resize((MAX_THUMB_IMAGE_WIDTH, MAX_THUMB_IMAGE_WIDTH), Image.ANTIALIAS)
-        #thumb_name = self.get_image_upload_directory_thumb(os.path.basename(self.main_image.name))
-        #thumb.save(self.main_image.path, quality=100)
-        
+                    
         self.set_hash_id()
     
         super(ImageRecord, self).save()    
@@ -89,4 +116,4 @@ class ImageRecord(models.Model):
     class Meta:
         ordering = ('name', '-created'  )
 
-        
+post_save.connect(ImageRecord.update_image_sizes, sender=ImageRecord)
