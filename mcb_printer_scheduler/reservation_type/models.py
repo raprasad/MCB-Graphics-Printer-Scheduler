@@ -28,7 +28,7 @@ class DayOfWeek(models.Model):
         ordering = ('day_number',)
         verbose_name = 'Day of Week'
         verbose_name_plural = 'Days of Week'
-        
+        db_name = 'res_type_day_of_week'
         
 class ReservationType(models.Model):
     """
