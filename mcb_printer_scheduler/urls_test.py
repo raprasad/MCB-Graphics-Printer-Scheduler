@@ -31,6 +31,7 @@ urlpatterns = patterns('',
 
     (r'^poster-printer/media/(?P<path>.*)$', 'django.views.static.serve'\
         , {'document_root': settings.MEDIA_ROOT }),
+        url(r'^poster-printer/', include('mcb_printer_scheduler.schedule_viewer.urls')),
     
 )
 
