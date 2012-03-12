@@ -7,7 +7,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
-    url(r'^poster-printer/admin/', include(admin.site.urls)),
+    url(r'^poster-printer/graphics-admin/', include(admin.site.urls)),
     
     url(r'^poster-printer/calendar/', include('mcb_printer_scheduler.schedule_viewer.urls')),
 
