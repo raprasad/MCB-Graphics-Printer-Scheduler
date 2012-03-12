@@ -108,6 +108,18 @@ x* thumbnail of each poster -- img upload with note -- name images with hash
     x* upload screenshot, will be .png, change size to 500px wide
         x* allow multiple screenshots with names
 	x* Note: for image resizing, use post_save functions            
+
+# 3/9/2012 - prod. directory layout - 12:38pm to 3:00pm
+* created "/Users/rprasad/webapps/django/mcb_lib"
+* passphrase - gitmove
+* git readonly:
+    
+* git full - scheduler:
+    /home/p/r/prasad/webapps/django/MCB-Graphics-Printer-Scheduler
+
+# 3/10/2012 - prod move - 9:30am to 
+* prepping prod file + prod directories with files
+
 (i) * reservations 
         * 3 buttons: 
             9:00am to 12pm

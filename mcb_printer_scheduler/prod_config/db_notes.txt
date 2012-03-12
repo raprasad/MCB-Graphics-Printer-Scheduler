@@ -1,0 +1,7 @@
+create database mcb_graphics_scheduler;
+create database test_mcb_graphics_scheduler;
+
+CREATE USER 'mcb_prod_user'@'localhost' IDENTIFIED BY '(the pw)';
+GRANT ALL ON mcb_graphics_scheduler.* TO 'mcb_prod_user'@'localhost';
+GRANT ALL ON test_mcb_graphics_scheduler.* TO 'mcb_prod_user'@'localhost';
+

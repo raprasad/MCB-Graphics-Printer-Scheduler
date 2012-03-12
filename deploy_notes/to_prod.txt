@@ -1,0 +1,57 @@
+ssh rprasad@mcbweb.rc.fas.harvard.edu
+
+-----------------------
+new layout
+
+/home/p/r/prasad/webapps/django/mcb_lib/
+
+-----------------------
+
+(a) activate mod_rewrite
+sudo a2enmod rewrite
+
+(b) /srv/www/mcb_public/mcb_public.wsgi
+
+(c) /etc/apache2/sites-available/mcb_public
+
+
+sudo /etc/init.d/apache2 restart
+
+
+-------------------------------------------------------
+FILE: /srv/www/mcb_public/mcb_public.wsgi
+-------------------------------------------------------
+import os, sys
+
+prod_paths = ('/usr/local/django_apps/',\
+           'usr/local/django_apps/mcb_public_site',)
+for p in prod_paths:
+    if os.path.isdir(p): sys.path.append(p)
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'mcb_public_site.settings'
+
+import django.core.handlers.wsgi
+application = django.core.handlers.wsgi.WSGIHandler()
+
+-------------------------------------------------------
+
+-------------------------------------------------------
+FILE: /etc/apache2/sites-available/mcb_public
+-------------------------------------------------------
+<VirtualHost *:80>
+    
+ 
+    ServerName mcbweb.rc.fas.harvard.edu
+    #ServerName wsgi.mcb_public
+    DocumentRoot /srv/www/mcb_public
+ 
+    <Directory /srv/www/mcb_public>
+        Order allow,deny
+        Allow from all
+    </Directory>
+ 
+    WSGIScriptAlias / /srv/www/mcb_public/mcb_public.wsgi 
+ 
+</VirtualHost>
+-------------------------------------------------------
+

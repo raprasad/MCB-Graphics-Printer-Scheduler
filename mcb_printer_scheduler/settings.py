@@ -114,3 +114,4 @@ HU_PIN_LOGIN_APP_NAMES = config.HU_PIN_LOGIN_APP_NAMES
 SMTP_CONNECTION_STRING = 'mail.fas.harvard.edu' 
 EMAIL_HOST = 'mail.fas.harvard.edu' 
 
+FILE_UPLOAD_PERMISSIONS = 0644

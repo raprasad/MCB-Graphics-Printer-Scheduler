@@ -1,0 +1,11 @@
+# 3/12/2012
+
+/home/p/r/prasad/webapps/django/MCB-Graphics-Printer-Scheduler
+/home/p/r/prasad/webapps/django/mcb_lib/CMS-Basics
+/home/p/r/prasad/webapps/django/mcb_lib/django-ckeditor
+/home/p/r/prasad/webapps/django/mcb_lib/Poor-Mans-Tag
+
+/var/www/poster-printer/media
+/var/www/poster-printer/collected_static
+
+http://mcbweb.unix.fas.harvard.edu/static/media/tutors/Nancy_Kleckner_2.jpg

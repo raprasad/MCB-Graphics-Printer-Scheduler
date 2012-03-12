@@ -1,0 +1,37 @@
+file: /etc/apache2/sites-available/mcb_public
+
+<VirtualHost *:80>
+    ServerName mcbweb.rc.fas.harvard.edu
+    DocumentRoot /var/www/mcb_public
+
+    # static media from django apps
+    Alias /static/ /var/www/static/
+    <Directory /var/www/static/>
+     AllowOverride None
+     Options -Indexes FollowSymLinks -MultiViews
+     Order deny,allow
+     Deny from all
+     Allow from 140.247.108.24
+    </Directory>
+
+    # admin media for django
+    Alias /admin-media/ /var/www/admin-media/
+    <Directory /var/www/admin-media>
+     AllowOverride None
+    Options -Indexes FollowSymLinks -MultiViews
+     Order deny,allow
+     Deny from all
+     Allow from 140.247.108.24
+    </Directory>
+
+    # MCB public site
+    <Directory /var/www/mcb_public>
+     AllowOverride None
+     Order deny,allow
+     Deny from all
+     Allow from 140.247.108.24
+    </Directory>
+
+    WSGIScriptAlias / /var/www/mcb_public/mcb_public.wsgi
+
+</VirtualHost>
