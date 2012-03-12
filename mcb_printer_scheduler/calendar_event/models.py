@@ -67,7 +67,7 @@ class CalendarEvent(models.Model):
         ordering = ('-start_datetime', 'display_name'  )
         verbose_name = 'Calendar Event (view all events)'
         verbose_name_plural = 'Calendar Events (view all events)'
-
+        db_table = 'cal_event'
         
         
 class Reservation(CalendarEvent):
@@ -111,6 +111,7 @@ class Reservation(CalendarEvent):
     
     class Meta:
         verbose_name = 'Reservation'
+        db_table = 'cal_event_reservation'
 
 
 class CalendarMessage(CalendarEvent):
@@ -132,6 +133,7 @@ class CalendarMessage(CalendarEvent):
     class Meta:
         verbose_name = 'Calendar Message'
         verbose_name_plural = 'Calendar Messages'
+        db_table = 'cal_event_msg'
 
 class CalendarFullDayMessageGroup(models.Model):
     group_name = models.CharField(max_length=255)
@@ -159,6 +161,9 @@ class CalendarFullDayMessageGroup(models.Model):
        self.set_hash_id()
        super(CalendarFullDayMessageGroup, self).save()    
 
+    class Meta:
+        db_table = 'cal_event_msg_group'
+        
 class CalendarFullDayMessage(CalendarEvent):
     message_group = models.ForeignKey(CalendarFullDayMessageGroup)
     """For general messages, e.g. holidays, etc"""    
@@ -187,6 +192,7 @@ class CalendarFullDayMessage(CalendarEvent):
     class Meta:
         verbose_name = 'Calendar Full Day Message (1 or more days, e.g. holiday)'
         verbose_name_plural = 'Calendar Full Day Messages (1 or more days, e.g. holiday)'
+        db_table = 'cal_event_day_msg'
     
     
 class ScheduledBannerMessage(models.Model):
@@ -211,3 +217,4 @@ class ScheduledBannerMessage(models.Model):
         ordering = ('-start_datetime',)
         verbose_name = 'Scheduled Banner Message (Displayed above calendar)'
         verbose_name_plural = 'Scheduled Banner Messages (Displayed above calendar)'
+        db_table = 'cal_event_banner_msg'

@@ -65,7 +65,8 @@ class ReservationType(models.Model):
     
     class Meta:
         ordering = ('-is_default', '-is_active',)
-
+        db_table = 'res_type'
+        
     def get_day_iso_numbers(self):
         l = map(lambda x: x.day_number, self.days_allowed.all())
         if len(l) == 0:
