@@ -1,7 +1,10 @@
 # 3/12/2012
 
 ## reload
-    * sudo /etc/init.d/apache2 force-reload
+* sudo /etc/init.d/apache2 force-reload
+* sudo /etc/init.d/apache2 restart
+* errs: sudo tail -f /var/log/apache2/error.log
+
 
 ## Layout for deployment to mcbweb.unix.fas.harvard.edu 
 

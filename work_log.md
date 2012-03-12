@@ -117,8 +117,9 @@ x* thumbnail of each poster -- img upload with note -- name images with hash
 * git full - scheduler:
     /home/p/r/prasad/webapps/django/MCB-Graphics-Printer-Scheduler
 
-# 3/10/2012 - prod move - 9:30am to 12pm, 1pm to 
+# 3/10/2012 - prod move - 9:30am to 12pm, 1pm to 4:20pm
 * prepping prod file + prod directories with files
+* initial set-up working, except PIN auth
 
 (i) * reservations 
         * 3 buttons: 
