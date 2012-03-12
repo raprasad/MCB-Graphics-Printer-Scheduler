@@ -1,5 +1,8 @@
 # 3/12/2012
 
+## reload
+    * sudo /etc/init.d/apache2 force-reload
+
 ## Layout for deployment to mcbweb.unix.fas.harvard.edu 
 
 * Django apps via github
@@ -21,6 +24,9 @@
 
 ## apache/mod_wsgi
 * /etc/apache2/sites-available/mcb_graphics_scheduler
+    > points to wsgi file at:
+         /home/p/r/prasad/webapps/django/MCB-Graphics-Printer-Scheduler/mcb_printer_scheduler/wsgi.py
+* 
 
 /etc/apache2/sites-available
 
