@@ -178,8 +178,6 @@ class CalendarFullDayMessage(CalendarEvent):
 
         self.set_hash_id()
 
-Can delete Calendar Full Day Message (1 or more days, e.g. holiday)        self.subclass_name = self.__class__.__name__
-
         # make the start/end times 24 hours
         self.start_datetime = datetime(self.start_datetime.year, self.start_datetime.month, self.start_datetime.day)
         self.end_datetime = datetime(self.end_datetime.year, self.end_datetime.month, self.end_datetime.day) + timedelta(days=1) + timedelta(microseconds=-1)
