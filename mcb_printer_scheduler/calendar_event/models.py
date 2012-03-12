@@ -178,7 +178,7 @@ class CalendarFullDayMessage(CalendarEvent):
 
         self.set_hash_id()
 
-        self.subclass_name = self.__class__.__name__
+Can delete Calendar Full Day Message (1 or more days, e.g. holiday)        self.subclass_name = self.__class__.__name__
 
         # make the start/end times 24 hours
         self.start_datetime = datetime(self.start_datetime.year, self.start_datetime.month, self.start_datetime.day)
@@ -190,8 +190,8 @@ class CalendarFullDayMessage(CalendarEvent):
         super(CalendarFullDayMessage, self).save()    
 
     class Meta:
-        verbose_name = 'Calendar Full Day Message (1 or more days, e.g. holiday)'
-        verbose_name_plural = 'Calendar Full Day Messages (1 or more days, e.g. holiday)'
+        verbose_name = 'All Day Message'
+        verbose_name_plural = 'All Day Messages'
         db_table = 'cal_event_day_msg'
     
     
@@ -215,6 +215,6 @@ class ScheduledBannerMessage(models.Model):
         
     class Meta:
         ordering = ('-start_datetime',)
-        verbose_name = 'Scheduled Banner Message (Displayed above calendar)'
-        verbose_name_plural = 'Scheduled Banner Messages (Displayed above calendar)'
+        verbose_name = 'Scheduled Banner Message'
+        verbose_name_plural = 'Scheduled Banner Messages'
         db_table = 'cal_event_banner_msg'

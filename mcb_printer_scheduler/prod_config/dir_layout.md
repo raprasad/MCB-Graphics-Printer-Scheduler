@@ -13,6 +13,9 @@
     * /var/www/poster_printer/media
     * /var/www/poster_printer/collected_static
 
+## mysql 
+* see db_notes.txt
+
 ## django settings
 * updates for db, file locations, etc.
 

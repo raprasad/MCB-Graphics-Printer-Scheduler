@@ -1,5 +1,5 @@
-create database mcb_graphics_scheduler;
-create database test_mcb_graphics_scheduler;
+CREATE DATABASE mcb_graphics_scheduler CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE test_mcb_graphics_scheduler CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 CREATE USER 'mcb_prod_user'@'localhost' IDENTIFIED BY '(the pw)';
 GRANT ALL ON mcb_graphics_scheduler.* TO 'mcb_prod_user'@'localhost';
