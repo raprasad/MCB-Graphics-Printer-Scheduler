@@ -1,6 +1,11 @@
 # Django settings for mcb_printer_scheduler project.
-import config.desktop as config
+import socket
 
+if socket.gethostbyname(socket.gethostname()) == '140.247.195.248':
+    import config.prod as config
+else:
+    import config.desktop as config
+    
 DEBUG = config.DEBUG
 TEMPLATE_DEBUG = DEBUG
 
