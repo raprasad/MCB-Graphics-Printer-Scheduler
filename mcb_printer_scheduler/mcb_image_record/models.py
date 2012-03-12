@@ -115,5 +115,5 @@ class ImageRecord(models.Model):
 
     class Meta:
         ordering = ('name', '-created'  )
-
+        db_table = 'mcb_image_record'
 post_save.connect(ImageRecord.update_image_sizes, sender=ImageRecord)
