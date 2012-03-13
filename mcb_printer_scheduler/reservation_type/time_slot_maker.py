@@ -159,7 +159,38 @@ class TimeSlotChecker:
                 
         lu.update(self.get_err_flag_lookup())
         return lu
+    
+    
+    def is_last_minute_reservation(self, cal_event):
+        if cal_event is None:
+            return False
         
+        # find the difference bettween the event start time and current time
+        time_diff = cal_event.start_datetime - self.current_datetime
+        if time_diff.days > 0:
+            return False
+            
+        # reservation in the past
+        if time_diff.seconds < 0:
+            return False
+        
+        # find the reservation booking window
+        if self.reservation_type:
+            min_minutes_in_advance = self.reservation_type.min_time_advance_notice
+        else:
+            min_minutes_in_advance = 180 # 3 hours
+        
+        diff_minutes = time_diff.seconds / 60
+        
+        if diff_minutes <= min_minutes_in_advance:
+            return True
+            
+        return False
+
+
+            
+
+    
     def err_found(self):
         for attr in self.__dict__.keys():
             if attr.startswith('ERR_'):

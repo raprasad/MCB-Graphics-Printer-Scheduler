@@ -28,12 +28,14 @@ def view_signup_page_success(request, id_hash):
     except CalendarEvent.DoesNotExist:
         raise Http404('Reservation not found.')
     
+    
     lu = get_common_lookup(request)
     lu.update({'reservation' : reservation
             , 'selected_date' : reservation.start_datetime.date() })
     
     timeslot_checker = TimeSlotChecker(selected_date=reservation.start_datetime.date())
-    lu.update({ 'calendar_events' : timeslot_checker.calendar_events })
+    lu.update({ 'calendar_events' : timeslot_checker.calendar_events\
+                , 'is_last_minute_reservation' : timeslot_checker.is_last_minute_reservation(reservation) })
     
     return render_to_response('reservation_signup/signup_success.html', lu, context_instance=RequestContext(request))
         

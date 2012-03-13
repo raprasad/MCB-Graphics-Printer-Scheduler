@@ -68,7 +68,8 @@ def view_admin_signup_page_success(request, id_hash):
             , 'selected_date' : reservation.start_datetime.date() })
     
     timeslot_checker = TimeSlotChecker(selected_date=reservation.start_datetime.date())
-    lu.update({ 'calendar_events' : timeslot_checker.calendar_events })
+    lu.update({ 'calendar_events' : timeslot_checker.calendar_events
+    , 'is_last_minute_reservation' : timeslot_checker.is_last_minute_reservation(reservation) })
     
     return render_to_response('admin_signup/admin_signup_success.html', lu, context_instance=RequestContext(request))
 

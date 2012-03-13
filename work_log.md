@@ -113,13 +113,15 @@ x* thumbnail of each poster -- img upload with note -- name images with hash
 * created "/Users/rprasad/webapps/django/mcb_lib"
 * passphrase - gitmove
 * git readonly:
-    
 * git full - scheduler:
     /home/p/r/prasad/webapps/django/MCB-Graphics-Printer-Scheduler
 
-# 3/10/2012 - prod move - 9:30am to 12pm, 1pm to 4:20pm
+# 3/10/2012 - prod move - 9:30am to 12pm, 1pm to 5:50pm
 * prepping prod file + prod directories with files
-* initial set-up working, except PIN auth
+* initial set-up working
+
+# 3/11/2012 - last minute warning - 9:15am to 10am
+
 
 (i) * reservations 
         * 3 buttons: 
