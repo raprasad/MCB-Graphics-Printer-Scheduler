@@ -20,9 +20,9 @@
     {% endif %}
 
     <div id="question_div">
-        <form action="mailto:mcbgraphics@fas.harvard.edu" method="GET">
+        <form action="mailto:{{ mcbgraphics_email }}" method="GET">
         	<label for="hu_email_button">Questions? Please e-mail us</label>					  
-        	<br /><input type="submit" id="hu_email_button" class="smaller" value="mcbgraphics@fas.harvard.edu" />
+        	<br /><input type="submit" id="hu_email_button" class="smaller" value="{{ mcbgraphics_email }}" />
         </form>
     </div>
     <div class="clear"></div>

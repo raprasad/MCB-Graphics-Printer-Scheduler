@@ -6,13 +6,13 @@
 
 
         {% if reservation %}
-        {% include "reservation_signup/last_minute_reservation_warning.html" %}
+        {#% include "reservation_signup/last_minute_reservation_warning.html" %#}
         
         <div class="gb">
             Success!
             Your reservation has been made.
 
-            <p>User: <b>{{ reservation.user.get_fullname_last_first }}</b></p>
+            <p>User: <b>{{ reservation.user.get_fullname }}</b></p>
         
             {% ifequal reservation.start_datetime.date reservation.end_datetime.date %}
                 <!-- start / end on same day -->
@@ -24,13 +24,11 @@
             <p>Start Time: <b>{{ reservation.start_datetime|date:"F j, Y" }} at {{ reservation.start_datetime|date:"P" }}</b></p>
             <p>End Time: <b>{{ reservation.end_datetime|date:"F j, Y" }} at {{ reservation.end_datetime|date:"P" }}</b></p>
             {% endifequal %}
-            
-            {% include "reservation_signup/link_return_to_monthly_cal.html" %}
-
-            <p><a href="{% url view_admin_signup_page reservation.start_datetime|date:"Y-m-d" %}">Sign up</a> again for {{ reservation.start_datetime|date:"F j, Y" }}.</p>
-
-
         </div>
+        {% include "reservation_signup/link_return_to_monthly_cal.html" %}
+
+        <p><a href="{% url view_admin_signup_page reservation.start_datetime|date:"Y-m-d" %}">Sign up</a> again for {{ reservation.start_datetime|date:"F j, Y" }}.</p>
+    
         {% endif %}
 
      	{% include "reservation_signup/signup_errs.html" %}

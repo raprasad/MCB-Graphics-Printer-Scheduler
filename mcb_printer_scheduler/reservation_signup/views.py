@@ -8,6 +8,7 @@ from datetime import datetime, date, timedelta, time
 from calendar_event.models import CalendarEvent, Reservation
 from reservation_type.time_slot_maker import TimeSlotChecker
 from reservation_signup.forms import SignupForm
+from reservation_signup.email_notification import notify_staff_of_last_minute_reservation
 
 from cal_util.view_util import get_common_lookup
 from cal_util.msg_util import *
@@ -24,8 +25,8 @@ def view_signup_page_success(request, id_hash):
         return render_to_response('reservation_signup/signup_success.html', lu, context_instance=RequestContext(request))
     
     try:
-        reservation = CalendarEvent.objects.get(id_hash=id_hash, is_visible=True)
-    except CalendarEvent.DoesNotExist:
+        reservation = Reservation.objects.get(id_hash=id_hash, is_visible=True)
+    except Reservation.DoesNotExist:
         raise Http404('Reservation not found.')
     
     
@@ -34,8 +35,14 @@ def view_signup_page_success(request, id_hash):
             , 'selected_date' : reservation.start_datetime.date() })
     
     timeslot_checker = TimeSlotChecker(selected_date=reservation.start_datetime.date())
+    
+    is_last_minute_reservation = timeslot_checker.is_last_minute_reservation(reservation)
+    #print 
+    if is_last_minute_reservation:
+        notify_staff_of_last_minute_reservation(reservation)
+    
     lu.update({ 'calendar_events' : timeslot_checker.calendar_events\
-                , 'is_last_minute_reservation' : timeslot_checker.is_last_minute_reservation(reservation) })
+                , 'is_last_minute_reservation' :  is_last_minute_reservation })
     
     return render_to_response('reservation_signup/signup_success.html', lu, context_instance=RequestContext(request))
         

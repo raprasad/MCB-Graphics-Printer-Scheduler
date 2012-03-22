@@ -121,4 +121,8 @@ EMAIL_HOST = 'mail.fas.harvard.edu'
 
 GNUPG_HOME = config.GNUPG_HOME
 
+#MCB_GRAPHICS_EMAIL = 'mcbgraphics@fas.harvard.edu'
+MCB_GRAPHICS_EMAIL = 'raman_prasad@harvard.edu'
+
+
 FILE_UPLOAD_PERMISSIONS = 0644

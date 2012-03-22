@@ -16,7 +16,12 @@
     <div style="float:left;"><h1>poster printer schedule</h1></div>
     {% if calendar_user %}
 		<div style="float:right; padding:0 10px;">logged in as {{ calendar_user }}
-			<br /><a href="{% url view_logout_page %}">log out</a></div>
+			<br /><a href="{% url view_logout_page %}">log out</a>
+    		{% if calendar_user.is_calendar_admin %}
+			&nbsp;|&nbsp; <a href="{% url admin:index %}" target="_blank">admin site</a>
+            {% endif %}
+        </div>
+
     {% endif %}
 <div class="clear"></div>
 </div>
@@ -25,12 +30,21 @@
 {% block main_content %}main_content block{% endblock %}
 <div id="additional_links">
 Links: 
+<a href="{{ STATIC_URL }}pdfs/mcb_graphics_poster.pdf">Printing a Poster (pdf)</a>
+
+&nbsp;|&nbsp; 
+<a href="http://isites.harvard.edu/icb/icb.do?keyword=k75408&pageid=icb.page381199">Harvard University Identify Guidelines</a>
+
+&nbsp;|&nbsp; 
 <a href="http://isites.harvard.edu/icb/icb.do?keyword=k75408&tabgroupid=icb.tabgroup136632">Harvard Shields</a>
+
+&nbsp;|&nbsp; 
+<a href="https://intranet.seas.harvard.edu/offices-services/communications/logo-and-templates/logo-and-template-files">SEAS Logo &amp; Templates</a>
 </div>
 <!-- start: footer -->
 
 <div id="footer">
-    <p>Questions?  Contact <a href="mailto:mcbgraphics@fas.harvard.edu">mcbgraphics@fas.harvard.edu</a></p>
+    <p>Questions?  Contact <a href="mailto:{{ mcbgraphics_email }}">{{ mcbgraphics_email }}</a></p>
     
     copyright &copy; {% now "Y" %} <a href="http://www.mcb.harvard.edu">Department of Molecular &amp; Cellular Biology</a> 
     &nbsp;|&nbsp; <a href="http://www.harvard.edu">Harvard University</a>

@@ -22,12 +22,13 @@
             <p>Start Time: <b><span class="res_cancelled">{{ reservation.start_datetime|date:"F j, Y" }} at {{ reservation.start_datetime|date:"P" }}</span></b></p>
             <p>End Time: <b><span class="res_cancelled">{{ reservation.end_datetime|date:"F j, Y" }} at {{ reservation.end_datetime|date:"P" }}</span></b></p>
             {% endifequal %}
-            
-            {% include "reservation_signup/link_return_to_monthly_cal.html" %}
-
 
         </div>
         {% endif %}
+
+            
+        {% include "reservation_signup/link_return_to_monthly_cal.html" %}
+
 
      	{% include "reservation_signup/signup_errs.html" %}
 		

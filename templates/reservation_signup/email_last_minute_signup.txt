@@ -1,0 +1,18 @@
+Please note: {{ reservation.user.get_fullname }} has reserved a {{ reservation.start_datetime|date:"P" }} time slot.
+
+Reservation Information
+
+    {% if reservation %}User: {{ reservation.user.get_fullname }}
+    Date: {{ reservation.start_datetime|date:"F j, Y" }}
+    Time: {{ reservation.start_datetime|date:"P" }}
+
+Contact Information:
+{% if reservation.user %}
+    phone: {{ reservation.user.phone_number }}
+    email: {{  reservation.user.contact_email }}
+    affliation: {{ reservation.user.lab_name }}
+{% endif %}{% else %}
+Sorry!  The reservation information was  not found 
+{% endif %}
+(end of email)
+
