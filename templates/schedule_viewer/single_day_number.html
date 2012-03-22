@@ -1,0 +1,20 @@
+{% if day_event_obj.is_weekend or day_event.is_full_day_message %}
+<!--  wkend/holiday --><td class="cal_td_over">
+    <div class="cal_day_num cal_day_holiday_weekend">{{ day_event_obj.date.day }}</div>
+{% else %}{% if day_event_obj.is_day_today %}
+<!--  today --><td>
+    <div class="cal_day_num cal_day_num_today">
+        {% include "schedule_viewer/single_day_number_signup.html" %}
+    </div>
+{% else %}
+
+    {% if day_event_obj.is_day_past %}
+    <!--  day has passed --><td>
+        <div class="cal_day_num">{{ day_event_obj.date.day }}</div>
+    {% else %}
+    <!--  day --><td>
+        <div class="cal_day_num">
+            {% include "schedule_viewer/single_day_number_signup.html" %}          
+        </div>
+    {% endif %}
+{% endif %}{% endif %}

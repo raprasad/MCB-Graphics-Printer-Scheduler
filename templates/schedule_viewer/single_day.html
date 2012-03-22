@@ -8,32 +8,8 @@ click events: today/future
 
 {% endcomment %}
 
+{% include "schedule_viewer/single_day_number.html" %}
 
-{% if day_event_obj.is_weekend or day_event.is_full_day_message %}
-<!--  wkend/holiday --><td class="cal_td_over">
-    <div class="cal_day_num cal_day_holiday_weekend">{{ day_event_obj.date.day }}</div>
-{% else %}{% if day_event_obj.is_day_today %}
-<!--  today --><td>
-    <div class="cal_day_num cal_day_num_today">
-        {% if calendar_user.is_calendar_admin %}
-        <a href="{% url view_admin_signup_page day_event_obj.date|date:"Y-m-d" %}">{{ day_event_obj.date.day }}</a>
-        {% else %}
-        <a href="{% url view_signup_page day_event_obj.date|date:"Y-m-d" %}">{{ day_event_obj.date.day }}</a>
-        {% endif %}
-        </div>
-{% else %}{% if day_event_obj.is_day_past %}
-<!--  day has passed --><td>
-    <div class="cal_day_num">{{ day_event_obj.date.day }}</div>
-{% else %}
-<!--  day --><td>
-    <div class="cal_day_num">
-            {% if calendar_user.is_calendar_admin %}
-            <a href="{% url view_admin_signup_page day_event_obj.date|date:"Y-m-d" %}">{{ day_event_obj.date.day }}</a>
-            {% else %}
-            <a href="{% url view_signup_page day_event_obj.date|date:"Y-m-d" %}">{{ day_event_obj.date.day }}</a>
-            {% endif %}
-    </div>
-{% endif %}{% endif %}{% endif %}
 <div class="cal_day">
     {% for evt in day_event_obj.events %}
         <div class="day_evt_listing">
@@ -60,7 +36,8 @@ click events: today/future
            
             {% if evt.is_calendar_message %}
             <div class="cal_day_time_msg">
-                  {{ evt.display_name|safe }} @{{ evt.start_datetime|date:"g:i A" }}
+                  {{ evt.display_name|safe }} 
+                  <br />{{ evt.start_datetime|date:"g:iA" }} - {{ evt.end_datetime|date:"g:iA" }}
                   {% if calendar_user.is_calendar_admin %}
                     <a href="{% url view_cancel_calendar_message evt.id_hash %}">(c)</a>
                   {#<a href="{% url admin:calendar_event_calendarmessage_change evt.id  %}" target="_blank">(e)</a>#}{% endif %}
@@ -70,7 +47,7 @@ click events: today/future
             {# <!-- ================ Full Day Message ============== --> #}    
             {% if evt.is_fullday_message %}
 			 <div class="cal_fullday_msg">
-	                  {{ evt.display_name|safe }} <br>(all day)
+	                  {{ evt.display_name|safe }} <br>(All Day)
 	                  {% if calendar_user.is_calendar_admin %}
 	                    <a href="{% url view_cancel_calendar_message evt.id_hash %}">(c)</a>
 	                  {#<a href="{% url admin:calendar_event_calendarmessage_change evt.id  %}" target="_blank">(e)</a>#}{% endif %}
@@ -82,21 +59,3 @@ click events: today/future
     </div>
 </td>
 
-
-{% comment %}
-<!--div class="cal_day_num {% if day_event_obj.is_date_other_month %} cal_day_num_other_mth{% endif %}{% if day_event_obj.is_day_today %} cal_day_num_today{% endif %}"--><a href="{% url view_signup_page day_event_obj.date|date:"Y-m-d" %}">{{ day_event_obj.date.day }}</a></div>
-                    <!--({{ day_event_obj.get_event_count }})-->
-
-<td {% if day_event_obj.is_day_past or day_event_obj.is_weekend %}class="cal_td_over"{% endif %}>
-    {% if day_event_obj.is_weekend %}
-        <div class="cal_day_num"> weekend
-    {% else %}{% if day_event_obj.is_date_other_month %}
-        <div class="cal_day_num cal_day_num_other_mth">other month
-    {% else %}{% if day_event_obj.is_day_today %}
-        <div class="cal_day_num cal_day_num_today">today
-    {% else %}{% if day_event_obj.is_day_past %}
-        <div class="cal_day_num">past
-    {% else %}
-        <div class="cal_day_num">regular
-    {% endif %}{% endif %}{% endif %}{% endif %}
-{% endcomment %}

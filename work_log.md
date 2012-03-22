@@ -122,6 +122,23 @@ x* thumbnail of each poster -- img upload with note -- name images with hash
 
 # 3/11/2012 - last minute warning - 9:15am to 10am
 
+# 3/20/2012 - - 2:55pm to 3:39pm
+x* monthly cal: remove day links unless person is signed in
+x* move last signup time to 5:20 from 5:40 (last end time is 5:40)
+* **form to adjust reservation type for a single day: 3 checkboxes with times available
+* last minute reservation; remove online note and send email instead
+x* monthly cal: black out times, display end time
+* redo signup success page based on RH notes on print out
+x* calendar login button alignment
+x* "questions" button alignment
+x* footer reduce font of timestamp and remove "(...)" 
+x* right col listings, add day of week, e.g., "Thursday"
+x* right col listings, change color of most recent signup from yellow to shade of green
+* add link to fas logos ,etc
+* add link to PDF download on current site
+* when admin logged in, link to django admin
+** mark reservation as allow signup for this time 
+
 
 (i) * reservations 
         * 3 buttons: 

@@ -23,8 +23,10 @@
 
 <!-- start: overarching_cal_div -->
 {% block main_content %}main_content block{% endblock %}
-
-
+<div id="additional_links">
+Links: 
+<a href="http://isites.harvard.edu/icb/icb.do?keyword=k75408&tabgroupid=icb.tabgroup136632">Harvard Shields</a>
+</div>
 <!-- start: footer -->
 
 <div id="footer">
@@ -32,7 +34,7 @@
     
     copyright &copy; {% now "Y" %} <a href="http://www.mcb.harvard.edu">Department of Molecular &amp; Cellular Biology</a> 
     &nbsp;|&nbsp; <a href="http://www.harvard.edu">Harvard University</a>
-<br /><br />({% now "F jS, Y f:s a" %})
+<br /><br /><span style="font-size:80%">{% now "F jS, Y f:s a" %}</span>
 </div><!-- end: footer -->
 </div><!-- end: overarching_cal_div -->
 </div><!-- end container -->

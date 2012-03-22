@@ -4,7 +4,7 @@
     <div id="day_events_list">
     <table cellspacing="0">
         <tr>
-            <th colspan="2">{{ selected_date|date:"F j, Y" }}</th>
+            <th colspan="2">{{ selected_date|date:"l, F j, Y" }}</th>
         </tr>
         {% for evt in calendar_events %}
             {% if evt.is_calendar_message or evt.is_fullday_message %}
@@ -17,13 +17,13 @@
 
             {% if evt.is_reservation %}
                 {% ifequal reservation.id evt.id %}
-                <tr style="background-color:#f9de66;">
+                <tr style="background-color:#99ff66;">
                     <td class="time_col"><b>{{ evt.start_datetime|date:"g:i A" }}<b></td>
                     <td><b>{{ evt.display_name|safe }}</b></td>
                 </tr>
             
                 {% else %}{% ifequal evt.user calendar_user %}
-                	<tr style="background-color:#f4fcf2;">
+                	<tr style="background-color:#ccffcc;">
     	                <td class="time_col"><b>{{ evt.start_datetime|date:"g:i A" }}
     	                   </b></td>
     	                <td><b>{{ evt.display_name|safe }}</b></td>

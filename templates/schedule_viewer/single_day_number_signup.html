@@ -1,0 +1,11 @@
+{% if calendar_user %}
+    {% if calendar_user.is_calendar_admin %}
+    <a href="{% url view_admin_signup_page day_event_obj.date|date:"Y-m-d" %}">{{ day_event_obj.date.day }}</a>
+    {% else %}
+    <a href="{% url view_signup_page day_event_obj.date|date:"Y-m-d" %}">{{ day_event_obj.date.day }}</a>
+    {% endif %}
+{% else %}
+    <div class="cal_day_num">{{ day_event_obj.date.day }}</div>
+{% endif %}
+
+
