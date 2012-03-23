@@ -108,7 +108,11 @@ class ReservationType(models.Model):
         if selected_date > (current_date + timedelta(self.scheduling_window_in_days)):        
             return False
             
-        # check if the day of the week is permitted    
+        # check if the day of the week is permitted  
+        if not self.day_iso_numbers:
+            return False
+
+        #day_str = eval(self.day_iso_numbers)
         if not selected_date.isoweekday() in eval(self.day_iso_numbers):
             return False
             

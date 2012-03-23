@@ -4,15 +4,27 @@
 {% else %}    <a href="{% url view_admin_signup_page selected_date|date:"Y-m-d" %}">Time Slot Signup</a>{% endif %}
 &nbsp;|&nbsp;
 
-{% if admin_blackout %}<b>Set Blackout Time</b>
-{% else %}<a href="{% url view_blackout_signup_page selected_date|date:"Y-m-d" %}">Set Blackout Time</a>{% endif %}
+{% if admin_blackout or admin_blackout_days %}<b>Set Blackout: </b>
+{% else %}Set Blackout: {% endif %} 
+{% if admin_blackout %}<b>Time</b>
+{% else %}<a href="{% url view_blackout_signup_page selected_date|date:"Y-m-d" %}">Time</a>{% endif %}
+or
+{% if admin_blackout_days %}<b>Days</b>
+{% else %}<a href="{% url view_blackout_days_signup_page selected_date|date:"Y-m-d" %}">Days</a>{% endif %}
+
 &nbsp;|&nbsp;
 
-{% if admin_blackout_days %}<b>Set Blackout Days</b>
-{% else %}<a href="{% url view_blackout_days_signup_page selected_date|date:"Y-m-d" %}">Set Blackout Days</a>{% endif %}
+{% if change_hours %}<b>Change Hours</b>
+{% else %}
+<a href="{% url view_adjust_reservation_type selected_date|date:"Y-m-d" %}">Change Hours</a>
+{% endif %}
 </div>
 
 
+
+{% if change_hours %}
+<h3 style="margin:20px 0; ">Change Hours</h3>
+{% endif %}
 
 {% if admin_signup %}
 <h3 style="margin:20px 0; ">Time Slot Signup Up</h3>

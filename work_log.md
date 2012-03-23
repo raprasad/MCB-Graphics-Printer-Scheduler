@@ -139,26 +139,27 @@ x* right col listings, change color of most recent signup from yellow to shade o
 * when admin logged in, link to django admin
 ** mark reservation as allow signup for this time 
 
-# 3/22/2012 - 11:00am to 1:02pm
+# 3/22/2012 - 11:00am to 3:02pm
 x* add link to fas logos ,etc
 x* add link to PDF download on current site
 x* last minute reservation; remove online note and send email instead
 x* redo signup success page based on RH notes on print out
 x* when admin logged in, link to django admin
 x* move mcbgraphics@fas.harvard.edu to a config variable
-**form to adjust reservation type for a single day: 3 checkboxes with times available
-** mark reservation as allow signup for this time 
+
+# 3/23/2012 - 9:30am to 11:00am, 11:40am to 1:30pm
+x** mark reservation as allow signup for this time 
     x* model change
     x* month view
     x* right col view 
     x* conflict checking
-    * right col as form
-
-(i) * reservations 
-        * 3 buttons: 
-            9:00am to 12pm
-            12pm to 6pm (default)
-            6pm to 8:40pm
+    x* right col as form
+**form to adjust reservation type for a single day: 3 checkboxes with times available
+    x* set menu (10:40am)
+    x* show current time span
+    x* make form
+    x    * 3 check boxes - 1 required
+    x * 3 checkboxes:  9:00am to 12pm, 12pm to 6pm (default), 6pm to 8:40pm
 #----------------    
 
 * limit scheduling ahead by 1year

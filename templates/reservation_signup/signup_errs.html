@@ -12,6 +12,10 @@
         You must be a calendar administrator to free up a time slot.
     {% endif %}
     
+    {% if ERR_no_permission_to_change_time %}
+        You must be a calendar administrator to change a time slot.
+    {% endif %}
+    
     {% if ERR_calendar_event_not_cancelled %}
         Sorry!  The blackout time was NOT cancelled!
         <p>Please go back to the monthly calendar and try again.</p>

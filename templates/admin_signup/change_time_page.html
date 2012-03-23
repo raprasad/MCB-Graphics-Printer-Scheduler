@@ -1,0 +1,46 @@
+
+{% extends "base.html" %}
+
+</head>
+
+{% block main_content %}
+    <div style="float:left; width:400px;">
+        {% include "admin_signup/menu_admin_signup.html" %}
+
+        {% if success_new_reservation_time_set %}
+        <div class="gb">
+            Success!  The new reservation time has been set:
+            <br /><br />Start Time: <b>{{ reservation_type.opening_time|time:"P" }}</b>
+            <br />End Time: <b>{{ reservation_type.closing_time|time:"P" }}</b>            
+        </div>
+        {% include "reservation_signup/link_return_to_monthly_cal.html" %}
+        
+        {% endif %}
+        
+        {% if not success_new_reservation_time_set %}
+            <div id="id_signup_form_div">
+            
+            <form method="post" id="signup_form" name="signup_form" action="{% url view_adjust_reservation_type selected_date|date:"Y-m-d" %}">{% csrf_token %} 
+                {{ signup_form.non_field_errors }}
+            <table>
+                <tr>
+                    <th>Date:</th>
+                    <td><b>{{ selected_date|date:"F j, Y" }}</b></td>
+                </tr>
+            {% if reservation_type %}
+                <p>Current Time Slot: 
+                  <span style="font-size:120%;">  <b>{{ reservation_type.opening_time|time:"P" }}</b>
+                    to  <b>{{ reservation_type.closing_time|time:"P" }}</b></span>
+                </p>
+                {% include "admin_signup/change_time_form.html" %}
+            {% endif %}
+            </table></form>
+            </div>
+        {% endif %}
+		{% include "reservation_signup/signup_errs.html" %}
+       
+    </div>
+    
+    {% include "reservation_signup/right_col_reservations.html" %}
+	<div class="clear"></div>
+{% endblock %}

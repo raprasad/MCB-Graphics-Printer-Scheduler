@@ -287,9 +287,9 @@ class TimeSlotChecker:
             return None
 
     @staticmethod
-    def choose_reservation_type_by_date(selected_date, current_date):
+    def get_potential_reservation_types(selected_date, current_date=None):
         """
-        Given a date, choose the corresponding ReservationType object, assuming there is one
+        Given a date, choose the list of ReservationType objects
         """
         if selected_date is None:
             return None
@@ -299,12 +299,24 @@ class TimeSlotChecker:
         qset = ReservationType.objects.filter(is_active=True).order_by('-start_date', 'is_default')    
 
         l = filter(lambda x: x.is_potential_reservation_date_valid(selected_date, current_date), qset)
-        #for rt in l:
-            #print rt
-        if len(l) > 0:
-            return l[0]
+        if len(l) == 0:
+            return None
 
-        return None
+        return l
+
+    @staticmethod
+    def choose_reservation_type_by_date(selected_date, current_date):
+        """
+        Given a date, choose the corresponding ReservationType object, assuming there is one
+        """
+        if selected_date is None:
+            return None
+           
+        rt_list = TimeSlotChecker.get_potential_reservation_types(selected_date, current_date)
+        if rt_list is None or len(rt_list)==0:
+            return None
+        
+        return rt_list[0]
 
 
 
