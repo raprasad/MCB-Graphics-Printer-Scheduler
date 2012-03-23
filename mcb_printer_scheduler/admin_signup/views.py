@@ -82,18 +82,19 @@ def view_admin_signup_page(request, selected_date):
     lu = get_common_lookup(request)
     lu.update({ 'admin_signup' : True })
 
+    try:
+        selected_datetime = datetime.strptime(selected_date, '%Y-%m-%d')
+    except:
+        raise Http404('Signup date not found.')
+
+    selected_date = selected_datetime.date()
+    lu.update({ 'selected_date' : selected_date})
+
     cal_user = lu.get('calendar_user', None)
     if cal_user is None or not cal_user.is_calendar_admin:
         lu.update({ 'ERR_found' : True, 'ERR_no_permission_to_reserve_as_admin' : True })
         return render_to_response('admin_signup/reservation_signup_page.html', lu, context_instance=RequestContext(request))
-        
-    try:
-        selected_datetime = datetime.strptime(selected_date, '%Y-%m-%d')
-    except:
-        return HttpResponse('Sign up date is not valid')
-    
-    selected_date = selected_datetime.date()
-    lu.update({ 'selected_date' : selected_date})
+            
 
     if not request.user.is_authenticated():
         lu.update({ 'ERR_found' : True, 'ERR_not_authenticated' : True })
@@ -127,7 +128,8 @@ def view_admin_signup_page(request, selected_date):
                         , timeslot_checker.get_reservation_time_block()
                         , cal_user)
             
-    lu.update({ 'signup_form' : signup_form})
+    lu.update({ 'signup_form' : signup_form
+                , 'show_open_slot_links' : True})
     
     return render_to_response('admin_signup/reservation_signup_page.html', lu, context_instance=RequestContext(request))
         

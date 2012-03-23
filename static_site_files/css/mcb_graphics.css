@@ -13,6 +13,8 @@ h1{color:#1a2f5a; padding:0 20px; margin:0; line-height:60px; font-family:'trebu
 
 .res_cancelled, .timeslot_open {text-decoration: line-through;}
 
+a.lnk_free_slot {cursor:pointer;
+    font-size:11px;}
 
 
 div#container

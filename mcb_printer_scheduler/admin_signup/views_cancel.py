@@ -20,25 +20,24 @@ def view_cancel_calendar_message_success(request, id_hash, selected_date):
         raise Http404('id_hash or date not found.')
 
     lu = get_common_lookup(request)
-    lu.update({'selected_date' : datetime.date.today() })        
+
+    try:
+        selected_date = datetime.datetime.strptime(selected_date, '%Y-%m-%d').date()
+        lu.update({'selected_date' : selected_date })
+    except:
+        raise Http404('selected_date date not found.')
     
     lu.update({ 'admin_blackout_cancel' : True })
+
+    if not request.user.is_authenticated():
+        lu.update({ 'ERR_found' : True, 'ERR_not_authenticated' : True })
+        return render_to_response('admin_cancel/cancel_signup_success.html', lu, context_instance=RequestContext(request))
 
     cal_user = lu.get('calendar_user', None)
     if not cal_user.is_calendar_admin:
         lu.update({ 'ERR_found' : True, 'ERR_no_permission_to_cancel' : True })
         return render_to_response('admin_cancel/cancel_signup_success.html', lu, context_instance=RequestContext(request))
 
-    if not request.user.is_authenticated():
-        lu.update({ 'ERR_found' : True, 'ERR_not_authenticated' : True })
-        return render_to_response('admin_cancel/cancel_signup_success.html', lu, context_instance=RequestContext(request))
-
-    try:
-        selected_date = datetime.datetime.strptime(selected_date, '%Y-%m-%d').date()
-        lu.update({'selected_date' : selected_date })
-    except:
-        lu.update({ 'ERR_found' : True, 'ERR_selected_date_is_invalid' : True })
-        return render_to_response('admin_cancel/cancel_signup_success.html', lu, context_instance=RequestContext(request))
 
     if CalendarEvent.objects.filter(id_hash=id_hash).count() > 0:
         lu.update({ 'ERR_found' : True, 'ERR_calendar_event_not_cancelled' : True })

@@ -58,3 +58,12 @@ urlpatterns += patterns(
     
 )
 
+# Free Time Slot
+urlpatterns += patterns(
+    'admin_signup.views_free_timeslot'
+,    url(r'free-timeslot/(?P<id_hash>(\w){32,40})/$', 'view_free_timeslot', name='view_free_timeslot')
+
+
+)
+
+

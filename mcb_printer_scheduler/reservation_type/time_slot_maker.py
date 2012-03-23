@@ -299,8 +299,8 @@ class TimeSlotChecker:
         qset = ReservationType.objects.filter(is_active=True).order_by('-start_date', 'is_default')    
 
         l = filter(lambda x: x.is_potential_reservation_date_valid(selected_date, current_date), qset)
-        for rt in l:
-            print rt
+        #for rt in l:
+            #print rt
         if len(l) > 0:
             return l[0]
 
