@@ -17,6 +17,7 @@ class CalendarEvent(models.Model):
     id_hash = models.CharField(max_length=40, blank=True, help_text='Auto-fill on save')   # 
 
     is_visible = models.BooleanField('Event is Active and Visible',     default=True)
+    is_timeslot_free = models.BooleanField(default=False, help_text='If job is done early, free time slot')
     
     start_datetime = models.DateTimeField()
     end_datetime = models.DateTimeField()
@@ -25,6 +26,7 @@ class CalendarEvent(models.Model):
     
     created = models.DateTimeField(auto_now_add=True)
     last_update = models.DateTimeField(auto_now=True)
+    
     
     def __unicode__(self):
         return self.display_name
@@ -105,6 +107,7 @@ class Reservation(CalendarEvent):
     
         if self.is_cancelled:
             self.is_visible= False
+            
         self.subclass_name = self.__class__.__name__
         super(Reservation, self).save()    
     

@@ -225,24 +225,13 @@ class TimeSlotChecker:
     
     def gather_calendar_events(self):
         cal_events = CalendarEvent.objects.filter(is_visible=True\
-                             , start_datetime__gte=datetime.combine(self.selected_date, time.min)
+                             , start_datetime__gte=datetime.combine(self.selected_date, time.min)\
                              , start_datetime__lte=datetime.combine(self.selected_date, time.max)).order_by('start_datetime')
         
         #print 'TimeSlotMaker.gather_calendar_events: %s' % cal_events
         
         self.calendar_events = CalendarEventOrganizer.substitute_cal_event_subclasses(cal_events)
-        
-    def check_for_conflict(self, timeslot):
-        if timeslot is None:
-            raise ValueError('None timeslot object sent.')
-            
-        if self.calendar_events is None:        # Nothing to conflict with?
-            return False
-        
-        """Check for conflicts"""
-        #for cal_event in self.calendar_event:
-        #    if 
-
+     
     def calculate_time_slots(self):
         
         if self.selected_date < self.current_date:        

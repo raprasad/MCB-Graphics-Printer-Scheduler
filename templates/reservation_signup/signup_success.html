@@ -15,7 +15,7 @@
             <!-- Success!-->
             Your reservation has been made.
         
-            <p>Name: <b>{{ reservation.user.get_fullname }}</b></p>
+            <p>Name: <b>{{ reservation.user.get_fullname }}</p>
             {% ifequal reservation.start_datetime.date reservation.end_datetime.date %}
                 <!-- start / end on same day -->
                 <p>Date: <b>{{ reservation.start_datetime|date:"F j, Y" }}</b></p>

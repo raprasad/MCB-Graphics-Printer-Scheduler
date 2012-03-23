@@ -15,7 +15,10 @@ click events: today/future
         <div class="day_evt_listing">
             {% if evt.is_reservation %}
             {# <!-- ================ Reservation ============== --> #}
-            <div class="cal_day_time">{{ evt.start_datetime|date:"g:i A" }} &#150; 
+            <div class="cal_day_time">
+                {% if evt.is_timeslot_free %}<span class="timeslot_open">{{ evt.start_datetime|date:"g:i A" }}</span>
+                {% else %}{{ evt.start_datetime|date:"g:i A" }}{% endif %} &#150; 
+                
                 {% if calendar_user %}
                     {% ifequal evt.user calendar_user %}
                         <a href="{% url view_cancel_signup evt.id_hash %}" class="cal_name_regular">{{ evt.display_name|safe }}</a> {% if calendar_user.is_calendar_admin %}<a href="{% url view_reservation_history evt.user.id_hash %}">(h)</a>{% endif %}                        {% include "schedule_viewer/event_note_for_cal.html" %}
@@ -29,7 +32,7 @@ click events: today/future
                 {% endif %}{% endifequal %}{% else %}
                     <span style="color:#1a2f5a;">{{ evt.display_name|safe }}</span>
                 {% endif %}             
-            {% endif %}
+                {% endif %}
 		    </div>
             
             {# <!-- ================ Calendar Message ============== --> #}    

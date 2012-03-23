@@ -27,7 +27,7 @@ class CalendarEventAdmin(admin.ModelAdmin):
     save_on_top = True
     inlines = (ImageRecordAdminInline,)
     list_display= ('display_name', 'start_datetime', 'end_datetime', 'is_visible')
-    list_filter = ('is_visible', 'subclass_name',)
+    list_filter = ('is_visible', 'subclass_name', 'is_timeslot_free')
     search_fields = ( 'display_name',)
     readonly_fields = ('subclass_name',)
 admin.site.register(CalendarEvent, CalendarEventAdmin)

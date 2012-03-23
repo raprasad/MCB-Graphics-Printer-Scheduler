@@ -11,7 +11,7 @@ a:hover{color:#77aa56; }
 
 h1{color:#1a2f5a; padding:0 20px; margin:0; line-height:60px; font-family:'trebuchet ms', serif;}
 
-.res_cancelled {text-decoration: line-through;}
+.res_cancelled, .timeslot_open {text-decoration: line-through;}
 
 
 

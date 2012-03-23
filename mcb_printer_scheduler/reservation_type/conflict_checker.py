@@ -9,9 +9,10 @@ class ConflictChecker:
         self.event_to_edit = event_to_edit
         
         if event_to_edit:
-            self.base_evts = CalendarEvent.objects.filter(is_visible=True).exclude(id=event_to_edit.id)
+            self.base_evts = CalendarEvent.objects.filter(is_visible=True\
+                                        , is_timeslot_free=False).exclude(id=event_to_edit.id)
         else:
-            self.base_evts = CalendarEvent.objects.filter(is_visible=True)
+            self.base_evts = CalendarEvent.objects.filter(is_visible=True, is_timeslot_free=False)
     
     
     def does_timeslot_conflict(self, proposed_timeslot):

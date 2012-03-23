@@ -146,10 +146,13 @@ x* last minute reservation; remove online note and send email instead
 x* redo signup success page based on RH notes on print out
 x* when admin logged in, link to django admin
 x* move mcbgraphics@fas.harvard.edu to a config variable
-* **form to adjust reservation type for a single day: 3 checkboxes with times available
+**form to adjust reservation type for a single day: 3 checkboxes with times available
 ** mark reservation as allow signup for this time 
-
-
+    x* model change
+    x* month view
+    x* right col view 
+    x* conflict checking
+    * right col as form
 
 (i) * reservations 
         * 3 buttons: 
