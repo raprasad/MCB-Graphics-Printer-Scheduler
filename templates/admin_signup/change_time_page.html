@@ -28,10 +28,11 @@
                     <td><b>{{ selected_date|date:"F j, Y" }}</b></td>
                 </tr>
             {% if reservation_type %}
-                <p>Current Time Slot: 
-                  <span style="font-size:120%;">  <b>{{ reservation_type.opening_time|time:"P" }}</b>
-                    to  <b>{{ reservation_type.closing_time|time:"P" }}</b></span>
-                </p>
+                <tr>
+                    <th>Current<br />Reservation Window:</th>
+                    <td><span style="font-size:120%;">  <b>{{ reservation_type.opening_time|time:"P" }}</b>
+                    to  <b>{{ reservation_type.closing_time|time:"P" }}</b></span></td>
+                </tr>
                 {% include "admin_signup/change_time_form.html" %}
             {% endif %}
             </table></form>
