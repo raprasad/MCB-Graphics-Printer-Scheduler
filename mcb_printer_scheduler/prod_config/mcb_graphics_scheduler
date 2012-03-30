@@ -1,0 +1,49 @@
+<VirtualHost *:80>
+    ServerName mcbweb.unix.fas.harvard.edu
+    DocumentRoot /var/www/
+
+    <Directory /var/www/>
+     AllowOverride None
+     Options -Indexes FollowSymLinks -MultiViews
+     Order deny,allow
+     Deny from all
+     #Allow from 140.247.108.24
+     #Allow from 140.247
+     Allow from all
+    </Directory>
+
+    # static files from django apps
+    Alias /poster-printer/static/ /var/www/poster_printer/collected_static/
+    <Directory /var/www/poster_printer/collected_static/>
+     AllowOverride None
+     Options -Indexes FollowSymLinks -MultiViews
+     Order deny,allow
+     Deny from all
+     #Allow from 140.247.108.24
+     #Allow from 140.247
+     Allow from all
+    </Directory>
+
+    # media: uploaded files
+    Alias /poster-printer/media/ /var/www/poster_printer/media/
+    <Directory /var/www/poster_printer/media/>
+     AllowOverride None
+     Options -Indexes FollowSymLinks -MultiViews
+     Order deny,allow
+     Deny from all
+     Allow from 140.247.108.24
+     Allow from 140.247
+    </Directory>
+
+    # MCB poster printer
+    <Directory /var/www/poster-printer>
+     AllowOverride None
+     Order deny,allow
+     Deny from all
+     #Allow from 140.247.108.24
+     #Allow from 140.247
+     Allow from all
+    </Directory>
+    WSGIScriptAlias / /home/p/r/prasad/webapps/django/MCB-Graphics-Printer-Scheduler/mcb_printer_scheduler/wsgi.py
+
+</VirtualHost>

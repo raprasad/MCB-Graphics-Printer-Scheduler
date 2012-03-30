@@ -9,7 +9,8 @@ a {color:#1a2f5a;
     text-decoration:underline;}
 a:hover{color:#77aa56; }
 
-h1{color:#1a2f5a; padding:0 20px; margin:0; line-height:60px; font-family:'trebuchet ms', serif;}
+h1{color:#1a2f5a; padding:9px 20px 10px 20px; margin:0; xline-height:60px; font-family:'trebuchet ms', serif;}
+#id_address{color:#1a2f5a; padding:0px 20px; font-size:11px; font-family:'trebuchet ms', serif;}
 
 .res_cancelled, .timeslot_open {text-decoration: line-through;}
 

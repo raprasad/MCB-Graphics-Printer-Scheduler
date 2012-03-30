@@ -14,3 +14,7 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'mcb_printer_scheduler.settings'
 import django.core.handlers.wsgi
 application = django.core.handlers.wsgi.WSGIHandler()
 
+"""
+# restart apache each day at 11:10am
+10 11 * * * /etc/init.d/apache2 restart >/dell/null 2>&1
+"""
