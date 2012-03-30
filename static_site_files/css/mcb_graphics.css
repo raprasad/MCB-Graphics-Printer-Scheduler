@@ -16,6 +16,23 @@ h1{color:#1a2f5a; padding:0 20px; margin:0; line-height:60px; font-family:'trebu
 a.lnk_free_slot {cursor:pointer;
     font-size:11px;}
 
+#id_show_downloads{ 
+    cursor:pointer;
+}
+#id_download_div{
+    padding:0px;
+    display:none;
+    margin:0;
+}
+#id_download_div ul {
+    padding:0 20px;
+    margin:0;
+    list-style-type:none;
+}
+#id_download_div ul li{
+    padding:5px 0;
+    list-style-type:none;
+}
 
 div#container
 {

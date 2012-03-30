@@ -160,7 +160,10 @@ x** mark reservation as allow signup for this time
     x* make form
     x    * 3 check boxes - 1 required
     x * 3 checkboxes:  9:00am to 12pm, 12pm to 6pm (default), 6pm to 8:40pm
-#----------------    
+#----------------  
+# 3/30/2012 - 10am
+* downloads at bottom links
+* address  
 
 * limit scheduling ahead by 1year
 * too many cancels on same day, give warning
