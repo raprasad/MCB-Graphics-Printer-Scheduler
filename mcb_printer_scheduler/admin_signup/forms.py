@@ -18,7 +18,7 @@ def get_calendar_choices():
 class AdminSignupForm(forms.Form):
     """Form used for a regular user to reserve a time."""
 
-    calendar_user = forms.ChoiceField(label='User', choices=map(lambda x: (x.id, x), CalendarUser.objects.filter(user__is_active=True)))
+    calendar_user = forms.ChoiceField(label='User', choices=get_calendar_choices())
     time_slot = forms.DateTimeField(label='Available times', widget=forms.Select)
     session_length = forms.IntegerField(widget=forms.HiddenInput)
     phone_number = USPhoneNumberField(label='Contact Phone',widget=forms.TextInput(attrs={'size': 25}) )
@@ -31,6 +31,7 @@ class AdminSignupForm(forms.Form):
         self.fields['time_slot'].widget.choices = time_slot_choices
         self.fields['session_length'].initial = session_length
 
+        self.fields['calendar_user'].choices = map(lambda x: (x.id, x), CalendarUser.objects.filter(user__is_active=True))
         self.fields['calendar_user'].initial = cal_user.id 
         self.fields['email'].initial = cal_user.contact_email 
         self.fields['phone_number'].initial = cal_user.phone_number
