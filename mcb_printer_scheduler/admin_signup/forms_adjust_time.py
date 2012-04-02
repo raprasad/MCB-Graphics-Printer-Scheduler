@@ -46,10 +46,10 @@ class AvailableHoursForm(forms.Form):
     
     def get_latest_time(self):
         if self.cleaned_data.get('slot3', False):
-            return time(21, 0)
+            return time(20, 40)
 
         if self.cleaned_data.get('slot2', False):
-                return time(18, 0)
+                return time(17, 40)
 
         if self.cleaned_data.get('slot1', False):
             return time(12, 0)
