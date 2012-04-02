@@ -10,8 +10,8 @@ class AvailableHoursForm(forms.Form):
     """Blackout a Time Slot"""
     selected_day = forms.DateField(widget=forms.HiddenInput)
     slot1 = forms.BooleanField(label='9:00am to 12pm', required=False)
-    slot2 = forms.BooleanField(label='12pm to 6pm', required=False)
-    slot3 = forms.BooleanField(label='6pm to 8:40pm', required=False)
+    slot2 = forms.BooleanField(label='12pm to 6pm', required=False, help_text='(last reservation starts at 5:20pm)')
+    slot3 = forms.BooleanField(label='6pm to 9:00pm', help_text='(last reservation starts at 8:20pm)', required=False)
 
     def init(self, selected_day):
         self.fields['selected_day'].initial = selected_day

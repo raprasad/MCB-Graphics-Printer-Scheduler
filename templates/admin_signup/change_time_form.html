@@ -5,7 +5,8 @@
              {{ f }}
          {% else %}
          <tr>
-             <th>{% if f.field.required %}*{% endif %}{{ f.label }}</th>
+             <th>{% if f.field.required %}*{% endif %}{{ f.label }}
+                 {% if f.help_text %}<br />{{ f.help_text}}{% endif %}</th>
      
              <td>{% for err in f.errors %}
                      <span style="color:#ff0000;">{{ err }}</span><br />
