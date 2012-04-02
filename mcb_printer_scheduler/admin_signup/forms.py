@@ -10,13 +10,15 @@ from calendar_user.models import CalendarUser
 
 from django.contrib.localflavor.us.forms import USPhoneNumberField
 
-CALENDAR_USER_CHOICES = map(lambda x: (x.id, x), CalendarUser.objects.filter(user__is_active=True))
+def get_calendar_choices():
+    return map(lambda x: (x.id, x), CalendarUser.objects.filter(user__is_active=True))
+    #CALENDAR_USER_CHOICES = map(lambda x: (x.id, x), CalendarUser.objects.filter(user__is_active=True))
 
 
 class AdminSignupForm(forms.Form):
     """Form used for a regular user to reserve a time."""
 
-    calendar_user = forms.ChoiceField(label='User', choices=CALENDAR_USER_CHOICES)
+    calendar_user = forms.ChoiceField(label='User', choices=get_calendar_choices())
     time_slot = forms.DateTimeField(label='Available times', widget=forms.Select)
     session_length = forms.IntegerField(widget=forms.HiddenInput)
     phone_number = USPhoneNumberField(label='Contact Phone',widget=forms.TextInput(attrs={'size': 25}) )
