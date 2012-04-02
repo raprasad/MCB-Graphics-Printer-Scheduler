@@ -21,7 +21,7 @@ a.lnk_free_slot {cursor:pointer;
     cursor:pointer;
 }
 #id_download_div{
-    padding:0px;
+    padding:10px 0;
     display:none;
     margin:0;
 }
