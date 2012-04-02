@@ -18,7 +18,7 @@ from cal_util.view_util import get_common_lookup
 from cal_util.msg_util import *
 
 from django.core.urlresolvers import reverse
-
+from django.views.decorators.cache import never_cache
 
 @login_required    
 def get_cal_user_contact_info(request, cal_user_id=None):
@@ -75,6 +75,7 @@ def view_admin_signup_page_success(request, id_hash):
 
     
 @login_required 
+@never_cache
 def view_admin_signup_page(request, selected_date):
     if selected_date is None:
         raise Http404('Signup date not found.')
