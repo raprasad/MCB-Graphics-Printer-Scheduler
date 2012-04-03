@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block main_content %}
+
+    <div style="width:700px;">
+        <h3 style="margin:0 0 20px 0;">Logo Listing</h3>
+
+        {% if ERR_found %}
+            <div class="err_box">
+            {% if ERR_not_authenticated %}You must sign in to view the logo links.
+                {% include "pin_auth/login_url.html" %}
+            {% endif %}
+            </div>
+            
+        {% endif %}
+
+        {% if calendar_user %}
+            {% if primary_organizations.count > 0 %}
+                <div class="id_logo_list_div" style="background-color:#FAFAE8; border:1px solid #333; padding:10px; margin:20px 0;">
+                    <ul>
+                {% for org in primary_organizations %}
+                    {% include "design_links/link_list.html" %}
+                {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            {% if other_organizations.count > 0 %}
+            <div class="id_logo_list_div" style="border:1px solid #333; padding:10px; margin:20px 0;">
+                <ul>
+                {% for org in other_organizations %}
+                    {% include "design_links/link_list.html" %}
+                {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        {% endif %}
+        {% include "reservation_signup/link_return_to_monthly_cal.html" %}
+        
+    <div class="clear"></div>
+	</div>
+	
+{% endblock %}

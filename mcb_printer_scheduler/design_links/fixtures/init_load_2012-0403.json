@@ -1,0 +1,236 @@
+[
+    {
+        "pk": 1, 
+        "model": "design_links.organization", 
+        "fields": {
+            "website": "http://www.harvard.edu/", 
+            "is_visible": true, 
+            "name": "Harvard University", 
+            "created": "2012-04-03 13:46:47", 
+            "is_primary": true, 
+            "last_update": "2012-04-03 14:33:39", 
+            "abbreviation": "HU", 
+            "sort_field": 10, 
+            "slug": ""
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "design_links.organization", 
+        "fields": {
+            "website": "http://www.huh.harvard.edu/", 
+            "is_visible": true, 
+            "name": "Harvard University Herbaria", 
+            "created": "2012-04-03 14:06:30", 
+            "is_primary": false, 
+            "last_update": "2012-04-03 14:09:28", 
+            "abbreviation": "HUH", 
+            "sort_field": 10, 
+            "slug": ""
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "design_links.organization", 
+        "fields": {
+            "website": "http://www.mcz.harvard.edu/", 
+            "is_visible": true, 
+            "name": "Museum of Comparative Zoology", 
+            "created": "2012-04-03 14:05:33", 
+            "is_primary": false, 
+            "last_update": "2012-04-03 14:05:57", 
+            "abbreviation": "MCZ", 
+            "sort_field": 10, 
+            "slug": ""
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "design_links.organization", 
+        "fields": {
+            "website": "http://seas.harvard.edu/", 
+            "is_visible": true, 
+            "name": "School of Engineering and Applied Sciences", 
+            "created": "2012-04-03 14:10:24", 
+            "is_primary": false, 
+            "last_update": "2012-04-03 14:37:00", 
+            "abbreviation": "SEAS", 
+            "sort_field": 10, 
+            "slug": ""
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "design_links.organization", 
+        "fields": {
+            "website": "http://www.mcb.harvard.edu/", 
+            "is_visible": true, 
+            "name": "Molecular & Cellular Biology", 
+            "created": "2012-04-03 13:59:45", 
+            "is_primary": true, 
+            "last_update": "2012-04-03 13:59:48", 
+            "abbreviation": "MCB", 
+            "sort_field": 20, 
+            "slug": ""
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "design_links.organization", 
+        "fields": {
+            "website": "http://www.oeb.harvard.edu/", 
+            "is_visible": true, 
+            "name": "Organismic and Evolutionary Biology", 
+            "created": "2012-04-03 14:03:58", 
+            "is_primary": false, 
+            "last_update": "2012-04-03 14:04:12", 
+            "abbreviation": "OEB", 
+            "sort_field": 30, 
+            "slug": ""
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "design_links.designlinkbase", 
+        "fields": {
+            "name": "Veritas Shield", 
+            "created": "2012-04-03 14:32:54", 
+            "last_update": "2012-04-03 14:32:54", 
+            "organization": 1, 
+            "sort_field": 10, 
+            "link_type": "DesignLink", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "design_links.designlinkbase", 
+        "fields": {
+            "name": "School Shields", 
+            "created": "2012-04-03 14:33:27", 
+            "last_update": "2012-04-03 14:33:27", 
+            "organization": 1, 
+            "sort_field": 12, 
+            "link_type": "DesignLink", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "design_links.designlinkbase", 
+        "fields": {
+            "name": "logo", 
+            "created": "2012-04-03 14:06:30", 
+            "last_update": "2012-04-03 14:37:16", 
+            "organization": 5, 
+            "sort_field": 10, 
+            "link_type": "DesignImage", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "design_links.designlinkbase", 
+        "fields": {
+            "name": "logo", 
+            "created": "2012-04-03 14:05:33", 
+            "last_update": "2012-04-03 14:37:23", 
+            "organization": 4, 
+            "sort_field": 10, 
+            "link_type": "DesignImage", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "design_links.designlinkbase", 
+        "fields": {
+            "name": "Logos & Templates", 
+            "created": "2012-04-03 14:37:00", 
+            "last_update": "2012-04-03 14:37:00", 
+            "organization": 6, 
+            "sort_field": 10, 
+            "link_type": "DesignLink", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "design_links.designlinkbase", 
+        "fields": {
+            "name": "black background", 
+            "created": "2012-04-03 14:03:58", 
+            "last_update": "2012-04-03 14:37:28", 
+            "organization": 3, 
+            "sort_field": 5, 
+            "link_type": "DesignImage", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "design_links.designlinkbase", 
+        "fields": {
+            "name": "white background", 
+            "created": "2012-04-03 14:03:58", 
+            "last_update": "2012-04-03 14:37:33", 
+            "organization": 3, 
+            "sort_field": 10, 
+            "link_type": "DesignImage", 
+            "description": ""
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "design_links.designlink", 
+        "fields": {
+            "design_link": "http://isites.harvard.edu/icb/icb.do?keyword=k75408&tabgroupid=icb.tabgroup119585"
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "design_links.designlink", 
+        "fields": {
+            "design_link": "http://isites.harvard.edu/icb/icb.do?keyword=k75408&tabgroupid=icb.tabgroup136632"
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "design_links.designlink", 
+        "fields": {
+            "design_link": "https://intranet.seas.harvard.edu/offices-services/communications/logo-and-templates/logo-and-template-files"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "design_links.designimage", 
+        "fields": {
+            "main_image": "logos/main/huh_logo_01_1.tif", 
+            "thumb_image": "logos/thumb/huh_logo_01_1.tif"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "design_links.designimage", 
+        "fields": {
+            "main_image": "logos/main/mcz_logo_01.jpg", 
+            "thumb_image": "logos/thumb/mcz_logo_01.jpg"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "design_links.designimage", 
+        "fields": {
+            "main_image": "logos/main/oeb_logo_01_3.jpg", 
+            "thumb_image": "logos/thumb/oeb_logo_01_3.jpg"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "design_links.designimage", 
+        "fields": {
+            "main_image": "logos/main/oeb_logo_02.jpg", 
+            "thumb_image": "logos/thumb/oeb_logo_02.jpg"
+        }
+    }
+]

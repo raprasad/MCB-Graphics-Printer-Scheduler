@@ -10,7 +10,6 @@ class ImageRecordAdminInline(admin.TabularInline):
     form = ImageRecordAdminForm
     readonly_fields = ('thumb_view',)
     fields = ('name', 'notes', 'main_image', 'thumb_view',)
-    #form = BlastocystInjectionChimeraProductionForm
     extra=0
 
 

@@ -14,23 +14,16 @@ h1{color:#1a2f5a; padding:9px 20px 10px 20px; margin:0; xline-height:60px; font-
 
 .res_cancelled, .timeslot_open {text-decoration: line-through;}
 
-a.lnk_free_slot {cursor:pointer;
-    font-size:11px;}
-
-#id_show_downloads{ 
-    cursor:pointer;
-}
-#id_download_div{
+.id_logo_list_div{
     padding:10px 0;
-    display:none;
     margin:0;
 }
-#id_download_div ul {
+.id_logo_list_div ul {
     padding:0 20px;
     margin:0;
     list-style-type:none;
 }
-#id_download_div ul li{
+.id_logo_list_div ul li{
     padding:5px 0;
     list-style-type:none;
 }
