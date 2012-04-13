@@ -1,16 +1,18 @@
 {% if org.get_num_links > 0 %}
     <li><b>{{ org.abbreviation }} &#150; {{ org.name }}</b>:
-        &nbsp; {% if org.website %}<a href="{{ org.website }}">site</a>{% endif %}
+        {# &nbsp; {% if org.website %}<a href="{{ org.website }}">site</a>{% endif %}#}
         {% for lnk in org.get_listing_links %}
             {% if not forloop.last %}{% endif %}
-            &nbsp;|&nbsp;
+           
             {% if lnk.link_type == 'DesignLink' %}
                 <a href="{{ lnk.design_link }}">{{ lnk.name }}</a>
             {% else %}
-                <a href="{{ lnk.main_image.url }}">{{ lnk.name }}</a> ({{ lnk.get_ext }}, {{ lnk.main_image.width }} x {{ lnk.main_image.height }})
+                <a href="{{ lnk.main_image.url }}">{{ lnk.name }}</a> 
+                {# ({{ lnk.get_ext }}, {{ lnk.main_image.width }} x {{ lnk.main_image.height }})#}  
                 <!--a href="{{ lnk.main_image.url }}"><img src="{{ lnk.thumb_image.url }}" alt="thumb" /></a-->
                 
             {% endif %}    
+             &nbsp;|&nbsp;
         {% endfor %}
     </li>
 {% endif %}
