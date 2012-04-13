@@ -165,6 +165,9 @@ x** mark reservation as allow signup for this time
 * downloads at bottom links
 * address  
 
+# 4/12/2012 - 10:45 to 11pm
+* google analytics added
+
 * limit scheduling ahead by 1year
 * too many cancels on same day, give warning
 * too many reservations same day, give warning
