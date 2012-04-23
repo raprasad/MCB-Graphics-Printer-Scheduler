@@ -152,6 +152,7 @@ class DesignImage(DesignLinkBase):
         # save file
         ext = thumb_full_filename.split('.')[-1].lower()
         if ext not in ['gif', 'jpeg', 'jpg', 'png']:
+            thumb_full_filename = thumb_full_filename.replace('.%s' % ext, '.jpg')
             thumb.save(thumb_full_filename, "JPEG", quality=100)
         else:
             thumb.save(thumb_full_filename, quality=100)
@@ -159,7 +160,7 @@ class DesignImage(DesignLinkBase):
         # disconnect save signal, save the ImageRecord, and reconnect signal
         post_save.disconnect(DesignImage.update_image_sizes, sender=DesignImage)        
         # update/save django model
-        img_rec.thumb_image.name = os.path.join(THUMB_UPLOAD_TO ,os.path.basename(img_rec.main_image.path)  ) 
+        img_rec.thumb_image.name = os.path.join(THUMB_UPLOAD_TO ,os.path.basename(thumb_full_filename)  ) 
         img_rec.save()
         
         post_save.connect(DesignImage.update_image_sizes, sender=DesignImage)
