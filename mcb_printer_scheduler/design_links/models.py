@@ -67,7 +67,7 @@ class DesignLinkBase(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     last_update = models.DateTimeField(auto_now=True)
 
-    link_type = models.CharField(max_length=10, blank=True)
+    link_type = models.CharField(max_length=25, blank=True)
     
     def __unicode__(self):
         return '%s - %s' % (self.name, self.organization.name)
