@@ -1,5 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.views.generic.simple import redirect_to
 from django.conf import settings
 from django.contrib import admin
 admin.autodiscover()
@@ -26,6 +27,8 @@ urlpatterns = patterns('',
     #(r'^poster-printer/media/(?P<path>.*)$', 'django.views.static.serve'\
     #    , {'document_root': settings.MEDIA_ROOT }),
     url(r'^poster-printer/', include('mcb_printer_scheduler.schedule_viewer.urls')),
+    
+    (r'^$', redirect_to, {'url': '/poster-printer/calendar/'}),
     
 )
 
