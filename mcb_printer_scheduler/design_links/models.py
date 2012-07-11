@@ -101,6 +101,13 @@ class DesignImage(DesignLinkBase):
     thumb_image = models.ImageField(max_length=255, upload_to=THUMB_UPLOAD_TO,
       blank=True, null=True, help_text='auto-filled on save') #  'mcb_images/thumb/month_%Y_%m',
 
+    def get_image_basename(self):
+      
+        if self.main_image and self.main_image.file:
+            #print dir(self.main_image)
+            return os.path.basename(str(self.main_image))
+        return 'not available'
+        
     def save(self):
         self.link_type = self.__class__.__name__
         super(DesignImage, self).save()

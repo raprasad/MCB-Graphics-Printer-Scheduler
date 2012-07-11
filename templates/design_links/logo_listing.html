@@ -16,21 +16,18 @@
         {% if calendar_user %}
             {% if primary_organizations.count > 0 %}
                 <div class="id_logo_list_div" style="background-color:#FAFAE8; border:1px solid #333; padding:10px; margin:20px 0;">
-                    <ul>
                 {% for org in primary_organizations %}
-                    {% include "design_links/link_list.html" %}
+                    {% include "design_links/link_list2.html" %}
                 {% endfor %}
-                    </ul>
                 </div>
             {% endif %}
 
             {% if other_organizations.count > 0 %}
             <div class="id_logo_list_div" style="border:1px solid #333; padding:10px; margin:20px 0;">
-                <ul>
+        
                 {% for org in other_organizations %}
-                    {% include "design_links/link_list.html" %}
+                        {% include "design_links/link_list2.html" %}
                 {% endfor %}
-                </ul>
             </div>
             {% endif %}
         {% endif %}

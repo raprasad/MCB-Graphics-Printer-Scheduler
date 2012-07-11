@@ -1,0 +1,22 @@
+{% if org.get_num_links > 0 %}
+{% if not forloop.first %}<br />{% endif %}
+<b>{{ org.name }}</b>
+  <ul>
+    {% for lnk in org.get_listing_links %}     
+    <li>
+            
+            {% if lnk.link_type == 'DesignLink' %}
+             website {% if forloop.first and forloop.last %}{% else %}{{ forloop.counter }}{% endif %} &#150; 
+                 <a href="{{ lnk.design_link }}">{{ lnk.name }}</a>
+            {% else %}
+            logo {% if forloop.first and forloop.last %}{% else %}{{ forloop.counter }}{% endif %} &#150; 
+                <a href="{{ lnk.main_image.url }}">{{ lnk.get_image_basename }}</a>             
+            {% endif %}    
+    </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+{% comment %}
+<b>{{ org.abbreviation }} &#150; {{ org.name }}</b>:
+     &nbsp; {% if org.website %}<a href="{{ org.website }}">site</a>{% endif %}
+{% endcomment %}
