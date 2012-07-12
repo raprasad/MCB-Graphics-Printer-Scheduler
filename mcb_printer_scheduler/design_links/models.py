@@ -49,7 +49,9 @@ class Organization(models.Model):
             if l.link_type == 'DesignLink':
                 lnks.append(l.designlink)
             elif l.link_type == 'DesignImage':
-                    lnks.append(l.designimage)
+                lnks.append(l.designimage)
+            elif l.link_type == 'DesignImageNonWeb':
+                lnks.append(l.designimagenonweb)
         return lnks
     
     def __unicode__(self):
@@ -204,7 +206,7 @@ class DesignImageNonWeb(DesignLinkBase):
           return None
 
     class Meta:
-        verbose_name = 'Logo Image File Not-Web Ready (.ai, .psd etc)'
+        verbose_name = 'Logo Image File Not-Web Ready (.ai, .eps, .psd etc)'
         verbose_name_plural = verbose_name
 
 
