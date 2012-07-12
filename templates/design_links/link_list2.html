@@ -4,17 +4,16 @@
   <ul>
     {% for lnk in org.get_listing_links %}     
     <li>
-            
             {% if lnk.link_type == 'DesignLink' %}
-             website {% if forloop.first and forloop.last %}{% else %}{{ forloop.counter }}{% endif %} &#150; 
-                 <a href="{{ lnk.design_link }}">{{ lnk.name }}</a>
-            {% else %}{% if lnk.link_type == 'DesignImageNonWeb' %}
-            logo {% if forloop.first and forloop.last %}{% else %}{{ forloop.counter }}{% endif %} &#150; 
-                <a href="{{ lnk.image_file.url }}">{{ lnk.get_image_basename }}</a>             
+		             website {% if forloop.first and forloop.last %}{% else %}{{ forloop.counter }}{% endif %} &#150;
+		                 <a href="{{ lnk.design_link }}">{{ lnk.name }}</a>
+		            {% else %}{% if lnk.link_type == 'DesignImageNonWeb' %}
+		            logo {% if forloop.first and forloop.last %}{% else %}{{ forloop.counter }}{% endif %} &#150; {{ lnk.name }}  &#150;
+		                <a href="{{ lnk.image_file.url }}">{{ lnk.get_image_basename }}</a>
 
-			{% else %}
-            logo {% if forloop.first and forloop.last %}{% else %}{{ forloop.counter }}{% endif %} &#150; 
-                <a href="{{ lnk.main_image.url }}">{{ lnk.get_image_basename }}</a>             
+		                        {% else %}
+		            logo {% if forloop.first and forloop.last %}{% else %}{{ forloop.counter }}{% endif %} &#150; {{ lnk.name }} &#150;  
+		                <a href="{{ lnk.main_image.url }}">{{ lnk.get_image_basename }}</a>
             {% endif %}{% endif %}    
     </li>
     {% endfor %}
