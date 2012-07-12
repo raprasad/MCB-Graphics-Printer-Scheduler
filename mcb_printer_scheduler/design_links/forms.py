@@ -7,3 +7,4 @@ class DesignImageAdminForm(forms.ModelForm):
         widgets = {   'name': forms.TextInput(attrs={'size':20})\
                     , 'description': forms.Textarea(attrs={'rows': 2, 'cols':20})                
                 }
+

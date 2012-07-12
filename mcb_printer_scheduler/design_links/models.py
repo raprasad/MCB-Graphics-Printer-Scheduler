@@ -16,6 +16,7 @@ except:
 MAX_LOGO_THUMB_IMAGE_DIM = 60
 THUMB_UPLOAD_TO = os.path.join('logos', 'thumb')
 MAIN_UPLOAD_TO = os.path.join('logos', 'main')
+MAIN_NON_WEB_UPLOAD_TO = os.path.join('logos', 'main_nonweb')
 '''
 from design_links.models import *
 for i in DesignImage.objects.all(): i.save()
@@ -73,7 +74,7 @@ class DesignLinkBase(models.Model):
         return '%s - %s' % (self.name, self.organization.name)
             
     class Meta:
-        verbose_name = 'Logo Image Base'
+        verbose_name = 'All Logo/Image List'
         ordering = ('organization', 'sort_field', 'name' )
     
     
@@ -173,12 +174,37 @@ class DesignImage(DesignLinkBase):
         post_save.connect(DesignImage.update_image_sizes, sender=DesignImage)
         
     class Meta:
-        verbose_name = 'Logo Image File'
+        verbose_name = 'Logo Image File for Web (png, jpg, etc)'
+        verbose_name_plural = verbose_name
     
 post_save.connect(DesignImage.update_image_sizes, sender=DesignImage)
     
 
-    
-    
-    
-    
+class DesignImageNonWeb(DesignLinkBase):
+
+    image_file = models.FileField(max_length=255, upload_to=MAIN_NON_WEB_UPLOAD_TO)
+
+    def get_image_basename(self):
+
+      if self.image_file and self.image_file.file:
+          #print dir(self.main_image)
+          return os.path.basename(str(self.image_file))
+      return 'not available'
+
+    def save(self):
+      self.link_type = self.__class__.__name__
+      super(DesignImageNonWeb, self).save()
+
+    def get_ext(self):
+      if not self.image_file:
+          return None
+      try:
+          return os.path.basename(self.image_file.path).split('.')[-1].upper()
+      except:
+          return None
+
+    class Meta:
+        verbose_name = 'Logo Image File Not-Web Ready (.ai, .psd etc)'
+        verbose_name_plural = verbose_name
+
+
