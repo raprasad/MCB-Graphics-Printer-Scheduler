@@ -1,6 +1,6 @@
 {% if org.get_num_links > 0 %}
 {% if not forloop.first %}<br />{% endif %}
-<b>{{ org.name }}</b>
+<b>{{ org.name }}</b> &nbsp;({{ org.abbreviation }})
   <ul>
     {% for lnk in org.get_listing_links %}     
     <li>
