@@ -3,7 +3,7 @@ import os, sys
 sys.path.append('/home/p/r/prasad/webapps/django/MCB-Graphics-Printer-Scheduler/mcb_printer_scheduler')
 sys.path.append('/home/p/r/prasad/webapps/django/MCB-Graphics-Printer-Scheduler')
 
-from finance_utilities import settings
+from mcb_printer_scheduler import settings
 from django.core.management import setup_environ
 setup_environ(settings)
 
