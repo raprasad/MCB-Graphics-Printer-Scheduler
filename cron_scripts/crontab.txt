@@ -1,0 +1,7 @@
+
+# poster printer
+# run database back up each morning at 7:20 am; relatively quick
+20 7 * * * /usr/bin/python /home/p/r/prasad/webapps/django/MCB-Graphics-Printer-Scheduler/cron_scripts/db_backup/run_db_backup.py
+
+# run database back up on 2nd and 16th of each month at 7:10 am; quick
+10 7 2,16 * * /usr/bin/python /home/p/r/prasad/webapps/django/MCB-Graphics-Printer-Scheduler/cron_scripts/db_backup/run_trim_backups.py

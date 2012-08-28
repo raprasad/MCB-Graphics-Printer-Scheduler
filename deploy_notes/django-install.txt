@@ -1,0 +1,12 @@
+
+# update 8/3/2012
+# ---------------------------------------
+# Upgrade Django to 1.3.3
+# http://felecan.com/2011/definitive-guide-installing-django-ubuntu/
+# ---------------------------------------
+1. cd /home/p/r/prasad/installs
+2. sudo wget https://www.djangoproject.com/download/1.3.3/tarball/
+3. mv index.html Django-1.3.3.tar.gz
+4. sudo vim /usr/lib/python2.6/dist-packages/varsrc.pth
+5. contents: /home/p/r/prasad/installs/Django-1.3.3
+
