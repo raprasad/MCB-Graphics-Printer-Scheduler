@@ -86,7 +86,11 @@ class CalendarUser(models.Model):
         # self.user.email directly from Harvard LDAP, contact_email may be different
         if not self.contact_email:
             self.contact_email = self.user.email
-            
+
+        # big hack 10-01-2012
+        if self.contact_email == 'mayaanderson@college.harvard.e':
+            self.contact_email = 'mayaanderson@college.harvard.edu'
+        
         super(CalendarUser, self).save()        # Call the "real" save() method.
 
     class Meta:
