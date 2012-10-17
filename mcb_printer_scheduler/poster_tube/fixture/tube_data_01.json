@@ -1,0 +1,57 @@
+[
+    {
+        "pk": 4, 
+        "model": "poster_tube.postertubecolor", 
+        "fields": {
+            "name": "blue"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "poster_tube.postertubecolor", 
+        "fields": {
+            "name": "green"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "poster_tube.postertubecolor", 
+        "fields": {
+            "name": "orange"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "poster_tube.postertubecolor", 
+        "fields": {
+            "name": "white"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "poster_tube.postertubetype", 
+        "fields": {
+            "available": true, 
+            "price": "3.6", 
+            "name": "Cardboard ", 
+            "color_choices": [
+                1
+            ]
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "poster_tube.postertubetype", 
+        "fields": {
+            "available": true, 
+            "price": "15", 
+            "name": "PVC", 
+            "color_choices": [
+                4, 
+                3, 
+                2, 
+                1
+            ]
+        }
+    }
+]
