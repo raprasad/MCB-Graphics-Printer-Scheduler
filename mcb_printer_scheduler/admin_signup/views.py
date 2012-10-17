@@ -7,9 +7,11 @@ from datetime import datetime
 
 from calendar_user.models import CalendarUser
 from calendar_event.models import Reservation
+
 from reservation_type.time_slot_maker import TimeSlotChecker
 from admin_signup.forms import AdminSignupForm
 
+from poster_tube.models import PosterTubeColor, PosterTubeType
 
 from django.utils import simplejson
 from cal_util.ajax_util import render_to_string_remove_spaces, get_json_str_as_http_response2
@@ -130,6 +132,7 @@ def view_admin_signup_page(request, selected_date):
                         , cal_user)
             
     lu.update({ 'signup_form' : signup_form
+                , 'poster_tube_types' : PosterTubeType.objects.filter(available=True)
                 , 'show_open_slot_links' : True})
     
     return render_to_response('admin_signup/reservation_signup_page.html', lu, context_instance=RequestContext(request))

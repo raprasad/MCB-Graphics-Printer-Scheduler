@@ -8,6 +8,33 @@
 <script language="javascript1.1" type="text/javascript">
 <!--
 
+// arrays for poster tube color options
+{% for poster_tube in poster_tube_types %}
+    var color_set{{ poster_tube.id }} = {{ poster_tube.get_color_options|safe }};
+{% endfor %}
+
+function set_color_options(){
+    var ptube_val = $('#id_poster_tube_type').val();
+    var color_set_options = eval('color_set' + ptube_val);
+    
+    var $el = $("#id_poster_tube_color");
+    $el.empty(); // remove old options
+    $.each(color_set_options, function(key, value) {
+      $el.append($("<option></option>")
+         .attr("value", value).text(key));
+    });
+}
+
+function show_hide_poster_tube_colors(){
+    var ptube_val = $('#id_poster_tube_type').val();
+    if (ptube_val==''){
+        $('#id_tr_poster_tube').hide();
+    }else{
+        set_color_options();
+        $('#id_tr_poster_tube').show();                   
+   }
+}
+
 function set_contact_info(){
         
     cal_user_id = $("#id_calendar_user").val();
@@ -54,6 +81,11 @@ $(document).ready(function(){
            }else{
            }
        });
+       
+       $('#id_poster_tube_type').change(function() {
+                show_hide_poster_tube_colors();
+        });
+        show_hide_poster_tube_colors();
        
 });
 //-->

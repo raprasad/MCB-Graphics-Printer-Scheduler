@@ -13,6 +13,8 @@ from reservation_signup.email_notification import notify_staff_of_last_minute_re
 from cal_util.view_util import get_common_lookup
 from cal_util.msg_util import *
 
+from poster_tube.models import PosterTubeColor, PosterTubeType
+
 from django.core.urlresolvers import reverse
 
 @login_required    
@@ -96,7 +98,9 @@ def view_signup_page(request, selected_date):
                         , timeslot_checker.get_reservation_time_block()
                         , cal_user)
             
-    lu.update({ 'signup_form' : signup_form})
+    lu.update({ 'signup_form' : signup_form\
+            , 'poster_tube_types' : PosterTubeType.objects.filter(available=True)
+    })
     
     return render_to_response('reservation_signup/standard_signup_page.html', lu, context_instance=RequestContext(request))
         

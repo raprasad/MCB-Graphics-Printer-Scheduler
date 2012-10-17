@@ -4,7 +4,8 @@
          {% if f.is_hidden %}
              {{ f }}
          {% else %}
-         <tr>
+         <tr {% if f.label == 'Poster tube color' %}id="id_tr_poster_tube" style="display:none;"{% endif %}>
+             
              <th>{% if f.field.required %}*{% endif %}{{ f.label }}</th>
      
              <td>{% for err in f.errors %}

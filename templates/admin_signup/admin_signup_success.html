@@ -24,6 +24,11 @@
             <p>Start Time: <b>{{ reservation.start_datetime|date:"F j, Y" }} at {{ reservation.start_datetime|date:"P" }}</b></p>
             <p>End Time: <b>{{ reservation.end_datetime|date:"F j, Y" }} at {{ reservation.end_datetime|date:"P" }}</b></p>
             {% endifequal %}
+            {% if reservation.include_poster_tube %}
+                <p>Poster Tube: <b>{{ reservation.poster_tube_details }}</b></p>
+            {% else %}
+                <p>Poster Tube: <b>no poster tube</b></p>
+            {% endif %}
         </div>
         {% include "reservation_signup/link_return_to_monthly_cal.html" %}
 

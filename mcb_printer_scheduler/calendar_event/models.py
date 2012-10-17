@@ -81,6 +81,9 @@ class Reservation(CalendarEvent):
     note = models.TextField(blank=True)
     is_cancelled = models.BooleanField(default=False)
     
+    include_poster_tube = models.BooleanField(default=False)
+    poster_tube_details = models.CharField(max_length=255, blank=True)
+    
     
     def is_reservation(self):
         """convenience for templates"""
