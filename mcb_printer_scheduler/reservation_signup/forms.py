@@ -90,10 +90,10 @@ class SignupForm(forms.Form):
         """If poster tube chosen, make sure color is chosen"""
         poster_tube_type = self.cleaned_data.get('poster_tube_type')
         poster_tube_color = self.cleaned_data.get('poster_tube_color')
-        if poster_tube_type:
-            if not poster_tube_color:
-                self._errors['poster_tube_color'] = self.error_class(['Please choose a color.'])
-                raise forms.ValidationError('If you choose a poster tube, please choose a color.')
+        #if poster_tube_type:
+        #    if not poster_tube_color:
+        #        self._errors['poster_tube_color'] = self.error_class(['Please choose a color.'])
+        #        raise forms.ValidationError('If you choose a poster tube, please choose a color.')
         #poster_tube_color = self.cleaned_data.get('poster_tube_color')
         
          
@@ -110,7 +110,7 @@ class SignupForm(forms.Form):
             return None
         
         poster_tube_type = self.cleaned_data.get('poster_tube_type')
-        poster_tube_color = self.cleaned_data.get('poster_tube_color')
+        poster_tube_color = self.cleaned_data.get('poster_tube_color', '(?)')
         if poster_tube_type:
             include_poster_tube = True
             poster_tube_details = '%s; color: %s' % (poster_tube_type, poster_tube_color)
