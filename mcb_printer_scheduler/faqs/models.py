@@ -2,7 +2,6 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.localflavor.us.models import PhoneNumberField
 from datetime import datetime, timedelta
-from calendar_user.models import CalendarUser
 
 from hashlib import sha1
     
@@ -27,7 +26,7 @@ class FrequentlyAskedQuestion(models.Model):
     """
     question = models.CharField(max_length=255)
     answer = models.TextField()
-    category = models.ForeignKey(FAQCategory)
+    category = models.ForeignKey(FAQCategory, on_delete=models.PROTECT)
     
     sort_order = models.IntegerField()
     is_visible = models.BooleanField('Event is Active and Visible',     default=True)
