@@ -15,14 +15,16 @@ def view_logo_listing(request):
     lu = get_common_lookup(request)
 
     if not request.user.is_authenticated():
-        lu.update({ 'ERR_found' : True, 'ERR_not_authenticated' : True })
+        lu.update({ 'ERR_found' : True\
+                    , 'ERR_not_authenticated' : True
+                    , 'next_link_if_not_logged_in' : reverse('view_logo_listing', kwargs={})
+                 })
         return render_to_response('design_links/logo_listing.html', lu, context_instance=RequestContext(request))
 
     base_qs = Organization.objects.filter(is_visible=True)
     
     lu.update({ 'primary_organizations' : base_qs.filter(is_primary=True)\
                 , 'other_organizations' : base_qs.filter(is_primary=False)\
-                , 'next_link_if_not_logged_in' : reverse('view_logo_listing', kwargs={})
             })
 
     return render_to_response('design_links/logo_listing.html', lu, context_instance=RequestContext(request))
