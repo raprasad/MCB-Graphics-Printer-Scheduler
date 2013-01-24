@@ -1,3 +1,3 @@
 {% load url from future %}
 
-<p>To access this page, please <a href="https://www.pin1.harvard.edu/pin/authenticate?__authen_application=FAS_FCOR_MCB_GPPS">Log in with your Harvard PIN</a>
+<p>To access this page, please <a href="https://www.pin1.harvard.edu/pin/authenticate?__authen_application=FAS_FCOR_MCB_GPPS{% if next_link_if_not_logged_in %}&next={{ next_link_if_not_logged_in }}{% endif %}">Log in with your Harvard PIN</a>
