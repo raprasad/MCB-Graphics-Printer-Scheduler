@@ -1,4 +1,6 @@
+{% load url from future %}
 <div id="additional_links">
-    <a href="{{ STATIC_URL }}pdfs/mcb_graphics_poster_5-31-2012.pdf">Printing a Poster (pdf)</a>
-    &nbsp;|&nbsp; <a href="{% url view_logo_listing %}" rel="show">Download Logos</a>
+    <a href="{% url 'view_faqs' %}" rel="show">Frequently Asked Questions</a>
+    &nbsp;|&nbsp; <a href="{{ STATIC_URL }}pdfs/mcb_graphics_poster_5-31-2012.pdf">Printing a Poster (pdf)</a>
+    &nbsp;|&nbsp; <a href="{% url 'view_logo_listing' %}" rel="show">Download Logos</a>
 </div>

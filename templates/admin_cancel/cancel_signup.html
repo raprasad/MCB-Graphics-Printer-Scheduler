@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load url from future %}
 {% block main_content %}
     <div style="float:left; width:400px;">
         <h3 style="margin:0 0 20px 0;">Cancel Blackout Time</h3>
@@ -20,7 +21,7 @@
 	     {% endif %}
 
 		{% if cancel_form and calendar_message and not ERR_found %}
-	    <form method="post" id="cancel_form" name="cancel_form" action="{% url view_cancel_calendar_message calendar_message.id_hash %}">{% csrf_token %} 
+	    <form method="post" id="cancel_form" name="cancel_form" action="{% url 'view_cancel_calendar_message' calendar_message.id_hash %}">{% csrf_token %} 
 			{{ cancel_form.as_p }}
 
 		    <input type="submit" name="Remove" value="Remove">

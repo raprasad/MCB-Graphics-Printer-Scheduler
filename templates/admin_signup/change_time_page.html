@@ -1,5 +1,6 @@
-
 {% extends "base.html" %}
+{% load url from future %}
+
 
 </head>
 
@@ -20,7 +21,7 @@
         {% if not success_new_reservation_time_set %}
             <div id="id_signup_form_div">
             
-            <form method="post" id="signup_form" name="signup_form" action="{% url view_adjust_reservation_type selected_date|date:"Y-m-d" %}">{% csrf_token %} 
+            <form method="post" id="signup_form" name="signup_form" action="{% url 'view_adjust_reservation_type' selected_date|date:"Y-m-d" %}">{% csrf_token %} 
                 {{ signup_form.non_field_errors }}
             <table>
                 <tr>

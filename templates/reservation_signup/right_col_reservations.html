@@ -1,3 +1,4 @@
+{% load url from future %}
 <div style="float:left; width:400px; margin:0 0 0 20px">
     {% if selected_date and calendar_events %}
     <!-- day listing -->
@@ -29,7 +30,7 @@
                             {% else %}
                                 {{ evt.start_datetime|date:"g:i A" }}
                                 {% if show_open_slot_links %}
-                                <br /><a class="lnk_free_slot" rel="{% url view_free_timeslot evt.id_hash %}">free this slot</a>{% endif %}
+                                <br /><a class="lnk_free_slot" rel="{% url 'view_free_timeslot' evt.id_hash %}">free this slot</a>{% endif %}
                             {% endif %}</td>
                         <td>{{ evt.display_name|safe }}</td>
                 </tr>

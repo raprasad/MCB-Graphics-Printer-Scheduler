@@ -1,22 +1,23 @@
+{% load url from future %}
 
 <div><!-- admin signup menu -->
 {% if admin_signup %}<b>Time Slot Signup</b>
-{% else %}    <a href="{% url view_admin_signup_page selected_date|date:"Y-m-d" %}">Time Slot Signup</a>{% endif %}
+{% else %}    <a href="{% url 'view_admin_signup_page' selected_date|date:"Y-m-d" %}">Time Slot Signup</a>{% endif %}
 &nbsp;|&nbsp;
 
 {% if admin_blackout or admin_blackout_days %}<b>Set Blackout: </b>
 {% else %}Set Blackout: {% endif %} 
 {% if admin_blackout %}<b>Time</b>
-{% else %}<a href="{% url view_blackout_signup_page selected_date|date:"Y-m-d" %}">Time</a>{% endif %}
+{% else %}<a href="{% url 'view_blackout_signup_page' selected_date|date:"Y-m-d" %}">Time</a>{% endif %}
 or
 {% if admin_blackout_days %}<b>Days</b>
-{% else %}<a href="{% url view_blackout_days_signup_page selected_date|date:"Y-m-d" %}">Days</a>{% endif %}
+{% else %}<a href="{% url 'view_blackout_days_signup_page' selected_date|date:"Y-m-d" %}">Days</a>{% endif %}
 
 &nbsp;|&nbsp;
 
 {% if change_hours %}<b>Change Hours</b>
 {% else %}
-<a href="{% url view_adjust_reservation_type selected_date|date:"Y-m-d" %}">Change Hours</a>
+<a href="{% url 'view_adjust_reservation_type' selected_date|date:"Y-m-d" %}">Change Hours</a>
 {% endif %}
 </div>
 

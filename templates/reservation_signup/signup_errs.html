@@ -1,10 +1,11 @@
+{% load url from future %}
 {% if ERR_found %}
     <div class="err_box">
 	
 	{% if ERR_reservation_not_cancelled %}
 		This reservation has NOT been cancelled.
 		{% if reservation %}
-		<p>Please try to <a href="{% url view_cancel_signup reservation.id_hash %}">cancel</a> it again.</p>
+		<p>Please try to <a href="{% url 'view_cancel_signup' reservation.id_hash %}">cancel</a> it again.</p>
 		{% endif %}
 	{% endif %}
 
@@ -76,9 +77,9 @@
 	    
     <p>Please return to the 
 		{% if selected_date %}
-			<a href="{% url view_month_calendar selected_date|date:"Y-m" %}">monthly calendar</a>.
+			<a href="{% url 'view_month_calendar' selected_date|date:"Y-m" %}">monthly calendar</a>.
 		{% else %}
-		    <a href="{% url view_current_month_calendar %}">monthly calendar</a>.
+		    <a href="{% url 'view_current_month_calendar' %}">monthly calendar</a>.
 		
 		{% endif %}
 	</p>

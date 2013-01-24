@@ -20,6 +20,8 @@ urlpatterns = patterns('',
 
     url(r'^poster-printer/history/', include('mcb_printer_scheduler.reservation_history.urls')),
     
+    url(r'^poster-printer/faqs/', include('mcb_printer_scheduler.faqs.urls')),
+    
     url(r'^poster-printer/hu-auth/', include('mcb_printer_scheduler.login.urls')),
     
     url(r'^poster-printer/logos/', include('mcb_printer_scheduler.design_links.urls')),

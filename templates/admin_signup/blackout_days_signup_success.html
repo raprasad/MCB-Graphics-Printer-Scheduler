@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load url from future %}
 {% block main_content %}
     <div style="float:left; width:400px;">
         {% include "admin_signup/menu_admin_signup.html" %}
@@ -23,7 +24,7 @@
             
             {% include "reservation_signup/link_return_to_monthly_cal.html" %}
 
-            <p><a href="{% url view_admin_signup_page calendar_message.start_datetime|date:"Y-m-d" %}">Sign up</a> again for {{ calendar_message.start_datetime|date:"F j, Y" }}.</p>
+            <p><a href="{% url 'view_admin_signup_page' calendar_message.start_datetime|date:"Y-m-d" %}">Sign up</a> again for {{ calendar_message.start_datetime|date:"F j, Y" }}.</p>
         
         {% endif %}
 

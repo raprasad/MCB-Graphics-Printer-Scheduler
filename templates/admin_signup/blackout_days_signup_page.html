@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load url from future %}
 
 {% block extra_header %}
 <link type="text/css" href="{{ STATIC_URL }}jquery-ui/css/ui-lightness/jquery-ui-1.8.18.custom.css" rel="stylesheet" />	
@@ -26,7 +27,7 @@ $(document).ready(function(){
             <div style="border:1px solid #ccc; padding:10px; width:250px; margin:10px 0;">Note: Blackout days may NOT overlap with existing reservations or events.
             </div>
             Enter a message to appear on FULL calendar days.
-        <form method="post" id="signup_form" name="signup_form" action="{% url view_blackout_days_signup_page selected_date|date:"Y-m-d" %}">{% csrf_token %} 
+        <form method="post" id="signup_form" name="signup_form" action="{% url 'view_blackout_days_signup_page' selected_date|date:"Y-m-d" %}">{% csrf_token %} 
             {{ signup_form.non_field_errors }}
         <table>
             

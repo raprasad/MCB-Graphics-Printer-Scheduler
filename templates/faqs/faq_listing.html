@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block extra_header %}
+{{ block.super }} 
+<style type="text/css">
+div.faq_answer{display:none;}
+a.faq_link{cursor:pointer;}
+ol li {padding:5px 0;}
+ul li {padding:5px 0;}
+</style>
+<script language="javascript" type="text/javascript">
+<!--
+
+$(document).ready(function(){
+    $('a.faq_link').each(function(){
+        $(this).bind('click', function(e) {
+	        e.preventDefault();
+	        var rel_val = $(this).attr('rel');
+	        $('#'+rel_val).slideToggle();
+        });
+     });
+    
+});
+//-->
+</script>
+{% endblock %}
+
+{% block main_content %}
+
+    <div style="width:700px;">
+        <h3 style="margin:0 0 20px 0;">Frequently Asked Questions</h3>
+
+        {% if ERR_found %}
+            <div class="err_box">
+            {% if ERR_not_authenticated %}You must sign in to view the logo links.
+                {% include "pin_auth/login_url.html" %}
+            {% endif %}
+            </div>
+            
+        {% endif %}
+
+        {% for q in faqs %}
+            {% ifchanged q.category %}
+                {% if not forloop.first %}</ul>{% endif %}
+                <h4>{{ q.category }}</h4>
+                <ul>
+            {% endifchanged%}
+            
+            	<li>
+            		<b><a class="faq_link" rel="faq_answer_{{ forloop.counter }}">{{ q.question|safe }}</a></b>
+            		<div id="faq_answer_{{ forloop.counter }}" class="faq_answer"><p>{{ q.answer|safe }}</p></div>
+            	</li>
+            {% if forloop.last %}</ul>{% endif %}    
+        {% empty %}
+            <h4>Sorry, there are no FAQs in the database.</h4>
+        {% endfor %}
+        <p>&nbsp;</p>
+        {% include "reservation_signup/link_return_to_monthly_cal.html" %}
+        
+    <div class="clear"></div>
+	</div>
+	
+{% endblock %}

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load url from future %}
 {% block main_content %}
     <div style="float:left; width:400px;">
         {% if not ERR_found %}
@@ -34,7 +35,7 @@
         </div>
         {% include "reservation_signup/link_return_to_monthly_cal.html" %}
 
-        <p><a href="{% url view_signup_page reservation.start_datetime|date:"Y-m-d" %}">Sign up</a> again for {{ reservation.start_datetime|date:"F j, Y" }}.</p>
+        <p><a href="{% url 'view_signup_page' reservation.start_datetime|date:"Y-m-d" %}">Sign up</a> again for {{ reservation.start_datetime|date:"F j, Y" }}.</p>
 
         
         {% endif %}

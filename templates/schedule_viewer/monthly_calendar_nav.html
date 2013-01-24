@@ -1,23 +1,24 @@
+{% load url from future %}
 <tr><!-- previous year | selected year's months | next year -->
        <td colspan="7"><div id="nav_months">
 		{% if not is_current_month %}
-		<div style="text-align:left;"><a href="{% url view_current_month_calendar %}">THIS MONTH</a></div>
+		<div style="text-align:left;"><a href="{% url 'view_current_month_calendar' %}">THIS MONTH</a></div>
 		{% endif %}
       
 
-		<a href="{% url view_current_month_calendar %}{{ prev_year }}-1/">{{ prev_year }}</a>
+		<a href="{% url 'view_current_month_calendar' %}{{ prev_year }}-1/">{{ prev_year }}</a>
        
    {% spaceless %}
       {% for mth in month_list %}
             &nbsp;&nbsp;
            {% ifequal mth selected_month.date %}
-               <a href="{% url view_month_calendar mth|date:"Y-m" %}" class="month_lnk_sel">{{ mth|date:"M" }}</a>
+               <a href="{% url 'view_month_calendar' mth|date:"Y-m" %}" class="month_lnk_sel">{{ mth|date:"M" }}</a>
            {% else %}
-               <a href="{% url view_month_calendar mth|date:"Y-m" %}">{{ mth|date:"M" }}</a>
+               <a href="{% url 'view_month_calendar' mth|date:"Y-m" %}">{{ mth|date:"M" }}</a>
                
            {% endifequal %}
        {% endfor %}
-        &nbsp;&nbsp; <a href="{% url view_current_month_calendar %}{{ next_year }}-1/">{{ next_year }}</a>
+        &nbsp;&nbsp; <a href="{% url 'view_current_month_calendar' %}{{ next_year }}-1/">{{ next_year }}</a>
    {% endspaceless %}
        </div></td>
    </tr>

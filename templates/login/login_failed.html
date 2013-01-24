@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load url from future %}
 {% load i18n %}
 
 {% block main_content %}
@@ -83,7 +84,7 @@
 {% endcomment %}
 </div>
 
-<p><a href="{% url view_current_month_calendar %}">{% trans 'Log in again' %}</a></p>
+<p><a href="{% url 'view_current_month_calendar' %}">{% trans 'Log in again' %}</a></p>
 <p><a href="https://www.pin1.harvard.edu/pin/logout" target="_blank">Harvard Pin Logout</a></p>
 
 {% endblock %}

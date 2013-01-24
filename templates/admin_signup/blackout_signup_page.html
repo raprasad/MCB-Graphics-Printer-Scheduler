@@ -1,5 +1,6 @@
-
 {% extends "base.html" %}
+{% load url from future %}
+
 
 {% block extra_header %}
 <script language="javascript"  src="{{ STATIC_URL }}js/jquery-1.7.1.min.js" type="text/javascript"></script>
@@ -20,7 +21,7 @@ function set_available_hours(){
     var hh = stime.substring(11, 13);
     var mm = stime.substring(14, 16);
 
-    var hours_url = '{% url get_valid_end_times_base  selected_date|date:"Y-m-d" %}'  + hh + '-' + mm + '/';
+    var hours_url = '{% url 'get_valid_end_times_base'  selected_date|date:"Y-m-d" %}'  + hh + '-' + mm + '/';
     
      $.getJSON(hours_url,{}, function(data){
          if (data.success == false){
@@ -57,7 +58,7 @@ $(document).ready(function(){
         {% endif %}
         <div id="id_signup_form_div">
             Enter a message to appear on a calendar day.
-        <form method="post" id="signup_form" name="signup_form" action="{% url view_blackout_signup_page selected_date|date:"Y-m-d" %}">{% csrf_token %} 
+        <form method="post" id="signup_form" name="signup_form" action="{% url 'view_blackout_signup_page' selected_date|date:"Y-m-d" %}">{% csrf_token %} 
             {{ signup_form.non_field_errors }}
         <table>
             <tr>

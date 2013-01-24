@@ -1,3 +1,4 @@
+{% load url from future %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -14,7 +15,7 @@
 <div id="overarching_div">
     
 <div id="header">
-    <a href="{% url view_current_month_calendar %}"><img src="{{ STATIC_URL }}imgs/mcb_graphics_sm.jpg" width="60" height="60" style="float:left;" /></a>
+    <a href="{% url 'view_current_month_calendar' %}"><img src="{{ STATIC_URL }}imgs/mcb_graphics_sm.jpg" width="60" height="60" style="float:left;" /></a>
     <div style="float:left;"><h1>poster printer schedule</h1>
         {% if calendar_user %}
         <div id="id_address">Biological Labs, Room 2058, 16 Divinity Ave, Cambridge, MA 02138</div>
@@ -23,9 +24,9 @@
 	<div style="float:right; padding:0 10px; color:#1A2F5A;">
         {% if calendar_user %}
             logged in as {{ calendar_user }}
-			<br /><a href="{% url view_logout_page %}">log out</a>
+			<br /><a href="{% url 'view_logout_page' %}">log out</a>
     		{% if calendar_user.is_calendar_admin %}
-			&nbsp;|&nbsp; <a href="{% url admin:index %}" target="_blank">admin site</a>
+			&nbsp;|&nbsp; <a href="{% url 'admin:index' %}" target="_blank">admin site</a>
             {% endif %}
         {% else %}
             Biological Labs, Room 2058

@@ -1,5 +1,5 @@
-
 {% extends "base.html" %}
+{% load url from future %}
 
 {% block extra_header %}
 {% endblock %}
@@ -45,10 +45,10 @@
 					    
                         {% if not is_current_month %}
                            <div style="float:right;padding:5px 10px 5px 10px; ">
-                       		<a href="{% url view_current_month_calendar %}" class="this_month">{% now "F Y" %}</a><br />         {% else %}
+                       		<a href="{% url 'view_current_month_calendar' %}" class="this_month">{% now "F Y" %}</a><br />         {% else %}
                        		<div style="float:right;padding:25px 10px 5px 10px; ">
-                       		{% endif %} <!-- previous month -->{% if previous_month %}	&nbsp; <a href="{% url view_month_calendar previous_month|date:"Y-m" %}" class="cal_nav_months"> &lt;&lt; {{ previous_month|date:"F" }}</a>{% endif %}
-                                <!-- next month --> &nbsp;	{% if next_month %}<a href="{% url view_month_calendar next_month|date:"Y-m" %}" class="cal_nav_months">{{ next_month|date:"F" }} &gt;&gt; </a>{% endif %}                 
+                       		{% endif %} <!-- previous month -->{% if previous_month %}	&nbsp; <a href="{% url 'view_month_calendar' previous_month|date:"Y-m" %}" class="cal_nav_months"> &lt;&lt; {{ previous_month|date:"F" }}</a>{% endif %}
+                                <!-- next month --> &nbsp;	{% if next_month %}<a href="{% url 'view_month_calendar' next_month|date:"Y-m" %}" class="cal_nav_months">{{ next_month|date:"F" }} &gt;&gt; </a>{% endif %}                 
                     
                         
                         </div>

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load url from future %}
 {% block main_content %}
     <div style="float:left; width:400px;">
         <h3 style="margin:0 0 20px 0;">Cancel Reservation</h3>
@@ -26,7 +27,7 @@
 	     {% endif %}
 
 		{% if cancel_form and reservation and not ERR_found %}
-	    <form method="post" id="cancel_form" name="cancel_form" action="{% url view_cancel_signup reservation.id_hash %}">{% csrf_token %} 
+	    <form method="post" id="cancel_form" name="cancel_form" action="{% url 'view_cancel_signup' reservation.id_hash %}">{% csrf_token %} 
 			{{ cancel_form.as_p }}
 
 		    <input type="submit" name="Cancel Reservation" value="Cancel Reservation">
