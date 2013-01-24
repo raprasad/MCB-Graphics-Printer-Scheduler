@@ -13,9 +13,9 @@ def view_faqs(request):
 
     lu = get_common_lookup(request)
 
-    #if not request.user.is_authenticated():
-    #    lu.update({ 'ERR_found' : True, 'ERR_not_authenticated' : True })
-    #    return render_to_response('faqs/faq_listing.html', lu, context_instance=RequestContext(request))
+    if not request.user.is_authenticated():
+        lu.update({ 'ERR_found' : True, 'ERR_not_authenticated' : True })
+        return render_to_response('faqs/faq_listing.html', lu, context_instance=RequestContext(request))
     
     lu.update({ 'faqs' : FrequentlyAskedQuestion.objects.filter(is_visible=True)
             })
