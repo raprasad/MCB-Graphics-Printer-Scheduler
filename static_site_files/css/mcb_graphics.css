@@ -68,8 +68,9 @@ div#container
 
 #reserve_slot_div{color:#1a2f5a;
     font-size:14px;
+    line-height:20px;
     float:left;
-    margin:0 0 20px 0px;
+    margin:0 10px 20px 0px;
     text-align:center;
 }
 

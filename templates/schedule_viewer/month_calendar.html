@@ -7,7 +7,7 @@
 
 <div>
     
-    {% if not calendar_user %}
+    {% if calendar_user %}
     <div id="reserve_slot_div">
     <form action="https://www.pin1.harvard.edu/pin/authenticate" method="GET">
         <input type="hidden" name="__authen_application" id="__authen_application" value="{{ HU_PIN_LOGIN_APP_NAME }}" />
