@@ -21,10 +21,15 @@
         To reserve a time slot, click on an available date.
     </div>
     {% endif %}
-
     <div id="question_div">
+        <form action="{% url 'view_faqs' %}" method="GET">
+        	<label for="hu_email_button">&nbsp;</label>					  
+        	<br /><input type="submit" id="hu_faq_button" class="smaller" value="FAQs" />
+        </form>
+    </div>
+    <div id="email_mcb_div">
         <form action="mailto:{{ mcbgraphics_email }}" method="GET">
-        	<label for="hu_email_button">Questions? Please e-mail us</label>					  
+        	<label for="hu_email_button">E-mail us at</label>					  
         	<br /><input type="submit" id="hu_email_button" class="smaller" value="{{ mcbgraphics_email }}" />
         </form>
     </div>
