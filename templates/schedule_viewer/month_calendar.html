@@ -16,17 +16,24 @@
     	<br /><input type="submit" id="hu_pin_login" class="smaller" value="Log in with your Harvard PIN" />
     	<!-- <br /><span style="font-size:80%">so that the we can ready the printers for you</span> -->
     </form></div>
-    {% else %}
-    <div id="reserve_slot_div">
-        <br />To reserve a time slot, click on an available date.
-    </div>
-    {% endif %}
     <div id="question_div">
         <form action="{% url 'view_faqs' %}" method="GET">
         	<label for="hu_email_button">&nbsp;</label>					  
         	<br /><input type="submit" id="hu_faq_button" class="smaller" value="FAQs" />
         </form>
     </div>
+    {% else %}
+    <div id="reserve_slot_div">
+        <br />To reserve a time slot, click on an available date.
+    </div>
+    <div id="question_div2">
+           <form action="{% url 'view_faqs' %}" method="GET">
+           	<label for="hu_email_button">&nbsp;</label>					  
+           	<br /><input type="submit" id="hu_faq_button" class="smaller" value="FAQs" />
+           </form>
+       </div>
+    {% endif %}
+   
     <div id="email_mcb_div">
         <form action="mailto:{{ mcbgraphics_email }}" method="GET">
         	<label for="hu_email_button">E-mail us at</label>					  

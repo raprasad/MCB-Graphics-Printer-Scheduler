@@ -48,8 +48,16 @@ div#container
     text-align:center;
     margin:0 8px 10px 0;
 }
-
 #question_div{color:#1a2f5a;
+    font-size:14px;
+    float:left;
+    text-align:center;
+    line-height:20px;
+    margin: 0px 8px 0px 0px;
+    
+}
+
+#question_div2{color:#1a2f5a;
     font-size:14px;
     float:left;
     text-align:center;
