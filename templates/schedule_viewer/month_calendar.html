@@ -17,7 +17,7 @@
     	<!-- <br /><span style="font-size:80%">so that the we can ready the printers for you</span> -->
     </form></div>
     <div id="question_div">
-        <form action="{% url 'view_faqs' %}" method="GET">
+        <form action="{% url 'view_faqs' %}" method="get">
         	<label for="hu_email_button">&nbsp;</label>					  
         	<br /><input type="submit" id="hu_faq_button" class="smaller" value="FAQs" />
         </form>
@@ -27,7 +27,7 @@
         <br />To reserve a time slot, click on an available date.
     </div>
     <div id="question_div2">
-           <form action="{% url 'view_faqs' %}" method="GET">
+           <form action="{% url 'view_faqs' %}" method="get">
            	<label for="hu_email_button">&nbsp;</label>					  
            	<br /><input type="submit" id="hu_faq_button" class="smaller" value="FAQs" />
            </form>
@@ -35,7 +35,7 @@
     {% endif %}
    
     <div id="email_mcb_div">
-        <form action="mailto:{{ mcbgraphics_email }}" method="GET">
+        <form action="mailto:{{ mcbgraphics_email }}" method="get">
         	<label for="hu_email_button">E-mail us at</label>					  
         	<br /><input type="submit" id="hu_email_button" class="smaller" value="{{ mcbgraphics_email }}" />
         </form>
