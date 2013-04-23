@@ -16,7 +16,7 @@ click events: today/future
         <div class="day_evt_listing">
             {% if evt.is_reservation %}
             {# <!-- ================ Reservation ============== --> #}
-            <div class="cal_day_time">{% spaceless %}
+            <div class="cal_day_time">
                 {% if evt.is_timeslot_free %}<span class="timeslot_open">{{ evt.start_datetime|date:"g:i A" }}</span>
                 {% else %}{{ evt.start_datetime|date:"g:i A" }}{% endif %} &#150; 
                 
@@ -34,7 +34,7 @@ click events: today/future
                     <span style="color:#1a2f5a;">{{ evt.display_name|safe }}</span>
                 {% endif %}             
                 {% endif %}
-		    {% endspaceless %}</div>
+		    </div>
             
             {# <!-- ================ Calendar Message ============== --> #}    
            
