@@ -13,7 +13,7 @@ click events: today/future
 
 <div class="cal_day">
     {% for evt in day_event_obj.events %}
-        <div class="day_evt_listing">
+    <div class="day_evt_listing">
             {% if evt.is_reservation %}
             {# <!-- ================ Reservation ============== --> #}
             <div class="cal_day_time">
@@ -26,22 +26,20 @@ click events: today/future
                     {% else %}{% if calendar_user.is_calendar_admin %}
                         <a href="{% url 'view_cancel_signup' evt.id_hash %}" class="cal_name_admin">{{ evt.display_name|safe }}</a> <a href="{% url 'view_reservation_history' evt.user.id_hash %}">(h)</a>
                         {% include "schedule_viewer/event_note_for_cal.html" %}
-                        
-                        
                     {% else %}
                         <span style="color:#1a2f5a;">{{ evt.display_name|safe }}</span>
-                {% endif %}{% endifequal %}{% else %}
+                    {% endif %}{% endifequal %}
+                {% else %}
                     <span style="color:#1a2f5a;">{{ evt.display_name|safe }}</span>
-                {% endif %}             
-                {% endif %}
+                {% endif %} 
 		    </div>
-            
+            {% endif %}
             {# <!-- ================ Calendar Message ============== --> #}    
            
             {% if evt.is_calendar_message %}
             <div class="cal_day_time_msg">
                   {{ evt.display_name|safe }} 
-                  <br />{{ evt.start_datetime|date:"g:iA" }} - {{ evt.end_datetime|date:"g:iA" }}
+                  <br />{{ evt.start_datetime|date:"g:iA" }}-{{ evt.end_datetime|date:"g:iA" }}
                   {% if calendar_user.is_calendar_admin %}
                     <a href="{% url 'view_cancel_calendar_message' evt.id_hash %}">(c)</a>
                   {#<a href="{% url 'admin:calendar_event_calendarmessage_change' evt.id  %}" target="_blank">(e)</a>#}{% endif %}
@@ -55,8 +53,9 @@ click events: today/future
 	                  {% if calendar_user.is_calendar_admin %}
 	                    <a href="{% url 'view_cancel_calendar_message' evt.id_hash %}">(c)</a>
 	                  {#<a href="{% url 'admin:calendar_event_calendarmessage_change' evt.id  %}" target="_blank">(e)</a>#}{% endif %}
-	            </div>            {% endif %}
-        </div>
+	        </div>            
+	        {% endif %}
+    </div>
     {% empty %}
         <br />&nbsp;
     {% endfor %}
