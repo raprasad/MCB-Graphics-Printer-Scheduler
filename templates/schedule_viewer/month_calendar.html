@@ -9,7 +9,7 @@
     
     {% if not calendar_user %}
     <div id="reserve_slot_div">
-    <form action="https://www.pin1.harvard.edu/pin/authenticate" method="GET">
+    <form action="https://www.pin1.harvard.edu/pin/authenticate" method="get">
         <input type="hidden" name="__authen_application" id="__authen_application" value="{{ HU_PIN_LOGIN_APP_NAME }}" />
         
     	<label for="hu_pin_login">Please reserve a time slot</label>					  

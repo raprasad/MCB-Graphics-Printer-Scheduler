@@ -10,12 +10,12 @@
 {% endblock %}
 {% include "google_analytics.html" %}
 </head>
-<body>
+<body><br />
 <div id="container">
 <div id="overarching_div">
     
 <div id="header">
-    <a href="{% url 'view_current_month_calendar' %}"><img src="{{ STATIC_URL }}imgs/mcb_graphics_sm.jpg" width="60" height="60" style="float:left;" /></a>
+    <a href="{% url 'view_current_month_calendar' %}"><img src="{{ STATIC_URL }}imgs/mcb_graphics_sm.jpg" alt="mcb_graphics" width="60" height="60" style="float:left;" /></a>
     <div style="float:left;"><h1>poster printer schedule</h1>
         {% if calendar_user %}
         <div id="id_address">Biological Labs, Room 2058, 16 Divinity Ave, Cambridge, MA 02138</div>
@@ -29,9 +29,11 @@
 			&nbsp;|&nbsp; <a href="{% url 'admin:index' %}" target="_blank">admin site</a>
             {% endif %}
         {% else %}
+            <div style="text-align:right;">
             Biological Labs, Room 2058
             <br />16 Divinity Ave
             <br />Cambridge, MA 02138
+            </div>
         {% endif %}
 
     </div>
