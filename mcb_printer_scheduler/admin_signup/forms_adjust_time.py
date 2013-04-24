@@ -2,7 +2,7 @@ import re
 from django import forms 
 from datetime import datetime, time, timedelta
 
-from reservation_type.models import DayOfWeek, ReservationType
+from reservation_type.models import DayOfWeek, ReservationType, DEFAULT_TIME_BLOCK
 from reservation_type.time_slot_maker import TimeSlotChecker
 
 
@@ -10,8 +10,8 @@ class AvailableHoursForm(forms.Form):
     """Blackout a Time Slot"""
     selected_day = forms.DateField(widget=forms.HiddenInput)
     slot1 = forms.BooleanField(label='9:00am to 12pm', required=False)
-    slot2 = forms.BooleanField(label='12pm to 6pm', required=False, help_text='(last reservation starts at 5:20pm)')
-    slot3 = forms.BooleanField(label='6pm to 9:00pm', help_text='(last reservation starts at 8:20pm)', required=False)
+    slot2 = forms.BooleanField(label='12pm to 6pm', required=False, help_text='(last reservation starts at 5:45pm)')
+    slot3 = forms.BooleanField(label='6pm to 9:00pm', help_text='(last reservation starts at 8:45pm)', required=False)
 
     def init(self, selected_day):
         self.fields['selected_day'].initial = selected_day
@@ -46,10 +46,10 @@ class AvailableHoursForm(forms.Form):
     
     def get_latest_time(self):
         if self.cleaned_data.get('slot3', False):
-            return time(20, 40)
+            return time(20, 45)
 
         if self.cleaned_data.get('slot2', False):
-                return time(17, 40)
+                return time(17, 45)
 
         if self.cleaned_data.get('slot1', False):
             return time(12, 0)
@@ -64,6 +64,7 @@ class AvailableHoursForm(forms.Form):
         new_rt = ReservationType(name='time for %s' % selected_day.strftime('%Y-%m-%d')\
                             , start_date=selected_day\
                             , end_date=selected_day\
+                            , time_block=DEFAULT_TIME_BLOCK
                             , opening_time=self.get_earliest_time()\
                             , closing_time=self.get_latest_time()\
                             , is_active=True

@@ -11,6 +11,7 @@ try:
 except:
     import md5
 
+DEFAULT_TIME_BLOCK = 15
 """
 DAY_NAMES = "Monday Tuesday Wednesday Thursday Friday Saturday Sunday".split()
 DAYS_OF_WEEK = map(lambda x: (x[1], x[0]+1), enumerate(DAY_NAMES))
@@ -49,7 +50,7 @@ class ReservationType(models.Model):
     opening_time = models.TimeField()
     closing_time = models.TimeField()
 
-    time_block = models.IntegerField('minutes in a time block', default=20)
+    time_block = models.IntegerField('minutes in a time block', default=DEFAULT_TIME_BLOCK)
     
     min_time_advance_notice = models.IntegerField(default=180, help_text='in minutes. If the user tries to sign up last minute, he/she will receive an online notice to email.')
 
