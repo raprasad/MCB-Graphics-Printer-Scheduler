@@ -11,7 +11,7 @@ class ReservationTypeAdmin(admin.ModelAdmin):
     form = ReservationTypeForm
     save_on_top = True
     readonly_fields = ('available_days_of_week', 'created', 'last_update')
-    list_display= ('name', 'is_default', 'is_active', 'opening_time', 'closing_time','start_date', 'end_date', 'available_days_of_week', 'scheduling_window_in_days', 'created', 'last_update', )
+    list_display= ('name', 'is_default', 'is_active', 'time_block', 'opening_time', 'closing_time','start_date', 'end_date', 'available_days_of_week', 'scheduling_window_in_days', 'created', 'last_update', )
     filter_horizontal = ('days_allowed',)
     list_filter = ( 'is_default', 'is_active', )
     search_fields = ( 'name', )
