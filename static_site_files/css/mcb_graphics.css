@@ -175,7 +175,7 @@ div.evt_note_monthly_cal{
     font-style:italic;}
 
 div.cal_day_time_msg{background-color:#dadade;color:#1a2f5a; line-height:140%;padding:2px; margin:3px 0; }
-div.cal_fullday_msg{background-color:#fad4d4;color:#1a2f5a; padding:15px 2px; margin:3px 0; }
+div.cal_fullday_msg{background-color:#fad4d4;color:#1a2f5a; padding:15px 2px; margin:3px 0;line-height:140%; }
 
 div.day_evt_listing .cal_day_time a.cal_name_regular {
     color: #9a1a2c;
