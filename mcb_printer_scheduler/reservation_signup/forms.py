@@ -23,7 +23,7 @@ class SignupForm(forms.Form):
     email = forms.EmailField(label='Contact Email', widget=forms.TextInput(attrs={'size': 25}) )
     billing_code = forms.CharField(label='33-digit Harvard Billing Code', required=False, widget=forms.TextInput(attrs={'size': 40}))
     lab_name = forms.CharField(label='Lab or Group Affiliation',widget=forms.TextInput(attrs={'size': 25}) )
-    poster_tube_type = forms.ModelChoiceField(label='Poster tube (optional)', queryset=PosterTubeType.objects.filter(available=True), required=False)
+    poster_tube_type = forms.ModelChoiceField(label='Poster tube (optional)', queryset=PosterTubeType.objects.filter(available=True), required=False, )
     poster_tube_color = forms.ChoiceField(choices=get_color_choices(), required=False)
     
     def init(self, time_slot_choices, session_length, cal_user):   

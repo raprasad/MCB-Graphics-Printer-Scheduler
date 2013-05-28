@@ -9,7 +9,9 @@
                 <td>{% for err in f.errors %}
                         <span style="color:#ff0000;">{{ err }}</span><br />
                     {% endfor %} 
-                    {{ f }}</td>
+                    {{ f }}
+                  {% if f.name == 'poster_tube_type' %}&nbsp;<a id="lnk_view_poster_tube">view poster tubes</a>{% endif %}
+                </td>
                 {% endif %}
             </tr>
         {% endfor %}
