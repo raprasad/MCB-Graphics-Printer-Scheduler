@@ -10,7 +10,9 @@
                         <span style="color:#ff0000;">{{ err }}</span><br />
                     {% endfor %} 
                     {{ f }}
-                  {% if f.name == 'poster_tube_type' %}&nbsp;<a id="lnk_view_poster_tube">view poster tubes</a>{% endif %}
+                  {% if f.name == 'poster_tube_type' %}&nbsp;<a id="lnk_view_poster_tube"><img src="{{ STATIC_URL }}imgs/thumb_poster_tubes_2013_05_31.png" alt="view poster tubes" /></a>
+                  <br /><i>click the image above to see the poster tubes</i>
+                  {% endif %}
                 </td>
                 {% endif %}
             </tr>
