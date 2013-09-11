@@ -40,8 +40,8 @@ class ReservationAdmin(admin.ModelAdmin):
     inlines = (ImageRecordAdminInline,)
     readonly_fields = ('subclass_name',)
     list_display= ('display_name', 'user', 'include_poster_tube','start_datetime', 'end_datetime', 'contact_email', 'contact_phone', 'lab_name', 'is_cancelled' )
-    list_filter = ('is_visible', 'is_cancelled', 'include_poster_tube', 'user',)
-    search_fields = ( 'display_name', 'poster_tube_details', 'user__last_name', 'user__first_name', 'lab', 'billing_code')
+    list_filter = ('is_visible', 'is_cancelled', 'include_poster_tube', 'print_media', 'user',)
+    search_fields = ( 'display_name', 'poster_tube_details', 'user__last_name', 'user__first_name', 'lab', 'billing_code', 'printing_media_details')
 admin.site.register(Reservation, ReservationAdmin)
 
 

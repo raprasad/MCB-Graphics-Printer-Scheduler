@@ -8,6 +8,7 @@ from reservation_type.time_slot_maker import TimeSlot
 from calendar_event.models import CalendarEvent, Reservation
 from calendar_user.models import CalendarUser
 from poster_tube.models import PosterTubeColor, PosterTubeType
+from media_type.models import PrintMediaType
 
 from django.contrib.localflavor.us.forms import USPhoneNumberField
 
@@ -17,6 +18,7 @@ def get_calendar_choices():
 
 def get_color_choices():
     return map(lambda x: (x.name, x.name), PosterTubeColor.objects.all())
+
 
 class AdminSignupForm(forms.Form):
     """Form used for a regular user to reserve a time."""
@@ -28,6 +30,13 @@ class AdminSignupForm(forms.Form):
     email = forms.EmailField(label='Contact Email',widget=forms.TextInput(attrs={'size': 25}) )
     billing_code = forms.CharField(label='33-digit Harvard Billing Code', required=False, widget=forms.TextInput(attrs={'size': 40}))
     lab_name = forms.CharField(label='Lab or Group Affiliation',widget=forms.TextInput(attrs={'size': 25}) )
+    
+    print_media = forms.ModelChoiceField(label='Media Type'\
+                            , queryset=PrintMediaType.objects.filter(available=True)\
+                            , required=True\
+                            , empty_label=None\
+                            )
+    
     poster_tube_type = forms.ModelChoiceField(label='Poster tube (optional)', queryset=PosterTubeType.objects.filter(available=True), required=False)
     poster_tube_color = forms.ChoiceField(choices=get_color_choices(), required=False)
     note = forms.CharField(label='Note', required=False, widget=forms.Textarea(attrs={'rows': 3, 'cols': 25}))
@@ -136,7 +145,7 @@ class AdminSignupForm(forms.Form):
                         , note=self.cleaned_data.get('note', '')\
                         , include_poster_tube=include_poster_tube\
                         , poster_tube_details=poster_tube_details                        
-                        
+                        , print_media=self.cleaned_data.get('print_media', None)\
                         )        
         res.save()          # save the reservation
         

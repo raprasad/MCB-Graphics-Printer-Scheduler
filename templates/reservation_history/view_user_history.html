@@ -10,7 +10,7 @@
 
 	{% if  cal_user_to_check %}
          <p><b>{{ reservations.count }} reservation{{ reservations.count|pluralize }}</b> found for <b>{{ cal_user_to_check }}</b>.
-             <br />{{ cancellations.count }} cancellation{{ cancellations.count|pluralize }}</b> 
+             <br />{{ cancellations_count }} cancellation{{ cancellations_count|pluralize }}</b> 
         {% include "reservation_signup/link_return_to_monthly_cal.html" %}         
         </p>
     {% endif %}
@@ -44,8 +44,9 @@
                     <th>&nbsp;</th>
                     <th>date</th>
                     <th>start time</th>
-                    <th>lab or group affiliation</th>
-                    <th>expense code</th>
+                    <th>lab or group affiliation<br />
+                        expense code
+                        </th>
                     <th>poster&nbsp;tube</th>
                     <th>cancelled?</th>
                 </tr>
@@ -59,12 +60,14 @@
            		 
                     </td>
                 <td class="rt">{{ r.start_datetime|date:"g:i" }}&nbsp;{{ r.start_datetime|date:"A" }}</td>
-                <td>{{ r.lab_name }}</td>
-                <td>{% if r.billing_code %}{{ r.billing_code }}{% endif %}
-                     
+                <td>{{ r.lab_name }}
+                    {% if r.billing_code %}<br />{{ r.billing_code }}{% endif %}
+                    {% if r.print_media %}<br />{{ r.print_media }}{% endif %}
                     {% if r.note %}<br /><br />Note: {{ r.note|safe }}{% endif %}
                     &nbsp;</td>
-                <td>{% if r.include_poster_tube %}
+                <td>
+                    
+                    {% if r.include_poster_tube %}
                         {{ r.poster_tube_details }}
                      {% else %}
                         No

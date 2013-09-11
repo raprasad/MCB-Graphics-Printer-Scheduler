@@ -6,6 +6,7 @@ from reservation_type.conflict_checker import ConflictChecker
 from reservation_type.time_slot_maker import TimeSlot
 
 from poster_tube.models import PosterTubeColor, PosterTubeType
+from media_type.models import PrintMediaType
 
 from calendar_event.models import CalendarEvent, Reservation
 
@@ -13,6 +14,7 @@ from django.contrib.localflavor.us.forms import USPhoneNumberField
 
 def get_color_choices():
     return map(lambda x: (x.name, x.name), PosterTubeColor.objects.all())
+
 
 class SignupForm(forms.Form):
     """Form used for a regular user to reserve a time."""
@@ -23,7 +25,15 @@ class SignupForm(forms.Form):
     email = forms.EmailField(label='Contact Email', widget=forms.TextInput(attrs={'size': 25}) )
     billing_code = forms.CharField(label='33-digit Harvard Billing Code', required=False, widget=forms.TextInput(attrs={'size': 40}))
     lab_name = forms.CharField(label='Lab or Group Affiliation',widget=forms.TextInput(attrs={'size': 25}) )
-    poster_tube_type = forms.ModelChoiceField(label='Poster tube (optional)', queryset=PosterTubeType.objects.filter(available=True), required=False, )
+    print_media = forms.ModelChoiceField(label='Media Type'\
+                            , queryset=PrintMediaType.objects.filter(available=True)\
+                            , required=True\
+                            , empty_label=None\
+                            )    
+    poster_tube_type = forms.ModelChoiceField(label='Poster tube (optional)'\
+                            , queryset=PosterTubeType.objects.filter(available=True)\
+                            , required=False\
+                            )
     poster_tube_color = forms.ChoiceField(choices=get_color_choices(), required=False)
     
     def init(self, time_slot_choices, session_length, cal_user):   
@@ -126,7 +136,8 @@ class SignupForm(forms.Form):
                         , billing_code=self.cleaned_data.get('billing_code', '')\
                         , lab_name=self.cleaned_data.get('lab_name', '')\
                         , include_poster_tube=include_poster_tube\
-                        , poster_tube_details=poster_tube_details                        
+                        , poster_tube_details=poster_tube_details\
+                        , print_media=self.cleaned_data.get('print_media', None)\
                         )        
         res.save()          # save the reservation
         

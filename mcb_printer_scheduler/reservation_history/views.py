@@ -35,9 +35,20 @@ def view_reservation_history(request, id_hash):
         lu.update({ 'ERR_found' : True, 'ERR_no_permission_to_view_history' : True })
         return render_to_response('reservation_history/view_user_history.html', lu, context_instance=RequestContext(request))
 
+    reservations = Reservation.objects.select_related(\
+                                'user', 'print_media'\
+                            ).filter(user=cal_user_to_check\
+                                   # , is_cancelled=False\
+                                    )
     
-    lu.update({ 'reservations' : Reservation.objects.filter(user=cal_user_to_check)\
-            , 'cancellations' : Reservation.objects.filter(user=cal_user_to_check, is_cancelled=True)\
+    cancellations = Reservation.objects.select_related(\
+                                'user', 'print_media'\
+                            ).filter(user=cal_user_to_check\
+                                    , is_cancelled=True\
+                                    )
+    
+    lu.update({ 'reservations' : reservations\
+            , 'cancellations_count' :cancellations.count()\
             , 'cal_user_to_check' : cal_user_to_check})
 
     return render_to_response('reservation_history/view_user_history.html', lu, context_instance=RequestContext(request))

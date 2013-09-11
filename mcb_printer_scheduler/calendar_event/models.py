@@ -3,6 +3,8 @@ from django.template.defaultfilters import slugify
 from django.contrib.localflavor.us.models import PhoneNumberField
 from datetime import datetime, timedelta
 from calendar_user.models import CalendarUser
+from media_type.models import PrintMediaType
+
 try:
     from hashlib import sha1
 except:
@@ -71,7 +73,7 @@ class CalendarEvent(models.Model):
         verbose_name_plural = 'Calendar Events (view all events)'
         db_table = 'cal_event'
         
-        
+         
 class Reservation(CalendarEvent):
     user = models.ForeignKey(CalendarUser)
     contact_email = models.EmailField()
@@ -83,7 +85,8 @@ class Reservation(CalendarEvent):
     
     include_poster_tube = models.BooleanField(default=False)
     poster_tube_details = models.CharField(max_length=255, blank=True)
-    
+
+    print_media = models.ForeignKey(PrintMediaType, blank=True, null=True)
     
     def is_reservation(self):
         """convenience for templates"""
