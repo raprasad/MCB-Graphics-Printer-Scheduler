@@ -32,6 +32,9 @@
             {% else %}
                 <p>Poster Tube: <b>no poster tube</b></p>
             {% endif %}
+            {% if reservation.print_media %}
+                <p>Print Media: <b>{{ reservation.print_media }}</b></p>
+            {% endif %}
         </div>
         {% include "reservation_signup/link_return_to_monthly_cal.html" %}
 

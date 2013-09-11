@@ -28,6 +28,11 @@
             {% else %}
             <p>Poster Tube: <b><span class="res_cancelled">no poster tube</span></b></p>
             {% endif %}
+            
+            {% if reservation.print_media %}
+                <p>Print Media: <b><span class="res_cancelled">{{ reservation.print_media }}</span></b></p>
+            {% endif %}
+            
         </div>
         {% endif %}
 
