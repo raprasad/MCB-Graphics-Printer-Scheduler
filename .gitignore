@@ -1,7 +1,7 @@
 *.pyc
 
 mcb_printer_scheduler/config/desktop.py
-mcb_printer_scheduler/config/prod.py
+mcb_printer_scheduler/config/prod*.py
 db/*.db3
 fixtures/*
 # after running collectstatic

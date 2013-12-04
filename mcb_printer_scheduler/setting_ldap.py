@@ -5,8 +5,8 @@ if socket.gethostbyname(socket.gethostname()) == '140.247.195.248':
     import config.prod as config
     #import config.prod_authz_01 as config
 else:
-    #import config.desktop as config
-    import config.desktop_authz as config
+    import config.desktop as config
+    #import config.desktop_authz as config
     
 DEBUG = config.DEBUG
 TEMPLATE_DEBUG = DEBUG
@@ -111,9 +111,9 @@ SESSION_COOKIE_NAME = config.SESSION_COOKIE_NAME
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
-#LDAP_CUSTOMER_NAME = config.LDAP_CUSTOMER_NAME
-#LDAP_CUSTOMER_PASSWORD = config.LDAP_CUSTOMER_PASSWORD
-#LDAP_SERVER = config.LDAP_SERVER
+LDAP_CUSTOMER_NAME = config.LDAP_CUSTOMER_NAME
+LDAP_CUSTOMER_PASSWORD = config.LDAP_CUSTOMER_PASSWORD
+LDAP_SERVER = config.LDAP_SERVER
 
 HU_PIN_LOGIN_APP_NAME = config.HU_PIN_LOGIN_APP_NAME
 HU_PIN_LOGIN_APP_NAMES = config.HU_PIN_LOGIN_APP_NAMES
@@ -122,7 +122,6 @@ SMTP_CONNECTION_STRING = 'mail.fas.harvard.edu'
 EMAIL_HOST = 'mail.fas.harvard.edu' 
 
 GNUPG_HOME = config.GNUPG_HOME
-GPG_PASSPHRASE = config.GPG_PASSPHRASE
 
 MCB_GRAPHICS_EMAIL = config.MCB_GRAPHICS_EMAIL
 

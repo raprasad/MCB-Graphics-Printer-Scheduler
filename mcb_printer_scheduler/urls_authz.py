@@ -6,12 +6,6 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'mcb_printer_scheduler.views.home', name='home'),
-    # url(r'^mcb_printer_scheduler/', include('mcb_printer_scheduler.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
     url(r'^poster-printer/graphics-admin/', include(admin.site.urls)),
@@ -25,23 +19,19 @@ urlpatterns = patterns('',
     #url(r'^poster-printer/user-auth/', include('mcb_printer_scheduler.login.urls')),
 
     url(r'^poster-printer/history/', include('mcb_printer_scheduler.reservation_history.urls')),
-
+    
     url(r'^poster-printer/faqs/', include('mcb_printer_scheduler.faqs.urls')),
     
-    #url(r'^poster-printer/hu-auth/', include('mcb_printer_scheduler.login.urls')),
-    
     url(r'^poster-printer/hu-azp/', include('mcb_printer_scheduler.hu_authz_handler.urls')),
-    
+        
     url(r'^poster-printer/logos/', include('mcb_printer_scheduler.design_links.urls')),
-    #url(r'^mcb/hu_auth/', include('mcb_printer_scheduler.login.urls')),
-
-    (r'^poster-printer/media/(?P<path>.*)$', 'django.views.static.serve'\
-        , {'document_root': settings.MEDIA_ROOT }),
     
+    #(r'^poster-printer/media/(?P<path>.*)$', 'django.views.static.serve'\
+    #    , {'document_root': settings.MEDIA_ROOT }),
     url(r'^poster-printer/$', include('mcb_printer_scheduler.schedule_viewer.urls')),
     
-    #(r'^$', RedirectView.as_view(url='/poster-printer/calendar/')),
+    (r'^$', RedirectView.as_view(url='/poster-printer/calendar/')),
     
 )
 
-urlpatterns += staticfiles_urlpatterns()
+#urlpatterns += staticfiles_urlpatterns()
