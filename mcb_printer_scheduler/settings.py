@@ -2,8 +2,8 @@
 import socket
 
 if socket.gethostbyname(socket.gethostname()) == '140.247.195.248':
-    import config.prod as config
-    #import config.prod_authz_01 as config
+    #import config.prod as config
+    import config.prod_authz_01 as config
 else:
     #import config.desktop as config
     import config.desktop_authz as config
