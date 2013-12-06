@@ -25,6 +25,10 @@
             <p>Start Time: <b>{{ reservation.start_datetime|date:"F j, Y" }} at {{ reservation.start_datetime|date:"P" }}</b></p>
             <p>End Time: <b>{{ reservation.end_datetime|date:"F j, Y" }} at {{ reservation.end_datetime|date:"P" }}</b></p>
             {% endifequal %}
+            {% if reservation.billing_code %}
+            <p>Billing Code: <b>{{ reservation.billing_code }}</b></p>
+            {% endif %}
+            
             {% if reservation.include_poster_tube %}
                 <p>Poster Tube: <b>{{ reservation.poster_tube_details }}</b></p>
             {% else %}
