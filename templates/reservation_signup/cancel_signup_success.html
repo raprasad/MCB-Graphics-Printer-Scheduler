@@ -23,6 +23,10 @@
             <p>End Time: <b><span class="res_cancelled">{{ reservation.end_datetime|date:"F j, Y" }} at {{ reservation.end_datetime|date:"P" }}</span></b></p>
             {% endifequal %}
 
+            {% if reservation.billing_code %}
+            <p>Billing Code: <b><span class="res_cancelled">{{ reservation.billing_code }}</span></b></p>
+            {% endif %}
+
             {% if reservation.include_poster_tube %}
             <p>Poster Tube: <b><span class="res_cancelled">{{ reservation.poster_tube_details }}</span></b></p>
             {% else %}
