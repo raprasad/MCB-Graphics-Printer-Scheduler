@@ -6,6 +6,9 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.core.mail import send_mail
 
+from calendar_user.models import CalendarUser
+#from cal_util.view_util import get_common_lookup
+
 #from hu_pin_auth.pin_login_handler import PinLoginHandler
 from hu_authzproxy.authzproxy_login_handler import AuthZProxyLoginHandler
 from hu_authzproxy.authz_proxy_validation_info import AuthZProxyValidationInfo
@@ -65,6 +68,15 @@ def view_handle_authz_callback(request):
 
     if authz_pin_login_handler.did_login_succeed():
         login(request, authz_pin_login_handler.get_user())
+        
+        try:
+            cal_user = CalendarUser.objects.get(user=django_user)
+        except CalendarUser.DoesNotExist:
+            cal_user = CalendarUser(user=pin_login_handler.get_user()\
+                            , is_calendar_admin=False
+                            , contact_email=django_user.email)
+            cal_user.save()
+        
         return HttpResponseRedirect(next)
 
     # Errors while logging in!
