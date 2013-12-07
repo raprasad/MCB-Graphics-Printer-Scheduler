@@ -26,8 +26,19 @@ from django.conf import settings
         return render_to_response('login/logout_page.html', lu, context_instance=RequestContext(request))
 """
 
+def get_or_create_calendar_user(django_user):
+    try:
+        cal_user = CalendarUser.objects.get(user=django_user)
+    except CalendarUser.DoesNotExist:
+        cal_user = CalendarUser(user=django_user #pin_login_handler.get_user()\
+                        , is_calendar_admin=False
+                        )
+        if django_user.email:
+            cal_user.contact_email=django_user.email
+        cal_user.save()
 
-
+    return cal_user
+    
 def view_handle_authz_callback(request):
     """View to handle pin callback
     If authentication is succesful:
@@ -36,6 +47,7 @@ def view_handle_authz_callback(request):
     """
     print 'blah'
     if request.user.is_authenticated():
+        get_or_create_calendar_user(request.user)
         print '(1) already authenticated'
         return HttpResponseRedirect(reverse('view_current_month_calendar', kwargs={}))
 
@@ -70,6 +82,8 @@ def view_handle_authz_callback(request):
         django_user = authz_pin_login_handler.get_user()
         login(request, django_user)
         
+        get_or_create_calendar_user(django_user)
+        """
         try:
             cal_user = CalendarUser.objects.get(user=django_user)
         except CalendarUser.DoesNotExist:
@@ -77,7 +91,7 @@ def view_handle_authz_callback(request):
                             , is_calendar_admin=False
                             , contact_email=django_user.email)
             cal_user.save()
-        
+        """
         return HttpResponseRedirect(next)
 
     # Errors while logging in!
