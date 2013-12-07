@@ -67,12 +67,13 @@ def view_handle_authz_callback(request):
 
 
     if authz_pin_login_handler.did_login_succeed():
-        login(request, authz_pin_login_handler.get_user())
+        django_user = authz_pin_login_handler.get_user()
+        login(request, django_user)
         
         try:
             cal_user = CalendarUser.objects.get(user=django_user)
         except CalendarUser.DoesNotExist:
-            cal_user = CalendarUser(user=pin_login_handler.get_user()\
+            cal_user = CalendarUser(user=django_user #pin_login_handler.get_user()\
                             , is_calendar_admin=False
                             , contact_email=django_user.email)
             cal_user.save()
