@@ -2,8 +2,7 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
-from django.contrib.auth import authenticate, login
-from django.contrib.auth import logout
+from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail
 
 from calendar_user.models import CalendarUser
@@ -35,6 +34,8 @@ def get_or_create_calendar_user(django_user):
                         )
         if django_user.email:
             cal_user.contact_email=django_user.email
+        else:
+            cal_user.contact = 'need_email@harvard.edu'
         cal_user.save()
 
     return cal_user
@@ -45,10 +46,13 @@ def view_handle_authz_callback(request):
         - go to a specified 'next' link 
         - or default to the django admin index page
     """
-    print 'blah'
+    #print 'blah'
     if request.user.is_authenticated():
-        get_or_create_calendar_user(request.user)
-        print '(1) already authenticated'
+        # make sure still exists (e.g. CalendarUser not deleted during session)
+        if request.user.calendaruser_set.count() == 0:  # deleted, log the user out
+            logout(request)
+        else:
+            print '(1) already authenticated'
         return HttpResponseRedirect(reverse('view_current_month_calendar', kwargs={}))
 
     #
