@@ -123,7 +123,7 @@ def view_handle_authz_callback(request):
         admin_emails = None
     print admin_emails
     if admin_emails and len(admin_emails) > 0:
-        send_mail('grad db log in fail info', 'Here is the message. %s' % ('\n'.join(error_messages)), admin_emails[0], admin_emails,fail_silently=False)
+        send_mail('mcb printer scheduler db log in fail info', 'Here is the message. %s' % ('\n'.join(error_messages)), admin_emails[0], admin_emails,fail_silently=False)
 
     # send the error flags to the template
     return render_to_response('hu_authz_handler/view_authz_login_failed.html', err_dict, context_instance=RequestContext(request))
