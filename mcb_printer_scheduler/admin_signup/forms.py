@@ -5,7 +5,7 @@ from datetime import timedelta
 from reservation_type.conflict_checker import ConflictChecker
 from reservation_type.time_slot_maker import TimeSlot
 
-from calendar_event.models import CalendarEvent, Reservation
+from calendar_event.models import CalendarEvent, Status, Reservation
 from calendar_user.models import CalendarUser
 from poster_tube.models import PosterTubeColor, PosterTubeType
 from media_type.models import PrintMediaType
@@ -19,6 +19,8 @@ def get_calendar_choices():
 def get_color_choices():
     return map(lambda x: (x.name, x.name), PosterTubeColor.objects.all())
 
+def get_status_choices():
+    return map(lambda x: (x.id, x.name.capitalize()), Status.objects.all().order_by('sort_order'))
 
 class AdminSignupForm(forms.Form):
     """Form used for a regular user to reserve a time."""
@@ -40,6 +42,8 @@ class AdminSignupForm(forms.Form):
     poster_tube_type = forms.ModelChoiceField(label='Poster tube (optional)', queryset=PosterTubeType.objects.filter(available=True), required=False)
     poster_tube_color = forms.ChoiceField(choices=get_color_choices(), required=False)
     note = forms.CharField(label='Note', required=False, widget=forms.Textarea(attrs={'rows': 3, 'cols': 25}))
+
+    status = forms.ChoiceField(label='Status', choices=get_status_choices())
     
     def init(self, time_slot_choices, session_length, cal_user):   
         self.fields['time_slot'].widget.choices = time_slot_choices
@@ -51,7 +55,8 @@ class AdminSignupForm(forms.Form):
         self.fields['phone_number'].initial = cal_user.phone_number
         self.fields['billing_code'].initial = cal_user.billing_code
         self.fields['lab_name'].initial = cal_user.lab_name
-
+        self.fields['status'].choices = map(lambda x: (x.id, x.name.capitalize()), Status.objects.all().order_by('sort_order'))
+        #self.fields['status'].initial = cal_user.id 
 
     def get_time_slot_object(self):
         
@@ -124,6 +129,12 @@ class AdminSignupForm(forms.Form):
             calendar_user = CalendarUser.objects.get(pk=cal_user_id)
         except CalendarUser.DoesNotExist: 
             return None
+
+        try:
+            status_id = self.cleaned_data.get('status')
+            status = Status.objects.get(pk=status_id)
+        except Status.DoesNotExist: 
+            return None
         
         
         poster_tube_type = self.cleaned_data.get('poster_tube_type')
@@ -136,6 +147,7 @@ class AdminSignupForm(forms.Form):
             poster_tube_details = ''
             
         res = Reservation(user=calendar_user\
+                        , status=status\
                         , contact_email=self.cleaned_data.get('email')\
                         , contact_phone=self.cleaned_data.get('phone_number')\
                         , start_datetime = ts_obj.start_datetime\
@@ -160,3 +172,11 @@ class AdminSignupForm(forms.Form):
         
         return res
              
+
+class AdminStatusForm(forms.Form):
+    """Form used for an admin user to change the status of a reservation."""
+    reservation = forms.CharField(label='Reservaion', max_length=100) 
+    status = forms.ChoiceField(label='Status', choices=get_status_choices())
+    
+    def __init__(self):   
+        self.fields['status'].choices = map(lambda x: (x.id, x.name.capitalize()), Status.objects.all().order_by('sort_order'))

@@ -49,6 +49,11 @@
                         </th>
                     <th>poster&nbsp;tube</th>
                     <th>cancelled?</th>
+		    {% if calendar_user.is_calendar_admin and calendar_user.user.is_staff %}
+		    <th>Status</th>
+		    <th>Free Timeslot</th>
+		    <th>Invoice</th>
+		    {% endif %}
                 </tr>
          {% for r in reservations %}
             <tr>
@@ -76,6 +81,30 @@
                 <td>{% if r.is_cancelled %}YES <div class="cancelled_box"></div>
                     
                     {% else %}no <div class="enabled_box"></div>{% endif %}</td>
+		{% if calendar_user.is_calendar_admin and calendar_user.user.is_staff %}
+		<td>
+		    {% if r.calendarevent_ptr.status.next %}
+		      {{ r.calendarevent_ptr.status.name|title }} <br/>
+                      <a href="{% url 'view_mark_status' r.id r.calendarevent_ptr.status.next %}">Change to 
+			{{ r.calendarevent_ptr.status.next|title }}</a>
+		    {% else %}
+		      {{ r.calendarevent_ptr.status.name|title }}
+		    {% endif %}		  
+		</td>
+		<td>
+		  {% if not r.calendarevent_ptr.is_timeslot_free %}
+		      Timeslot is locked
+		      <a href="{% url 'view_mark_timeslot_free' r.id 'True' %}">Make timeslot free</a>
+		  {% else %}
+		      Timeslot is free
+		      <a href="{% url 'view_mark_timeslot_free' r.id 'False' %}">Make timeslot locked</a>
+		  {% endif %}
+		  </td>
+		<td>
+		  <a href="{% url 'view_create_invoice' r.id %}">Create Invoice</a>
+		  </td>
+
+		{% endif %}
             </tr>
             
          {% empty %}

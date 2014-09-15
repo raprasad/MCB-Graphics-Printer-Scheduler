@@ -9,7 +9,37 @@ try:
     from hashlib import sha1
 except:
     import md5
+
+class Status(models.Model):
+    name = models.CharField(blank=False, max_length=30)
+    hex_color = models.CharField(blank=True, max_length=8)
+    sort_order = models.IntegerField(default=99)
     
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        ordering = ('sort_order', 'name')
+        db_table = 'cal_event_status'
+        verbose_name = 'Event Status'
+        verbose_name_plural = 'Event Statuses'
+
+    @property
+    def prev(self):
+        prev_num = self.sort_order - 1
+        try:
+            return Status.objects.get(sort_order=prev_num)
+        except:
+            return None
+
+    @property
+    def next(self):
+        next_num = self.sort_order + 1
+        try:
+            return Status.objects.get(sort_order=next_num)
+        except:
+            return None
+
 class CalendarEvent(models.Model):
     """
     Basic calendar event class
@@ -28,7 +58,7 @@ class CalendarEvent(models.Model):
     
     created = models.DateTimeField(auto_now_add=True)
     last_update = models.DateTimeField(auto_now=True)
-    
+    status = models.ForeignKey('Status', default=Status.objects.get(name="reserved"))
     
     def __unicode__(self):
         return self.display_name
@@ -73,7 +103,7 @@ class CalendarEvent(models.Model):
         verbose_name_plural = 'Calendar Events (view all events)'
         db_table = 'cal_event'
         
-         
+
 class Reservation(CalendarEvent):
     user = models.ForeignKey(CalendarUser)
     contact_email = models.EmailField()
@@ -87,7 +117,7 @@ class Reservation(CalendarEvent):
     poster_tube_details = models.CharField(max_length=255, blank=True)
 
     print_media = models.ForeignKey(PrintMediaType, blank=True, null=True)
-    
+
     def is_reservation(self):
         """convenience for templates"""
         return True

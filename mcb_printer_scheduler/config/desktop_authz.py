@@ -14,10 +14,26 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-     ('Raman Prasad', 'raman_prasad@harvard.edu'),
+     ('Eric Mattison', 'eric_mattison@harvard.edu'),
 )
 
+HOSTNAME = 'localhost:8080'
+
 MANAGERS = ADMINS
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'printer', 
+        'USER': 'printer',                      # Not used with sqlite3.
+        'PASSWORD': 'Pr1nt3r!',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+    }
+}
+
+"""
+print os.path.join(PROJECT_DIRECTORY, 'db', 'printer.db3')
 
 DATABASES = {
     'default': {
@@ -29,6 +45,7 @@ DATABASES = {
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
+"""
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -108,15 +125,16 @@ INSTALLED_APPS = (
     #'hu_ldap_basic',
     #'hu_pin_auth',
     #'hu_authzproxy',
+    'wkhtmltopdf',
     'mcb_printer_scheduler.media_type',
     'mcb_printer_scheduler.poster_tube',
     'mcb_printer_scheduler.calendar_user',
     'mcb_printer_scheduler.calendar_event',
     'mcb_printer_scheduler.mcb_image_record',
     'mcb_printer_scheduler.reservation_type',
-    'mcb_printer_scheduler.hu_authz_handler',
+    #'mcb_printer_scheduler.hu_authz_handler',
     'mcb_printer_scheduler.design_links',
-
+    'mcb_printer_scheduler.invoice',
 )
 
 LOGIN_URL = '/poster-printer/'
@@ -126,8 +144,8 @@ HU_PIN_LOGIN_APP_NAMES = (HU_PIN_LOGIN_APP_NAME,) #'FAS_MCB_AUTH_DEV',)
 
 SESSION_COOKIE_NAME = 'mcb_graphics_poster_printer_test'
 
-AUTHENTICATION_BACKENDS = (   'django.contrib.auth.backends.ModelBackend'\
-        ,'hu_authzproxy.hu_authz_pin_backend.HarvardAuthZProxyBackend' \
+AUTHENTICATION_BACKENDS = (   'django.contrib.auth.backends.ModelBackend',
+        #,'hu_authzproxy.hu_authz_pin_backend.HarvardAuthZProxyBackend' \
 )
 
 #LDAP_CUSTOMER_NAME = 'mcb'
@@ -140,7 +158,8 @@ GPG_PASSPHRASE = None
 
 MCB_GRAPHICS_EMAIL = 'raman_prasad@harvard.edu' # 'mcbgraphics@fas.harvard.edu'
 
-
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = '/vagrant/MCB-Graphics-Printer-Scheduler/email_log'
 
 LOGGING = {
     'version': 1,
@@ -160,4 +179,41 @@ LOGGING = {
     }
 }
 
+"""
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'datefmt' : "%d/%b/%Y %H:%M:%S"
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'error.log',
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers':['file'],
+            'propagate': True,
+            'level':'DEBUG',
+        },
+        'reservation_history': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+        },
+    }
+}
+"""
+
 POORMANS_DB_BACKUP_DIR = 'use for prod mysql backups'
+PRINT_PROOFING_COST = '0.6'
+TAX_RATE = '0.065'

@@ -9,8 +9,8 @@ from calendar_user.models import CalendarUser
 #from cal_util.view_util import get_common_lookup
 
 #from hu_pin_auth.pin_login_handler import PinLoginHandler
-from hu_authzproxy.authzproxy_login_handler import AuthZProxyLoginHandler
-from hu_authzproxy.authz_proxy_validation_info import AuthZProxyValidationInfo
+#from hu_authzproxy.authzproxy_login_handler import AuthZProxyLoginHandler
+#from hu_authzproxy.authz_proxy_validation_info import AuthZProxyValidationInfo
 
 from django.conf import settings
 

@@ -8,7 +8,7 @@ from reservation_type.time_slot_maker import TimeSlot
 from poster_tube.models import PosterTubeColor, PosterTubeType
 from media_type.models import PrintMediaType
 
-from calendar_event.models import CalendarEvent, Reservation
+from calendar_event.models import CalendarEvent, Status, Reservation
 
 from django.contrib.localflavor.us.forms import USPhoneNumberField
 
@@ -35,6 +35,7 @@ class SignupForm(forms.Form):
                             , required=False\
                             )
     poster_tube_color = forms.ChoiceField(choices=get_color_choices(), required=False)
+    #status = forms.ModelChoiceField(widget=forms.HiddenInput)
     
     def init(self, time_slot_choices, session_length, cal_user):   
         self.fields['time_slot'].widget.choices = time_slot_choices
@@ -44,7 +45,7 @@ class SignupForm(forms.Form):
         self.fields['phone_number'].initial = cal_user.phone_number
         self.fields['billing_code'].initial = cal_user.billing_code
         self.fields['lab_name'].initial = cal_user.lab_name
-
+        #self.fields['status'].initial = Status.objects.get(name="reserved")
 
     def get_time_slot_object(self):
         
@@ -100,13 +101,12 @@ class SignupForm(forms.Form):
         """If poster tube chosen, make sure color is chosen"""
         poster_tube_type = self.cleaned_data.get('poster_tube_type')
         poster_tube_color = self.cleaned_data.get('poster_tube_color')
+        status = self.cleaned_data.get('status')
         #if poster_tube_type:
         #    if not poster_tube_color:
         #        self._errors['poster_tube_color'] = self.error_class(['Please choose a color.'])
         #        raise forms.ValidationError('If you choose a poster tube, please choose a color.')
         #poster_tube_color = self.cleaned_data.get('poster_tube_color')
-        
-         
         
         return self.cleaned_data
             
