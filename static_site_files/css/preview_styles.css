@@ -1,0 +1,134 @@
+body, td, th { 
+  font-family: "Arial", sans-serif;
+}
+
+#preview_div {
+  width: 100%;
+}
+
+#mcb_logo_div {
+}
+
+#graphics_address {
+  float: right;
+  text-align: right;
+}
+
+#summary_table_div {
+  width: 100%;
+  clear: both;
+}
+
+#summary_table {
+  width: 100%;
+  border: solid black 1px;
+  border-collapse: collapse;
+  background-image: url("/static/imgs/logos/gray_shield_red_text.png");
+  background-repeat: no-repeat;
+  background-position: center 40px; 
+}
+
+#summary_table th {
+  padding: .3em;
+  font-weight: bold;
+  font-size: 1.3em;
+  background-color: #ccc;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
+
+#top_header th {
+  border-bottom: 3px double black;
+}
+
+#client {
+  width: 20%;
+}
+
+#price {
+  width: 15%;
+}
+
+td {
+  padding: .3em .5em;
+}
+
+#summary_table td {
+  padding: .3em;
+  vertical-align: top;
+  font-size: 1em;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
+
+#summary_table td.description {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+#summary_table td.price {
+    border: 0px;
+    padding: 0;
+    padding-top: .1em;
+    padding-right: .1em;
+}
+
+#summary_table td.shim {
+    padding: 0;
+    width: 1px;
+    border-left: 0px;
+}
+
+
+#summary_table td.no_border {
+    border-right: none;
+}
+
+#summary_table td.totals {
+  border-left: none;
+  border-right: none;
+}
+
+#billing_row td {
+  border-top: 1px solid black;
+}
+
+.dark_gray {
+  background-color: #ccc;
+}
+
+.light_gray {
+  background-color: #eee;
+}
+
+.align_center {
+  text-align: center;
+}
+
+.align_right {
+  text-align: right;
+}
+
+#hu_dept_of {
+  font: 1.5em arial, sans-serif;
+  color: #e6e6e6;
+  padding: .7em 0;
+}
+
+#mcb_title_div {
+  width: 100%;
+}
+
+#phone_div {
+  float: right;
+  text-align: right;
+}
+
+#download_pdf {
+  float: right;
+  text-align: right;
+}
+
+.hidden {
+  display: none;
+}

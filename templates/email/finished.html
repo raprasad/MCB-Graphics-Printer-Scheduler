@@ -1,0 +1,24 @@
+<style>
+font-family: arial, sans-serif;
+</style>
+
+{{ cal_user.user.email }}
+<p>Hi {% if cal_user.user.first_name %}{{ cal_user.user.first_name }}{% else %}{{ cal_user }}{% endif %},</p>
+
+<p>Your poster is printed and ready for pick-up.</p>
+
+<p>See you soon!</p>
+
+<p>{{ cal_admin.user.first_name }} {{ cal_admin.user.last_name }}<br />
+Harvard University<br />
+Department of Molecular and Cellular Biology </p>
+
+<p><img src="http://{{ hostname }}{{ static_url }}imgs/mcb_graphics.png" title="MCB Graphics" /><br />
+mcb graphics<br />
+16 Divinity Ave, BL.2058 <br />
+Cambridge, MA 02138</p>
+
+<p>Doors are unlocked M-F 9:00 AM to 7:00 PM<br />
+<a href="mailto:mcbgraphics@fas.harvard.edu">mcbgraphics@fas.harvard.edu</a></p>
+
+
