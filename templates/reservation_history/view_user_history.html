@@ -1,5 +1,18 @@
 {% extends "base.html" %}
 {% load url from future %}
+
+{% block extra_header %}
+<style>
+{% for status in stati %}
+span.class_{{ status.name }}_highlight {
+  background-color: {{ status.hex_color }};
+  color: #fff;
+}
+{% endfor %}
+</style>
+{% endblock %}
+
+
 {% block main_content %}
 
         
@@ -83,13 +96,16 @@
                     {% else %}no <div class="enabled_box"></div>{% endif %}</td>
 		{% if calendar_user.is_calendar_admin and calendar_user.user.is_staff %}
 		<td>
-		    {% if r.calendarevent_ptr.status.next %}
-		      {{ r.calendarevent_ptr.status.name|title }} <br/>
-                      <a href="{% url 'view_mark_status' r.id r.calendarevent_ptr.status.next %}">Change to 
-			{{ r.calendarevent_ptr.status.next|title }}</a>
+		  {% for status in stati %}
+		    {% if r.calendarevent_ptr.status.next == status %}
+		      <a href="{% url 'view_mark_status' r.id r.calendarevent_ptr.status.next %}">{{ status.name|title }}</a>
+		    {% elif r.calendarevent_ptr.status == status %}
+		      <span class="class_{{ status.name }}_highlight">{{ status.name|title }}</span>
 		    {% else %}
-		      {{ r.calendarevent_ptr.status.name|title }}
-		    {% endif %}		  
+ 		      {{ status.name|title }} 
+		    {% endif %}
+		  {% endfor %}
+		      
 		</td>
 		<td>
 		  {% if not r.calendarevent_ptr.is_timeslot_free %}
