@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block main_content %}
+    <div style="float:left; width:400px;">
+        {% if not ERR_found %}
+        <h3 style="margin:0 0 20px 0; color:green;">Billing Code Reminder Sent</h3>
+        {% else %}
+        <h3 style="margin:0 0 20px 0;">Reminder Email Failed</h3>
+        {% endif %}
+
+
+        {% include "reservation_signup/link_return_to_monthly_cal.html" %}
+
+
+     	{% include "reservation_signup/signup_errs.html" %}
+		
+       
+    </div>
+    
+    {% include "reservation_signup/right_col_reservations.html" %}
+    
+	<div class="clear"></div>
+{% endblock %}

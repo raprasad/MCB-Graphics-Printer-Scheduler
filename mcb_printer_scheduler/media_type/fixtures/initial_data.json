@@ -1,0 +1,22 @@
+[
+  {
+    "pk": 1, 
+    "model": "media_type.printmediatype", 
+    "fields": {
+      "available": true, 
+      "sort_order": 1, 
+      "dollar_cost": 5,
+      "name": "Paper ($5.00/sq ft)"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "media_type.printmediatype", 
+    "fields": {
+      "available": true, 
+      "sort_order": 2, 
+      "dollar_cost": 9,
+      "name": "Fabric ($9.00/sq ft)"
+    }
+  }
+]

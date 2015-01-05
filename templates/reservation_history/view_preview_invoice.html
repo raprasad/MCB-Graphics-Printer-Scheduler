@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+{% load i18n admin_modify adminmedia %}
+{% load url from future %}
+
+{% block extra_header %}
+{{ block.super }}
+
+<link rel="stylesheet" type="text/css" href="/media/admin/css/forms.css"/>
+<link rel="stylesheet" type="text/css" href="{% admin_media_prefix %}css/widgets.css" />
+<script type="text/javascript" src="/poster-printer/graphics-admin/jsi18n/"></script>
+<script type="text/javascript" src="{% admin_media_prefix %}js/core.js"></script>
+<script type="text/javascript" src="{% admin_media_prefix %}js/admin/RelatedObjectLookups.js"></script>
+<script type="text/javascript" src="{% admin_media_prefix %}js/jquery.js"></script>
+<script type="text/javascript" src="{% admin_media_prefix %}js/jquery.init.js"></script>
+<script type="text/javascript" src="{% admin_media_prefix %}js/actions.js"></script>
+
+<script type="text/javascript" src="{{ STATIC_URL }}jquery-ui/js/jquery-ui-1.8.18.custom.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}jquery-ui/css/ui-lightness/jquery-ui-1.8.18.custom.css" />
+
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/preview_styles.css" />
+
+<script type="text/javascript">
+$(function() {
+  //Kind of a hack...
+  $("#id_download_pdf").val("True");
+
+  var dialog = $( "#confirm_dialog" ).dialog({
+    autoOpen: false,
+    height: 300,
+    width: 350,
+    modal: true,
+    buttons: {
+    "Send Email": function() {
+          $(this).dialog("close");
+          $("#download_form").submit();
+       },
+    "Cancel": function() {
+          $(this).dialog("close");
+       }
+    },
+    Cancel: function() {
+          $(this).dialog("close");
+    }
+  });
+
+  $("#button_submit").click(function(event) {
+    event.preventDefault();
+    dialog.dialog("open");
+  });
+
+  $("#button_submit_top").click(function(event) {
+    event.preventDefault();
+    dialog.dialog("open");
+  });
+});
+</script>
+
+{{ form.media }}
+{% endblock %}
+
+{% block main_content %}
+
+<span style="float: right;"><button type="button" id="button_submit_top">Download and Send PDF</button><br />
+<a href="{% url 'view_current_month_calendar' %}">Back to Monthly Calendar</a></span>
+<h1>PDF Preview</h1>        
+
+<div id="preview_div" style="clear: both;">
+
+<div id="graphics_address">
+{{ cal_user.user.first_name }} {{ cal_user.user.last_name }}<br />
+{% if cal_user.title %}
+  {{ cal_user.title }}<br />
+{% endif %}
+Harvard University<br />
+Dept. of Molecular and Cellular Biology<br />
+16 Divinity Ave. BL2025B<br />
+Cambridge, MA 02138<br />
+{{ cal_user.user.email }}<br />
+</div> <!-- end graphics address -->
+
+<div id="mcb_logo_div"><img src="{{ STATIC_URL }}imgs/mcb_graphics.png" /></div>
+
+<div id="summary_table_div">
+<table id="summary_table">
+  <tr id="top_header">
+    <th class="align_center" id="client">Client</th>
+    <th class="align_center" id="date_completed">Date Completed</th>
+    <th class="align_center" id="description">Description</th>
+    <th class="align_center" id="prod_cost">Prod. Cost</th>
+    <th class="align_center" id="price" colspan="3">Price</th>
+  </tr>
+  <tr class="data_row first_row" style="height: 50px">
+    <td class="align_center">{{ user_fullname }}<br />
+    {{ reservation.lab_name }}</td>
+    <td class="align_center">{{ fd.completed_date }}</td>
+    <td class="description">{{ fd.note }}</td>
+    <td class="align_center">(${{ fd.print_media.dollar_cost|floatformat:2 }} x {{ fd.sq_feet }} ft<sup>2</sup> + ${{ print_proofing_cost|floatformat:2 }})</td>
+    <td class="no_border"></td>
+    <td class="price align_right">${{ fd.base_cost|floatformat:2 }}</td>
+    <td class="shim" rowspan="3" style="width: 1px;"><img id="shim_image" src="{{ STATIC_URL }}imgs/trans.png" width="1" /></td>
+  </tr>
+
+  <tr class="data_row" style="height: 50px">
+    <td class="align_center"></td>
+    <td class="align_center"></td>
+    <td class="description">Poster Tube: {{ poster_tube }}</td>
+    <td class="align_center">${{ poster_tube.price|floatformat:2 }}</td>
+    <td class="no_border"></td>
+    <td class="price align_right">${{ poster_tube.price|floatformat:2 }}</td>
+  </tr>
+
+  <tr class="data_row">
+    <td class="align_center"></td>
+    <td class="align_center"></td>
+    <td class="description">Extra Services: {{ fd.extra }}</td>
+    <td class="align_center">${{ fd.extra_cost|floatformat:2 }}</td>
+    <td class="no_border"></td>
+    <td class="price align_right">${{ fd.extra_cost|floatformat:2 }}</td>
+  </tr>
+
+  <tr id="billing_row">
+    <td class="light_gray align_right">Billing Date:</td>
+    <td class="light_gray" colspan="3">{{ fd.billing_date }}</td>
+    <td class="totals align_right">Subtotal:</td>
+    <td class="totals align_right" colspan="2">${{ fd.subtotal_cost|floatformat:2 }}</td>
+  </tr>
+  <tr id="invoice_no_row">
+    <td class="light_gray align_right">Invoice Number:</td>
+    <td class="light_gray" colspan="3"><strong>{{ invoice_code }}</strong></td>
+    <td class="totals align_right">Tax:</td>
+    <td class="totals align_right" style="border-bottom: 1px solid black;" colspan="2">${{ fd.tax|floatformat:2 }}</td>
+  </tr>
+  <tr id="total_cost_row">
+    <td class="light_gray align_right">Billing Code:</td>
+    <td class="light_gray" colspan="3"><strong>{{ billing_code }}</strong></td>
+    <td class="totals align_right"><strong>Total:</strong></td>
+    <td class="totals align_right" colspan="2"><strong>${{ fd.total_cost }}</strong></td>
+  </tr>
+  <tr id="account_row">
+    <td class="dark_gray align_right">Credited Account:</th>
+    <td class="dark_gray" colspan="3"><span style="background: #999; color: #fff; padding: .3em; letter-spacing: .3em;">
+	370-31520-8260-017150-610958-5000-00000</span></th>
+    <td class="totals light_gray" colspan="3"></td>
+  </tr>
+</table>
+
+</div> <!-- end summary_table_div -->
+
+<div id="hu_dept_of">HARVARD UNIVERSITY | DEPARTMENT OF</div>
+<div id="mcb_title_div"><img src="{{ STATIC_URL }}imgs/logos/molecular_and_cellular_biology.png" /></div>
+
+<div id="phone_div">phone: 617-496-9159</div>
+<div id="address_div">16 Divinity Avenue, Cambridge, MA 02138<br />
+<a href="mailto:{{ mcb_graphics_email }}">{{ mcb_graphics_email }}</a>
+</div>
+
+</div> <!-- end preview div -->
+	
+<div id="confirm_dialog">Are you sure you want to send an invoice to {{ user_fullname }} and download a PDF copy to your computer?</div>
+
+<div id="download_pdf">
+<form method="post" action="." id="download_form">
+{% csrf_token %}
+<div class="hidden">
+{{ form }}
+</div>
+<button type="button" id="button_submit">Download and Send PDF</button>
+</form>
+</div>
+<div id="back"><a href="{% url 'view_reservation_history' cal_user.id_hash %}">Back to Reservation History</a></div>
+
+{% endblock %}

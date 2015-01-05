@@ -1,0 +1,16 @@
+Hi {% if cal_user.user.first_name %}{{ cal_user.user.first_name }}{% else %}{{ cal_user }}{% endif %},
+
+Attached is your copy of an invoice for printing done on {{ cal_event.start_datetime|date:"D., M d Y" }}.
+
+Best,
+
+{{ cal_admin.user.first_name }} {{ cal_admin.user.last_name }}
+Harvard University
+Department of Molecular and Cellular Biology 
+
+mcb graphics
+16 Divinity Ave, BL.2058 
+Cambridge, MA 02138
+
+Doors are unlocked M-F 9:00 AM to 7:00 PM
+mcbgraphics@fas.harvard.edu
