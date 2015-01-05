@@ -178,7 +178,11 @@ div.cal_day_time_msg{background-color:#dadade;color:#1a2f5a; line-height:140%;pa
 div.cal_fullday_msg{background-color:#fad4d4;color:#1a2f5a; padding:15px 2px; margin:3px 0;line-height:120%; }
 
 div.day_evt_listing .cal_day_time a.cal_name_regular {
+<<<<<<< HEAD
     font-size:100%;
+=======
+    font-size:110%;
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
     cursor: pointer;
     text-decoration: underline;
 }
@@ -209,8 +213,13 @@ div.day_evt_listing .cal_day_time a.cal_name_admin_orig:hover { color:#ff0000;}
 
 
 div.cal_day{padding:2px 0 5px 0;}
+<<<<<<< HEAD
 div.cal_day a {font-size:10px; text-decoration:underline;}
 div.cal_day_orig a {font-size:10px; color:#2952ae; text-decoration:underline;}
+=======
+div.cal_day a {font-size:11px; text-decoration:underline;}
+div.cal_day_orig a {font-size:11px; color:#2952ae; text-decoration:underline;}
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
 div.cal_day_orig a:hover{color:#ff0000;}
 
 /* navigation menu by montly */

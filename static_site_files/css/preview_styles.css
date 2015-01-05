@@ -23,7 +23,11 @@ body, td, th {
   width: 100%;
   border: solid black 1px;
   border-collapse: collapse;
+<<<<<<< HEAD
   background-image: url("/poster-printer/static/imgs/logos/gray_shield_red_text.png");
+=======
+  background-image: url("/static/imgs/logos/gray_shield_red_text.png");
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
   background-repeat: no-repeat;
   background-position: center 40px; 
 }
@@ -53,7 +57,11 @@ td {
   padding: .3em .5em;
 }
 
+<<<<<<< HEAD
 #summary_table tr td {
+=======
+#summary_table td {
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
   padding: .3em;
   vertical-align: top;
   font-size: 1em;
@@ -61,38 +69,61 @@ td {
   border-right: 1px solid black;
 }
 
+<<<<<<< HEAD
 #summary_table tr td.description {
+=======
+#summary_table td.description {
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
     padding-left: 1em;
     padding-right: 1em;
 }
 
+<<<<<<< HEAD
 #summary_table tr td.price {
+=======
+#summary_table td.price {
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
     border: 0px;
     padding: 0;
     padding-top: .1em;
     padding-right: .1em;
 }
 
+<<<<<<< HEAD
 #summary_table tr td.shim {
+=======
+#summary_table td.shim {
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
     padding: 0;
     width: 1px;
     border-left: 0px;
 }
 
 
+<<<<<<< HEAD
 #summary_table tr td.no_border {
     border-right: none;
 }
 
 #summary_table tr td.totals {
+=======
+#summary_table td.no_border {
+    border-right: none;
+}
+
+#summary_table td.totals {
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
   border-left: none;
   border-right: none;
 }
 
+<<<<<<< HEAD
 #summary_table tr.first_row td {
   padding-top: 1em;
 }
 
+=======
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
 #billing_row td {
   border-top: 1px solid black;
 }

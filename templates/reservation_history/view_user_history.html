@@ -6,9 +6,13 @@
 {% for status in stati %}
 span.class_{{ status.name }}_highlight {
   background-color: {{ status.hex_color }};
+<<<<<<< HEAD
   {% if status.name != 'received' %} 
   color: #fff;
   {% endif %}
+=======
+  color: #fff;
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
 }
 {% endfor %}
 </style>
@@ -100,6 +104,7 @@ span.class_{{ status.name }}_highlight {
 		<td>
 		  {% for status in stati %}
 		    {% if r.calendarevent_ptr.status.next == status %}
+<<<<<<< HEAD
 		      <span style="line-height: 1.8em;"><a href="{% url 'view_mark_status' r.id r.calendarevent_ptr.status.next %}">{{ status.name|title }}</a></span>
 		    {% elif r.calendarevent_ptr.status == status %}
 		      <span style="line-height: 1.8em;" class="class_{{ status.name }}_highlight">{{ status.name|title }}</span>
@@ -107,6 +112,13 @@ span.class_{{ status.name }}_highlight {
 		      <span style="line-height: 1.8em;"><a href="{% url 'view_mark_status' r.id status %}">{{ status.name|title }}</a></span>
 		    {% else %}
  		      <span style="line-height: 1.8em;">{{ status.name|title }}</span>
+=======
+		      <a href="{% url 'view_mark_status' r.id r.calendarevent_ptr.status.next %}">{{ status.name|title }}</a>
+		    {% elif r.calendarevent_ptr.status == status %}
+		      <span class="class_{{ status.name }}_highlight">{{ status.name|title }}</span>
+		    {% else %}
+ 		      {{ status.name|title }} 
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
 		    {% endif %}
 		  {% endfor %}
 		      

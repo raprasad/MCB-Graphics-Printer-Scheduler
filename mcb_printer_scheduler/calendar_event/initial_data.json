@@ -1,5 +1,6 @@
 [
   {
+<<<<<<< HEAD
     "pk": 3,
     "model": "calendar_event.status",
     "fields": {
@@ -23,6 +24,31 @@
     "fields": {
       "hex_color": "#990000",
       "sort_order": 1,
+=======
+    "pk": 3, 
+    "model": "calendar_event.status", 
+    "fields": {
+      "hex_color": "#00ff00", 
+      "sort_order": 3, 
+      "name": "finished"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "calendar_event.status", 
+    "fields": {
+      "hex_color": "#ffff00", 
+      "sort_order": 2, 
+      "name": "received"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "calendar_event.status", 
+    "fields": {
+      "hex_color": "#990000", 
+      "sort_order": 1, 
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
       "name": "reserved"
     }
   }

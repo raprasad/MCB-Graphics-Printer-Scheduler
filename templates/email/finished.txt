@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+{{ cal_user.user.email }}
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
 Hi {% if cal_user.user.first_name %}{{ cal_user.user.first_name }}{% else %}{{ cal_user }}{% endif %},
 
 Your poster is printed and ready for pick-up.

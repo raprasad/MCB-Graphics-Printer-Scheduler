@@ -35,8 +35,12 @@ class SignupForm(forms.Form):
                             , required=False\
                             )
     poster_tube_color = forms.ChoiceField(choices=get_color_choices(), required=False)
+<<<<<<< HEAD
     status = forms.ModelChoiceField(queryset=Status.objects.all().order_by('sort_order'),
                                     widget=forms.HiddenInput)
+=======
+    #status = forms.ModelChoiceField(widget=forms.HiddenInput)
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
     
     def init(self, time_slot_choices, session_length, cal_user):   
         self.fields['time_slot'].widget.choices = time_slot_choices
@@ -46,7 +50,11 @@ class SignupForm(forms.Form):
         self.fields['phone_number'].initial = cal_user.phone_number
         self.fields['billing_code'].initial = cal_user.billing_code
         self.fields['lab_name'].initial = cal_user.lab_name
+<<<<<<< HEAD
         self.fields['status'].initial = Status.objects.get(name="reserved")
+=======
+        #self.fields['status'].initial = Status.objects.get(name="reserved")
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
 
     def get_time_slot_object(self):
         

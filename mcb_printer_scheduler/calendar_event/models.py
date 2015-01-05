@@ -58,7 +58,11 @@ class CalendarEvent(models.Model):
     
     created = models.DateTimeField(auto_now_add=True)
     last_update = models.DateTimeField(auto_now=True)
+<<<<<<< HEAD
     status = models.ForeignKey('Status', default=Status.objects.get(name="reserved").id)
+=======
+    status = models.ForeignKey('Status', default=Status.objects.get(name="reserved"))
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
     
     def __unicode__(self):
         return self.display_name

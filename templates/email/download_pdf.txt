@@ -1,7 +1,16 @@
+<<<<<<< HEAD
+=======
+{{ cal_user.user.email }}
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
 Hi {% if cal_user.user.first_name %}{{ cal_user.user.first_name }}{% else %}{{ cal_user }}{% endif %},
 
 Attached is your copy of an invoice for printing done on {{ cal_event.start_datetime|date:"D., M d Y" }}.
 
+<<<<<<< HEAD
+=======
+If you have paid for this poster using a Harvard Expense code or need to be re-imbursed, please forward a copy of the attached invoice to your lab manager or financial officer.
+
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
 Best,
 
 {{ cal_admin.user.first_name }} {{ cal_admin.user.last_name }}

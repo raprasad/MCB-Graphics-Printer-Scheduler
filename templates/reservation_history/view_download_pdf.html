@@ -2,8 +2,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<<<<<<< HEAD
 <link href="{{ STATIC_URL }}css/mcb_graphics_print.css" type="text/css" rel="stylesheet">
 <link href="{{ STATIC_URL }}css/preview_styles.css" type="text/css" rel="stylesheet">
+=======
+<link href="/static/css/mcb_graphics_print.css" type="text/css" rel="stylesheet">
+<link href="/static/css/preview_styles.css" type="text/css" rel="stylesheet">
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
 </head>
 <body>
 <div id="container">
@@ -36,14 +41,23 @@ Cambridge, MA 02138<br />
     <th class="align_center" id="prod_cost">Prod. Cost</th>
     <th class="align_center" id="price" colspan="3">Price</th>
   </tr>
+<<<<<<< HEAD
   <tr class="data_row first_row" style="height: 50px">
     <td class="align_center">{{ user_fullname }}</td>
+=======
+  <tr class="data_row" style="height: 50px">
+    <td class="align_center">{{ cal_user }}</td>
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
     <td class="align_center">{{ fd.completed_date }}</td>
     <td class="description">{{ fd.note }}</td>
     <td class="align_center">(${{ fd.print_media.dollar_cost|floatformat:2 }} x {{ fd.sq_feet }} ft<sup>2</sup> + ${{ print_proofing_cost|floatformat:2 }})</td>
     <td class="no_border"></td>
     <td class="price align_right">${{ fd.base_cost|floatformat:2 }}</td>
+<<<<<<< HEAD
     <td class="shim" rowspan="3" style="width: 1px;"><img id="shim_image" src="{{ STATIC_URL }}imgs/trans.png" width="1" /></td>
+=======
+    <td class="shim" rowspan="3" style="width: 1px;"><img src="{{ STATIC_URL }}imgs/trans.png" width="1" height="420" /></td>
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
   </tr>
 
   <tr class="data_row" style="height: 50px">
@@ -95,9 +109,13 @@ Cambridge, MA 02138<br />
 <div id="hu_dept_of">HARVARD UNIVERSITY | DEPARTMENT OF</div>
 <div id="mcb_title_div"><img src="{{ STATIC_URL }}imgs/logos/molecular_and_cellular_biology.png" /></div>
 
+<<<<<<< HEAD
 <div id="phone_div">phone: 617-496-9159<br />
 <a href="mailto:{{ mcb_graphics_email }}">{{ mcb_graphics_email }}</a></div>
 
+=======
+<div id="phone_div">phone: 617-496-9159</div>
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
 <div id="address_div">16 Divinity Avenue, Cambridge, MA 02138</div>
 
 </div> <!-- end preview div -->

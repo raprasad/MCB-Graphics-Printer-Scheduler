@@ -135,7 +135,10 @@ def view_create_invoice(request, res_id):
                    , 'poster_tube': selected_poster_tube
                    , 'print_proofing_cost': Decimal(PRINT_PROOFING_COST)
                    , 'tax_rate': Decimal(TAX_RATE)
+<<<<<<< HEAD
                    , 'mcb_graphics_email': MCB_GRAPHICS_EMAIL
+=======
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
                })
 
     if request.method == 'POST':
@@ -148,6 +151,7 @@ def view_create_invoice(request, res_id):
             frm_data['extra'] = mark_safe(frm_data['extra'].replace('\n', '<br />\n'))
             prod_cost = frm_data['print_media'].name
             billing_code = frm_data['billing_code']
+<<<<<<< HEAD
             try:
                 poster_tube = PosterTubeType.objects.get(pk=frm_data['poster_tube'])
             except:
@@ -155,6 +159,9 @@ def view_create_invoice(request, res_id):
                     poster_tube = PosterTubeType.objects.get(name='No Tube')
                 except:
                     raise
+=======
+            poster_tube = PosterTubeType.objects.get(pk=frm_data['poster_tube'])
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
             cc = frm_data['cc']
             if frm_data['payment_method'] == 'cash':
                 billing_code = 'paid with cash'
@@ -169,7 +176,11 @@ def view_create_invoice(request, res_id):
         return render_to_response('reservation_history/view_form_create_invoice.html',
                                   lu, context_instance=RequestContext(request))
     else:
+<<<<<<< HEAD
         note_array = [reservation.note]
+=======
+        note_array = [reservation.lab_name, reservation.note]
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
         note_array = filter(None, note_array)
         note_string = '\n'.join(note_array)
         initial_form_data = {'note': note_string,
@@ -238,7 +249,11 @@ def download_invoice(request, filename, lu):
     p = Popen(cmd, stdout=PIPE, shell=True)
     output = p.communicate()
 
+<<<<<<< HEAD
     url = 'http://mcbweb.unix.fas.harvard.edu/poster-printer/history/display-invoice/%s/' % (lu['invoice_no'])
+=======
+    url = 'http://localhost/poster-printer/history/display-invoice/%s/' % (lu['invoice_no'])
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
     filepath = '/tmp/%s' % filename
     cmd  = '/usr/local/bin/wkhtmltopdf.sh %s %s' % (url, filepath)
     p = Popen(cmd, stdout=PIPE, shell=True)
@@ -270,12 +285,21 @@ def download_invoice(request, filename, lu):
     msg = EmailMultiAlternatives(subject, text_content, from_email, to)
     msg.attach_alternative(html_content, "text/html")
     msg.attach_file(filepath)
+<<<<<<< HEAD
     msg.send()
 
     #filename = "/vagrant/MCB-Graphics-Printer-Scheduler/email_log/email%s.txt" % datetime.now().strftime("%y%m%d_%H%M%S")
     #email_filename = "/vagrant/MCB-Graphics-Printer-Scheduler/email_log/download_invoice_%s.html" % datetime.now().strftime("%y%m%d_%H%M%S")
     #with open(email_filename, "w") as f:
     #    f.write(html_content)
+=======
+    #msg.send()
+
+    #filename = "/vagrant/MCB-Graphics-Printer-Scheduler/email_log/email%s.txt" % datetime.now().strftime("%y%m%d_%H%M%S")
+    email_filename = "/vagrant/MCB-Graphics-Printer-Scheduler/email_log/download_invoice_%s.html" % datetime.now().strftime("%y%m%d_%H%M%S")
+    with open(email_filename, "w") as f:
+        f.write(html_content)
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
 
 
     response = HttpResponse(pdf_data, content_type='application/pdf')
@@ -329,12 +353,21 @@ def view_mark_status(request, res_id, status):
     html_content = htmly.render(d)
     msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
     msg.attach_alternative(html_content, "text/html")
+<<<<<<< HEAD
     msg.send()
 
     #filename = "/vagrant/MCB-Graphics-Printer-Scheduler/email_log/email%s.txt" % datetime.now().strftime("%y%m%d_%H%M%S")
     #filename = "/vagrant/MCB-Graphics-Printer-Scheduler/email_log/email%s.html" % datetime.now().strftime("%y%m%d_%H%M%S")
     #with open(filename, "w") as f:
     #    f.write(html_content)
+=======
+    #msg.send()
+
+    #filename = "/vagrant/MCB-Graphics-Printer-Scheduler/email_log/email%s.txt" % datetime.now().strftime("%y%m%d_%H%M%S")
+    filename = "/vagrant/MCB-Graphics-Printer-Scheduler/email_log/email%s.html" % datetime.now().strftime("%y%m%d_%H%M%S")
+    with open(filename, "w") as f:
+        f.write(html_content)
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
 
     return redirect(reverse('view_reservation_history', kwargs={'id_hash': reservation.user.id_hash}))
 

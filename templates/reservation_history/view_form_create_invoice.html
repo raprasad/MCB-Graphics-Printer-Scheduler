@@ -37,8 +37,12 @@ $(function() {
     var base_cost = print_media_cost * sq_feet + parseFloat({{ print_proofing_cost }});
     base_cost = Math.round(base_cost * 100) / 100;
 
+<<<<<<< HEAD
     var subtotal = parseFloat(base_cost) + parseFloat(poster_val) + parseFloat(extra_cost);
     subtotal = Math.round(subtotal * 100) / 100;
+=======
+    var subtotal = parseFloat(base_cost) + parseFloat(poster_val) + parseFloat(extra_cost) + parseFloat({{ print_proofing_cost }});
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
     var total = subtotal;
 
     /* Add Tax if Taxable is checked */

@@ -25,10 +25,13 @@ click events: today/future
                         <a href="{% url 'view_cancel_signup' evt.id_hash %}" class="class_{{ evt.status.name|safe }} cal_name_regular">{{ evt.display_name|safe }}</a> {% if calendar_user.is_calendar_admin %}<a href="{% url 'view_reservation_history' evt.user.id_hash %}" class="class_{{ evt.status.name|safe }}">(h)</a>{% endif %}                        {% include "schedule_viewer/event_note_for_cal.html" %}
                     {% else %}{% if calendar_user.is_calendar_admin %}
                         <a href="{% url 'view_cancel_signup' evt.id_hash %}" class="class_{{ evt.status.name|safe }} cal_name_admin">{{ evt.display_name|safe }}</a> <a href="{% url 'view_reservation_history' evt.user.id_hash %}" class="class_{{ evt.status.name|safe }}">(h)</a>
+<<<<<<< HEAD
 
                         {% ifequal evt.print_media.name 'Fabric ($9/sq ft)' %}  <span style="color:red">(F)</span>  {% endifequal %}
                         {% if 'Satin' in evt.print_media.name %}  <span style="color:blue">(S)</span>  {% endif %}
 
+=======
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
                         {% include "schedule_viewer/event_note_for_cal.html" %}
 
                     {% else %}
@@ -36,7 +39,11 @@ click events: today/future
                         <!-- <span style="color:#1a2f5a;">{{ evt.display_name|safe }}</span> -->
                     {% endif %}{% endifequal %}
                 {% else %}
+<<<<<<< HEAD
 		    <span class="class_{{ evt.status.name|safe }}">{{ evt.display_name|safe }}</span>
+=======
+		    <span class="class_{{ evt.status.name|safe }}">{{ evt.display_name|safe }}</span> -->
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
                     <!-- <span style="color:#1a2f5a;">{{ evt.display_name|safe }}</span> -->
                 {% endif %} 
 		    </div>

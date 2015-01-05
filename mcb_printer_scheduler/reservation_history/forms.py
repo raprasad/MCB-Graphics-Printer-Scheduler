@@ -55,7 +55,11 @@ class CreateInvoiceForm(ModelForm):
     pts = []
     for pt in poster_tube_types:
         pts.append((pt.id, '%s ($%0.2f)' % (pt.name, pt.price)))
+<<<<<<< HEAD
     pts.insert(0, pts.pop())
+=======
+    pts.insert(0, (0, ' No Tube ($0.00)'))
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
 
     poster_tube = forms.ChoiceField(label='Poster Tube Types',
                                     choices=pts)

@@ -133,11 +133,19 @@ class ImageRecord(models.Model):
         html_content = htmly.render(d)
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
         msg.attach_alternative(html_content, "text/html")
+<<<<<<< HEAD
         msg.send()
 
         #filename = "/vagrant/MCB-Graphics-Printer-Scheduler/email_log/email%s.txt" % datetime.now().strftime("%y%m%d_%H%M")
         #with open(filename, "w") as f:
         #    f.write(text_content)
+=======
+        #msg.send()
+
+        filename = "/vagrant/MCB-Graphics-Printer-Scheduler/email_log/email%s.txt" % datetime.now().strftime("%y%m%d_%H%M")
+        with open(filename, "w") as f:
+            f.write(text_content)
+>>>>>>> f332f6d3abe8d6a74fad9bb430a11b41d71a5904
             
     def save(self):    
         if self.id is None:
