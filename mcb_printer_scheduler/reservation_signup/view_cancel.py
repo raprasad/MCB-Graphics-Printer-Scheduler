@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from calendar_event.models import CalendarEvent, Reservation
 from reservation_type.time_slot_maker import TimeSlotChecker
 from reservation_signup.forms_cancel import ReservationCancellationForm
+from reservation_signup.email_notification import  mail_billing_code_reminder
 
 from cal_util.view_util import get_common_lookup
 from cal_util.msg_util import *
@@ -53,7 +54,43 @@ def view_cancel_success(request, id_hash):
     
     
 @login_required    
+def view_code_reminder(request, id_hash):
+    import logging
+    log = logging.getLogger(__name__)
+
+    if id_hash is None:
+        raise Http404('Reservation not found.')
+    
+    if not request.user.is_authenticated():
+        lu.update({ 'ERR_found' : True, 'ERR_not_authenticated' : True })
+        return render_to_response('reservation_signup/cancel_signup.html', lu, context_instance=RequestContext(request))
+    
+    try:
+        reservation = Reservation.objects.get(id_hash=id_hash, is_visible=True)
+    except Reservation.DoesNotExist:
+        raise Http404('Reservation not found.')
+    
+    lu = get_common_lookup(request)
+    cal_user = lu.get('calendar_user', None)
+
+    log.info("USER %s"%cal_user)
+    log.info("USER %s"%cal_user.contact_email)
+
+    lu.update({'reservation' : reservation
+            , 'email' : cal_user.contact_email
+            , 'selected_date' : reservation.start_datetime.date() })
+    
+    cal_user = lu.get('calendar_user')
+
+    mail_billing_code_reminder(reservation,cal_user.contact_email)
+  
+    return render_to_response('reservation_signup/code_reminder.html', lu, context_instance=RequestContext(request))
+
+@login_required    
 def view_cancel_signup(request, id_hash):
+    import logging
+    log = logging.getLogger(__name__)
+    log.info("HERE")
     if id_hash is None:
         raise Http404('Reservation not found.')
     
@@ -111,9 +148,6 @@ def view_cancel_signup(request, id_hash):
         
         
 
-        
-        
-        
         
         
         

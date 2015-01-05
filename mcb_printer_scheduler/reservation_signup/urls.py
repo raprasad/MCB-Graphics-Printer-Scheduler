@@ -11,6 +11,13 @@ urlpatterns = patterns(
 ,
 )
 
+urlpatterns += patterns(
+    'reservation_signup.view_cancel'
+,    url(r'email/(?P<id_hash>(\w){32,40})/$', 'view_code_reminder', name='view_code_reminder')
+
+,
+    
+)
 
 urlpatterns += patterns(
     'reservation_signup.view_cancel'

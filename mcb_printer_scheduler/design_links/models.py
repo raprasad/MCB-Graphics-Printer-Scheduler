@@ -1,5 +1,5 @@
 import os
-import Image
+from PIL import Image
 
 from django.conf import settings
 from django.db import models

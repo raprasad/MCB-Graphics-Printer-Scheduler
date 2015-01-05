@@ -83,7 +83,7 @@ def view_signup_page(request, selected_date):
             # Process the data in form.cleaned_data
             # ...
             new_signup = signup_form.get_reservation(lu.get('calendar_user'))
-            
+
             success_url = reverse('view_signup_page_success'\
                             , kwargs={  'id_hash' : new_signup.id_hash }\
                             )

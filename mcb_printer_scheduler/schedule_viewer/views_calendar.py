@@ -7,7 +7,7 @@ from django.conf import settings
 
 from datetime import datetime, date, timedelta
 
-from calendar_event.models import CalendarEvent, ScheduledBannerMessage
+from calendar_event.models import CalendarEvent, Status, ScheduledBannerMessage
 from calendar_event.calendar_event_helper import CalendarEventOrganizer
 from schedule_maker.day_events_organizer import DayEventsOrganizer
 from schedule_maker.calendar_weeks import get_calendar_weeks
@@ -43,7 +43,8 @@ def view_month_calendar(request, selected_month=None):
     lu.update({'current_datetime':current_datetime\
                 , 'is_current_month' : is_current_month
                 , 'selected_month' : selected_month
-                , 'HU_PIN_LOGIN_APP_NAME' : settings.HU_PIN_LOGIN_APP_NAME })
+                #, 'HU_PIN_LOGIN_APP_NAME' : settings.HU_PIN_LOGIN_APP_NAME })
+               })
     
     
     # Create a list of the weeks. Each week is a list of seven datetime.date objects.
@@ -64,16 +65,32 @@ def view_month_calendar(request, selected_month=None):
     #                                ,start_datetime__lte=filter_end_day) | \
     #                            ).order_by('start_datetime')
     
-                                    
     cal_events = CalendarEventOrganizer.substitute_cal_event_subclasses(cal_events)
-    
+
+    import logging
+    log = logging.getLogger(__name__)
+
+    fabric_media = {}
+
+    for evt in cal_events:
+        fabric_media[evt] = False
+
+        if evt.__class__ == 'calendar_event.models.Reservation':
+          if evt.print_media == "Fabric ($9/sq ft)":
+            fabric_media[evt.id] = True
+
+    lu.update({'fabric_media':fabric_media})
+
     num_events = len(cal_events)
     
     day_events_organizer = DayEventsOrganizer(cal_weeks, cal_events)
 
-    lu.update( { 'day_events_organizer' : day_events_organizer \
-                ,'cal_events' : cal_events\
-                , 'num_events' : num_events })
+    statuses = Status.objects.all().order_by('sort_order')
+
+    lu.update( { 'day_events_organizer' : day_events_organizer,
+                 'cal_events' : cal_events,
+                 'num_events' : num_events,
+                 'statuses' : statuses })
 
     month_list = []
     for x in range(1,13):

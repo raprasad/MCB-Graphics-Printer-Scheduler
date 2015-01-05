@@ -1,5 +1,5 @@
 import os
-import Image
+from PIL import Image
 
 from django.db import models
 from django.template.defaultfilters import slugify
@@ -7,11 +7,16 @@ from django.db.models.signals import post_save
 from django.conf import settings
 
 from datetime import datetime, timedelta
-from calendar_event.models import CalendarEvent
+from calendar_event.models import CalendarEvent, Status
+from calendar_user.models import CalendarUser
 try:
     from hashlib import sha1
 except:
     import md5
+
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import get_template
+from django.template import Context
 
 '''
 from mcb_image_record.models import *
@@ -105,10 +110,40 @@ class ImageRecord(models.Model):
         img_rec.save()
         post_save.connect(ImageRecord.update_image_sizes, sender=ImageRecord)
         
+    def send_user_email(self):
+        lu = {}
+        cal_event = self.calendar_event
+        
+        try:
+            self.calendar_event.status = Status.objects.get(name="received")
+            self.calendar_event.save()
+        except:
+            raise
+
+        #if cal_event.get_subclass_name() == "Reservation":
+        
+        #cal_user = CalendarUser.objects.get(pk=1)
+        cal_user = self.calendar_event.reservation.user
+        lu.update({'cal_event': cal_event, 'cal_user': cal_user})
+        plaintext = get_template('email/received.txt')
+        htmly     = get_template('email/received.html')
+        d = Context(lu)
+        subject, from_email, to = 'Your Poster has been uploaded', 'mcbgraphics@example.com', 'emattison@gmail.com'
+        text_content = plaintext.render(d)
+        html_content = htmly.render(d)
+        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+
+        #filename = "/vagrant/MCB-Graphics-Printer-Scheduler/email_log/email%s.txt" % datetime.now().strftime("%y%m%d_%H%M")
+        #with open(filename, "w") as f:
+        #    f.write(text_content)
+            
     def save(self):    
         if self.id is None:
             super(ImageRecord, self).save()     
-                    
+            self.send_user_email()
+
         self.set_hash_id()
     
         super(ImageRecord, self).save()    

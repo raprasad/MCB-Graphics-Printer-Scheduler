@@ -24,7 +24,8 @@ class CalendarEventOrganizer:
                 continue    # go to the next subclass name
             cal_evt_obj_type = eval(subclass_name)     # e.g. eval('Page')
             # retrieve subclass instances
-            subclass_object_qs = cal_evt_obj_type.objects.select_related().filter(id__in=cal_event_ids, is_visible=True) 
+            #subclass_object_qs = cal_evt_obj_type.objects.select_related().filter(id__in=cal_event_ids, is_visible=True) 
+            subclass_object_qs = cal_evt_obj_type.objects.select_related('user').filter(id__in=cal_event_ids, is_visible=True) 
             # put subclass instances into lookup
             for subclass_obj in subclass_object_qs:  
                 cal_event_subclass_objects.update({ subclass_obj.id: subclass_obj })
