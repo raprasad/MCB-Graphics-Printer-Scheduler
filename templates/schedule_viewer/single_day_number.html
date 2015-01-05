@@ -3,6 +3,7 @@
     <div class="cal_day_num cal_day_holiday_weekend">{{ day_event_obj.date.day }}</div>
 {% else %}{% if day_event_obj.is_day_today %}
 <!--  today --><td>
+    <a name="today_anchor"></a>
     <div class="cal_day_num cal_day_num_today">
         {% include "schedule_viewer/single_day_number_signup.html" %}
     </div>

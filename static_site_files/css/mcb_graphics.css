@@ -32,7 +32,7 @@ div#container
 {
 	margin-left: auto;
 	margin-right: auto;
-	width: 900px;
+	width: 1000px;
 	text-align: left;
 }
 .clear{clear:both;}
@@ -161,7 +161,7 @@ border-right: 1px solid #1a2f5a; width:850px;
 
 
 /* each event listing within a single day block */ 
-div.day_evt_listing{font-size:12px; 
+div.day_evt_listing{font-size:8px; 
     padding:2px; 
     margin:3px 0; 
     line-height:80%;
@@ -178,26 +178,40 @@ div.cal_day_time_msg{background-color:#dadade;color:#1a2f5a; line-height:140%;pa
 div.cal_fullday_msg{background-color:#fad4d4;color:#1a2f5a; padding:15px 2px; margin:3px 0;line-height:120%; }
 
 div.day_evt_listing .cal_day_time a.cal_name_regular {
-    color: #9a1a2c;
-    font-size:110%;
+    font-size:100%;
     cursor: pointer;
     text-decoration: underline;
 }
-div.day_evt_listing .cal_day_time a.cal_name_regular:hover { color:#ff0000;}
+
+div.day_evt_listing .cal_day_time a.cal_name_regular_orig {
+    color: #9a1a2c;
+    font-size:100%;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+div.day_evt_listing .cal_day_time a.cal_name_regular_orig:hover { color:#ff0000;}
+
 
 div.day_evt_listing .cal_day_time a.cal_name_admin {
+    font-size:100%;
+    cursor: pointer;
+    text-decoration: underline;
+}
+div.day_evt_listing .cal_day_time a.cal_name_admin_orig {
     color: #006699;
     font-size:100%;
     cursor: pointer;
     text-decoration: underline;
 }
-div.day_evt_listing .cal_day_time a.cal_name_admin:hover { color:#ff0000;}
+div.day_evt_listing .cal_day_time a.cal_name_admin_orig:hover { color:#ff0000;}
 
 
 
 div.cal_day{padding:2px 0 5px 0;}
-div.cal_day a {font-size:11px; color:#2952ae; text-decoration:underline;}
-div.cal_day a:hover{color:#ff0000;}
+div.cal_day a {font-size:10px; text-decoration:underline;}
+div.cal_day_orig a {font-size:10px; color:#2952ae; text-decoration:underline;}
+div.cal_day_orig a:hover{color:#ff0000;}
 
 /* navigation menu by montly */
 #nav_months{background-color:#C3D9FF; padding:8px; text-align:center;}

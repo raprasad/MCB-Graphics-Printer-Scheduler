@@ -2,6 +2,13 @@
 {% load url from future %}
 
 {% block extra_header %}
+<style>
+{% for status in statuses %}
+a.class_{{ status.name }}, a.class_{{ status.name }}:hover, a.class_{{ status.name }}:visited {
+  color: {{ status.hex_color }}
+}
+{% endfor %}
+</style>
 {% endblock %}
 {% block main_content %}
 
@@ -108,5 +115,11 @@
 </div><!-- end: overarching_cal_div -->
 {% endif %}
 {#% include "download_links.html" %#}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(function() {
+  window.location.href = "#today_anchor";
+});
+</script>
 
 {% endblock %}

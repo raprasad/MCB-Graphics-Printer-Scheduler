@@ -1,5 +1,20 @@
 {% extends "base.html" %}
 {% load url from future %}
+
+{% block extra_header %}
+<style>
+{% for status in stati %}
+span.class_{{ status.name }}_highlight {
+  background-color: {{ status.hex_color }};
+  {% if status.name != 'received' %} 
+  color: #fff;
+  {% endif %}
+}
+{% endfor %}
+</style>
+{% endblock %}
+
+
 {% block main_content %}
 
         
@@ -49,6 +64,11 @@
                         </th>
                     <th>poster&nbsp;tube</th>
                     <th>cancelled?</th>
+		    {% if calendar_user.is_calendar_admin and calendar_user.user.is_staff %}
+		    <th>Status</th>
+		    <th>Free Timeslot</th>
+		    <th>Invoice</th>
+		    {% endif %}
                 </tr>
          {% for r in reservations %}
             <tr>
@@ -76,6 +96,35 @@
                 <td>{% if r.is_cancelled %}YES <div class="cancelled_box"></div>
                     
                     {% else %}no <div class="enabled_box"></div>{% endif %}</td>
+		{% if calendar_user.is_calendar_admin and calendar_user.user.is_staff %}
+		<td>
+		  {% for status in stati %}
+		    {% if r.calendarevent_ptr.status.next == status %}
+		      <span style="line-height: 1.8em;"><a href="{% url 'view_mark_status' r.id r.calendarevent_ptr.status.next %}">{{ status.name|title }}</a></span>
+		    {% elif r.calendarevent_ptr.status == status %}
+		      <span style="line-height: 1.8em;" class="class_{{ status.name }}_highlight">{{ status.name|title }}</span>
+		    {% elif status.name == 'finished' %}
+		      <span style="line-height: 1.8em;"><a href="{% url 'view_mark_status' r.id status %}">{{ status.name|title }}</a></span>
+		    {% else %}
+ 		      <span style="line-height: 1.8em;">{{ status.name|title }}</span>
+		    {% endif %}
+		  {% endfor %}
+		      
+		</td>
+		<td>
+		  {% if not r.calendarevent_ptr.is_timeslot_free %}
+		      Timeslot is locked
+		      <a href="{% url 'view_mark_timeslot_free' r.id 'True' %}">Make timeslot free</a>
+		  {% else %}
+		      Timeslot is free
+		      <a href="{% url 'view_mark_timeslot_free' r.id 'False' %}">Make timeslot locked</a>
+		  {% endif %}
+		  </td>
+		<td>
+		  <a href="{% url 'view_create_invoice' r.id %}">Create Invoice</a>
+		  </td>
+
+		{% endif %}
             </tr>
             
          {% empty %}
